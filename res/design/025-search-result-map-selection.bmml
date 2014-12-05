@@ -1,0 +1,303 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1641" measuredH="1236" mockupW="1425" mockupH="1043">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="216" y="203" w="1180" h="1033" measuredW="1180" measuredH="1033" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/symbols.bmml#Firefox%205%20Windows</src>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="1150" h="889"/>
+        <override controlID="1" x="211" y="149" w="156" h="39"/>
+        <override controlID="2" x="0" y="224" w="1150" h="665">
+          <src>./assets/OSM-Europe-complete.png</src>
+        </override>
+        <override controlID="3" x="359" y="150" w="582" h="39"/>
+        <override controlID="4" x="218" y="159" w="112" h="-1"/>
+        <override controlID="5" x="0" y="219" w="1150" h="-1"/>
+        <override controlID="6" x="1080" y="202" w="-1" h="-1"/>
+        <override controlID="8" x="1053" y="202" w="-1" h="-1"/>
+        <override controlID="9" x="159" y="158" w="44" h="-1"/>
+        <override controlID="10" x="0" y="191" w="1150" h="-1"/>
+        <override controlID="11" x="1098" y="263" w="-1" h="-1"/>
+        <override controlID="12" x="0" y="0" w="1150" h="137"/>
+        <override controlID="13" x="21" y="150" w="125" h="39">
+          <text>*EOBS*%0AResource%20Coll...</text>
+        </override>
+        <override controlID="14" x="117" y="167" w="-1" h="-1"/>
+        <override controlID="15" x="1016" y="153" w="86" h="30"/>
+        <override controlID="16" x="1105" y="167" w="-1" h="-1"/>
+        <override controlID="17" x="367" y="158" w="566" h="-1">
+          <text>%20</text>
+        </override>
+        <override controlID="18" x="334" y="161" w="-1" h="-1"/>
+        <override controlID="19" x="938" y="150" w="51" h="39"/>
+        <override controlID="20" x="940" y="157" w="48" h="-1"/>
+        <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
+        <src>./assets/symbols.bmml#SIP%20Application</src>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="715" y="193" w="243" h="90" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>11820806</color>
+        <text>*Categories*%0AStartpage%20of%20the%20SIP%20Catalogue%20Access%20GUI%20HTML5%20Application</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="2">
+          <text>Total%20records%20returned%3A%2010%20%28of%2078%29</text>
+        </override>
+        <src>./assets/symbols.bmml#status-notification</src>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::HRule" x="257" y="916" w="275" h="-1" measuredW="100" measuredH="10" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>3355443</color>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Canvas" x="248" y="580" w="296" h="625" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::Paragraph" x="263" y="617" w="281" h="296" measuredW="275" measuredH="80" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Gridded%20data%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DE-OBS%20datafiles%201950-01-01%20-%202013-12-31.%20%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0APredefined%20subsets%20in%20ASCII%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DPredefined%20subsets%20of%20ECA%20data%20...%20%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0AIndices%20data%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DAggregated%20station%20indices%20....%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0ARR%200.44%20deg.%20rotated%20grid%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DRR%20daily%20precipitation%20sum.%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0ATG%200.22%20deg.%20rotated%20grid%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DTG%20daily%20mean%20temperature.%20%7Bcolor%7D%7Bsize%7D%0AGridded%20data%20%232%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DE-OBS%20datafiles%201950-01-01%20-%202013-12-31.%20%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0APredefined%20subsets%20in%20ASCII%20%232%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DPredefined%20subsets%20of%20ECA%20data%20...%20%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0AIndices%20data%20%232%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DAggregated%20station%20indices%20....%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0ARR%200.22%20deg.%20rotated%20grid%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DRR%20daily%20precipitation%20sum.%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D%0A%7Bcolor%3Aorange%7DTG%200.44%20deg.%20rotated%20grid%7Bcolor%7D%0A%7Bsize%3A10%7D%7Bcolor%3Agray3%7DTG%20daily%20mean%20temperature.%20%7Bcolor%7D%7Bsize%7D%0A%7Bsize%3A2%7D%20%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Paragraph" x="255" y="592" w="283" h="24" measuredW="275" measuredH="80" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DResults%7Bsize%7D%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7Bsize%3A12%7D%7Bcolor%3Agray3%7D%3C%3C%20previous%7Bcolor%7D%20%20%7Bcolor%3Ablue2%7Dnext%20%3E%3E%7Bcolor%7D%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Paragraph" x="255" y="927" w="289" h="24" measuredW="275" measuredH="80" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DKeywords%20Filter%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="__group__" x="1493" y="343" w="148" h="70" measuredW="148" measuredH="70" zOrder="9" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="-1" h="-1" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="43"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Icon" x="100" y="20" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="1" locked="false" isInGroup="43"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Component" x="263" y="951" w="112" h="21" measuredW="112" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Component" x="384" y="951" w="98" h="21" measuredW="98" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="98" h="21"/>
+        <override controlID="1" x="4" y="0" w="90" h="21">
+          <text>%7Bcolor%3A%23ffffff%7Datmosphere%7Bcolor%7D</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Component" x="263" y="979" w="100" h="21" measuredW="100" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="100" h="21"/>
+        <override controlID="1" x="3" y="0" w="92" h="21">
+          <text>%7Bcolor%3A%23ffffff%7Dprecipitation%7Bcolor%7D</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Icon" x="516" y="931" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>0</color>
+        <icon>UpFillTriangleIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Component" x="371" y="980" w="121" h="21" measuredW="121" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="121" h="21"/>
+        <override controlID="1" x="4" y="0" w="111" h="21">
+          <text>%7Bcolor%3A%23ffffff%7Dair%20temperature%7Bcolor%7D</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Paragraph" x="255" y="1012" w="289" h="24" measuredW="275" measuredH="80" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DTopics%20Filter%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::Icon" x="516" y="1016" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>0</color>
+        <icon>DownFillTriangleIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Paragraph" x="255" y="1041" w="289" h="24" measuredW="275" measuredH="80" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DData%20Access%20Filter%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Icon" x="516" y="1045" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>0</color>
+        <icon>UpFillTriangleIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Component" x="263" y="1067" w="83" h="21" measuredW="83" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="83" h="21">
+          <color>16750848</color>
+        </override>
+        <override controlID="1" x="3" y="0" w="76" h="21">
+          <text>%7Bcolor%3A%23ffffff%7Ddownload%7Bcolor%7D</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Component" x="353" y="1067" w="55" h="21" measuredW="55" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="55" h="21">
+          <color>16750848</color>
+        </override>
+        <override controlID="1" x="2" y="0" w="50" h="21">
+          <text>%7Bcolor%3A%23ffffff%7D%20order%7Bcolor%7D</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Component" x="414" y="1067" w="93" h="21" measuredW="93" measuredH="21" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="93" h="21">
+          <color>16750848</color>
+        </override>
+        <override controlID="1" x="4" y="0" w="85" h="21">
+          <text>%7Bcolor%3A%23ffffff%7Dinformation%7Bcolor%7D</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#tag-label</src>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Paragraph" x="254" y="1103" w="289" h="24" measuredW="275" measuredH="80" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DGeographic%20Filter%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Icon" x="515" y="1107" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>0</color>
+        <icon>DownFillTriangleIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Paragraph" x="254" y="1130" w="289" h="24" measuredW="275" measuredH="80" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DTemporal%20Filter%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Icon" x="515" y="1134" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>0</color>
+        <icon>DownFillTriangleIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Paragraph" x="254" y="1157" w="289" h="24" measuredW="275" measuredH="80" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%7Bsize%3A18%7DResource%20Type%20Filter%7Bsize%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Icon" x="515" y="1161" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>0</color>
+        <icon>DownFillTriangleIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Icon" x="314" y="894" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::Canvas" x="543" y="833" w="437" h="344" measuredW="100" measuredH="70" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>3700253</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Canvas" x="788" y="563" w="437" h="344" measuredW="100" measuredH="70" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>3700253</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::Canvas" x="552" y="846" w="437" h="344" measuredW="100" measuredH="70" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>3700253</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Canvas" x="701" y="861" w="437" h="344" measuredW="100" measuredH="70" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>3700253</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::Canvas" x="644" y="633" w="550" h="501" measuredW="100" measuredH="70" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::StickyNote" x="338" y="704" w="262" h="113" measuredW="109" measuredH="123" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Moving%20the%20mouse%20over%20a%20result%20set%20%281%29%20will%20highlight%20the%20respective%20polygon%20in%20the%20map%20view%20%282%29.</text>
+      </controlProperties>
+    </control>
+    <control controlID="75" controlTypeID="__group__" x="231" y="879" w="28" h="26" measuredW="28" measuredH="26" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="75">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="76" controlTypeID="com.balsamiq.mockups::Arrow" x="248" y="679" w="396" h="200" measuredW="150" measuredH="100" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="77" controlTypeID="__group__" x="631" y="638" w="28" h="26" measuredW="28" measuredH="26" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="77">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
