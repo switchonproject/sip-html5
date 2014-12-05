@@ -1,0 +1,99 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1487" measuredH="1236" mockupW="1271" mockupH="1043">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::StickyNote" x="661" y="595" w="454" h="293" measuredW="109" measuredH="123" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Universal%20Search%20Box*%20%0AAllows%20to%20specifically%20search%20for%20resources%20by%20defining%20different%20_pre-search%20filters_%20%20%28%20spatial%20coverage%2C%20temporal%20coverage%2C%20...%29%20of%20resources.%20Depending%20on%20the%20_pre-search%20filters_%20selected%2C%20a%20specific%20input%20format%20of%20the%20search%20term%20entered%20is%20expected.%20E.g.%20temporal%20coverage%20search%20expects%20a%20formatted%20string%20like%20%u201Cfrom%3AYYYY-MM-DD%2C%20to%3AYYYYY-MM-DD%u201D%2C%20spatial%20coverage%20search%20the%20format%20%u201CPOINT%28X%2CY%29%u201D%20or%20%u201CBBOX%28X1%2C%20Y1%2C%20X2%2C%20Y2%29%u201D%2C%20etc.%0A%20%0ANotes%3A%0A-%20When%20no%20%20_pre-search%20filter_%20is%20defined%2C%20the%20default%20behaviour%20is%20to%20performs%20a%20fulltext%20search%20on%20title%2C%20description%20and%20keywords%20of%20all%20resources%20belonging%20to%20the%20category%20that%20is%20selected%20in%20the%20*Quick%20Category%20Selector*.%20%0A-%20A%20set%20of%20User%20Interface%20%u2013Control%20will%20assist%20the%20user%20in%20defining%20appropriate%20_pre-search%20filters_</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Arrow" x="847" y="507" w="71" h="96" measuredW="150" measuredH="100" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::StickyNote" x="498" y="359" w="374" h="94" measuredW="109" measuredH="123" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Search%20Filter%20Selector*%20%0AFor%20choosing%20and%20configuring%20the%20filters%20%20that%20are%20applied%20to%20resource%20search%20performed%20in%20%20the%20*Universal%20Search%20Box*.</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Arrow" x="523" y="438" w="48" h="54" measuredW="150" measuredH="100" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::StickyNote" x="1238" y="346" w="249" h="107" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*My%20SWITCH-ON*%20%0APersonalised%20information%20and%20tools%20for%20recurring%20users.%20E.g.%20bookmark%20lists%2C%20download%20basket%2C%20etc.</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::StickyNote" x="1123" y="581" w="194" h="181" measuredW="109" measuredH="123" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Result%20Presentation%20Switch*%0AChanges%20the%20presentation%20of%20search%20results.%20Resources%20can%20be%20presented%20in%20a%20table-like%20list%20view%2C%20a%20thumbnail%20view%20with%20descriptive%20text%20or%20as%20points%20/%20polygons%20on%20the%20map.</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::StickyNote" x="1079" y="914" w="358" h="219" measuredW="109" measuredH="123" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Map%20Controls*%0AWell-known%20Map%20Controls%20for%20zooming%20and%20panning%20plus%20additional%20controls%20for%20defining%20a%20search%20polygon%20or%20a%20point%20for%20spatial%20search.%20%0A%20%0ANotes%0A-%20When%20the%20user%20has%20defined%20a%20polygon/point%2C%20the%20*Universal%20Search%20Box*%20shows%20the%20selected%20coordinates%20%28in%20abbreviated%20form%29.%20In%20this%20sense%2C%20the%20*Map%20Controls*%20are%20used%20to%20define%20a%20*pre-search*%20filter%20for%20the%20spatial%20extent%20of%20resources.</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Arrow" x="1246" y="798" w="86" h="126" measuredW="150" measuredH="100" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::StickyNote" x="270" y="625" w="351" h="191" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Quick%20Category%20Selector*%20%0AQuick%20access%20to%20all%20resources%20of%20important%20categories%20%28technically%3A%20Tag%20Group%29%2C%20e.g.%20%u201CResource%20Collections%u201D%2C%20%u201CResource%20Providers%u201D%2C%20%u201CHydrological%20Concepts%u201D%2C%20etc.%20Can%20be%20used%20to%20show%20all%20resources%20belonging%20to%20the%20certain%20category%2C%20or%2C%20in%20conjunction%20with%20_pre-search%20filters_%2C%20to%20perform%20a%20specific%20search%20%28e.g.%20time%2C%20spatial%2C%20...%29%20for%20resources%20of%20belonging%20to%20a%20certain%20category.</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Arrow" x="307" y="507" w="83" h="125" measuredW="150" measuredH="100" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <color>0</color>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="17">
+          <text>%20</text>
+        </override>
+        <src>./assets/symbols.bmml#SIP%20Application</src>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Component" x="216" y="203" w="1180" h="1033" measuredW="1180" measuredH="1033" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/symbols.bmml#Firefox%205%20Windows</src>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="715" y="193" w="243" h="90" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>11820806</color>
+        <text>*Startpage*%0AStartpage%20of%20the%20SIP%20Catalogue%20Access%20GUI%20HTML5%20Application</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Arrow" x="1295" y="438" w="48" h="54" measuredW="150" measuredH="100" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Arrow" x="1216" y="545" w="64" h="55" measuredW="150" measuredH="100" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::StickyNote" x="255" y="1021" w="176" h="112" measuredW="109" measuredH="123" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Map*%20%0AConfigurable%20with%20different%20backgrounds%20maps.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

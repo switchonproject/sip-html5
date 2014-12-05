@@ -1,0 +1,24 @@
+{
+  "name": "sip-html5",
+  "version": "0.0.1",
+  "ignore": [
+    ".*",
+    "app",
+    "config",
+    "nbproject",
+    "test",
+    "Gruntfile.js",
+    "karma*",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "1.2.25",
+    "json3": "3.2.6",
+    "es5-shim": "2.1.0",
+    "jquery": "2.1.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.25",
+    "angular-scenario": "1.2.25"
+  }
+}
