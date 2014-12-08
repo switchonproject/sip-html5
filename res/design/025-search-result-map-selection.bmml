@@ -34,7 +34,6 @@
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
         <override controlID="20" x="940" y="157" w="48" h="-1"/>
-        <override controlID="-1"/>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
@@ -171,7 +170,6 @@
                 <override controlID="1" x="4" y="0" w="90" h="21">
                   <text>%7Bcolor%3A%23ffffff%7Datmosphere%7Bcolor%7D</text>
                 </override>
-                <override controlID="-1"/>
                 <src>./assets/symbols.bmml#tag-label</src>
               </controlProperties>
             </control>
@@ -181,7 +179,6 @@
                 <override controlID="1" x="3" y="0" w="92" h="21">
                   <text>%7Bcolor%3A%23ffffff%7Dprecipitation%7Bcolor%7D</text>
                 </override>
-                <override controlID="-1"/>
                 <src>./assets/symbols.bmml#tag-label</src>
               </controlProperties>
             </control>
@@ -198,7 +195,6 @@
                 <override controlID="1" x="4" y="0" w="111" h="21">
                   <text>%7Bcolor%3A%23ffffff%7Dair%20temperature%7Bcolor%7D</text>
                 </override>
-                <override controlID="-1"/>
                 <src>./assets/symbols.bmml#tag-label</src>
               </controlProperties>
             </control>
@@ -234,7 +230,6 @@
                 <override controlID="1" x="3" y="0" w="76" h="21">
                   <text>%7Bcolor%3A%23ffffff%7Ddownload%7Bcolor%7D</text>
                 </override>
-                <override controlID="-1"/>
                 <src>./assets/symbols.bmml#tag-label</src>
               </controlProperties>
             </control>
@@ -246,7 +241,6 @@
                 <override controlID="1" x="2" y="0" w="50" h="21">
                   <text>%7Bcolor%3A%23ffffff%7D%20order%7Bcolor%7D</text>
                 </override>
-                <override controlID="-1"/>
                 <src>./assets/symbols.bmml#tag-label</src>
               </controlProperties>
             </control>
@@ -258,7 +252,6 @@
                 <override controlID="1" x="4" y="0" w="85" h="21">
                   <text>%7Bcolor%3A%23ffffff%7Dinformation%7Bcolor%7D</text>
                 </override>
-                <override controlID="-1"/>
                 <src>./assets/symbols.bmml#tag-label</src>
               </controlProperties>
             </control>
@@ -303,6 +296,12 @@
           </groupChildrenDescriptors>
         </control>
       </groupChildrenDescriptors>
+    </control>
+    <control controlID="79" controlTypeID="com.balsamiq.mockups::Icon" x="274" y="892" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
     </control>
   </controls>
 </mockup>
