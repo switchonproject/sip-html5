@@ -675,6 +675,22 @@
     </control>
     <control controlID="174" controlTypeID="com.balsamiq.mockups::Component" x="771" y="648" w="393" h="365" measuredW="393" measuredH="365" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
+        <override controlID="9">
+          <bold>true</bold>
+          <text>%7Bsize%3A12%7DMICRA2000%20GRIDS%7Bsize%7D%0A%7Bsize%3A12%7DNOAA%20GPCC%20LTM%20Total%20Full%20V3%20%282%2C5x2%2C5%29%7Bsize%7D%0A%7Bsize%3A12%7DWWF%20GLWD%20Level%201%7Bsize%7D%0A%7Bsize%3A12%7D...%7Bsize%7D</text>
+        </override>
+        <override controlID="11">
+          <text>*Unnamed%20workspace*</text>
+        </override>
+        <override controlID="4">
+          <text>*Gridded%20Data%20Europe*</text>
+        </override>
+        <override controlID="5">
+          <text>*Watersheds%20in%20Europe*</text>
+        </override>
+        <override controlID="6">
+          <text>*Precipitation%20Sweden%201990-2010*</text>
+        </override>
         <src>./assets/symbols.bmml#Workspace%20Manager</src>
       </controlProperties>
     </control>

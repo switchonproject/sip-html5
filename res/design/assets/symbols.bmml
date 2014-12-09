@@ -599,9 +599,9 @@
             <icon>XIcon%7Csmall</icon>
           </controlProperties>
         </control>
-        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="36" y="54" w="299" h="-1" measuredW="141" measuredH="21" zOrder="4" locked="false" isInGroup="23">
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="36" y="54" w="299" h="-1" measuredW="130" measuredH="21" zOrder="4" locked="false" isInGroup="23">
           <controlProperties>
-            <text>*Grided%20Data%20Collection*</text>
+            <text>*%7Bcolor%3Aorange%7DGridded%20Data%20Europe%7Bcolor%7D*</text>
           </controlProperties>
         </control>
         <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="36" y="183" w="172" h="-1" measuredW="136" measuredH="21" zOrder="5" locked="false" isInGroup="23">

@@ -82,43 +82,7 @@
         <color>40463</color>
       </controlProperties>
     </control>
-    <control controlID="74" controlTypeID="com.balsamiq.mockups::StickyNote" x="600" y="605" w="250" h="175" measuredW="109" measuredH="123" zOrder="9" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>*Resultset%20List*%20%0AQuick%20access%20to%20all%20resources%20returned%20by%20a%20search.%20If%20more%20resources%20are%20found%20than%20can%20be%20shown%20in%20the%20list%20%28e.g.%20%3E%2010%29%2C%20the%20paged%20result%20set%20can%20be%20browsed%20with%20help%20of%20the%20two%20buttons%20on%20the%20right.</text>
-      </controlProperties>
-    </control>
-    <control controlID="75" controlTypeID="com.balsamiq.mockups::Arrow" x="482" y="626" w="125" h="33" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
-      <controlProperties>
-        <direction>top</direction>
-        <rightArrow>false</rightArrow>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="84" controlTypeID="com.balsamiq.mockups::StickyNote" x="600" y="949" w="450" h="257" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>*Result%20Filters*%0AAre%20used%20to%20apply%20_result%20filters_%20to%20the%20result%20set%20and%20thus%20further%20narrow%20down%20the%20search%20results.%20Each%20result%20filter%20is%20represented%20by%20_tag%20list_%20that%20is%20populated%20by%20the%20respective%20tags%20of%20all%20resources%20of%20the%20*complete*%20result%20set.%20Removing%20a%20specific%20tag%20from%20such%20a%20list%20will%20also%20remove%20all%20resources%20from%20result%20set%20that%20are%20associated%20with%20this%20tag.%0A%20%0AFor%20example%2C%20if%20the%20user%20isn%u2019t%20interested%20in%20resources%20that%20require%20him%20to%20fill%20an%20order%20form%20before%20being%20able%20to%20download%20the%20actual%20resource%20data%2C%20he%20can%20remove%20the%20tag%20%u201Corder%u201D%20from%20the%20%u201CData%20Access%20Filter%20List%u201D.%20On%20the%20other%20hand%2C%20if%20the%20user%20is%20only%20interest%20in%20resources%20that%20can%20be%20downloaded%20directly%20%28%u201Cdownload%u201D%29%2C%20a%20_pre-search%20filter_%20should%20be%20set%20*before*%20the%20search%20is%20performed.</text>
-      </controlProperties>
-    </control>
-    <control controlID="85" controlTypeID="com.balsamiq.mockups::Arrow" x="515" y="972" w="92" h="43" measuredW="150" measuredH="100" zOrder="14" locked="false" isInGroup="-1">
-      <controlProperties>
-        <direction>top</direction>
-        <rightArrow>false</rightArrow>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="86" controlTypeID="com.balsamiq.mockups::StickyNote" x="1015" y="626" w="203" h="150" measuredW="109" measuredH="123" zOrder="11" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>*Map*%0AThe%20spatial%20extent%20of%20the%20resources%20shown%20on%20the%20*current%20page*%20of%20the%20result%20set%20is%20displayed%20on%20the%20map%20as%20polygons%20or%20points.</text>
-      </controlProperties>
-    </control>
-    <control controlID="87" controlTypeID="com.balsamiq.mockups::Arrow" x="950" y="760" w="80" h="73" measuredW="150" measuredH="100" zOrder="12" locked="false" isInGroup="-1">
-      <controlProperties>
-        <direction>bottom</direction>
-        <rightArrow>false</rightArrow>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="120" controlTypeID="__group__" x="248" y="580" w="296" h="625" measuredW="296" measuredH="625" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="120" controlTypeID="__group__" x="248" y="580" w="296" h="625" measuredW="296" measuredH="625" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>Search%20Results%20Pane</controlName>
       </controlProperties>
@@ -285,6 +249,77 @@
           </controlProperties>
         </control>
       </groupChildrenDescriptors>
+    </control>
+    <control controlID="121" controlTypeID="__group__" x="347" y="478" w="28" h="26" measuredW="28" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="121">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="122" controlTypeID="__group__" x="598" y="531" w="28" h="26" measuredW="28" measuredH="26" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="122">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="123" controlTypeID="com.balsamiq.mockups::RoundButton" x="505" y="1171" w="28" h="26" measuredW="32" measuredH="32" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>circle</shape>
+        <size>10</size>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="124" controlTypeID="com.balsamiq.mockups::StickyNote" x="415" y="652" w="335" h="134" measuredW="109" measuredH="123" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>When%20resources%20that%20belong%20to%20a%20specific%20category%20have%20been%20loaded%2C%20the%20name%20of%20category%20is%20shown%20in%20the%20*Quick%20Category%20Selector*%20%281%29%20and%20a%20status%20message%20%282%29%20and%20an%20option%20%283%29%20for%20clearing%20the%20*Resultset%20List*%20is%20displayed.</text>
+      </controlProperties>
+    </control>
+    <control controlID="125" controlTypeID="com.balsamiq.mockups::Arrow" x="375" y="493" w="208" h="159" measuredW="150" measuredH="100" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="126" controlTypeID="com.balsamiq.mockups::Arrow" x="626" y="545" w="56" h="123" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="127" controlTypeID="com.balsamiq.mockups::Arrow" x="522" y="786" w="61" h="385" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
     </control>
   </controls>
 </mockup>
