@@ -58,12 +58,12 @@
         <src>./assets/symbols.bmml#status-notification</src>
       </controlProperties>
     </control>
-    <control controlID="108" controlTypeID="com.balsamiq.mockups::StickyNote" x="872" y="409" w="245" h="110" measuredW="109" measuredH="123" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::StickyNote" x="881" y="409" w="284" h="136" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>*Result%20Set%20Table%20View*%0AShows%20resources%20in%20a%20table-like%20view.%20Provides%20slightly%20more%20information%20than%20the%20*Result%20Set%20List%20*</text>
+        <text>*Result%20Set%20Table%20View*%0AShows%20resources%20in%20a%20table-like%20view%20%282%29.%20Provides%20slightly%20more%20information%20than%20the%20*Result%20Set%20List*.%20Is%20shown%20by%20pressing%20the%20appropriate%20button%20of%20the%20*Result%20Presentation%20Switch*%20%281%29.%0A%20</text>
       </controlProperties>
     </control>
-    <control controlID="109" controlTypeID="com.balsamiq.mockups::Arrow" x="809" y="508" w="80" h="73" measuredW="150" measuredH="100" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::Arrow" x="809" y="526" w="441" h="55" measuredW="150" measuredH="100" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>bottom</direction>
         <rightArrow>false</rightArrow>
@@ -382,7 +382,7 @@
     </control>
     <control controlID="133" controlTypeID="com.balsamiq.mockups::StickyNote" x="821" y="851" w="284" h="202" measuredW="109" measuredH="123" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>*Tools*%20can%20be%20used%20to%20perform%20specific%20actions%20resources%20like%20%u201Cshowing%20detailed%20information%u201D%20%28meta-data%29%2C%20%20%u201Cadding%20to%20favourites%u201D%20%28My%20SWITCH-ON%29%2C%20%u201Cdownloading%20data%u201D%2C%20%u201Csharing%20with%20friends%u201D%2C%20etc.%0A%20%0APlease%20note%20that%20there%20is%20a%201-n%20relationship%20between%20resources%20and%20representations%20%28data%29%20in%20SWITCH-ON.</text>
+        <text>*Tools*%20can%20be%20used%20to%20perform%20specific%20actions%20resources%20like%20%u201Cshowing%20detailed%20information%u201D%20%28meta-data%29%2C%20%20%u201Cadding%20to%20favourites%u201D%20%28My%20SWITCH-ON%29%2C%20%u201Cdownloading%20data%u201D%2C%20%u201Csharing%20with%20friends%u201D%2C%20etc.</text>
       </controlProperties>
     </control>
     <control controlID="134" controlTypeID="com.balsamiq.mockups::Arrow" x="969" y="623" w="163" h="243" measuredW="150" measuredH="100" zOrder="11" locked="false" isInGroup="-1">
@@ -759,6 +759,40 @@
               </groupChildrenDescriptors>
             </control>
           </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="138" controlTypeID="__group__" x="1250" y="519" w="28" h="26" measuredW="28" measuredH="26" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="138">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="139" controlTypeID="__group__" x="778" y="570" w="28" h="26" measuredW="28" measuredH="26" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="139">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
         </control>
       </groupChildrenDescriptors>
     </control>

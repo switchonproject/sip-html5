@@ -696,7 +696,7 @@
             <text>*%7Bsize%3A18%7DDetailed%20Information%7Bsize%7D*</text>
           </controlProperties>
         </control>
-        <control controlID="3" controlTypeID="com.balsamiq.mockups::DataGrid" x="17" y="54" w="557" h="370" measuredW="569" measuredH="325" zOrder="3" locked="false" isInGroup="152">
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::DataGrid" x="17" y="54" w="557" h="370" measuredW="558" measuredH="325" zOrder="3" locked="false" isInGroup="152">
           <controlProperties>
             <alternateRowColor>16777215</alternateRowColor>
             <borderStyle>none</borderStyle>
@@ -704,7 +704,7 @@
             <hLines>false</hLines>
             <rowHeight>32</rowHeight>
             <size>12</size>
-            <text>*Title%3A*%2C%20%7Bsize%3A10%7DEOBS%20predefined%20subsets%20in%20ASCII%20general%7Bsize%7D%0A*Description%3A*%2C%20%7Bsize%3A10%7DPredefined%20subsets%20of%20ECA%20data%20are%20created%20on%20a%20regular%20basis%20for%20easy%20bulk%20download.%20%5CrThese%20are%20ZIPped-files%20containing%20separate%20ASCII%20files%20for%20each%20station.%20%7Bsize%7D%0A*Keywords%3A*%2C%20%7Bsize%3A10%7Datmosphere%3B%20earth%20science%3B%20precipitation%3B%20precipitation%20amount%7Bsize%7D%0A*Topic%3A*%2C%20%7Bsize%3A10%7DclimatologyMetereologyAtmosphere%7Bsize%7D%0A*Point%20of%20Contact%3A*%2C%20%7Bsize%3A10%7DECA%26D%20Project%20Team%20Royal%20Netherlands%20Meteorological%20Institute%20%28KNMI%29%7Bsize%7D%0A*Time%20Range%3A*%2C%20%7Bsize%3A10%7D1950-2013%7Bsize%7D%0A*Last%20Modification%3A*%2C%20%7Bsize%3A10%7D2014-12-12%7Bsize%7D%0A*Access%20Conditions%3A*%2C%20%7Bsize%3A10%7Dother%7Bsize%7D%0A*License%3A*%2C%20%7Bsize%3A10%7DThe%20ECA%26D%20data%20policy%20applies.%20These%20observational%20data%20are%20strictly%20for%20use%20in%20non-commercial%20%5Crresearch%20and%20non-commercial%20education%20projects%20only.%7Bsize%7D%0A*Meta-Data%20Files*%3A%2C%20%7Bsize%3A10%7D%20%5BISO19115%20%28XML%29%5D%3B%20%5BSWITCH-ON%20%28JSON%29%5D%7Bsize%7D</text>
+            <text>*Title%3A*%2C%20%7Bsize%3A10%7DEOBS%20predefined%20subsets%20in%20ASCII%20general%7Bsize%7D%0A*Description%3A*%2C%20%7Bsize%3A10%7DPredefined%20subsets%20of%20ECA%20data%20are%20created%20on%20a%20regular%20basis%20for%20easy%20bulk%20download.%20%5CrThese%20are%20ZIPped-files%20containing%20separate%20ASCII%20files%20for%20each%20station.%20%7Bsize%7D%0A*Keywords%3A*%2C%20%7Bsize%3A10%7Datmosphere%3B%20earth%20science%3B%20precipitation%3B%20precipitation%20amount%7Bsize%7D%0A*Topic%3A*%2C%20%7Bsize%3A10%7DclimatologyMetereologyAtmosphere%7Bsize%7D%0A*Point%20of%20Contact%3A*%2C%20%7Bsize%3A10%7DECA%26D%20Project%20Team%20Royal%20Netherlands%20Meteorological%20Institute%20%28KNMI%29%7Bsize%7D%0A*Time%20Range%3A*%2C%20%7Bsize%3A10%7D1950-2013%7Bsize%7D%0A*Last%20Modification%3A*%2C%20%7Bsize%3A10%7D2014-12-12%7Bsize%7D%0A*Access%20Conditions%3A%20%20%20%20%20%20*%2C%20%7Bsize%3A10%7Dother%7Bsize%7D%0A*License%3A*%2C%20%7Bsize%3A10%7DThe%20ECA%26D%20data%20policy%20applies.%20These%20observational%20data%20are%20strictly%20for%20use%20in%20%5Crnon-commercial%20research%20and%20non-commercial%20education%20projects%20only.%7Bsize%7D%0A*Meta-Data%20Files*%3A%2C%20%7Bsize%3A10%7D%20%5BISO19115%20%28XML%29%5D%3B%20%5BSWITCH-ON%20%28JSON%29%5D%7Bsize%7D</text>
             <verticalScrollbar>false</verticalScrollbar>
             <vLines>false</vLines>
           </controlProperties>
@@ -725,6 +725,52 @@
       <controlProperties>
         <color>0</color>
         <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="154" controlTypeID="__group__" x="567" y="842" w="28" h="26" measuredW="28" measuredH="26" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="154">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="155" controlTypeID="__group__" x="650" y="666" w="28" h="26" measuredW="28" measuredH="26" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="155">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="156" controlTypeID="com.balsamiq.mockups::Arrow" x="582" y="685" w="71" h="157" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="157" controlTypeID="com.balsamiq.mockups::StickyNote" x="426" y="702" w="216" h="123" measuredW="109" measuredH="123" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Detailed%20Information*%20%28meta-information%29%20on%20resources%20can%20be%20shown%20in%20this%20dialog.%20A%20complete%20set%20of%20meta-data%20can%20also%20be%20downloaded.%20</text>
       </controlProperties>
     </control>
   </controls>

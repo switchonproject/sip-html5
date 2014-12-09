@@ -41,6 +41,7 @@
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
         <override controlID="20" x="940" y="157" w="48" h="-1"/>
+        <override controlID="-1"/>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
@@ -83,7 +84,6 @@
           <controlProperties>
             <override controlID="0" x="0" y="0" w="112" h="21"/>
             <override controlID="1" x="4" y="0" w="103" h="21"/>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -93,7 +93,6 @@
             <override controlID="1" x="4" y="0" w="90" h="21">
               <text>%7Bcolor%3A%23ffffff%7Datmosphere%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -103,7 +102,6 @@
             <override controlID="1" x="3" y="0" w="92" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dprecipitation%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -146,7 +144,6 @@
             <override controlID="1" x="3" y="0" w="76" h="21">
               <text>%7Bcolor%3A%23ffffff%7Ddownload%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -158,7 +155,6 @@
             <override controlID="1" x="2" y="0" w="50" h="21">
               <text>%7Bcolor%3A%23ffffff%7D%20order%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -170,7 +166,6 @@
             <override controlID="1" x="4" y="0" w="85" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dinformation%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -226,7 +221,6 @@
             <override controlID="1" x="5" y="0" w="131" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dno%20conditions%20apply%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -239,7 +233,6 @@
             <override controlID="1" x="3" y="0" w="80" h="21">
               <text>%7Bcolor%3A%23ffffff%7DCC%20BY-ND%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -264,6 +257,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1950%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -283,7 +277,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1960%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -296,7 +289,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1970%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -309,7 +301,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1980%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -322,7 +313,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1990%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -335,7 +325,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D2000%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -348,7 +337,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D2010%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -664,6 +652,58 @@
             </control>
             <control controlID="4" controlTypeID="com.balsamiq.mockups::LineChart" x="15" y="9" w="199" h="116" measuredW="187" measuredH="175" zOrder="3" locked="false" isInGroup="0"/>
           </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="143" controlTypeID="com.balsamiq.mockups::Icon" x="1306" y="548" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="144" controlTypeID="com.balsamiq.mockups::Arrow" x="837" y="544" w="441" h="55" measuredW="150" measuredH="100" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="145" controlTypeID="com.balsamiq.mockups::StickyNote" x="909" y="427" w="284" h="153" measuredW="109" measuredH="123" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Thumbnail%20Views*%0AShows%20resources%20as%20thumbnails%20%282%29%2C%20e.g.%20with%20preview%20image%20of%20the%20resource%20data%20%28if%20available%29%20or%20preview%20map%20with%20spatial%20extent.%20Is%20shown%20by%20pressing%20the%20appropriate%20button%20of%20the%20*Result%20Presentation%20Switch*%20%281%29.%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="146" controlTypeID="__group__" x="1278" y="537" w="28" h="26" measuredW="28" measuredH="26" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="146">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="147" controlTypeID="__group__" x="806" y="588" w="28" h="26" measuredW="28" measuredH="26" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="147">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
         </control>
       </groupChildrenDescriptors>
     </control>

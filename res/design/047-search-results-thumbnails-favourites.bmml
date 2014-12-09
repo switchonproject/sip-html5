@@ -41,14 +41,13 @@
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
         <override controlID="20" x="940" y="157" w="48" h="-1"/>
-        <override controlID="-1"/>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
     <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="715" y="193" w="243" h="90" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <color>11820806</color>
-        <text>*Downloading%20Data*</text>
+        <text>*Adding%20Resources%20to%20Workspaces*</text>
       </controlProperties>
     </control>
     <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
@@ -84,6 +83,7 @@
           <controlProperties>
             <override controlID="0" x="0" y="0" w="112" h="21"/>
             <override controlID="1" x="4" y="0" w="103" h="21"/>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -93,6 +93,7 @@
             <override controlID="1" x="4" y="0" w="90" h="21">
               <text>%7Bcolor%3A%23ffffff%7Datmosphere%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -102,6 +103,7 @@
             <override controlID="1" x="3" y="0" w="92" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dprecipitation%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -144,6 +146,7 @@
             <override controlID="1" x="3" y="0" w="76" h="21">
               <text>%7Bcolor%3A%23ffffff%7Ddownload%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -155,6 +158,7 @@
             <override controlID="1" x="2" y="0" w="50" h="21">
               <text>%7Bcolor%3A%23ffffff%7D%20order%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -166,6 +170,7 @@
             <override controlID="1" x="4" y="0" w="85" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dinformation%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -221,6 +226,7 @@
             <override controlID="1" x="5" y="0" w="131" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dno%20conditions%20apply%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -233,6 +239,7 @@
             <override controlID="1" x="3" y="0" w="80" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dother%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -257,7 +264,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1950%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -277,6 +283,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1960%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -289,6 +296,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1970%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -301,6 +309,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1980%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -313,6 +322,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1990%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -325,6 +335,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D2000%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -337,6 +348,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D2010%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -655,118 +667,23 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="153" controlTypeID="com.balsamiq.mockups::Icon" x="674" y="857" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="153" controlTypeID="com.balsamiq.mockups::Icon" x="635" y="857" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <icon>HandPointIcon%7Cmedium</icon>
       </controlProperties>
     </control>
-    <control controlID="167" controlTypeID="__group__" x="732" y="672" w="436" h="435" measuredW="436" measuredH="435" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="174" controlTypeID="com.balsamiq.mockups::Component" x="771" y="648" w="393" h="365" measuredW="393" measuredH="365" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
-        <controlName>Download%20Dialog</controlName>
+        <src>./assets/symbols.bmml#Workspace%20Manager</src>
       </controlProperties>
-      <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="2" y="2" w="434" h="433" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="167">
-          <controlProperties>
-            <backgroundAlpha>0.5</backgroundAlpha>
-            <borderColor>6710886</borderColor>
-            <borderStyle>none</borderStyle>
-            <color>6710886</color>
-          </controlProperties>
-        </control>
-        <control controlID="1" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="434" h="433" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="167">
-          <controlProperties>
-            <align>left</align>
-            <borderColor>6710886</borderColor>
-            <shape>rectangle</shape>
-            <size>14</size>
-            <text/>
-          </controlProperties>
-        </control>
-        <control controlID="2" controlTypeID="com.balsamiq.mockups::RoundButton" x="1" y="2" w="429" h="43" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="167">
-          <controlProperties>
-            <align>left</align>
-            <borderColor>6710886</borderColor>
-            <color>10470904</color>
-            <shape>rectangle</shape>
-            <size>14</size>
-            <text>*%7Bsize%3A18%7DDownload%7Bsize%7D*</text>
-          </controlProperties>
-        </control>
-        <control controlID="3" controlTypeID="com.balsamiq.mockups::DataGrid" x="23" y="75" w="376" h="128" measuredW="371" measuredH="119" zOrder="3" locked="false" isInGroup="167">
-          <controlProperties>
-            <alternateRowColor>16777215</alternateRowColor>
-            <borderStyle>none</borderStyle>
-            <hasHeader>false</hasHeader>
-            <hLines>false</hLines>
-            <rowHeight>19</rowHeight>
-            <size>12</size>
-            <text>Temporal%20Resolution%3A%2C%20n/a%0ASpatial%20Resolution%3A%2C%20n/a%0ASize%3A%2C%20unknown%0AFormat%3A%2C%20application/zip%0AData%20Access%20Function%3A%2Cdownload%0AData%20Access%20Link%3A%2C%20%5Bhttp%3A//eca.knmi.nl/dailydata/download.zip%5D</text>
-            <verticalScrollbar>false</verticalScrollbar>
-            <vLines>false</vLines>
-          </controlProperties>
-        </control>
-        <control controlID="4" controlTypeID="com.balsamiq.mockups::Icon" x="399" y="11" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="4" locked="false" isInGroup="167">
-          <controlProperties>
-            <icon>XIcon%7Csmall</icon>
-          </controlProperties>
-        </control>
-        <control controlID="5" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="405" y="54" w="-1" h="370" measuredW="16" measuredH="100" zOrder="5" locked="false" isInGroup="167">
-          <controlProperties>
-            <value>0</value>
-          </controlProperties>
-        </control>
-        <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="23" y="54" w="85" h="-1" measuredW="85" measuredH="21" zOrder="6" locked="false" isInGroup="167">
-          <controlProperties>
-            <text>*ZIP%20Download*</text>
-          </controlProperties>
-        </control>
-        <control controlID="7" controlTypeID="com.balsamiq.mockups::DataGrid" x="23" y="224" w="376" h="128" measuredW="366" measuredH="119" zOrder="7" locked="false" isInGroup="167">
-          <controlProperties>
-            <alternateRowColor>16777215</alternateRowColor>
-            <borderStyle>none</borderStyle>
-            <hasHeader>false</hasHeader>
-            <hLines>false</hLines>
-            <rowHeight>19</rowHeight>
-            <size>12</size>
-            <text>Temporal%20Resolution%3A%2C%20n/a%0ASpatial%20Resolution%3A%2C%20n/a%0ASize%3A%2C%20unknown%0AFormat%3A%2C%20text/html%0AData%20Access%20Function%3A%2Csearch%0AData%20Access%20Link%3A%2C%20%5Bhttp%3A//eca.knmi.nl/dailydata/getdata.php%5D</text>
-            <verticalScrollbar>false</verticalScrollbar>
-            <vLines>false</vLines>
-          </controlProperties>
-        </control>
-        <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="23" y="203" w="111" h="-1" measuredW="111" measuredH="21" zOrder="8" locked="false" isInGroup="167">
-          <controlProperties>
-            <text>*Data%20Search%20Form*</text>
-          </controlProperties>
-        </control>
-        <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="23" y="352" w="346" h="-1" measuredW="216" measuredH="21" zOrder="9" locked="false" isInGroup="167">
-          <controlProperties>
-            <text>*Information%20on%20data%20and%20downloads*</text>
-          </controlProperties>
-        </control>
-        <control controlID="10" controlTypeID="com.balsamiq.mockups::Icon" x="374" y="56" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="10" locked="false" isInGroup="167">
-          <controlProperties>
-            <icon>UpFillTriangleIcon%7Cxsmall</icon>
-          </controlProperties>
-        </control>
-        <control controlID="11" controlTypeID="com.balsamiq.mockups::Icon" x="374" y="210" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="11" locked="false" isInGroup="167">
-          <controlProperties>
-            <icon>UpFillTriangleIcon%7Cxsmall</icon>
-          </controlProperties>
-        </control>
-        <control controlID="12" controlTypeID="com.balsamiq.mockups::Icon" x="374" y="354" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="12" locked="false" isInGroup="167">
-          <controlProperties>
-            <icon>DownFillTriangleIcon%7Cxsmall</icon>
-          </controlProperties>
-        </control>
-      </groupChildrenDescriptors>
     </control>
-    <control controlID="168" controlTypeID="__group__" x="650" y="841" w="28" h="26" measuredW="28" measuredH="26" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="175" controlTypeID="__group__" x="612" y="845" w="28" h="26" measuredW="28" measuredH="26" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
       <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="168">
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="175">
           <controlProperties>
             <bold>true</bold>
             <borderColor>40463</borderColor>
@@ -778,12 +695,12 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="169" controlTypeID="__group__" x="725" y="658" w="28" h="26" measuredW="28" measuredH="26" zOrder="15" locked="false" isInGroup="-1">
+    <control controlID="176" controlTypeID="__group__" x="764" y="633" w="28" h="26" measuredW="28" measuredH="26" zOrder="15" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
       <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="169">
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="176">
           <controlProperties>
             <bold>true</bold>
             <borderColor>40463</borderColor>
@@ -795,16 +712,16 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="170" controlTypeID="com.balsamiq.mockups::Arrow" x="665" y="680" w="58" h="161" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="177" controlTypeID="com.balsamiq.mockups::Arrow" x="627" y="659" w="137" h="186" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>bottom</direction>
         <leftArrow>false</leftArrow>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="171" controlTypeID="com.balsamiq.mockups::StickyNote" x="432" y="699" w="274" h="133" measuredW="109" measuredH="123" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="178" controlTypeID="com.balsamiq.mockups::StickyNote" x="442" y="665" w="297" h="161" measuredW="109" measuredH="123" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>This%20dialog%20or%20tool%2C%20respectively%2C%20allows%20*downloading*%20the%20actual%20resource%20data%20%28representation%20of%20the%20resource%29.%20Please%20note%20that%20there%20is%20a%201-n%20relationship%20between%20resources%20and%20representations%20in%20SWITCH-ON.%20</text>
+        <text>Resources%20can%20be%20added%20to%20*Workspaces*.%20Workspaces%20are%20available%20in%20%u201CMY%20SWITCH-ON%u201D%20and%20allow%20users%20to%20%u201Cbookmark%u201D%20individual%20resources%20or%20sets%20of%20resources%20%28_search%20resultsets_%29%20for%20later%20inspection%20or%20download.%20Workspaces%20are%20treated%20like%20_search%20resultsets_%2C%20so%20they%20can%20be%20loaded%20into%20the%20*Resultset%20List*.</text>
       </controlProperties>
     </control>
   </controls>
