@@ -5,7 +5,7 @@
         <src>./assets/symbols.bmml#Firefox%205%20Windows</src>
       </controlProperties>
     </control>
-    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="true" isInGroup="-1">
       <controlProperties>
         <override controlID="0" x="0" y="0" w="1150" h="889"/>
         <override controlID="1" x="211" y="149" w="156" h="39"/>
@@ -26,7 +26,7 @@
         <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
         <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
         <override controlID="17" x="367" y="158" w="566" h="-1">
-          <text>%20%20%20%20%20%20%20%20%20_filter_%20*%3A*%20_parameter_</text>
+          <text>%20location%3AGermany</text>
         </override>
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
@@ -38,7 +38,7 @@
     <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="715" y="193" w="243" h="90" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <color>11820806</color>
-        <text>*Search%20Filters*</text>
+        <text>*Geospatial%20Search*%0AUsing%20a%20location%20filter%20%28country%2C%20continent%29%20for%20geospatial%20search.</text>
       </controlProperties>
     </control>
     <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="true" isInGroup="-1">
@@ -57,18 +57,13 @@
         <text>%20%20%20%20</text>
       </controlProperties>
     </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Icon" x="560" y="502" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Icon" x="813" y="636" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <icon>HandPointIcon%7Cmedium</icon>
       </controlProperties>
     </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::StickyNote" x="592" y="758" w="478" h="211" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>There%20are%20two%20possibilities%20for%20specifying%20_pre-search%20filters_%20that%20are%20applied%20when%20performing%20a%20search%20for%20resources%20with%20help%20of%20the%20*Universal%20Search%20Box*%0A%20%0A-%201%29%20The%20user%20can%20directly%20input%20appropriate%20_filter%20expressions_%20in%20the%20*Universal%20Search%20Box*%20%281%29%2C%20e.g.%20%u201Ckeyword%3Awater%u201D.%20The%20general%20syntax%20for%20filter%20expressions%20is%20_filter_*%3A*_parameter_%2C%20or%0A-%202%29%20the%20user%20can%20use%20%20various%20*UI%20Widgets*%2C%20for%20example%20the%20*Search%20Filter%20Ribbon*%20%282%29%2C%20that%20are%20provided%20for%20different%20type%20of%20search%20filters%20%28spatial%2C%20temporal%2C%20keywords%2C%20...%29.</text>
-      </controlProperties>
-    </control>
-    <control controlID="98" controlTypeID="__group__" x="600" y="491" w="28" h="26" measuredW="28" measuredH="26" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="98" controlTypeID="__group__" x="822" y="570" w="28" h="26" measuredW="28" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
@@ -85,7 +80,7 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="99" controlTypeID="__group__" x="431" y="515" w="28" h="26" measuredW="28" measuredH="26" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="99" controlTypeID="__group__" x="757" y="636" w="28" h="26" measuredW="28" measuredH="26" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
@@ -102,19 +97,56 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="100" controlTypeID="com.balsamiq.mockups::RoundButton" x="1318" y="762" w="28" h="26" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::RoundButton" x="583" y="506" w="28" h="26" measuredW="32" measuredH="32" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
         <borderColor>40463</borderColor>
         <color>40463</color>
         <shape>circle</shape>
         <size>10</size>
-        <text>2</text>
+        <text>3</text>
       </controlProperties>
     </control>
-    <control controlID="103" controlTypeID="com.balsamiq.mockups::Component" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Component" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
+        <override controlID="7">
+          <text>%20/%20%20/%20</text>
+        </override>
+        <override controlID="13">
+          <text>title%20*and*%20description</text>
+        </override>
+        <override controlID="8:0">
+          <text/>
+        </override>
+        <override controlID="8:1">
+          <text/>
+        </override>
+        <override controlID="11:0">
+          <text>Ge</text>
+        </override>
+        <override controlID="11:1">
+          <selectedIndex>1</selectedIndex>
+          <text>Georgia%0AGermany</text>
+        </override>
         <src>./assets/symbols.bmml#Filter Ribbon</src>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::StickyNote" x="568" y="761" w="449" h="279" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20to%20perform%20a%20_location-based%20geospatial%20search_%20or%20a%20search%20with%20_location%20filter_%2C%20respectively.%0A%20%0A-%201%29%20Either%20directly%20write%20an%20appropriate%20_filter%20expression_%20for%20the%20%u201Clocation%u201D%20filter%20%283%29%2C%20like%20%u201Clocation%3AGermany%u201D%20or%20%u201Clocation%3AEurope%u201D%20%28countries%20and%20continents%20should%20work%29%0A-%202%29%20use%20the%20corresponding%20*UI%20Widget*.%20In%20case%20of%20location-based%20geospatial%20search%2C%20the%20*Search%20Filter%20Ribbon*%20provides%20the%20possibility%20to%20select%20a%20country.%20Chose%20whether%20only%20European%20countries%20or%20continents%20and%20countries%20of%20the%20world%20shall%20be%20used%20for%20the%20location%20filter.%20Start%20typing%20the%20name%20of%20the%20country%20%282%29%20and%20make%20a%20selection%20in%20the%20auto-completed%20list.%20A%20_location%20filter%20expression_%20is%20constructed%20based%20on%20the%20selected%20country%20and%20added%20to%20the%20*Universal%20Search%20Box*%20%283%29.%20To%20add%20more%20location%20filters%2C%20repeat%20steps%201%20%u2013%202.</text>
+      </controlProperties>
+    </control>
+    <control controlID="105" controlTypeID="com.balsamiq.mockups::Arrow" x="611" y="521" w="153" h="115" measuredW="150" measuredH="100" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="106" controlTypeID="com.balsamiq.mockups::Arrow" x="773" y="583" w="49" h="50" measuredW="150" measuredH="100" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <rightArrow>false</rightArrow>
+        <text/>
       </controlProperties>
     </control>
   </controls>

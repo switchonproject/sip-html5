@@ -16,7 +16,6 @@
         <override controlID="4" x="218" y="159" w="112" h="-1"/>
         <override controlID="5" x="0" y="219" w="1150" h="-1"/>
         <override controlID="6" x="1080" y="202" w="-1" h="-1"/>
-        <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
         <override controlID="8" x="1053" y="202" w="-1" h="-1"/>
         <override controlID="9" x="159" y="158" w="44" h="-1"/>
         <override controlID="10" x="0" y="191" w="1150" h="-1"/>
@@ -24,9 +23,7 @@
         <override controlID="12" x="0" y="0" w="1150" h="137"/>
         <override controlID="13" x="21" y="150" w="125" h="39"/>
         <override controlID="14" x="117" y="167" w="-1" h="-1"/>
-        <override controlID="15" x="1016" y="153" w="106" h="30">
-          <text>Workspace%0A*Grided%20Data%20E...*</text>
-        </override>
+        <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
         <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
         <override controlID="17" x="367" y="158" w="566" h="-1">
           <text>%20</text>
@@ -34,7 +31,9 @@
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
         <override controlID="20" x="940" y="157" w="48" h="-1"/>
-        <override controlID="-1"/>
+        <override controlID="15" x="1016" y="153" w="106" h="30">
+          <text>Workspace%0A*Grided%20Data%20E...*</text>
+        </override>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
@@ -103,6 +102,7 @@
             <override controlID="1" x="4" y="0" w="92" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dgrided%20data%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -112,6 +112,7 @@
             <override controlID="1" x="3" y="0" w="66" h="21">
               <text>%7Bcolor%3A%23ffffff%7Deurope%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -121,7 +122,6 @@
             <override controlID="1" x="3" y="0" w="92" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dprecipitation%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -138,7 +138,6 @@
             <override controlID="1" x="4" y="0" w="111" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dair%20temperature%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -174,7 +173,6 @@
             <override controlID="1" x="3" y="0" w="76" h="21">
               <text>%7Bcolor%3A%23ffffff%7Ddownload%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -186,7 +184,6 @@
             <override controlID="1" x="4" y="0" w="85" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dinformation%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -237,13 +234,7 @@
         <color>40463</color>
       </controlProperties>
     </control>
-    <control controlID="123" controlTypeID="com.balsamiq.mockups::Icon" x="1284" y="565" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
-      <controlProperties>
-        <color>0</color>
-        <icon>HandPointIcon%7Cmedium</icon>
-      </controlProperties>
-    </control>
-    <control controlID="126" controlTypeID="__group__" x="1218" y="485" w="28" h="26" measuredW="28" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="126" controlTypeID="__group__" x="1218" y="485" w="28" h="26" measuredW="28" measuredH="26" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
@@ -260,7 +251,7 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="127" controlTypeID="__group__" x="598" y="531" w="28" h="26" measuredW="28" measuredH="26" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="127" controlTypeID="__group__" x="598" y="531" w="28" h="26" measuredW="28" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
@@ -277,14 +268,14 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="130" controlTypeID="com.balsamiq.mockups::Arrow" x="1033" y="504" w="185" h="155" measuredW="150" measuredH="100" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="130" controlTypeID="com.balsamiq.mockups::Arrow" x="1033" y="504" w="185" h="155" measuredW="150" measuredH="100" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>bottom</direction>
         <rightArrow>false</rightArrow>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="132" controlTypeID="com.balsamiq.mockups::RoundButton" x="505" y="1171" w="28" h="26" measuredW="32" measuredH="32" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="132" controlTypeID="com.balsamiq.mockups::RoundButton" x="505" y="1171" w="28" h="26" measuredW="32" measuredH="32" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
         <borderColor>40463</borderColor>
@@ -294,22 +285,23 @@
         <text>3</text>
       </controlProperties>
     </control>
-    <control controlID="134" controlTypeID="com.balsamiq.mockups::Arrow" x="626" y="545" w="190" h="114" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
+    <control controlID="134" controlTypeID="com.balsamiq.mockups::Arrow" x="626" y="545" w="190" h="114" measuredW="150" measuredH="100" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>top</direction>
         <leftArrow>false</leftArrow>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="135" controlTypeID="com.balsamiq.mockups::StickyNote" x="728" y="642" w="335" h="134" measuredW="109" measuredH="123" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="135" controlTypeID="com.balsamiq.mockups::StickyNote" x="728" y="642" w="335" h="134" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <text>When%20a%20_Workspace_%20has%20been%20loaded%2C%20the%20name%20of%20the%20currently%20loaded%20workspace%20is%20shown%20in%20%u201CMy%20SWITCHON%u201D%20and%20a%20status%20message%20%282%29%20and%20an%20option%20%283%29%20for%20clearing%20the%20*Result%20set%20List*%20that%20is%20populated%20with%20resources%20from%20the%20workspace%20is%20displayed.</text>
       </controlProperties>
     </control>
-    <control controlID="142" controlTypeID="com.balsamiq.mockups::Arrow" x="522" y="772" w="313" h="399" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="142" controlTypeID="com.balsamiq.mockups::Arrow" x="522" y="772" w="313" h="399" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>bottom</direction>
-        <leftArrow>false</leftArrow>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
         <text/>
       </controlProperties>
     </control>

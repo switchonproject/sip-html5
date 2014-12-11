@@ -16,9 +16,6 @@
         <override controlID="4" x="218" y="159" w="112" h="-1"/>
         <override controlID="5" x="0" y="219" w="1150" h="-1"/>
         <override controlID="6" x="1080" y="202" w="-1" h="-1"/>
-        <override controlID="7" x="1105" y="200" w="-1" h="-1">
-          <src>./assets/map_brochure_disabled_-20.png</src>
-        </override>
         <override controlID="8" x="1053" y="202" w="-1" h="-1">
           <color>0</color>
         </override>
@@ -30,7 +27,9 @@
           <text>*EOBS*%0AResource%20Coll...</text>
         </override>
         <override controlID="14" x="117" y="167" w="-1" h="-1"/>
-        <override controlID="15" x="1016" y="153" w="86" h="30"/>
+        <override controlID="7" x="1105" y="200" w="-1" h="-1">
+          <src>./assets/map_brochure_disabled_-20.png</src>
+        </override>
         <override controlID="16" x="1105" y="167" w="-1" h="-1"/>
         <override controlID="17" x="367" y="158" w="566" h="-1">
           <text>%20</text>
@@ -38,7 +37,7 @@
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
         <override controlID="20" x="940" y="157" w="48" h="-1"/>
-        <override controlID="-1"/>
+        <override controlID="15" x="1016" y="153" w="86" h="30"/>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
@@ -56,7 +55,7 @@
         <src>./assets/symbols.bmml#status-notification</src>
       </controlProperties>
     </control>
-    <control controlID="113" controlTypeID="__group__" x="248" y="580" w="299" h="625" measuredW="299" measuredH="625" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="113" controlTypeID="__group__" x="248" y="580" w="299" h="625" measuredW="299" measuredH="625" zOrder="4" locked="true" isInGroup="-1">
       <controlProperties>
         <controlName>Result%20Set%20List</controlName>
       </controlProperties>
@@ -81,6 +80,7 @@
           <controlProperties>
             <override controlID="0" x="0" y="0" w="112" h="21"/>
             <override controlID="1" x="4" y="0" w="103" h="21"/>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -90,6 +90,7 @@
             <override controlID="1" x="4" y="0" w="90" h="21">
               <text>%7Bcolor%3A%23ffffff%7Datmosphere%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -99,6 +100,7 @@
             <override controlID="1" x="3" y="0" w="92" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dprecipitation%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -115,6 +117,7 @@
             <override controlID="1" x="4" y="0" w="111" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dair%20temperature%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -150,6 +153,7 @@
             <override controlID="1" x="3" y="0" w="76" h="21">
               <text>%7Bcolor%3A%23ffffff%7Ddownload%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -161,6 +165,7 @@
             <override controlID="1" x="2" y="0" w="50" h="21">
               <text>%7Bcolor%3A%23ffffff%7D%20order%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -172,6 +177,7 @@
             <override controlID="1" x="4" y="0" w="85" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dinformation%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -227,6 +233,7 @@
             <override controlID="1" x="5" y="0" w="131" h="21">
               <text>%7Bcolor%3A%23ffffff%7Dno%20conditions%20apply%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -239,6 +246,7 @@
             <override controlID="1" x="3" y="0" w="80" h="21">
               <text>%7Bcolor%3A%23ffffff%7DCC%20BY-ND%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -263,7 +271,6 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1950%7Bcolor%7D</text>
             </override>
-            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -283,6 +290,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1960%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -295,6 +303,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1970%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -307,6 +316,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1980%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -319,6 +329,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D1990%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -331,6 +342,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D2000%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>
@@ -343,6 +355,7 @@
             <override controlID="1" x="2" y="0" w="48" h="21">
               <text>%7Bcolor%3A%23ffffff%7D2010%7Bcolor%7D</text>
             </override>
+            <override controlID="-1"/>
             <src>./assets/symbols.bmml#tag-label</src>
           </controlProperties>
         </control>

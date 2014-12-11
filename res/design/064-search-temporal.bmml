@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1396" measuredH="1236" mockupW="1180" mockupH="1043">
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1396" measuredH="1236" mockupW="1180" mockupH="1048">
   <controls>
     <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="216" y="203" w="1180" h="1033" measuredW="1180" measuredH="1033" zOrder="0" locked="true" isInGroup="-1">
       <controlProperties>
@@ -26,19 +26,20 @@
         <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
         <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
         <override controlID="17" x="367" y="158" w="566" h="-1">
-          <text>%20%20%20%20%20%20%20%20%20_filter_%20*%3A*%20_parameter_</text>
+          <text>%20location%3AGermany%20keyword%3A%27water%20quality%27%20start%3A2012-11-11</text>
         </override>
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
         <override controlID="19" x="938" y="150" w="51" h="39"/>
         <override controlID="20" x="940" y="157" w="48" h="-1"/>
         <override controlID="15" x="1016" y="153" w="106" h="30"/>
+        <override controlID="-1"/>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
-    <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="715" y="193" w="243" h="90" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="600" y="188" w="363" h="90" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <color>11820806</color>
-        <text>*Search%20Filters*</text>
+        <text>*Temporal%20Search*%0AUsing%20start%20/%20end%20date%20filter%20for%20temporal%20search.</text>
       </controlProperties>
     </control>
     <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="true" isInGroup="-1">
@@ -48,6 +49,7 @@
         <override controlID="2" x="10" y="4" w="808" h="13">
           <text>%20%20%20%20</text>
         </override>
+        <override controlID="-1"/>
         <src>./assets/symbols.bmml#status-notification</src>
       </controlProperties>
     </control>
@@ -57,18 +59,13 @@
         <text>%20%20%20%20</text>
       </controlProperties>
     </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Icon" x="560" y="502" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Icon" x="450" y="680" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <icon>HandPointIcon%7Cmedium</icon>
       </controlProperties>
     </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::StickyNote" x="592" y="758" w="478" h="211" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>There%20are%20two%20possibilities%20for%20specifying%20_pre-search%20filters_%20that%20are%20applied%20when%20performing%20a%20search%20for%20resources%20with%20help%20of%20the%20*Universal%20Search%20Box*%0A%20%0A-%201%29%20The%20user%20can%20directly%20input%20appropriate%20_filter%20expressions_%20in%20the%20*Universal%20Search%20Box*%20%281%29%2C%20e.g.%20%u201Ckeyword%3Awater%u201D.%20The%20general%20syntax%20for%20filter%20expressions%20is%20_filter_*%3A*_parameter_%2C%20or%0A-%202%29%20the%20user%20can%20use%20%20various%20*UI%20Widgets*%2C%20for%20example%20the%20*Search%20Filter%20Ribbon*%20%282%29%2C%20that%20are%20provided%20for%20different%20type%20of%20search%20filters%20%28spatial%2C%20temporal%2C%20keywords%2C%20...%29.</text>
-      </controlProperties>
-    </control>
-    <control controlID="98" controlTypeID="__group__" x="600" y="491" w="28" h="26" measuredW="28" measuredH="26" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="98" controlTypeID="__group__" x="480" y="665" w="28" h="26" measuredW="28" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
@@ -85,7 +82,7 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="99" controlTypeID="__group__" x="431" y="515" w="28" h="26" measuredW="28" measuredH="26" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="99" controlTypeID="__group__" x="860" y="508" w="28" h="26" measuredW="28" measuredH="26" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <controlName>bs-badge-success</controlName>
       </controlProperties>
@@ -102,19 +99,37 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="100" controlTypeID="com.balsamiq.mockups::RoundButton" x="1318" y="762" w="28" h="26" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Component" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <bold>true</bold>
-        <borderColor>40463</borderColor>
-        <color>40463</color>
-        <shape>circle</shape>
-        <size>10</size>
-        <text>2</text>
+        <override controlID="7">
+          <text>2012%20/%2011%20/%2011%20</text>
+        </override>
+        <override controlID="13">
+          <text>title%20*and*%20description</text>
+        </override>
+        <override controlID="11:0">
+          <text>Germany</text>
+        </override>
+        <override controlID="8:1">
+          <selectedIndex>3</selectedIndex>
+        </override>
+        <override controlID="11:1">
+          <text>Georgia%0AGermany</text>
+        </override>
+        <src>./assets/symbols.bmml#Filter Ribbon</src>
       </controlProperties>
     </control>
-    <control controlID="103" controlTypeID="com.balsamiq.mockups::Component" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::StickyNote" x="631" y="560" w="449" h="236" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
-        <src>./assets/symbols.bmml#Filter Ribbon</src>
+        <text>How%20to%20perform%20a%20_temporal%20search_%20%28start%20and%20end%20date%20of%20temporal%20coverage%29%20or%20a%20search%20with%20_date%20filter_%2C%20respectively.%0A%20%0A-%201%29%20Either%20directly%20write%20an%20appropriate%20_filter%20expression_%20for%20the%20%u201Cstart%u201D%20and%20%u201Cend%u201D%20date%20filters%20%282%29%2C%20like%20%u201Cstart%3A2012-11-11%u201D%20or%20%u201Cend%3A2012-12-12%u201D%2C%20or%0A-%202%29%20use%20the%20corresponding%20*UI%20Widget*.%20In%20case%20of%20temporal%20search%2C%20the%20*Search%20Filter%20Ribbon*%20provides%20the%20possibility%20to%20select%20two%20dates.%20Chose%20the%20start%20%20and%20/%20or%20end%20date.%20Make%20a%20selection%20in%20the%20*Date%20Chooser*%20%281%29.%20A%20respective%20filter%20expression%20is%20constructed%20based%20on%20the%20selected%20date%20and%20added%20to%20the%20*Universal%20Search%20Box*%20%282%29.%20To%20add%20also%20a%20end%20data%20filter%2C%20repeat%20steps%201%20%u2013%202.</text>
+      </controlProperties>
+    </control>
+    <control controlID="106" controlTypeID="com.balsamiq.mockups::Arrow" x="502" y="526" w="343" h="145" measuredW="150" measuredH="100" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <text/>
       </controlProperties>
     </control>
   </controls>

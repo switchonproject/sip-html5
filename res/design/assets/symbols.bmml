@@ -89,7 +89,7 @@
         </control>
         <control controlID="17" controlTypeID="com.balsamiq.mockups::Label" x="367" y="158" w="566" h="-1" measuredW="231" measuredH="21" zOrder="17" locked="false" isInGroup="0">
           <controlProperties>
-            <color>3355443</color>
+            <color>6710886</color>
             <text>please%20enter%20on%20ore%20more%20search%20terms</text>
           </controlProperties>
         </control>
@@ -655,6 +655,260 @@
           <controlProperties>
             <text>Cancel</text>
           </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="24" controlTypeID="__group__" x="60" y="80" w="668" h="247" measuredW="668" measuredH="247" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>Filter%20Ribbon</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="668" h="247" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="24">
+          <controlProperties>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::VRule" x="146" y="6" w="-1" h="197" measuredW="10" measuredH="100" zOrder="1" locked="false" isInGroup="24">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="8" y="218" w="-1" h="-1" measuredW="265" measuredH="21" zOrder="2" locked="false" isInGroup="24">
+          <controlProperties>
+            <bold>true</bold>
+            <color>6710886</color>
+            <icon>CircledXIcon%7Cxsmall</icon>
+            <labelPosition>right</labelPosition>
+            <text>Clear%20current%20search%20filters%20and%20options</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::HRule" x="8" y="208" w="651" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="24"/>
+        <control controlID="4" controlTypeID="__group__" x="163" y="8" w="146" h="39" measuredW="146" measuredH="39" zOrder="4" locked="false" isInGroup="24">
+          <controlProperties>
+            <controlName>Keyword%20Tab</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="74" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="4">
+              <controlProperties>
+                <bold>true</bold>
+                <borderColor>16777215</borderColor>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>Topic</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="74" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="4">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="25" w="146" h="-1" measuredW="100" measuredH="10" zOrder="2" locked="false" isInGroup="4"/>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="3" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="4">
+              <controlProperties>
+                <bold>true</bold>
+                <color>14540253</color>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>Keyword</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="3" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="4">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="5" controlTypeID="__group__" x="9" y="8" w="124" h="39" measuredW="124" measuredH="39" zOrder="5" locked="false" isInGroup="24">
+          <controlProperties>
+            <controlName>Keyword%20Tab</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="63" y="0" w="61" h="37" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="5">
+              <controlProperties>
+                <bold>true</bold>
+                <borderColor>16777215</borderColor>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>To</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="63" y="30" w="61" h="9" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="5">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="25" w="124" h="-1" measuredW="100" measuredH="10" zOrder="2" locked="false" isInGroup="5"/>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="2" y="0" w="61" h="37" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="5">
+              <controlProperties>
+                <bold>true</bold>
+                <color>14540253</color>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>From</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="2" y="30" w="61" h="9" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="5">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Image" x="12" y="86" w="119" h="106" measuredW="119" measuredH="106" zOrder="6" locked="false" isInGroup="24">
+          <controlProperties>
+            <src>./assets/calendar-from.png</src>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="12" y="46" w="119" h="-1" measuredW="91" measuredH="27" zOrder="7" locked="false" isInGroup="24">
+          <controlProperties>
+            <borderColor>10066329</borderColor>
+            <text>2012%20/%2011%20/%2011</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="__group__" x="165" y="46" w="145" h="159" measuredW="145" measuredH="159" zOrder="8" locked="false" isInGroup="24">
+          <controlProperties>
+            <controlName>list</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="144" h="-1" measuredW="42" measuredH="27" zOrder="0" locked="false" isInGroup="8">
+              <controlProperties>
+                <borderColor>10066329</borderColor>
+                <text>wat...</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::List" x="1" y="33" w="128" h="126" measuredW="100" measuredH="132" zOrder="1" locked="false" isInGroup="8">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+                <text>water%0Awatershed%0Awater%20base%0Awater%20quality%0Awater%20cycle%0A...</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="129" y="34" w="-1" h="123" measuredW="16" measuredH="100" zOrder="2" locked="false" isInGroup="8"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::VRule" x="315" y="8" w="-1" h="197" measuredW="10" measuredH="100" zOrder="9" locked="false" isInGroup="24">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="__group__" x="333" y="7" w="146" h="39" measuredW="146" measuredH="39" zOrder="10" locked="false" isInGroup="24">
+          <controlProperties>
+            <controlName>Keyword%20Tab</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="74" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="10">
+              <controlProperties>
+                <bold>true</bold>
+                <borderColor>16777215</borderColor>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>World</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="74" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="10">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="25" w="146" h="-1" measuredW="100" measuredH="10" zOrder="2" locked="false" isInGroup="10"/>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="3" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="10">
+              <controlProperties>
+                <bold>true</bold>
+                <color>14540253</color>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>Europe</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="3" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="10">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="11" controlTypeID="__group__" x="333" y="45" w="145" h="159" measuredW="145" measuredH="159" zOrder="11" locked="false" isInGroup="24">
+          <controlProperties>
+            <controlName>list</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="144" h="-1" measuredW="31" measuredH="27" zOrder="0" locked="false" isInGroup="11">
+              <controlProperties>
+                <borderColor>10066329</borderColor>
+                <text>A...</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::List" x="1" y="33" w="128" h="126" measuredW="100" measuredH="126" zOrder="1" locked="false" isInGroup="11">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+                <text>Albania%0AAndorra%0AArmenia%0AAustria%0AAzerbaijan</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="129" y="34" w="-1" h="123" measuredW="16" measuredH="100" zOrder="2" locked="false" isInGroup="11"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::VRule" x="491" y="6" w="-1" h="197" measuredW="10" measuredH="100" zOrder="12" locked="false" isInGroup="24">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="com.balsamiq.mockups::CheckBox" x="504" y="58" w="139" h="46" measuredW="138" measuredH="22" zOrder="13" locked="false" isInGroup="24">
+          <controlProperties>
+            <state>selected</state>
+            <text>title%20*and*%20description</text>
+          </controlProperties>
+        </control>
+        <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="501" y="49" w="-1" h="-1" measuredW="60" measuredH="21" zOrder="14" locked="false" isInGroup="24">
+          <controlProperties>
+            <text>Text%20Filter</text>
+          </controlProperties>
+        </control>
+        <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="501" y="96" w="-1" h="-1" measuredW="97" measuredH="21" zOrder="15" locked="false" isInGroup="24">
+          <controlProperties>
+            <text>Geosaptial%20Filter</text>
+          </controlProperties>
+        </control>
+        <control controlID="16" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="504" y="120" w="-1" h="-1" measuredW="90" measuredH="39" zOrder="16" locked="false" isInGroup="24">
+          <controlProperties>
+            <text>%28o%29%20intersection%0A%28%20%29%20enclosure</text>
+          </controlProperties>
+        </control>
+        <control controlID="17" controlTypeID="__group__" x="506" y="8" w="146" h="39" measuredW="146" measuredH="39" zOrder="17" locked="false" isInGroup="24">
+          <controlProperties>
+            <controlName>Keyword%20Tab</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="74" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="17">
+              <controlProperties>
+                <bold>true</bold>
+                <borderColor>16777215</borderColor>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>Sort</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="74" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="17">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="25" w="146" h="-1" measuredW="100" measuredH="10" zOrder="2" locked="false" isInGroup="17"/>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="3" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="17">
+              <controlProperties>
+                <bold>true</bold>
+                <color>14540253</color>
+                <shape>roundRect</shape>
+                <size>14</size>
+                <text>Options</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="3" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="17">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
         </control>
       </groupChildrenDescriptors>
     </control>
