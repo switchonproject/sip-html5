@@ -107,7 +107,7 @@
         <text>3</text>
       </controlProperties>
     </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::StickyNote" x="273" y="594" w="449" h="265" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::StickyNote" x="534" y="619" w="389" h="369" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <text>How%20to%20perform%20a%20_coordinate-based%20geospatial%20search_%20or%20a%20search%20with%20_coordinate%20filter_%2C%20respectively.%0A%20%0A-%2012%20Either%20directly%20write%20an%20appropriate%20_filter%20expression_%20for%20the%20%u201Cgeo%u201D%20filter%20%283%29%2C%20like%20geo%3ABBOX%2890%2C180%2C-90%2C-180%29%u201D%2C%20%u201Cgeo%3APOLYGON%20%28%u2026.%29%u201D%20and%20%u201Cgeo%3APOINT%28...%29%u201D%20or%0A-%202%29%20use%20the%20corresponding%20%20*UI%20Widget*.%20In%20case%20of%20location-based%20geospatial%20search%2C%20the%20*Map%20Controls*%20%281%29%20can%20be%20used%20to%20draw%20a%20bounding%20box%20%282%29%2C%20a%20polygon%20or%20a%20point%20that%20is%20used%20for%20_geospatial%20filter%20expression_%20%283%29.%0A%20%0ANote%3A%20When%20using%20the%20*Map%20Controls*%20*UI%20Widget*%20for%20specifying%20the%20spatial%20extent%2C%20the%20*Universal%20Search%20Box*%20does%20not%20necessarily%20show%20the%20coordinates%20of%20the%20bounding%20box%20or%20polygon%20but%20the%20area%20in%20m%B2.</text>
       </controlProperties>
