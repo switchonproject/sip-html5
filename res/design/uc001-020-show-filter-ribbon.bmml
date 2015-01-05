@@ -1,0 +1,138 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1396" measuredH="1236" mockupW="1180" mockupH="1033">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="216" y="203" w="1180" h="1033" measuredW="1180" measuredH="1033" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/symbols.bmml#Firefox%205%20Windows</src>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="1150" h="889"/>
+        <override controlID="1" x="211" y="149" w="156" h="39"/>
+        <override controlID="2" x="0" y="224" w="1150" h="665">
+          <src>./assets/OSM-Europe-complete.png</src>
+        </override>
+        <override controlID="3" x="359" y="150" w="582" h="39"/>
+        <override controlID="4" x="218" y="159" w="112" h="-1"/>
+        <override controlID="5" x="0" y="219" w="1150" h="-1"/>
+        <override controlID="6" x="1080" y="202" w="-1" h="-1"/>
+        <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
+        <override controlID="8" x="1053" y="202" w="-1" h="-1"/>
+        <override controlID="9" x="159" y="158" w="44" h="-1"/>
+        <override controlID="10" x="0" y="191" w="1150" h="-1"/>
+        <override controlID="11" x="1098" y="263" w="-1" h="-1"/>
+        <override controlID="12" x="0" y="0" w="1150" h="137"/>
+        <override controlID="13" x="21" y="150" w="125" h="39"/>
+        <override controlID="14" x="117" y="167" w="-1" h="-1"/>
+        <override controlID="15" x="1016" y="153" w="106" h="30"/>
+        <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
+        <override controlID="17" x="367" y="158" w="566" h="-1">
+          <text>%20%20</text>
+        </override>
+        <override controlID="18" x="334" y="161" w="-1" h="-1"/>
+        <override controlID="19" x="938" y="150" w="51" h="39"/>
+        <override controlID="20" x="940" y="157" w="48" h="-1"/>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#SIP%20Application</src>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="980" h="21"/>
+        <override controlID="1" x="958" y="2" w="-1" h="-1"/>
+        <override controlID="2" x="10" y="4" w="808" h="13">
+          <text>%20%20%20%20</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#status-notification</src>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="600" y="493" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Component" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="668" h="247"/>
+        <override controlID="1" x="146" y="6" w="-1" h="197"/>
+        <override controlID="2" x="8" y="218" w="-1" h="-1"/>
+        <override controlID="3" x="8" y="208" w="651" h="-1"/>
+        <override controlID="5" x="9" y="8" w="124" h="39"/>
+        <override controlID="8" x="165" y="46" w="145" h="159"/>
+        <override controlID="9" x="315" y="8" w="-1" h="197"/>
+        <override controlID="12" x="491" y="6" w="-1" h="197"/>
+        <override controlID="14" x="501" y="49" w="-1" h="-1"/>
+        <override controlID="7" x="12" y="46" w="119" h="-1">
+          <text>%20/%20%20/%20</text>
+        </override>
+        <override controlID="17" x="506" y="8" w="146" h="39"/>
+        <override controlID="10" x="333" y="7" w="146" h="39"/>
+        <override controlID="11" x="333" y="45" w="145" h="159"/>
+        <override controlID="13" x="504" y="58" w="139" h="46">
+          <state>up</state>
+          <text>title%20*and*%20description</text>
+        </override>
+        <override controlID="15" x="501" y="96" w="-1" h="-1"/>
+        <override controlID="16" x="504" y="120" w="-1" h="-1"/>
+        <override controlID="6" x="12" y="86" w="119" h="106"/>
+        <override controlID="4" x="163" y="8" w="146" h="39"/>
+        <override controlID="17:2" x="0" y="25" w="146" h="-1"/>
+        <override controlID="4:4" x="3" y="30" w="72" h="9"/>
+        <override controlID="8:0" x="0" y="0" w="144" h="-1">
+          <text/>
+        </override>
+        <override controlID="11:0" x="0" y="0" w="144" h="-1">
+          <text/>
+        </override>
+        <override controlID="4:2" x="0" y="25" w="146" h="-1"/>
+        <override controlID="11:2" x="129" y="34" w="-1" h="123"/>
+        <override controlID="8:1" x="1" y="33" w="128" h="126">
+          <text/>
+        </override>
+        <override controlID="5:3" x="2" y="0" w="61" h="37"/>
+        <override controlID="17:1" x="74" y="30" w="72" h="9"/>
+        <override controlID="10:3" x="3" y="0" w="72" h="37"/>
+        <override controlID="17:4" x="3" y="30" w="72" h="9"/>
+        <override controlID="17:0" x="74" y="0" w="72" h="37"/>
+        <override controlID="10:2" x="0" y="25" w="146" h="-1"/>
+        <override controlID="5:1" x="63" y="30" w="61" h="9"/>
+        <override controlID="10:4" x="3" y="30" w="72" h="9"/>
+        <override controlID="4:1" x="74" y="30" w="72" h="9"/>
+        <override controlID="17:3" x="3" y="0" w="72" h="37"/>
+        <override controlID="8:2" x="129" y="34" w="-1" h="123"/>
+        <override controlID="10:0" x="74" y="0" w="72" h="37"/>
+        <override controlID="4:3" x="3" y="0" w="72" h="37"/>
+        <override controlID="10:1" x="74" y="30" w="72" h="9"/>
+        <override controlID="4:0" x="74" y="0" w="72" h="37"/>
+        <override controlID="5:4" x="2" y="30" w="61" h="9"/>
+        <override controlID="5:2" x="0" y="25" w="124" h="-1"/>
+        <override controlID="11:1" x="1" y="33" w="128" h="126">
+          <selectedIndex>-1</selectedIndex>
+          <text/>
+        </override>
+        <override controlID="5:0" x="63" y="0" w="61" h="37"/>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#Filter Ribbon</src>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="__group__" x="1092" y="755" w="28" h="26" measuredW="28" measuredH="26" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="104">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
