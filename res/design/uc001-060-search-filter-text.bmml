@@ -1,0 +1,140 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1396" measuredH="1236" mockupW="1180" mockupH="1033">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="216" y="203" w="1180" h="1033" measuredW="1180" measuredH="1033" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/symbols.bmml#Firefox%205%20Windows</src>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="1150" h="889"/>
+        <override controlID="1" x="211" y="149" w="156" h="39"/>
+        <override controlID="2" x="0" y="224" w="1150" h="665">
+          <src>./assets/OSM-Europe-complete.png</src>
+        </override>
+        <override controlID="3" x="359" y="150" w="582" h="39"/>
+        <override controlID="4" x="218" y="159" w="112" h="-1"/>
+        <override controlID="5" x="0" y="219" w="1150" h="-1"/>
+        <override controlID="6" x="1080" y="202" w="-1" h="-1"/>
+        <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
+        <override controlID="8" x="1053" y="202" w="-1" h="-1"/>
+        <override controlID="9" x="159" y="158" w="44" h="-1"/>
+        <override controlID="10" x="0" y="191" w="1150" h="-1"/>
+        <override controlID="11" x="1098" y="263" w="-1" h="-1"/>
+        <override controlID="12" x="0" y="0" w="1150" h="137"/>
+        <override controlID="13" x="21" y="150" w="125" h="39"/>
+        <override controlID="14" x="117" y="167" w="-1" h="-1"/>
+        <override controlID="15" x="1016" y="153" w="106" h="30"/>
+        <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
+        <override controlID="17" x="367" y="158" w="566" h="-1">
+          <text>from%3A01/01/2012%20keyword%3A%22water%20quality%22%20location%3AGermany%20option%3A%22description%22%20%7Bcolor%3Ablack%7DMosel%7Bcolor%7D</text>
+        </override>
+        <override controlID="18" x="334" y="161" w="-1" h="-1"/>
+        <override controlID="19" x="938" y="150" w="51" h="39"/>
+        <override controlID="20" x="940" y="157" w="48" h="-1"/>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#SIP%20Application</src>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="980" h="21"/>
+        <override controlID="1" x="958" y="2" w="-1" h="-1"/>
+        <override controlID="2" x="10" y="4" w="808" h="13">
+          <text>%20%20%20%20</text>
+        </override>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#status-notification</src>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="600" y="493" w="-1" h="-1" measuredW="16" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Component" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <override controlID="13">
+          <state>selected</state>
+          <text>title%20*and*%20description</text>
+        </override>
+        <override controlID="7">
+          <text>01%20/%2001%20/%202012%20</text>
+        </override>
+        <override controlID="11:1">
+          <selectedIndex>1</selectedIndex>
+          <text>Georgia%0AGermany</text>
+        </override>
+        <override controlID="11:0">
+          <text>G</text>
+        </override>
+        <override controlID="8:0">
+          <text>wate</text>
+        </override>
+        <override controlID="8:1">
+          <selectedIndex>2</selectedIndex>
+          <text>water%0Awater%20level%0Awater%20quality%0Awater%20level</text>
+        </override>
+        <src>./assets/symbols.bmml#Filter Ribbon</src>
+      </controlProperties>
+    </control>
+    <control controlID="106" controlTypeID="__group__" x="1031" y="490" w="28" h="26" measuredW="28" measuredH="26" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="106">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>3</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::Icon" x="940" y="606" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="108" controlTypeID="__group__" x="1090" y="591" w="28" h="26" measuredW="28" measuredH="26" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="true" isInGroup="108">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="109" controlTypeID="__group__" x="1099" y="490" w="28" h="26" measuredW="28" measuredH="26" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="109">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
