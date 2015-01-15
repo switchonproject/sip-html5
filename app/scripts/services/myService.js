@@ -1,13 +1,13 @@
 angular.module(
-    'de.cismet.myAngularApp.services'
-).factory('de.cismet.myAngularApp.services.MyService',
+    'de.cismet.switchon.sipApp.services'
+).factory('de.cismet.switchon.sipApp.services.MyService',
     [
         function () {
             'use strict';
 
             return {
                 tellMe: function () { 
-                    return 'The \'scripts/services\' folder contains the actual services that will automagically be processed during build.'; 
+                    return 'The Universal Search Box Allows to specifically search for resources by defining different <i>pre-search filters</i> of resources.'; 
                 }
             };
         }

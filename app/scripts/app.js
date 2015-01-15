@@ -1,10 +1,11 @@
 // main app module registration
 angular.module(
-    'de.cismet.myAngularApp',
-    [
-        'de.cismet.myAngularApp.controllers',
-        'de.cismet.myAngularApp.directives',
-        'de.cismet.myAngularApp.services'
-    ]
-);
+        'de.cismet.switchon.sipApp',
+        [
+            'ngResource',
+            'de.cismet.switchon.sipApp.controllers',
+            'de.cismet.switchon.sipApp.directives',
+            'de.cismet.switchon.sipApp.services'
+        ]
+        );
 

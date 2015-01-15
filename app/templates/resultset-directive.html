@@ -1,0 +1,11 @@
+<div style="clear:both; border: 1px solid"><h2>Result Set:</h2>
+    {{resultSet.$self}}<br>
+    
+    
+    
+    {{JSON.parse(resultSet).$collection}}
+    <ul>
+        <li ng-repeat="result in resultSet.$collection">  
+        <a href="{{result.$ref}}">{{result.$ref}}</a>
+        </li>
+</div>

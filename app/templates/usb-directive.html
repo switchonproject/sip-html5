@@ -1,0 +1,6 @@
+<form name="universalSearchBox" role="form">
+    <!--<div><strong>{{description}}</strong></div>-->
+    <input class="static" type="text" size="60" placeholder="keyword:" ng-model="universalSearchString" ng-pattern="/\w+:[^\s]+\s?$/"/>
+    <!--<input class="static" type="text" placeholder="keyword:" value="{{info}}"/>-->
+    <button data-ng-click="submit(universalSearchBox)" class="btn btn-default">Submit</button>
+</form>
