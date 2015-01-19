@@ -12,13 +12,14 @@ cismet GmbH, Saarbruecken, Germany
     Author     : Pascal Dihé <pascal.dihe@cismet.de>
 */
 
+
+/*
 usb
 {
     border-width: 2px;
     border-bottom-color:  darkgreen;
     border-style: solid;
     margin: 10px;
-    //width: 100%;
     float:left;
     clear:both;
 }
@@ -45,8 +46,11 @@ usb input.static
     font-style: italic;
 }
 
+
+
 usb input.ng-invalid {
     color:white;
     background: red;
   }
 
+*/

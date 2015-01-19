@@ -1,7 +1,7 @@
 angular.module(
         'de.cismet.switchon.sipApp.controllers'
         ).controller(
-        'de.cismet.switchon.sipApp.controllers.DefaultViewController',
+        'DefaultViewController',
         [
             '$scope',
             function ($scope) {
@@ -10,5 +10,6 @@ angular.module(
                 $scope.uss = 'text:blahhhhhhhhhhhhhhh'
                 //$scope.info = SearchService.tellMe();
             }
+            
         ]
         );

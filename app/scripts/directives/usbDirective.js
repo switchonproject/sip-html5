@@ -8,11 +8,15 @@ angular.module(
             return {
                 restrict: 'E',
                 templateUrl: 'templates/usb-directive.html',
-                scope: {
+                /*scope: {
                      universalSearchString: '=',
                      resultSet: '='
-                },
-                controller: 'de.cismet.switchon.sipApp.controllers.UsbDirectiveController'
+                     
+                },*/
+                controller: 'UsbDirectiveController',
+                controllerAs: 'usb',
+                transclude:true,
+                bindToController:true
             };
         }
     ]);
