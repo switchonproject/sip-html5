@@ -1,7 +1,7 @@
 angular.module(
-        'de.cismet.switchon.sipApp.controllers'
+        'eu.water-switch-on.sip.controllers'
         ).controller(
-        'UsbDirectiveController',
+        'eu.water-switch-on.sip.controllers.usbDirectiveController',
         [
             '$scope',
             function ($scope) {

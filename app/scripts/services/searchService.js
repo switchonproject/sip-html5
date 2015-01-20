@@ -1,7 +1,7 @@
 angular.module(
-        'de.cismet.switchon.sipApp.services'
-        ).factory('SearchService',
-        ['$resource', 'Base64',
+        'eu.water-switch-on.sip.services'
+        ).factory('eu.water-switch-on.sip.services.SearchService',
+        ['$resource', 'eu.water-switch-on.sip.services.Base64',
             function ($resource, Base64) {
                 'use strict';
                 //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
@@ -42,7 +42,7 @@ angular.module(
             }
         ])
 
-        .factory('Base64', function () {
+        .factory('eu.water-switch-on.sip.services.Base64', function () {
             /* jshint ignore:start */
 
             var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

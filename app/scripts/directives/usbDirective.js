@@ -1,5 +1,5 @@
 angular.module(
-    'de.cismet.switchon.sipApp.directives'
+    'eu.water-switch-on.sip.directives'
 ).directive('usb',
     [
         function () {
@@ -12,7 +12,7 @@ angular.module(
                      filterExpressions: '=',
                      searchFunction: '&'  
                 },
-                controller: 'UsbDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.usbDirectiveController'
                 /*controllerAs: 'usb',
                 transclude:true,
                 bindToController:true*/

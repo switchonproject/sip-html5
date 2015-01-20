@@ -1,5 +1,5 @@
 angular.module(
-    'de.cismet.switchon.sipApp.directives'
+    'eu.water-switch-on.sip.directives'
 ).directive('resultset',
     [
         function () {
@@ -11,7 +11,7 @@ angular.module(
                 scope: {
                      resultSet: '='
                 },
-                controller: 'ResultSetDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.resultSetDirectiveController'
             };
         }
     ]);

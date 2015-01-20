@@ -1,5 +1,5 @@
 angular.module(
-    'de.cismet.switchon.sipApp.directives'
+    'eu.water-switch-on.sip.directives'
 ).directive('dateFilter',
     [
         function () {
@@ -11,7 +11,7 @@ angular.module(
                 scope: {
                      filterExpressions: '=',
                 },
-                controller: 'DateFilterDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.dateFilterDirectiveController'
                 /*controllerAs: 'usb',
                 transclude:true,
                 bindToController:true*/

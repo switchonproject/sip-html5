@@ -1,11 +1,11 @@
 angular.module(
-        'de.cismet.switchon.sipApp.controllers'
+        'eu.water-switch-on.sip.controllers'
         ).controller(
-        'DefaultViewController',
+        'eu.water-switch-on.sip.controllers.defaultViewController',
         [
             '$scope',
-            'SearchService',
-            'MockService',
+            'eu.water-switch-on.sip.services.SearchService',
+            'eu.water-switch-on.sip.services.MockService',
             function ($scope, SearchService, MockService) {
                 'use strict';
 

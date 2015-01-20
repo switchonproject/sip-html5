@@ -1,7 +1,7 @@
 angular.module(
-        'de.cismet.switchon.sipApp.controllers'
+        'eu.water-switch-on.sip.controllers'
         ).controller(
-        'DateFilterDirectiveController',
+        'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
         [
             '$scope','$filter',
             function ($scope, $filter) {

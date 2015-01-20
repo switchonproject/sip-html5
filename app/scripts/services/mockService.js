@@ -1,6 +1,6 @@
 angular.module(
-        'de.cismet.switchon.sipApp.services'
-        ).factory('MockService',
+        'eu.water-switch-on.sip.services'
+        ).factory('eu.water-switch-on.sip.services.MockService',
         [
             function () {
                 'use strict';
