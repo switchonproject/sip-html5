@@ -1,0 +1,23 @@
+<!--<div>
+    The 'views' folder contains angular views that will automatically be processed during build.
+</div>-->
+<div ng-controller="eu.water-switch-on.sip.controllers.defaultViewController as defaultCtrl">
+
+    <div class="row">
+        <div class="col-md-12">
+            <usb filter-expressions="filterExpressions" search-function="performSearch(searchForm)"></usb>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <date-filter filter-expressions="filterExpressions"></date-filter>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <resultSet result-set="resultSet"></resultSet>
+        </div>
+    </div>
+</div>

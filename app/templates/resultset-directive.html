@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-md-8">
+                <strong>Resources</strong> ({{resultSet.$total}})
+            </div>
+            <span class="btn-invisible" ng-click="alert('todoItem: todoItem')" >
+                <i class="glyphicon glyphicon-floppy-disk"></i>
+            </span>
+            
+            <nav>
+  <ul class="pagination pagination-sm">
+    <li ng-class="{disabled: !resultSet.$previous}"><a href="#" aria-label="Previous" ng-click="alert();"><span aria-hidden="true">&laquo; previous</span></a></li>
+    <li ng-class="{disabled: resultSet.$next}"><a href="#" aria-label="Next" ng-click="alert();"><span aria-hidden="true">next &raquo;</span></a></li>
+  </ul>
+</nav>
+
+    </div>
+    <!--<div class="panel-body">-->
+
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="node in resultSet.$collection">  
+            <span class="btn-link" ng-click="alert();">{{node.name}}</span>
+            <p><small>{{node.description}}</small></p>
+        </li>
+    </ul>
+    <!--</div>-->
+</div>
