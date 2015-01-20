@@ -7,7 +7,8 @@ angular.module(
             function ($scope) {
                 'use strict';
 
-                $scope.filterExpressions = {universalSearchString:'text:blahhhhhhhhhhhhhhh'};        
+                //$scope.filterExpressions = {universalSearchString:'text:"undefined"'};     
+                $scope.filterExpressions = {universalSearchString:''};  
             }
             
         ]

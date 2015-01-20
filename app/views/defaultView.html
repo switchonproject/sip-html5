@@ -2,16 +2,22 @@
     The 'views' folder contains angular views that will automatically be processed during build.
 </div>-->
 <div ng-controller="DefaultViewController">
-    
-    
-    <date-filter filter-expressions="filterExpressions"></date-filter>
-    <hr>
-        
-    <usb result-set="resultSet" filter-expressions="filterExpressions"></usb>
-   
-    
-    <br<br><br><br><br><br><br>
-    <resultSet result-set="resultSet"></resultSet>
-    
-    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            <usb result-set="resultSet" filter-expressions="filterExpressions"></usb>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <date-filter filter-expressions="filterExpressions"></date-filter>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <resultSet result-set="resultSet"></resultSet>
+        </div>
+    </div>
 </div>
