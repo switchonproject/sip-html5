@@ -7,24 +7,20 @@ angular.module(
             'de.cismet.switchon.sipApp.services.SearchService',
             function ($scope, SearchService) {
                 'use strict';
+                
+                $scope.pattern = /^(\w+:".+"\s?)+$/;     
 
-                this.egal="controller";
-                //$scope.egal="scope";
-                this.pattern = /\w+:[^\s]+\s?$/;                
-                $scope.description = 'Universal Search Box';
-                //$scope.info = SearchService.tellMe();
-
-                this.clear = function () {
-                    $scope.universalSearchString = null;
+                $scope.clear = function () {
+                    $scope.filterExpressions.universalSearchString = null;
                 };
 
-                this.appendFilterExpression = function (filterExpression) {
+                var appendFilterExpression = function (filterExpression) {
                     
                     
                     if(this.pattern.test(filterExpression))
                     {
-                        $scope.universalSearchString += '';
-                        $scope.universalSearchString += filterExpression;
+                        $scope.filterExpressions.universalSearchString += '';
+                        $scope.filterExpressions.universalSearchString += filterExpression;
                     }
                     else
                     {
@@ -32,21 +28,8 @@ angular.module(
                     }
                 };
                 
-                this.getSearchString = function()
+                $scope.search = function (form)
                 {
-                    return $scope.universalSearchString;
-                };
-                
-                this.setSearchString = function(universalSearchString)
-                {
-                    $scope.universalSearchString = universalSearchString;
-                };
-
-                this.search = function (form)
-                {
-
-                   
-
                     // If form is invalid, return and let AngularJS show validation errors.
                     if (form.$invalid) {
                         //$scope.universalSearchString = "not submitted";
@@ -54,8 +37,8 @@ angular.module(
                         return;
                     }
                     
-                    console.log("Search String:" + $scope.universalSearchString);
-                    SearchService.search({query: $scope.universalSearchString},
+                    console.log("Search String:" + $scope.filterExpressions.universalSearchString);
+                    SearchService.search({query: $scope.filterExpressions.universalSearchString},
                     function (data)
                     {
                         console.log(angular.toJson(data, true));
@@ -66,8 +49,7 @@ angular.module(
                                 console.error(angular.toJson(data, true));
                             });
 
-                    $scope.universalSearchString = "submitted";
-
+                    //$scope.universalSearchString = "submitted";
                 };
             }
         ]

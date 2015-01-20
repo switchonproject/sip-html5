@@ -1,7 +1,7 @@
 angular.module(
         'de.cismet.switchon.sipApp.controllers'
         ).controller(
-        'de.cismet.switchon.sipApp.controllers.ResultSetDirectiveController',
+        'ResultSetDirectiveController',
         [
             '$scope',
             function ($scope) {

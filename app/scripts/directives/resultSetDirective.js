@@ -11,7 +11,7 @@ angular.module(
                 scope: {
                      resultSet: '='
                 },
-                controller: 'de.cismet.switchon.sipApp.controllers.ResultSetDirectiveController'
+                controller: 'ResultSetDirectiveController'
             };
         }
     ]);

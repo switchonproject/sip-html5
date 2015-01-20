@@ -1,35 +1,30 @@
 <form  class="form-inline" 
        name="universalSearchBox" 
-       role="form-horizontal" 
-       ng-submit="usb.search(universalSearchBox)"  
+       role="form-horizontal"  
        novalidate >
 
     <div class="form-group" 
          ng-class="{'has-error': !universalSearchBox.filterExpressionInput.$error.required
                      && universalSearchBox.filterExpressionInput.$invalid}">
 
-
-
-
-        <!--<div><strong>{{description}}</strong></div>-->
         <input class="form-control" name="filterExpressionInput" type="text" 
                size="60" placeholder="keyword:" 
-               ng-model="universalSearchString" 
-               ng-pattern="usb.pattern" required/>
+               ng-model="filterExpressions.universalSearchString" 
+               ng-pattern="pattern" required/>
         <!--<input class="static" type="text" placeholder="keyword:" value="{{info}}"/>-->
-        <button ng-click="usb.search(universalSearchBox)" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
+        <button ng-click="search(universalSearchBox)" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
                     || universalSearchBox.filterExpressionInput.$invalid" class="btn btn-primary">Submit</button>
-        <button ng-click="usb.clear()" class="btn btn-default">Clear</button>
+        <button ng-click="clear()" class="btn btn-default">Clear</button>
     </div>
+    
     <p class="help-block error" ng-show="!universalSearchBox.filterExpressionInput.$error.required
                     && universalSearchBox.filterExpressionInput.$invalid">
-        The filter entered expression is not valid. 
-        Try <i>expression</i><strong>:</strong><i>parameter</i>, e.g. "keyword:water".
+        This filter expression is not valid. 
+        Try <strong>expression</strong><strong>:</strong><i>"parameter"</i>, e.g. keyword:"water quality".
     </p>
-    <p class="help-block info" ng-show="universalSearchBox.filterExpressionInput.$error.required">Please enter a filter expression,  e.g. "keyword:water".</p>
+    <p class="help-block info" ng-show="universalSearchBox.filterExpressionInput.$error.required">Please enter a filter expression,  e.g. keyword:"water quality".</p>
 
 
 
 
 </form>
-<div  ng-transclude></div>

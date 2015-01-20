@@ -1,19 +1,17 @@
 angular.module(
     'de.cismet.switchon.sipApp.directives'
-).directive('usb',
+).directive('dateFilter',
     [
         function () {
             'use strict';
 
             return {
                 restrict: 'E',
-                templateUrl: 'templates/usb-directive.html',
+                templateUrl: 'templates/datefilter-directive.html',
                 scope: {
                      filterExpressions: '=',
-                     resultSet: '='
-                     
                 },
-                controller: 'UsbDirectiveController'
+                controller: 'DateFilterDirectiveController'
                 /*controllerAs: 'usb',
                 transclude:true,
                 bindToController:true*/
