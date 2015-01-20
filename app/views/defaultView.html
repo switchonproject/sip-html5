@@ -1,11 +1,11 @@
 <!--<div>
     The 'views' folder contains angular views that will automatically be processed during build.
 </div>-->
-<div ng-controller="DefaultViewController">
+<div ng-controller="DefaultViewController as defaultCtrl">
 
     <div class="row">
         <div class="col-md-12">
-            <usb result-set="resultSet" filter-expressions="filterExpressions"></usb>
+            <usb filter-expressions="filterExpressions" search-function="performSearch(searchForm)"></usb>
         </div>
     </div>
 

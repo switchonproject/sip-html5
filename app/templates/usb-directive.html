@@ -2,7 +2,7 @@
     <div class="panel-body">
     <form  class="form-inline" 
            name="universalSearchBox" 
-           role="form-horizontal"  
+           role="form"  
            novalidate >
 
         <div class="form-group" 
@@ -14,8 +14,10 @@
                    ng-model="filterExpressions.universalSearchString" 
                    ng-pattern="pattern" required/>
             <!--<input class="static" type="text" placeholder="keyword:" value="{{info}}"/>-->
-            <button ng-click="search(universalSearchBox)" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
+            
+            <button ng-click="searchFunction({searchForm:universalSearchBox})" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
                         || universalSearchBox.filterExpressionInput.$invalid" class="btn btn-primary">Submit</button>
+            
             <button ng-click="clear()" class="btn btn-default">Clear</button>
         </div>
 

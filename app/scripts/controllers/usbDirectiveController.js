@@ -4,8 +4,7 @@ angular.module(
         'UsbDirectiveController',
         [
             '$scope',
-            'de.cismet.switchon.sipApp.services.SearchService',
-            function ($scope, SearchService) {
+            function ($scope) {
                 'use strict';
                 
                 $scope.pattern = /^(\w+:".+"\s?)+$/;     
@@ -15,8 +14,7 @@ angular.module(
                 };
 
                 var appendFilterExpression = function (filterExpression) {
-                    
-                    
+
                     if(this.pattern.test(filterExpression))
                     {
                         $scope.filterExpressions.universalSearchString += '';
@@ -26,30 +24,6 @@ angular.module(
                     {
                         console.error('not a valid filter expression: '+filterExpression);
                     }
-                };
-                
-                $scope.search = function (form)
-                {
-                    // If form is invalid, return and let AngularJS show validation errors.
-                    if (form.$invalid) {
-                        //$scope.universalSearchString = "not submitted";
-                        console.error("Search String not valid");
-                        return;
-                    }
-                    
-                    console.log("Search String:" + $scope.filterExpressions.universalSearchString);
-                    SearchService.search({query: $scope.filterExpressions.universalSearchString},
-                    function (data)
-                    {
-                        console.log(angular.toJson(data, true));
-                        $scope.resultSet = data;
-                    },
-                            function (data)
-                            {
-                                console.error(angular.toJson(data, true));
-                            });
-
-                    //$scope.universalSearchString = "submitted";
                 };
             }
         ]

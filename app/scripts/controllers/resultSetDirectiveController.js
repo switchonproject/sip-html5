@@ -9,6 +9,10 @@ angular.module(
 
                 //$scope.description = 'Universal Search Box';
                 //$scope.info = MyService.tellMe();
+                
+                                $scope.alert = function () {
+                    alert('alerted!');
+                };
             }
         ]
         );

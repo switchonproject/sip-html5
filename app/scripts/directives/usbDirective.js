@@ -10,8 +10,7 @@ angular.module(
                 templateUrl: 'templates/usb-directive.html',
                 scope: {
                      filterExpressions: '=',
-                     resultSet: '='
-                     
+                     searchFunction: '&'  
                 },
                 controller: 'UsbDirectiveController'
                 /*controllerAs: 'usb',
