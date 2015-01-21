@@ -11,7 +11,7 @@ angular.module(
                 //$scope.info = MyService.tellMe();
                 
                                 $scope.alert = function () {
-                    alert('alerted!');
+                    console.log('alerted!');
                 };
             }
         ]
