@@ -47,7 +47,8 @@
                         </li>
                     </ul>
                     <div class="navbar-form navbar-left">
-                        <usb filter-expressions="filterExpressions" resource-collection="data.resultSet"></usb>
+                        <!-- search directive -->
+                        <usb filter-expressions="filterExpressions" resource-collection="data.resultSet" showMessagefunction="showMessage(message, type)"></usb>
                     </div>
                     <my-workspace workspace-name="SWITCH-ON"></my-workspace>
                 </div><!-- /.navbar-collapse -->
