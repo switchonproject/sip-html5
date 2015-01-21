@@ -1,6 +1,7 @@
 angular.module(
     'eu.water-switch-on.sip.directives'
-).directive('myWorkspace',
+).directive(
+    'myWorkspace',
     [
         function () {
             'use strict';
@@ -15,4 +16,5 @@ angular.module(
                 controller: 'eu.water-switch-on.sip.controllers.myWorkspaceDirectiveController'
             };
         }
-    ]);
+    ]
+);

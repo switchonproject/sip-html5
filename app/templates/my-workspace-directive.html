@@ -16,8 +16,8 @@
         </li>
         <li class="divider"></li>
         <li>
-            <a ui-sref="login" ng-show="user.name === 'Anonymous'">Log in</a>
-            <a ui-sref="login" ng-show="user.name !== 'Anonymous'">Not {{user.name}}? Log out</a>
+            <a ui-sref="login" ng-show="sessionService.isAnonymousUser(user)">Log in</a>
+            <a ui-sref="login" ng-hide="sessionService.isAnonymousUser(user)">Not {{user.name}}? Log out</a>
         </li>
     </ul>
 </div>

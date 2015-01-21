@@ -64,7 +64,8 @@
                         <button type="button"
                                 class="btn btn-default switchon-viewbutton" 
                                 ng-click="toggleResultView()"
-                                ng-class="{active: isResultShowing}">
+                                ng-class="{active: isResultShowing}"
+                                ng-disabled="!(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')">
                             <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -149,14 +150,17 @@
         <script src="scripts/controllers/dateFilterDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/resultSetDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/myWorkspaceDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/myProfileDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/directives/_module.js"></script>
         <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/dateFilterDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/resultSetDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/myWorkspaceDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/myProfileDirective.js" type="text/javascript"></script>
         <script src="scripts/services/_module.js"></script>
         <script src="scripts/services/mockService.js" type="text/javascript"></script>
         <script src="scripts/services/searchService.js" type="text/javascript"></script>
+        <script src="scripts/services/sessionService.js" type="text/javascript"></script>
         <!-- endbuild -->
     </body>
 </html>

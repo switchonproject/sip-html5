@@ -6,11 +6,12 @@ angular.module(
         '$scope',
         '$state',
         '$timeout',
-        function ($scope, $state, $timeout) {
+        'eu.water-switch-on.sip.services.sessionService',
+        function ($scope, $state, $timeout, sessionService) {
             'use strict';
 
-            $scope.user = {};
-            $scope.user.name = 'Anonymous';
+            $scope.user = sessionService.getCurrentUser();
+            $scope.sessionService = sessionService;
 
             $scope.status = {};
             $scope.status.isopen = false;

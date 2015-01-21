@@ -15,8 +15,8 @@ angular.module(
         '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             'use strict';
-
-            $urlRouterProvider.otherwise('/map');
+            
+            $urlRouterProvider.otherwise('/list');
 
             $stateProvider.state('list', {
                 url: '/list',
