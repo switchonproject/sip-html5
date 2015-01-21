@@ -30,6 +30,14 @@ angular.module(
                 url: '/map',
                 templateUrl: 'views/mapView.html'
             });
+            $stateProvider.state('profile', {
+                url: '/profile',
+                templateUrl: 'views/profileView.html'
+            });
+            $stateProvider.state('login', {
+                url: '/login',
+                templateUrl: 'views/loginView.html'
+            });
         }
     ]
 );
