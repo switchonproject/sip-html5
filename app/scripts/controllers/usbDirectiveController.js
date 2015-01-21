@@ -6,11 +6,10 @@ angular.module(
             '$scope',
             'eu.water-switch-on.sip.services.SearchService',
             'eu.water-switch-on.sip.services.MockService',
-            
             function ($scope, SearchService, MockService) {
                 'use strict';
-                
-                $scope.pattern = /^(\w+:".+"\s?)+$/;     
+
+                $scope.pattern = /^(\w+:".+"\s?)+$/;
 
                 $scope.clear = function () {
                     $scope.filterExpressions.universalSearchString = null;
@@ -28,7 +27,7 @@ angular.module(
 //                        console.error('not a valid filter expression: '+filterExpression);
 //                    }
 //                };
-                
+
                 $scope.performSearch = function (searchForm)
                 {
                     // If form is invalid, return and let AngularJS show validation errors.
@@ -37,7 +36,7 @@ angular.module(
                         console.error('Search String not valid');
                         return;
                     }
-                    
+
                     $scope.resultSet = MockService.search();
                 };
 
@@ -49,7 +48,7 @@ angular.module(
                         console.error('Search String not valid');
                         return;
                     }
-                    
+
                     var queryObject;
 
                     console.log('Search String:' + $scope.filterExpressions.universalSearchString);
@@ -68,6 +67,21 @@ angular.module(
                                 console.error(angular.toJson(data, true));
                             });
                 };
+
+
+                $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
+
+                   console.log($scope);
+
+//                    $scope.showMessagefunction({
+//                        newValue: after,
+//                        oldValue: before
+//                    });
+                });
+
+
+
+
             }
         ]
         );
