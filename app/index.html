@@ -14,6 +14,7 @@
         <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet" type="text/css"/>
         <!-- build:css() -->
         <link rel="stylesheet" href="styles/switchon.css">
+        <link href="styles/myWorkspace.css" rel="stylesheet" type="text/css"/>
         <!-- endbuild -->
     </head>
     <body ng-app="eu.water-switch-on.sip" ng-controller="eu.water-switch-on.sip.controllers.masterController">
@@ -46,17 +47,9 @@
                         </li>
                     </ul>
                     <div class="navbar-form navbar-left">
-                        <!-- search directive -->
                         <usb filter-expressions="filterExpressions" resource-collection="data.resultSet"></usb>
                     </div>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                My SWITCH-ON<span class="caret"></span>
-                                <!-- my switchon directive -->
-                            </a>
-                        </li>
-                    </ul>
+                    <my-workspace workspace-name="SWITCH-ON"></my-workspace>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
@@ -71,7 +64,8 @@
                         <button type="button"
                                 class="btn btn-default switchon-viewbutton" 
                                 ng-click="toggleResultView()"
-                                ng-class="{active: isResultShowing}">
+                                ng-class="{active: isResultShowing}"
+                                ng-disabled="!(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')">
                             <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -106,7 +100,7 @@
         
         <!-- content -->
         
-        <div id="wrapper" ng-class="{toggled: !isResultShowing}">
+        <div id="wrapper" class="toggled" ng-class="{toggled: !isResultShowing || !(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')}">
             <div id="sidebar-wrapper">
                 
                 
@@ -155,13 +149,18 @@
         <script src="scripts/controllers/usbDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/dateFilterDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/resultSetDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/myWorkspaceDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/myProfileDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/directives/_module.js"></script>
         <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/dateFilterDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/resultSetDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/myWorkspaceDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/myProfileDirective.js" type="text/javascript"></script>
         <script src="scripts/services/_module.js"></script>
         <script src="scripts/services/mockService.js" type="text/javascript"></script>
         <script src="scripts/services/searchService.js" type="text/javascript"></script>
+        <script src="scripts/services/sessionService.js" type="text/javascript"></script>
         <!-- endbuild -->
     </body>
 </html>

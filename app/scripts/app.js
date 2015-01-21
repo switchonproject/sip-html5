@@ -15,8 +15,8 @@ angular.module(
         '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             'use strict';
-
-            $urlRouterProvider.otherwise('/map');
+            
+            $urlRouterProvider.otherwise('/list');
 
             $stateProvider.state('list', {
                 url: '/list',
@@ -29,6 +29,14 @@ angular.module(
             $stateProvider.state('map', {
                 url: '/map',
                 templateUrl: 'views/mapView.html'
+            });
+            $stateProvider.state('profile', {
+                url: '/profile',
+                templateUrl: 'views/profileView.html'
+            });
+            $stateProvider.state('login', {
+                url: '/login',
+                templateUrl: 'views/loginView.html'
             });
         }
     ]
