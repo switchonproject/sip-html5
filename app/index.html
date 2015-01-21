@@ -45,10 +45,10 @@
                             </a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search">
+                    <div class="navbar-form navbar-left">
                         <!-- search directive -->
-                        <usb filter-expressions="filterExpressions" search-function="performSearch(searchForm)"></usb>
-                    </form>
+                        <usb filter-expressions="filterExpressions" resource-collection="data.resultSet"></usb>
+                    </div>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -109,7 +109,8 @@
         <div id="wrapper" ng-class="{toggled: !isResultShowing}">
             <div id="sidebar-wrapper">
                 
-                    <resultSet result-set="resultSet"></resultSet>
+                
+                    <resultSet result-set="data.resultSet"></resultSet>
                 
                 <div class="panel panel-default">
                <!-- <ul class="sidebar-nav">

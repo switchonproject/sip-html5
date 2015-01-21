@@ -16,7 +16,7 @@
                ng-model="filterExpressions.universalSearchString" 
                ng-pattern="pattern" required/>
         <!--<input class="static" type="text" placeholder="keyword:" value="{{info}}"/>-->
-        <button ng-click="searchFunction({searchForm: universalSearchBox})" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
+        <button ng-click="performSearch(universalSearchBox)" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
                     || universalSearchBox.filterExpressionInput.$invalid" class="btn btn-primary">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>

@@ -38,7 +38,7 @@ angular.module(
                     }
                 });
 
-                return resultSet;
+                return {searchResource:resultSet};
             }
         ])
 
@@ -126,4 +126,3 @@ angular.module(
 
             /* jshint ignore:end */
         });
-;
