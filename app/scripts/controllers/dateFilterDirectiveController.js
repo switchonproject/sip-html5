@@ -3,7 +3,7 @@ angular.module(
         ).controller(
         'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
         [
-            '$scope','$filter',
+            '$scope', '$filter',
             function ($scope, $filter) {
                 'use strict';
 
@@ -11,18 +11,18 @@ angular.module(
                 //$scope.toDate;  = new Date(2015, 1, 15);
 
                 //var dateformat = 'yyyy-MM-dd HH:mm:ss Z'
-                var dateformat = 'yyyy-MM-dd'
-                var today = 
+                var dateformat = 'yyyy-MM-dd';
                 $scope.createFilterExpression = function (keyword, parameter)
                 {
                     var filterExpression = '';
-                    
+
                     if (typeof parameter !== 'undefined' && parameter !== null && parameter instanceof Date)
                     {
-                        filterExpression += (keyword+':');
-                        filterExpression += ('"'+$filter('date')(parameter, dateformat)+'" ');
+                        filterExpression += (keyword + ':');
+                        filterExpression += ('"' + $filter('date')(parameter, dateformat) + '" ');
+                        
                     }
-                    
+                    console.log(filterExpression);
                     return filterExpression;
                 };
 
@@ -31,7 +31,8 @@ angular.module(
 
                     var filterExpression = $scope.createFilterExpression('fromDate', $scope.fromDate);
                     $scope.filterExpressions.universalSearchString += filterExpression;
-                });                
+                });
+
                 $scope.$watch('toDate', function () {
 
                     var filterExpression = $scope.createFilterExpression('toDate', $scope.toDate);

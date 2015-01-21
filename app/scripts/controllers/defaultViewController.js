@@ -19,8 +19,6 @@ angular.module(
                     $scope.resultSet = MockService.search();
                 };
 
-
-
                 $scope.performRealSearch = function (searchForm)
                 {
                     // If form is invalid, return and let AngularJS show validation errors.
@@ -36,21 +34,17 @@ angular.module(
                         limit: 100,
                         offset: 0
                     }, queryObject,
-                            //success function
-                                    function (data)
-                                    {
-                                        console.log(angular.toJson(data, true));
-                                        $scope.resultSet = data;
-                                    },
-                                    //error function
-                                            function (data)
-                                            {
-                                                console.error(angular.toJson(data, true));
-                                            });
-
-                                    //$scope.universalSearchString = "submitted";
-                                };
-                    }
+                            function (data)
+                            {
+                                console.log(angular.toJson(data, true));
+                                $scope.resultSet = data;
+                            },
+                            function (data)
+                            {
+                                console.error(angular.toJson(data, true));
+                            });
+                };
+            }
 
         ]
-                );
+        );
