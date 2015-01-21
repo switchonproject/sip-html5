@@ -100,7 +100,7 @@
         
         <!-- content -->
         
-        <div id="wrapper" class="toggled" ng-class="{toggled: !isResultShowing}">
+        <div id="wrapper" class="toggled" ng-class="{toggled: !isResultShowing || !(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')}">
             <div id="sidebar-wrapper">
                 
                 
