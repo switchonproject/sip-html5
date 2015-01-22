@@ -7,8 +7,8 @@ angular.module(
             function ($scope, $filter) {
                 'use strict';
 
-                //$scope.fromDate; = new Date(2013, 9, 22);
-                //$scope.toDate;  = new Date(2015, 1, 15);
+                $scope.fromDate =  null;
+                $scope.toDate  =  null;
 
                 //var dateformat = 'yyyy-MM-dd HH:mm:ss Z'
                 var dateformat = 'yyyy-MM-dd';
@@ -16,13 +16,12 @@ angular.module(
                 {
                     var filterExpression = '';
 
-                    if (typeof parameter !== 'undefined' && parameter !== null && parameter instanceof Date)
+                    if (parameter !== null)
                     {
                         filterExpression += (keyword + ':');
                         filterExpression += ('"' + $filter('date')(parameter, dateformat) + '" ');
-                        
+
                     }
-                    console.log(filterExpression);
                     return filterExpression;
                 };
 
