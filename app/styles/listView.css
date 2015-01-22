@@ -11,3 +11,12 @@
     width: 220px;
     min-width: 88px;
 }
+
+.btn-icon:hover {
+    cursor: pointer;
+}
+
+.btn-icon.disabled {
+    cursor: default;
+    opacity: 0.55;
+}

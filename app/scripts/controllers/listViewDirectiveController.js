@@ -32,6 +32,10 @@ angular.module(
                     $defer.resolve(ordered);
                 }
             });
+
+            $scope.showInfo = function (object) {
+                console.log('showinfo: ' + object);
+            };
         }
     ]
 );
