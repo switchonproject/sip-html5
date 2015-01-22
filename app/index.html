@@ -21,7 +21,7 @@
         <!--[if lt IE 7]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+        
         <!-- the real nav -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -46,10 +46,16 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="navbar-form navbar-left">
-                        <!-- search directive -->
-                        <usb filter-expressions="filterExpressions" resource-collection="data.resultSet" showMessagefunction="showMessage(message, type)"></usb>
-                    </div>
+                    <!-- search filter ribbon -->
+                    <search-filter-ribbon filter-expressions="filterExpressions" 
+                         notification-function="showMessage(message, type)">
+                    </search-filter-ribbon>   
+                    
+                    <!-- search directive -->
+                    <usb filter-expressions="filterExpressions" 
+                         resource-collection="data.resultSet" 
+                         notification-function="showMessage(message, type)">
+                    </usb> 
                     <my-workspace workspace-name="SWITCH-ON"></my-workspace>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -134,6 +140,7 @@
         <!-- bower:js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js" type="text/javascript"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
@@ -152,12 +159,14 @@
         <script src="scripts/controllers/resultSetDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/myWorkspaceDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/myProfileDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/searchFilterRibbonDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/directives/_module.js"></script>
         <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/dateFilterDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/resultSetDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/myWorkspaceDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/myProfileDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/searchFilterRibbonDirective.js" type="text/javascript"></script>
         <script src="scripts/services/_module.js"></script>
         <script src="scripts/services/mockService.js" type="text/javascript"></script>
         <script src="scripts/services/searchService.js" type="text/javascript"></script>

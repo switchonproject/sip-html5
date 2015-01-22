@@ -33,9 +33,18 @@ angular.module(
                     // If form is invalid, return and let AngularJS show validation errors.
                     if (searchForm.$invalid) {
                         //$scope.universalSearchString = "not submitted";
-                        console.error('Search String not valid');
+                        $scope.notificationFunction({
+                            message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
+                            type: 'warning'
+                        });
                         return;
                     }
+
+                    $scope.notificationFunction({
+                        message: 'Search is in progress ....',
+                        type: 'info'
+                    });
+
 
                     $scope.resultSet = MockService.search();
                 };
@@ -44,8 +53,10 @@ angular.module(
                 {
                     // If form is invalid, return and let AngularJS show validation errors.
                     if (searchForm.$invalid) {
-                        //$scope.universalSearchString = "not submitted";
-                        console.error('Search String not valid');
+                        $scope.notificationFunction({
+                            message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
+                            type: 'warning'
+                        });
                         return;
                     }
 
@@ -69,14 +80,28 @@ angular.module(
                 };
 
 
+                $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
+
+                    if (oldValue === false && newValue === true)
+                    {
+                        $scope.notificationFunction({
+                            message: 'Please enter a filter expression,  e.g. keyword:"water quality".',
+                            type: 'info'
+                        });
+                    }
+
+                });
+
                 $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
 
-                   console.log($scope);
-
-//                    $scope.showMessagefunction({
-//                        newValue: after,
-//                        oldValue: before
-//                    });
+                    if (!$scope.universalSearchBox.filterExpressionInput.$error.required
+                            && $scope.universalSearchBox.filterExpressionInput.$invalid)
+                    {
+                        $scope.notificationFunction({
+                            message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
+                            type: 'warning'
+                        });
+                    }
                 });
 
 
