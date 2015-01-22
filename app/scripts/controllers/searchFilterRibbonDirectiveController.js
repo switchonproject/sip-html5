@@ -7,7 +7,6 @@ angular.module(
             function ($scope) {
                 'use strict';
 
-
             }
         ]
         );

@@ -94,8 +94,8 @@ angular.module(
 
                 $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
 
-                    if (!$scope.universalSearchBox.filterExpressionInput.$error.required
-                            && $scope.universalSearchBox.filterExpressionInput.$invalid)
+                    if (!$scope.universalSearchBox.filterExpressionInput.$error.required && 
+                            $scope.universalSearchBox.filterExpressionInput.$invalid)
                     {
                         $scope.notificationFunction({
                             message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
