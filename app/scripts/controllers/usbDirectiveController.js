@@ -12,7 +12,9 @@ angular.module(
                 $scope.pattern = /^(\w+:".+"\s?)+$/;
 
                 $scope.clear = function () {
-                    $scope.filterExpressions.universalSearchString = null;
+                    $scope.filterExpressions.universalSearchString = '';
+                    $scope.filterExpressions.fromDate = null;
+                    $scope.filterExpressions.toDate = null;
                 };
 
 //                var appendFilterExpression = function (filterExpression) {

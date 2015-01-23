@@ -6,36 +6,53 @@ angular.module(
             '$scope', '$filter',
             function ($scope, $filter) {
                 'use strict';
-
-                $scope.fromDate =  null;
-                $scope.toDate  =  null;
-
                 //var dateformat = 'yyyy-MM-dd HH:mm:ss Z'
                 var dateformat = 'yyyy-MM-dd';
                 $scope.createFilterExpression = function (keyword, parameter)
                 {
-                    var filterExpression = '';
+                    var filterExpression;
 
-                    if (parameter !== null)
+                    if (parameter)
                     {
-                        filterExpression += (keyword + ':');
+                        filterExpression = (keyword + ':');
                         filterExpression += ('"' + $filter('date')(parameter, dateformat) + '" ');
-
+                        console.log(keyword+':'+filterExpression);
                     }
+                    
                     return filterExpression;
                 };
+                
+                $scope.appendFilterExpression = function(filterExpression)
+                {
+                    if(filterExpression && filterExpression.length > 0)
+                    {
+                        if ($scope.filterExpressions.universalSearchString) {
+                            $scope.filterExpressions.universalSearchString += (' '+filterExpression);
+                        }
+                        else
+                        {
+                            $scope.filterExpressions.universalSearchString = filterExpression;
+                        }
+                    }
+                }
 
 
-                $scope.$watch('fromDate', function () {
+                $scope.$watch('filterExpressions.fromDate', function (newValue, oldValue) {
 
-                    var filterExpression = $scope.createFilterExpression('fromDate', $scope.fromDate);
-                    $scope.filterExpressions.universalSearchString += filterExpression;
+                    if(newValue)
+                    {
+                        var filterExpression = $scope.createFilterExpression('fromDate', newValue);
+                        $scope.appendFilterExpression(filterExpression);
+                    }
                 });
 
-                $scope.$watch('toDate', function () {
+                $scope.$watch('filterExpressions.toDate', function (newValue, oldValue) {
 
-                    var filterExpression = $scope.createFilterExpression('toDate', $scope.toDate);
-                    $scope.filterExpressions.universalSearchString += filterExpression;
+                    if(newValue)
+                    {
+                        var filterExpression = $scope.createFilterExpression('toDate', newValue);
+                        $scope.appendFilterExpression(filterExpression);
+                    }
                 });
             }
         ]
