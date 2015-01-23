@@ -33,10 +33,10 @@ angular.module(
                             $scope.filterExpressions.universalSearchString = filterExpression;
                         }
                     }
-                }
+                };
 
 
-                $scope.$watch('filterExpressions.fromDate', function (newValue, oldValue) {
+                $scope.$watch('filterExpressions.fromDate', function (newValue) {
 
                     if(newValue)
                     {
@@ -45,7 +45,7 @@ angular.module(
                     }
                 });
 
-                $scope.$watch('filterExpressions.toDate', function (newValue, oldValue) {
+                $scope.$watch('filterExpressions.toDate', function (newValue) {
 
                     if(newValue)
                     {
