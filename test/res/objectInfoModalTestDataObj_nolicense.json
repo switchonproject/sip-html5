@@ -95,7 +95,6 @@
     },
     "creationdate": "2012-01-01T00:00:00.000Z",
     "name": "CERA Gateway",
-    "licensestatement": "Creative Commons License: All data and pages available from WDCC are licensed under a Creative Commons License (http://creativecommons.org/licenses/by-nc-sa/2.0/de/deed.en) as far as those conditions are not in any way modified by the following conditions or by any conditions specific to data or pages. Special data owner conditions: You must agree with the special data owner conditions (CERA WWW-Gateway >> 'Browse experiments' >> 'Show datasets' >> Click on dataset name >> 'Distribution'). If there is a conflict between the creative common licence and the special data owner conditions, the latter shall have precedence. Always quote reference: Articles, papers, or written scientific works of any form, based in whole or in part on data supplied by WDCC, will contain an acknowledgment concerning the supplied data. Always quote reference of the experiment in the citation index when using WDCC data (CERA WWW-Gateway >> 'Browse experiments' >> 'Experiment information' >> 'CERA UI Compact' >> 'Citation'. In addition to your comments and suggestions, we are VERY interested in how you use the data we distribute. We would be most appreciative if you would send us a line or two describing your application of these data to data@dkrz.de. Used freely for research only: Data from the projects available on the WDCC server may be used freely for research only. Non-research use of WDCC data: If you do not feel able to accept the conditions for access to the WDCC research data service, you may still be able to acquire data via WDCC Data Services. Please contact data@dkrz.de. Personal account: The WDCC will provide you with a personal account and password. If you copy, distribute, display and perform the data you may do it only under the conditions identical to this one. You are responsible for maintaining the confidentiality of any password(s) you are given to access the WDCC Site, and are fully responsible for all activities that occur under your password(s). You agree to notify WDCC immediately of any unauthorized use of your password(s). Liablity / Warranty: The data are delivered to the user without a warranty of any kind. The user is aware that the data were generated in keeping with the current state of science and technology. The WDCC assumes no obligations on the basis of this agreement towards third parties. There is no liability of the WDCC for any harm arising from the delivery and subsequent processing of the data products. The user exempts the WDCC from any liability towards third parties.",
     "tags": [{
             "$self": "/SWITCHON.TAG/926",
             "id": 926,
@@ -1299,9 +1298,7 @@
     "contact": {
         "$self": "/SWITCHON.CONTACT/40",
         "id": 40,
-        "organisation": "DKRZ WDCC",
         "description": null,
-        "name": "test",
         "email": "data@dkrz.de",
         "url": null,
         "role": {
@@ -1492,7 +1489,6 @@
     "accesslimitations": {
         "$self": "/SWITCHON.TAG/1",
         "id": 1,
-        "name": "no limitation",
         "taggroup": {
             "$self": "/SWITCHON.TAGGROUP/146",
             "id": 146,

@@ -1299,9 +1299,7 @@
     "contact": {
         "$self": "/SWITCHON.CONTACT/40",
         "id": 40,
-        "organisation": "DKRZ WDCC",
         "description": null,
-        "name": "test",
         "email": "data@dkrz.de",
         "url": null,
         "role": {
@@ -1492,7 +1490,6 @@
     "accesslimitations": {
         "$self": "/SWITCHON.TAG/1",
         "id": 1,
-        "name": "no limitation",
         "taggroup": {
             "$self": "/SWITCHON.TAGGROUP/146",
             "id": 146,

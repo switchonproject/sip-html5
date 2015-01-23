@@ -2,7 +2,7 @@ describe('Object Info Modal Test Suite', function () {
     'use strict';
     
     describe('Object Info Modal Tests', function () {
-        var $compile, $modal, $rootScope, $templateCache;
+        var $compile, $filter, $modal, $rootScope, $templateCache, fullObjs;
         
         beforeEach(function () {
             module('eu.water-switch-on.sip.controllers');
@@ -17,85 +17,286 @@ describe('Object Info Modal Test Suite', function () {
                 '$rootScope',
                 '$compile',
                 '$templateCache',
-                function (modal, rootscope, compile, templateCache) {
+                '$filter',
+                function (modal, rootscope, compile, templateCache, filter) {
                     $modal = modal;
                     $rootScope = rootscope;
                     $compile = compile;
                     $templateCache = templateCache;
+                    $filter = filter;
                 }
             ]
         ));
+
+        beforeEach(function () {
+            var i;
+            
+            fullObjs = [];
+            
+            i = 0;
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ1_) {
+                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ1_;
+            });
+
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ2_) {
+                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ2_;
+            });
+
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ3_) {
+                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ3_;
+            });
+
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ4_) {
+                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ4_;
+            });
+        });
         
         it('object info - proper title', function () {
-            var compiled, elem, mockdata, rootelem, scope, template;
+            var elem, i, rootelem, scope;
             
-            template = $templateCache.get('app/templates/object-info-modal-template.html');
-            expect(template).toBeDefined();
-            compiled = $compile(template);
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.children("div > h3");
+                expect(elem).toBeDefined();
+                expect(elem.hasClass('modal-title')).toBeTruthy();
+                expect(elem.text()).toEqual('Object info of ' + fullObjs[i].name);
+            }
+        });
+        
+        it('object info - proper name', function () {
+            var elem, i, rootelem, scope;
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ1_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ1_;
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(1)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Name:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].name);
+            }
+        });
+        
+        it('object info - proper description', function () {
+            var elem, i, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(2)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Description:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].description);
+            }
+        });
+        
+        it('object info - proper keywords', function () {
+            var elem, i, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(3)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Keywords:');
+                expect(elem.find('div:nth-child(2) span.label.label-primary').length).toEqual(fullObjs[i].tags.length);
+            }
+        });
+        
+        it('object info - proper topic', function () {
+            var elem, i, mockdata, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(4)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Topic:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].topiccategory.name);
+            }
+            
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOTOPIC_) {
+                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOTOPIC_;
             });
-            
-            expect(mockdata).toBeDefined();
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
-            
-            rootelem = compiled(scope);
+
+            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
             scope.$digest();
-            elem = rootelem.children("div > h3");
+            elem = rootelem.find(".row:nth-child(4)");
             expect(elem).toBeDefined();
-            expect(elem.hasClass('modal-title')).toBeTruthy();
-            expect(elem.text()).toEqual('Object info of CERA Gateway');
+            expect(elem.find('div label').text()).toEqual('Topic:');
+            expect(elem.find('div:nth-child(2)').text().trim()).toEqual("[none]");
+        });
+        
+        it('object info - proper point of contact', function () {
+            var elem, i, mockdata, rootelem, scope;
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ2_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ2_;
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(5)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Point of Contact:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].contact.name + ' (' + fullObjs[i].contact.organisation + ')');
+            }
+            
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOCONTACTNAME_) {
+                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOCONTACTNAME_;
             });
-            
-            expect(mockdata).toBeDefined();
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
-            
-            rootelem = compiled(scope);
+
+            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
             scope.$digest();
-            elem = rootelem.children("div > h3");
+            elem = rootelem.find(".row:nth-child(5)");
             expect(elem).toBeDefined();
-            expect(elem.hasClass('modal-title')).toBeTruthy();
-            expect(elem.text()).toEqual('Object info of Global Land Cover Product (2005 to 2006)');
+            expect(elem.find('div label').text()).toEqual('Point of Contact:');
+            expect(elem.find('div:nth-child(2)').text().trim()).toEqual("[none]" + ' (' + mockdata.contact.organisation + ')');
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ3_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ3_;
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_) {
+                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_;
             });
-            
-            expect(mockdata).toBeDefined();
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
-            
-            rootelem = compiled(scope);
+
+            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
             scope.$digest();
-            elem = rootelem.children("div > h3");
+            elem = rootelem.find(".row:nth-child(5)");
             expect(elem).toBeDefined();
-            expect(elem.hasClass('modal-title')).toBeTruthy();
-            expect(elem.text()).toEqual('Object info of Portugal 2013 bathing water report');
+            expect(elem.find('div label').text()).toEqual('Point of Contact:');
+            expect(elem.find('div:nth-child(2)').text().trim()).toEqual(mockdata.contact.name + ' (no organisation)');
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ4_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ4_;
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_NOCONTACTNAME_) {
+                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_NOCONTACTNAME_;
             });
-            
-            expect(mockdata).toBeDefined();
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
-            
-            rootelem = compiled(scope);
+
+            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
             scope.$digest();
-            elem = rootelem.children("div > h3");
+            elem = rootelem.find(".row:nth-child(5)");
             expect(elem).toBeDefined();
-            expect(elem.hasClass('modal-title')).toBeTruthy();
-            expect(elem.text()).toEqual('Object info of Malta 2013 bathing water report');
+            expect(elem.find('div label').text()).toEqual('Point of Contact:');
+            expect(elem.find('div:nth-child(2)').text().trim()).toEqual('[none] (no organisation)');
+        });
+        
+        it('object info - proper time range', function () {
+            var elem, i, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(6)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Time Range:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(
+                        $filter('date')(fullObjs[i].fromdate , "dd.MM.yyyy HH:mm:ss 'GMT'Z")
+                        + ' - '
+                        + $filter('date')(fullObjs[i].todate , "dd.MM.yyyy HH:mm:ss 'GMT'Z"));
+            }
+        });
+        
+        it('object info - proper last modification', function () {
+            var elem, i, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(7)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Last modification:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(
+                        $filter('date')(fullObjs[i].lastmodificationdate , "dd.MM.yyyy HH:mm:ss 'GMT'Z"));
+            }
+        });
+        
+        it('object info - proper access limitation', function () {
+            var elem, i, mockdata, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(8)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('Access limitations:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].accesslimitations.name);
+            }
+            
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOACCESSLIMITATIONS_) {
+                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOACCESSLIMITATIONS_;
+            });
+            
+            scope = $rootScope.$new(true);
+            scope.object = mockdata;
+
+            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            scope.$digest();
+            elem = rootelem.find(".row:nth-child(8)");
+            expect(elem).toBeDefined();
+            expect(elem.find('div label').text()).toEqual('Access limitations:');
+            expect(elem.find('div:nth-child(2)').text().trim()).toEqual('unknown');
+        });
+        
+        it('object info - proper license', function () {
+            var elem, i, mockdata, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find(".row:nth-child(9)");
+                expect(elem).toBeDefined();
+                expect(elem.find('div label').text()).toEqual('License:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].licensestatement);
+            }
+            
+            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOLICENSE_) {
+                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOLICENSE_;
+            });
+            
+            scope = $rootScope.$new(true);
+            scope.object = mockdata;
+
+            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            scope.$digest();
+            elem = rootelem.find(".row:nth-child(9)");
+            expect(elem).toBeDefined();
+            expect(elem.find('div label').text()).toEqual('License:');
+            expect(elem.find('div:nth-child(2)').text().trim()).toEqual('unknown');
         });
     });
 });

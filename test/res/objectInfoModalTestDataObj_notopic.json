@@ -1,6 +1,6 @@
 {
-    "$self": "/SWITCHON.RESOURCE/132",
-    "id": 132,
+    "$self": "/SWITCHON.RESOURCE/99",
+    "id": 99,
     "fromdate": "2012-01-01T00:00:00.000Z",
     "accessconditions": {
         "$self": "/SWITCHON.TAG/866",
@@ -15,11 +15,11 @@
         "description": "n/a"
     },
     "spatialcoverage": {
-        "$self": "/SWITCHON.GEOM/136",
-        "id": 136,
-        "geo_field": "SRID=4326;POLYGON ((-180 -90, 180 -90, 180 90, -180 90, -180 -90))"
+        "$self": "/SWITCHON.GEOM/103",
+        "id": 103,
+        "geo_field": "SRID=4326;POLYGON ((-30 30, 60 30, 60 75, -30 75, -30 30))"
     },
-    "todate": "2013-12-31T00:00:00.000Z",
+    "todate": "2012-01-01T00:00:00.000Z",
     "srid": {
         "$self": "/SWITCHON.TAG/226",
         "id": 226,
@@ -56,7 +56,7 @@
         },
         "description": "English"
     },
-    "description": "The GlobCover Portal provides access to the results of the GlobCover project. GlobCover is an ESA initiative which began in 2005 in partnership with JRC, EEA, FAO, UNEP, GOFC-GOLD and IGBP. The aim of the project was to develop a service capable of delivering global composites and land cover maps using as input observations from the 300m MERIS sensor on board the ENVISAT satellite mission. ESA makes available the land cover maps, which cover 2 periods: December 2004 - June 2006 and January - December 2009.",
+    "description": "State of bathing water, Malta report 2013",
     "type": {
         "$self": "/SWITCHON.TAG/254",
         "id": 254,
@@ -70,9 +70,9 @@
         "description": "This is data available as open data from any source on the Internet in a format, which can be directly used in experiments in the Laboratory."
     },
     "location": {
-        "$self": "/SWITCHON.TAG/865",
-        "id": 865,
-        "name": "World",
+        "$self": "/SWITCHON.TAG/172",
+        "id": 172,
+        "name": "Europe",
         "taggroup": {
             "$self": "/SWITCHON.TAGGROUP/158",
             "id": 158,
@@ -82,20 +82,19 @@
         "description": "n/a"
     },
     "topiccategory": {
-        "$self": "/SWITCHON.TAG/236",
-        "id": 236,
-        "name": "imageryBaseMapsEarthCover",
+        "$self": "/SWITCHON.TAG/238",
+        "id": 238,
         "taggroup": {
             "$self": "/SWITCHON.TAGGROUP/168",
             "id": 168,
             "name": "topic category",
             "description": "High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search (fixed group)."
         },
-        "description": "base maps Examples: land cover, topographic maps, imagery, unclassified images, annotations"
+        "description": "inland water features, drainage systems and their characteristics Examples: rivers and glaciers, salt lakes, water utilization plans, dams, currents, floods, water quality, hydrographic charts"
     },
     "creationdate": "2012-01-01T00:00:00.000Z",
-    "name": "Global Land Cover Product (2005 to 2006)",
-    "licensestatement": "The GlobCover products have been processed by ESA and by the Université catholique de Louvain. They are made available to the public by ESA. You may use the GlobCover land cover map for educational and/or scientific purposes, without any fee on the condition that you credit ESA and the Université catholique de Louvain as the source of the GlobCover products: Copyright notice: © ESA 2010 and UCLouvain Should you write any scientific publication on the results of research activities that use GlobCover products as input, you shall acknowledge the ESA GlobCover Project in the text of the publication and provide ESA with an electronic copy of the publication (due@esa.int). If you wish to use the GlobCover products in advertising or in any commercial promotion, you shall acknowledge the ESA GlobCover Project and you must submit the layout to ESA for approval beforehand (due@esa.int).",
+    "name": "Malta 2013 bathing water report",
+    "licensestatement": "EEA standard re-use policy: unless otherwise indicated, re-use of content on the EEA website for commercial or non-commercial purposes is permitted free of charge, provided that the source is acknowledged (http://www.eea.europa.eu/legal/copyright). Copyright holder: European Environment Agency (EEA).",
     "tags": [{
             "$self": "/SWITCHON.TAG/140",
             "id": 140,
@@ -108,9 +107,20 @@
             },
             "description": "n/a"
         }, {
-            "$self": "/SWITCHON.TAG/131",
-            "id": 131,
-            "name": "land surface",
+            "$self": "/SWITCHON.TAG/105",
+            "id": 105,
+            "name": "Hydrography",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/155",
+                "id": 155,
+                "name": "keywords - INSPIRE themes 1.0",
+                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+            },
+            "description": "Hydrographic elements, including marine areas and all other water bodies and items related to them, including river basins and sub-basins. Where appropriate, according to the definitions set out in Directive 2000/60/EC of the European Parliament and of the Council of 23 October 2000 establishing a framework for Community action in the field of water policy (2) and in the form of networks."
+        }, {
+            "$self": "/SWITCHON.TAG/1081",
+            "id": 1081,
+            "name": "lakes",
             "taggroup": {
                 "$self": "/SWITCHON.TAGGROUP/156",
                 "id": 156,
@@ -119,27 +129,93 @@
             },
             "description": "n/a"
         }, {
-            "$self": "/SWITCHON.TAG/107",
-            "id": 107,
-            "name": "Land use",
+            "$self": "/SWITCHON.TAG/872",
+            "id": 872,
+            "name": "water",
             "taggroup": {
-                "$self": "/SWITCHON.TAGGROUP/155",
-                "id": 155,
-                "name": "keywords - INSPIRE themes 1.0",
-                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
             },
-            "description": "Territory characterised according to its current and future planned functional dimension or socio-economic purpose (e.g. residential, industrial, commercial, agricultural, forestry, recreational)."
+            "description": "n/a"
         }, {
-            "$self": "/SWITCHON.TAG/106",
-            "id": 106,
-            "name": "Land cover",
+            "$self": "/SWITCHON.TAG/1082",
+            "id": 1082,
+            "name": "bathing",
             "taggroup": {
-                "$self": "/SWITCHON.TAGGROUP/155",
-                "id": 155,
-                "name": "keywords - INSPIRE themes 1.0",
-                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
             },
-            "description": "Physical and biological cover of the earth's surface including artificial surfaces, agricultural areas, forests, (semi-)natural areas, wetlands, water bodies."
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1083",
+            "id": 1083,
+            "name": "quality",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1084",
+            "id": 1084,
+            "name": "state",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1085",
+            "id": 1085,
+            "name": "status",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1086",
+            "id": 1086,
+            "name": "assessment",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1087",
+            "id": 1087,
+            "name": "report",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1108",
+            "id": 1108,
+            "name": "Malta",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
         }, {
             "$self": "/SWITCHON.TAG/262",
             "id": 262,
@@ -153,12 +229,12 @@
             "description": "information applies to the dataset"
         }],
     "contact": {
-        "$self": "/SWITCHON.CONTACT/62",
-        "id": 62,
-        "organisation": "ESA",
+        "$self": "/SWITCHON.CONTACT/50",
+        "id": 50,
+        "organisation": "EEA",
         "description": null,
-        "name": "test2",
-        "email": "fabrizio.ramoino@esa.int spaceinimages@esa.int education@esa.int",
+        "name": null,
+        "email": "eea.enquiries@eea.europa.eu",
         "url": null,
         "role": {
             "$self": "/SWITCHON.TAG/221",
@@ -175,10 +251,10 @@
     },
     "geography": null,
     "representation": [{
-            "$self": "/SWITCHON.REPRESENTATION/130",
-            "id": 130,
-            "name": "Global Land Cover Product (2005 to 2006) Representation",
-            "description": "Representation of Resource Global Land Cover Product (2005 to 2006)",
+            "$self": "/SWITCHON.REPRESENTATION/97",
+            "id": 97,
+            "name": "Malta 2013 bathing water report Representation",
+            "description": "Representation of Resource Malta 2013 bathing water report",
             "content": null,
             "type": {
                 "$self": "/SWITCHON.TAG/212",
@@ -219,29 +295,29 @@
             "applicationprofile": null,
             "uuid": null,
             "temporalresolution": null,
-            "spatialresolution": "300000m",
+            "spatialresolution": null,
             "spatialscale": null,
-            "contentlocation": "http://due.esrin.esa.int/globcover/LandCover_V2.2/Globcover_V2.2_Global.zip",
+            "contentlocation": "http://www.eea.europa.eu/themes/water/status-and-monitoring/state-of-bathing-water/country-reports-2013-bathing-season/malta-2013-bathing-water-report/at_download/file",
             "tags": [],
             "contenttype": {
-                "$self": "/SWITCHON.TAG/53",
-                "id": 53,
-                "name": "application/zip",
+                "$self": "/SWITCHON.TAG/1089",
+                "id": 1089,
+                "name": "application/pdf",
                 "taggroup": {
                     "$self": "/SWITCHON.TAGGROUP/151",
                     "id": 151,
                     "name": "content type",
                     "description": "MIME Type of the representation (open group which several predefined tags)."
                 },
-                "description": "zip archive file format"
+                "description": "n/a"
             },
             "uploadstatus": null,
             "uploadmessage": null
         }],
     "lastmodificationdate": "2012-01-01T00:00:00.000Z",
     "metadata": [{
-            "$self": "/SWITCHON.METADATA/253",
-            "id": 253,
+            "$self": "/SWITCHON.METADATA/194",
+            "id": 194,
             "name": "SWITCH-ON Basic Meta-Data",
             "tags": [],
             "description": "Meta-Data record created, derived or imported by the SWITCH-ON project according to the SWITCH-ON Standard Information Model (SIM) for Meta-Data for the SWITCH-ON Spatial Information Platform (SIP).",
@@ -308,11 +384,11 @@
             "contenttype": null,
             "content": null
         }, {
-            "$self": "/SWITCHON.METADATA/254",
-            "id": 254,
+            "$self": "/SWITCHON.METADATA/195",
+            "id": 195,
             "name": "Basic Lineage Meta-Data",
             "tags": [],
-            "description": "\"The geometric corrections are done using the AMORGOS tool (Bourg et al., 2007) provided by ESA and developed by ACRI. AMORGOS gives the geographical location (latitude and longitude) and the altitude for every pixel in the unprojected grid image. Software inputs are the MERIS FRS data, altitude files and operational or precise orbit files. Digital Elevation Model (DEM) used for orthorectification is based on the ACE DEM and is called Getasse 30. The atmospheric correction permits to transform Top of Atmosphere (TOA) radiances into surface reflectances. The effects of Rayleigh and aerosol scattering and gaseous absorption are taken into account. A neural network based on the so-called MOMO method (Fischer and Grassl, 1991) is applied with several inputs. Major input is the aerosol content which is taken from LARS_RR_L3 monthly products for 2009. Ozone is derived from European Climate Meteorological Weather Forecast (ECMWF) data present in the MERIS auxiliary data, O2 and H2O are derived from particular spectral bands plus polynomial coefficients from LUT delivered by ESA (Pelligrini et al., 2004). Two methods are combined to screen clouds, the first one using the MOMO method already quoted, and the second one using thresholds of reflectance on the bands at 443, 753, 760 and 865 nm. From the first method, two output states (clear and cloud) are possible and with the second one, four states can be detected (clear, thin cloud, dense cloud and snow). The final cloud mask merges both results excluding snow and clear states. The “Cloud Top Height” is also estimated for a better determination of cloud shadows and the snow reflectance is kept at its TOA level. The original MERIS level 1B Land/Ocean mask that covers sea, oceans, and the largest in-land lakes is applied and the reflectances are computed only for the unmasked water bodies. Yet, this mask presents some geo-location inaccuracies and is therefore not absolutely correct. In order to take into account these inaccuracies, a Land/Water and Water/Land reclassification is applied to finally generate status “Land”, “Water” or “Flooded” (corresponding to pixels declared wrongly as “Land” before the reclassification). Two methods are combined to reduce the directional effects due to variations of sun and view geometry in the successive measurements of surface reflectances. The Mean Compositing method (Vancutsem et al., 2007) is first processed over a compositing period of reference. This period is of 2 weeks for the internal biweekly composites, of 2 months for the bimonthly composites and of 12 months for the annual composite. An iterative procedure is then applied for detecting “valid” surface reflectance values. Finally, a mean is applied over the “valid” surface spectral reflectances at several temporal frequencies according to the products type. \"",
+            "description": "To allow Europeans to make an informed choice on which beach to choose, an annual report on the quality of coastal and freshwater bathing areas, as reported by EU Member States is prepared. This year the report has been prepared by the European Environment Agency (EEA) in cooperation with the European Commission DG Environment. The report assesses the bathing water quality in all 28 EU Member States, as well as Albania and Switzerland in the 2013 bathing water season and thereby gives an indication of the areas where the quality of bathing is expected to be good this year. Each report contains details on bathing water monitoring in the specific country and an assessment of the 2013 results and the trend in bathing water quality.",
             "contact": null,
             "type": {
                 "$self": "/SWITCHON.TAG/180",
@@ -357,11 +433,11 @@
         },
         "description": "no limitation"
     },
-    "uuid": "urn:x-waterswitchon:dataset:europeanspaceagency:globallandcoverproduct2005-06:ela4",
+    "uuid": "urn:x-waterswitchon:dataset:eea:bathingwaterreport:malta:2013:ela4",
     "collection": {
-        "$self": "/SWITCHON.TAG/1150",
-        "id": 1150,
-        "name": "ESA Globcover 2005-06",
+        "$self": "/SWITCHON.TAG/1080",
+        "id": 1080,
+        "name": "European Environment Agency (Bathing Water quality)",
         "taggroup": {
             "$self": "/SWITCHON.TAGGROUP/149",
             "id": 149,

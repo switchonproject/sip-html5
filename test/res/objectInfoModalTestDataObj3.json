@@ -234,7 +234,7 @@
         "id": 50,
         "organisation": "EEA",
         "description": null,
-        "name": null,
+        "name": "test3",
         "email": "eea.enquiries@eea.europa.eu",
         "url": null,
         "role": {

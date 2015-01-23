@@ -30,6 +30,7 @@ module.exports = function(config) {
         'target/dist/scripts/controllers/resultSetDirectiveController.js',
         'target/dist/scripts/controllers/myWorkspaceDirectiveController.js',
         'target/dist/scripts/controllers/myProfileDirectiveController.js',
+        'target/dist/scripts/controllers/objectInfoModalController.js',
         'target/dist/scripts/directives/_module.js',
         'target/dist/scripts/directives/usbDirective.js',
         'target/dist/scripts/directives/dateFilterDirective.js',
