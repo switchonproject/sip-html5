@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3 class="modal-title">Object info of {{object.name}}</h3>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                Name:
+            </div>
+            <div class="col-lg-9">
+                {{object.name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                Description:
+            </div>
+            <div class="col-lg-9">
+                {{object.description}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                Keywords:
+            </div>
+            <div class="col-lg-9">
+                <span ng-repeat="tag in object.tags">
+                    <span class="label label-primary">{{tag.name}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="closeInfoView()">OK</button>
+</div>

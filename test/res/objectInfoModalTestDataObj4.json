@@ -1,0 +1,451 @@
+{
+    "$self": "/SWITCHON.RESOURCE/99",
+    "id": 99,
+    "fromdate": "2012-01-01T00:00:00.000Z",
+    "accessconditions": {
+        "$self": "/SWITCHON.TAG/866",
+        "id": 866,
+        "name": "other",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/145",
+            "id": 145,
+            "name": "access conditions",
+            "description": "License regulating the conditions for access and use of the data (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "spatialcoverage": {
+        "$self": "/SWITCHON.GEOM/103",
+        "id": 103,
+        "geo_field": "SRID=4326;POLYGON ((-30 30, 60 30, 60 75, -30 75, -30 30))"
+    },
+    "todate": "2012-01-01T00:00:00.000Z",
+    "srid": {
+        "$self": "/SWITCHON.TAG/226",
+        "id": 226,
+        "name": "EPSG:4326",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/167",
+            "id": 167,
+            "name": "srid",
+            "description": "The Spatial Reference System Identifier (SRID) of the spatial coverage of the resource EPSG format (open group with some predefined tags)."
+        },
+        "description": "WGS 84 / World Geodetic System 1984"
+    },
+    "conformity": {
+        "$self": "/SWITCHON.TAG/253",
+        "id": 253,
+        "name": "Not evaluated",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/150",
+            "id": 150,
+            "name": "conformity",
+            "description": "This is a citation of the implementing rules adopted under Article 7(1) of Directive 2007/2/EC or other specification to which a particular resource conforms. (fixed group)"
+        },
+        "description": "Not evaluated"
+    },
+    "language": {
+        "$self": "/SWITCHON.TAG/145",
+        "id": 145,
+        "name": "eng",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/157",
+            "id": 157,
+            "name": "language",
+            "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+        },
+        "description": "English"
+    },
+    "description": "State of bathing water, Malta report 2013",
+    "type": {
+        "$self": "/SWITCHON.TAG/254",
+        "id": 254,
+        "name": "external data",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/164",
+            "id": 164,
+            "name": "resource type",
+            "description": "SIP internal type of the resource (fixed group)."
+        },
+        "description": "This is data available as open data from any source on the Internet in a format, which can be directly used in experiments in the Laboratory."
+    },
+    "location": {
+        "$self": "/SWITCHON.TAG/172",
+        "id": 172,
+        "name": "Europe",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/158",
+            "id": 158,
+            "name": "location",
+            "description": "Geographic Location of the resource (covered by the data). E.g. Continent, Country, Region, City, etc. Open Group. (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "topiccategory": {
+        "$self": "/SWITCHON.TAG/238",
+        "id": 238,
+        "name": "inlandWaters",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/168",
+            "id": 168,
+            "name": "topic category",
+            "description": "High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search (fixed group)."
+        },
+        "description": "inland water features, drainage systems and their characteristics Examples: rivers and glaciers, salt lakes, water utilization plans, dams, currents, floods, water quality, hydrographic charts"
+    },
+    "creationdate": "2012-01-01T00:00:00.000Z",
+    "name": "Malta 2013 bathing water report",
+    "licensestatement": "EEA standard re-use policy: unless otherwise indicated, re-use of content on the EEA website for commercial or non-commercial purposes is permitted free of charge, provided that the source is acknowledged (http://www.eea.europa.eu/legal/copyright). Copyright holder: European Environment Agency (EEA).",
+    "tags": [{
+            "$self": "/SWITCHON.TAG/140",
+            "id": 140,
+            "name": "earth science",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/105",
+            "id": 105,
+            "name": "Hydrography",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/155",
+                "id": 155,
+                "name": "keywords - INSPIRE themes 1.0",
+                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+            },
+            "description": "Hydrographic elements, including marine areas and all other water bodies and items related to them, including river basins and sub-basins. Where appropriate, according to the definitions set out in Directive 2000/60/EC of the European Parliament and of the Council of 23 October 2000 establishing a framework for Community action in the field of water policy (2) and in the form of networks."
+        }, {
+            "$self": "/SWITCHON.TAG/1081",
+            "id": 1081,
+            "name": "lakes",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/872",
+            "id": 872,
+            "name": "water",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1082",
+            "id": 1082,
+            "name": "bathing",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1083",
+            "id": 1083,
+            "name": "quality",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1084",
+            "id": 1084,
+            "name": "state",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1085",
+            "id": 1085,
+            "name": "status",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1086",
+            "id": 1086,
+            "name": "assessment",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1087",
+            "id": 1087,
+            "name": "report",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1108",
+            "id": 1108,
+            "name": "Malta",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/262",
+            "id": 262,
+            "name": "dataset",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/166",
+                "id": 166,
+                "name": "scope",
+                "description": "Scope of the resource. A codelist used in hierarchyLevel, DQ_Scope.level, and updateScope (fixed group with tags from a standard codelist)"
+            },
+            "description": "information applies to the dataset"
+        }],
+    "contact": {
+        "$self": "/SWITCHON.CONTACT/50",
+        "id": 50,
+        "organisation": "EEA",
+        "description": null,
+        "name": null,
+        "email": "eea.enquiries@eea.europa.eu",
+        "url": null,
+        "role": {
+            "$self": "/SWITCHON.TAG/221",
+            "id": 221,
+            "name": "pointOfContact",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/165",
+                "id": 165,
+                "name": "role",
+                "description": "Function performed by the responsible party (fixed group, standard codelist)."
+            },
+            "description": "Party that can be contacted for acquiring knowledge about or acquisition of the data resource. Person or organization that can be contacted to acquire data on the resource."
+        }
+    },
+    "geography": null,
+    "representation": [{
+            "$self": "/SWITCHON.REPRESENTATION/97",
+            "id": 97,
+            "name": "Malta 2013 bathing water report Representation",
+            "description": "Representation of Resource Malta 2013 bathing water report",
+            "content": null,
+            "type": {
+                "$self": "/SWITCHON.TAG/212",
+                "id": 212,
+                "name": "original data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/163",
+                    "id": 163,
+                    "name": "representation type",
+                    "description": "SIP internal type of the representation of the resource (fixed group)."
+                },
+                "description": "The representation holds the original data of the resource"
+            },
+            "function": {
+                "$self": "/SWITCHON.TAG/71",
+                "id": 71,
+                "name": "download",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/152",
+                    "id": 152,
+                    "name": "function",
+                    "description": "Function that can be perfomred following the contentLocation link to the resource representation (fixed group, standard codelist)."
+                },
+                "description": "link will get resource. The function of the link is to get a representation of the resource"
+            },
+            "protocol": {
+                "$self": "/SWITCHON.TAG/197",
+                "id": 197,
+                "name": "WWW:LINK-1.0-http--link",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/161",
+                    "id": 161,
+                    "name": "protocol",
+                    "description": "Protocol of the service that can be accessed at the contentLocation of the resource representation (open group with several predefined tags from standard codelists)."
+                },
+                "description": "Web Address (URL), should be used when no further information about the resource is available"
+            },
+            "applicationprofile": null,
+            "uuid": null,
+            "temporalresolution": null,
+            "spatialresolution": null,
+            "spatialscale": null,
+            "contentlocation": "http://www.eea.europa.eu/themes/water/status-and-monitoring/state-of-bathing-water/country-reports-2013-bathing-season/malta-2013-bathing-water-report/at_download/file",
+            "tags": [],
+            "contenttype": {
+                "$self": "/SWITCHON.TAG/1089",
+                "id": 1089,
+                "name": "application/pdf",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/151",
+                    "id": 151,
+                    "name": "content type",
+                    "description": "MIME Type of the representation (open group which several predefined tags)."
+                },
+                "description": "n/a"
+            },
+            "uploadstatus": null,
+            "uploadmessage": null
+        }],
+    "lastmodificationdate": "2012-01-01T00:00:00.000Z",
+    "metadata": [{
+            "$self": "/SWITCHON.METADATA/194",
+            "id": 194,
+            "name": "SWITCH-ON Basic Meta-Data",
+            "tags": [],
+            "description": "Meta-Data record created, derived or imported by the SWITCH-ON project according to the SWITCH-ON Standard Information Model (SIM) for Meta-Data for the SWITCH-ON Spatial Information Platform (SIP).",
+            "contact": {
+                "$self": "/SWITCHON.CONTACT/37",
+                "id": 37,
+                "organisation": "SWITCH-ON",
+                "description": "Sharing Water-related Information to Tackle Changes in the Hydrosphere – for Operational Needs (SWITCH-ON).",
+                "name": "Emma Lagerbäck Adolphi",
+                "email": "emma.l.adolphi@gmail.com",
+                "url": "http://www.water-switch-on.eu/",
+                "role": {
+                    "$self": "/SWITCHON.TAG/218",
+                    "id": 218,
+                    "name": "user",
+                    "taggroup": {
+                        "$self": "/SWITCHON.TAGGROUP/165",
+                        "id": 165,
+                        "name": "role",
+                        "description": "Function performed by the responsible party (fixed group, standard codelist)."
+                    },
+                    "description": "Party that uses the resource. Person or organization that is, or can be, the key user of the resource."
+                }
+            },
+            "type": {
+                "$self": "/SWITCHON.TAG/177",
+                "id": 177,
+                "name": "basic meta-data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/160",
+                    "id": 160,
+                    "name": "meta-data type",
+                    "description": "SIP internal type of the Meta-Data Record (fixed group)."
+                },
+                "description": "Type of the Meta-Data Record. \"basic meta-data\" refers to meta-data collected by switch-on according to the SIM meta-data schema. In fact, this meta-meta-data record refers to enclosing resource meta-data record."
+            },
+            "language": {
+                "$self": "/SWITCHON.TAG/145",
+                "id": 145,
+                "name": "eng",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/157",
+                    "id": 157,
+                    "name": "language",
+                    "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+                },
+                "description": "English"
+            },
+            "standard": {
+                "$self": "/SWITCHON.TAG/1387",
+                "id": 1387,
+                "name": "SWITCH-ON SIM",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/159",
+                    "id": 159,
+                    "name": "meta-data standard",
+                    "description": "Official standard on which the meta-data record is based (open group with some predefined tags)."
+                },
+                "description": "Meta-Data Record compliant to the Standard Information Model (SIM) of the Spatial Information Platform (SIP) of the EU FP7 project SWITCH-ON."
+            },
+            "uuid": null,
+            "contentlocation": null,
+            "creationdate": "2012-01-01T00:00:00.000Z",
+            "contenttype": null,
+            "content": null
+        }, {
+            "$self": "/SWITCHON.METADATA/195",
+            "id": 195,
+            "name": "Basic Lineage Meta-Data",
+            "tags": [],
+            "description": "To allow Europeans to make an informed choice on which beach to choose, an annual report on the quality of coastal and freshwater bathing areas, as reported by EU Member States is prepared. This year the report has been prepared by the European Environment Agency (EEA) in cooperation with the European Commission DG Environment. The report assesses the bathing water quality in all 28 EU Member States, as well as Albania and Switzerland in the 2013 bathing water season and thereby gives an indication of the areas where the quality of bathing is expected to be good this year. Each report contains details on bathing water monitoring in the specific country and an assessment of the 2013 results and the trend in bathing water quality.",
+            "contact": null,
+            "type": {
+                "$self": "/SWITCHON.TAG/180",
+                "id": 180,
+                "name": "lineage meta-data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/160",
+                    "id": 160,
+                    "name": "meta-data type",
+                    "description": "SIP internal type of the Meta-Data Record (fixed group)."
+                },
+                "description": "Type of the Meta-Data Record. \"lineage meta-data\" refers to meta-data about the lineage of the resource, e.g. a protocol of an experiment."
+            },
+            "language": {
+                "$self": "/SWITCHON.TAG/145",
+                "id": 145,
+                "name": "eng",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/157",
+                    "id": 157,
+                    "name": "language",
+                    "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+                },
+                "description": "English"
+            },
+            "standard": null,
+            "uuid": null,
+            "contentlocation": null,
+            "creationdate": "2012-01-01T00:00:00.000Z",
+            "contenttype": null,
+            "content": null
+        }],
+    "accesslimitations": {
+        "$self": "/SWITCHON.TAG/1",
+        "id": 1,
+        "name": "no limitation",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/146",
+            "id": 146,
+            "name": "access limitations",
+            "description": "Limitations on public access in accordance to Article 13 of Directive 2007/2/EC (fixed group with tags from a standard codelist)."
+        },
+        "description": "no limitation"
+    },
+    "uuid": "urn:x-waterswitchon:dataset:eea:bathingwaterreport:malta:2013:ela4",
+    "collection": {
+        "$self": "/SWITCHON.TAG/1080",
+        "id": 1080,
+        "name": "European Environment Agency (Bathing Water quality)",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/149",
+            "id": 149,
+            "name": "collection",
+            "description": "Assigns the resource to a collection of resources for cataloguing purposes, e.g. SWITCH-ON Experiment Results, etc. (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "publicationdate": "2012-01-01T00:00:00.000Z"
+}

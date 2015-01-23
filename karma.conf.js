@@ -15,13 +15,40 @@ module.exports = function(config) {
         'target/dist/bower_components/json3/lib/json3.min.js',
         'target/dist/bower_components/jquery/dist/jquery.js',
         'target/dist/bower_components/angular/angular.js',
+        'target/dist/bower_components/angular-bootstrap/ui-bootstrap.js',
+        'target/dist/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'target/dist/bower_components/angular-ui-router/release/angular-ui-router.js',
+        'target/dist/bower_components/leaflet/dist/leaflet.js',
+        'target/dist/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
+        'target/dist/bower_components/angular-resource/angular-resource.js',
         'target/dist/scripts/app.js',
         'target/dist/scripts/controllers/_module.js',
+        'target/dist/scripts/controllers/masterController.js',
+        'target/dist/scripts/controllers/mapController.js',
+        'target/dist/scripts/controllers/usbDirectiveController.js',
+        'target/dist/scripts/controllers/dateFilterDirectiveController.js',
+        'target/dist/scripts/controllers/resultSetDirectiveController.js',
+        'target/dist/scripts/controllers/myWorkspaceDirectiveController.js',
+        'target/dist/scripts/controllers/myProfileDirectiveController.js',
         'target/dist/scripts/directives/_module.js',
+        'target/dist/scripts/directives/usbDirective.js',
+        'target/dist/scripts/directives/dateFilterDirective.js',
+        'target/dist/scripts/directives/resultSetDirective.js',
+        'target/dist/scripts/directives/myWorkspaceDirective.js',
+        'target/dist/scripts/directives/myProfileDirective.js',
         'target/dist/scripts/services/_module.js',
+        'target/dist/scripts/services/mockService.js',
+        'target/dist/scripts/services/searchService.js',
+        'target/dist/scripts/services/sessionService.js',
         'target/dist/bower_components/angular-mocks/angular-mocks.js',
-        '',
-        'test/spec/controllers/myController.js'
+        'app/templates/datefilter-directive.html',
+        'app/templates/my-profile-directive.html',
+        'app/templates/my-workspace-directive.html',
+        'app/templates/object-info-modal-template.html',
+        'app/templates/resultset-directive.html',
+        'app/templates/usb-directive.html',
+        'test/spec/controllers/objectInfoModalTest.js',
+        {pattern: 'test/res/**/*.json', watched: true, included: true, served: true}
     ],
 
     // list of files / patterns to exclude
@@ -53,6 +80,16 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true,
+    
+    
+    preprocessors: {
+        '**/*.json': ['gb-json2js'],
+        '**/templates/**/*.html': ['ng-html2js']
+    },
+    
+    ngHtml2JsPreprocessor: {
+        moduleName: 'templates'
+    },
     
     reporters: ['progress', 'junit'],
     junitReporter: {
