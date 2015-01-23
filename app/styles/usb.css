@@ -1,0 +1,56 @@
+/*
+***************************************************
+
+cismet GmbH, Saarbruecken, Germany
+
+              ... and it just works.
+
+***************************************************
+*/
+/* 
+    Created on : 14.01.2015, 09:11:24
+    Author     : Pascal Dihé <pascal.dihe@cismet.de>
+*/
+
+
+/*
+usb
+{
+    border-width: 2px;
+    border-bottom-color:  darkgreen;
+    border-style: solid;
+    margin: 10px;
+    float:left;
+    clear:both;
+}
+
+usb div
+{
+    border-width: 1px;
+    border-color:  fuchsia;
+    border-style: dotted;
+    margin: 3px;
+    float:left;
+    clear:none;
+}
+
+usb input
+{
+    float:left;
+    clear:none;
+}
+
+usb input.static
+{
+    color:blue;
+    font-style: italic;
+}
+
+
+
+usb input.ng-invalid {
+    color:white;
+    background: red;
+  }
+
+*/

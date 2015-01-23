@@ -1,0 +1,14 @@
+.btn-xs.ws-button {
+    background-color: transparent;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.ws-button:hover {
+    border-color: #ccc
+}
+
+.dropdown-menu.hoverdropdown {
+    margin: 0px;
+}

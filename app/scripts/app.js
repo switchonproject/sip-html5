@@ -6,7 +6,8 @@ angular.module(
         'eu.water-switch-on.sip.directives',
         'eu.water-switch-on.sip.services',
         'ui.bootstrap.tpls',
-        'ui.router'
+        'ui.router',
+        'ngResource'
     ]
 ).config(
     [
@@ -14,8 +15,8 @@ angular.module(
         '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             'use strict';
-
-            $urlRouterProvider.otherwise('/map');
+            
+            $urlRouterProvider.otherwise('/list');
 
             $stateProvider.state('list', {
                 url: '/list',
@@ -29,7 +30,14 @@ angular.module(
                 url: '/map',
                 templateUrl: 'views/mapView.html'
             });
+            $stateProvider.state('profile', {
+                url: '/profile',
+                templateUrl: 'views/profileView.html'
+            });
+            $stateProvider.state('login', {
+                url: '/login',
+                templateUrl: 'views/loginView.html'
+            });
         }
     ]
 );
-

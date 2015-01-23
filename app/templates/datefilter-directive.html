@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Date Filter</div>
+    <div class="panel-body">
+        <form  class="form" 
+               name="dateFilterBox" 
+               role="form"  
+               novalidate>
+            <div class="form-group">
+                <label for="fromDate">Start Date: </label>
+                <input class="form-control" name="fromDate" id="fromDate" type="date" 
+                       ng-model="fromDate"
+                       />
+            </div>
+
+            <div class="form-group">
+                <label for="toDate">End Date: </label>
+                <input class="form-control" name="toDate" id="toDate" type="date" 
+                       placeholder="yyyy-MM-dd" ng-model="toDate"/>
+            </div>
+        </form>
+    </div>
+</div>

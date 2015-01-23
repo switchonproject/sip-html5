@@ -1,0 +1,23 @@
+<div class="btn-group nav navbar-nav navbar-right" dropdown is-open="status.isopen"
+     ng-mouseenter="popup(true)"
+     ng-mouseleave="popup(false)">
+    <button class="btn btn-xs navbar-btn dropdown-toggle ws-button" 
+            data-toggle="dropdown"
+            role="button"
+            type="button"
+            aria-expanded="false"
+            ng-click="showProfile()">
+        <div>Hello {{user.name}}</div>
+        <b>My {{workspaceName}} <span class="caret"></span></b>
+    </button>
+    <ul class="dropdown-menu hoverdropdown" role="menu">
+        <li>
+            <a ui-sref="profile">My profile</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a ui-sref="login" ng-show="sessionService.isAnonymousUser(user)">Log in</a>
+            <a ui-sref="login" ng-hide="sessionService.isAnonymousUser(user)">Not {{user.name}}? Log out</a>
+        </li>
+    </ul>
+</div>

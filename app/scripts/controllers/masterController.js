@@ -16,6 +16,9 @@ angular.module(
 
             $scope.isResultShowing = false;
             $scope.state = $state;
+            
+            $scope.filterExpressions = {universalSearchString: 'text:"anytext"'};
+            $scope.data.resultSet = null;
 
             $scope.activateView = function (state) {
                 $scope.showMessage(state + ' view showing', 'success');
