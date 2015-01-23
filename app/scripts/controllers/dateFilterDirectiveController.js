@@ -16,7 +16,6 @@ angular.module(
                     {
                         filterExpression = (keyword + ':');
                         filterExpression += ('"' + $filter('date')(parameter, dateformat) + '" ');
-                        console.log(keyword+':'+filterExpression);
                     }
                     
                     return filterExpression;
