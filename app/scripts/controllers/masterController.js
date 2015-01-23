@@ -18,6 +18,8 @@ angular.module(
             $scope.state = $state;
             
             $scope.filterExpressions = {universalSearchString: 'text:"anytext"'};
+            $scope.filterExpressions.fromDate = null;
+            $scope.filterExpressions.toDate = null;
             $scope.data.resultSet = null;
 
             $scope.activateView = function (state) {
