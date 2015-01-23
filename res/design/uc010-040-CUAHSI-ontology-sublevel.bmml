@@ -26,12 +26,16 @@
         <override controlID="15" x="1016" y="153" w="106" h="30"/>
         <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
         <override controlID="17" x="367" y="158" w="566" h="-1">
-          <text>%20</text>
+          <text>keyword%3A%22Chemical%22%20keyword%3A%22Organic%22</text>
         </override>
         <override controlID="10" x="0" y="191" w="1150" h="-1"/>
-        <override controlID="19" x="938" y="150" w="51" h="39"/>
-        <override controlID="20" x="940" y="157" w="48" h="-1"/>
+        <override controlID="19" x="938" y="150" w="39" h="39"/>
+        <override controlID="20" x="940" y="157" w="48" h="-1">
+          <text>GO</text>
+        </override>
+        <override controlID="21" x="946" y="158" w="-1" h="-1"/>
         <override controlID="18" x="334" y="161" w="-1" h="-1"/>
+        <override controlID="-1"/>
         <src>./assets/symbols.bmml#SIP%20Application</src>
       </controlProperties>
     </control>
@@ -51,22 +55,31 @@
         <text>%20%20%20%20</text>
       </controlProperties>
     </control>
-    <control controlID="108" controlTypeID="com.balsamiq.mockups::StickyNote" x="444" y="354" w="610" h="112" measuredW="109" measuredH="123" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="104" controlTypeID="__group__" x="663" y="570" w="28" h="26" measuredW="28" measuredH="26" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="104">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::StickyNote" x="444" y="354" w="610" h="112" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <text>*User%20Story%201%3A*%20_As%20a%20hydrologist%2C%20I%20need%20to%20find%20a%20list%20of%20data%20links%20as%20provided%20in%20Emmas%20data%20table%20by%20hierarchical%20keywords%20as%20provided%20in%20CUAHSI%27s%20tabular%20ontology%20table%20in%20column%20B%20to%20D%2C%20so%20I%20can%20efficiently%20identify%20precise%20and%20required%20data%20for%20my%20study._</text>
       </controlProperties>
     </control>
-    <control controlID="109" controlTypeID="com.balsamiq.mockups::StickyNote" x="779" y="481" w="282" h="167" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::StickyNote" x="794" y="502" w="333" h="252" measuredW="109" measuredH="123" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>UI%20Element%20for%20selecting%20keywords%20from%20the%20fixed%20keyword%20list%20of%20the%20Tabular%20CUASHI%20Ontology.%20%0AThe%20user%20is%20not%20able%20to%20enter%20arbitrary%20or%20%22free%22%20keywords%2C%20only%20%22CUASHI%20keywords%22%20can%20be%20selected%21</text>
-      </controlProperties>
-    </control>
-    <control controlID="113" controlTypeID="com.balsamiq.mockups::Arrow" x="678" y="501" w="114" h="40" measuredW="150" measuredH="100" zOrder="7" locked="false" isInGroup="-1">
-      <controlProperties>
-        <curvature>1</curvature>
-        <direction>bottom</direction>
-        <rightArrow>false</rightArrow>
-        <text/>
+        <text>To%20further%20narrow%20the%20search%20result%20to%20*Organic%20Chemicals*%20the%20user%20can%20start%20typing%20_organic_%20%20*%281%29*%20and%20then%20select%20the%20respective%20keyword%20*%282%29*%20from%20the%20CUASHI%20keywords%20list.%0A%20%0AIn%20this%20example%2C%20the%20search%20result%20would%20contain%20all%20resources%20that%20are%20tagged%20with%20the%20*top-level-keyword*%20%22Chemical%22%2C%20*2nd-level-keyword*%20%22Organic%22%20and%20related%20*3rd-level-keywords*%20from%20the%20CUASHI%20ontology.%20%0AThis%20means%2C%20that%20also%20resources%20tagged%20with%20the%20organic%20chemical%20concepts%20%22Other%20organic%20chemical%22%2C%20%22PCBs%22%20nand%20%22Pesticide%22%20etc.%20are%20found%21%20</text>
       </controlProperties>
     </control>
     <control controlID="114" controlTypeID="__group__" x="444" y="526" w="668" h="247" measuredW="668" measuredH="247" zOrder="4" locked="false" isInGroup="-1">
@@ -178,22 +191,22 @@
             <text>01%20/%2001%20/%202012%20</text>
           </controlProperties>
         </control>
-        <control controlID="8" controlTypeID="__group__" x="165" y="46" w="144" h="159" measuredW="145" measuredH="159" zOrder="8" locked="false" isInGroup="114">
+        <control controlID="8" controlTypeID="__group__" x="163" y="46" w="161" h="159" measuredW="161" measuredH="159" zOrder="8" locked="false" isInGroup="114">
           <controlProperties>
             <controlName>list</controlName>
           </controlProperties>
           <groupChildrenDescriptors>
-            <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="144" h="-1" measuredW="79" measuredH="26" zOrder="0" locked="false" isInGroup="8">
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="146" h="-1" measuredW="57" measuredH="27" zOrder="0" locked="false" isInGroup="8">
               <controlProperties>
                 <borderColor>10066329</borderColor>
-                <text/>
+                <text>organic</text>
               </controlProperties>
             </control>
-            <control controlID="1" controlTypeID="com.balsamiq.mockups::List" x="1" y="33" w="128" h="126" measuredW="100" measuredH="126" zOrder="1" locked="false" isInGroup="8">
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::List" x="0" y="33" w="161" h="126" measuredW="100" measuredH="126" zOrder="1" locked="false" isInGroup="8">
               <controlProperties>
                 <borderStyle>none</borderStyle>
-                <selectedIndex>-1</selectedIndex>
-                <text/>
+                <selectedIndex>1</selectedIndex>
+                <text>in*organic*%0A*Organic*%0AOther%20*organic*%20chemical</text>
               </controlProperties>
             </control>
           </groupChildrenDescriptors>
@@ -321,6 +334,46 @@
               </controlProperties>
             </control>
           </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::Icon" x="631" y="642" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="118" controlTypeID="__group__" x="825" y="490" w="28" h="26" measuredW="28" measuredH="26" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="118">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>3</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="119" controlTypeID="__group__" x="751" y="627" w="28" h="26" measuredW="28" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="119">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>2</text>
+          </controlProperties>
         </control>
       </groupChildrenDescriptors>
     </control>
