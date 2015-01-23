@@ -5,8 +5,10 @@ angular.module(
     [
         '$scope',
         '$filter',
+        '$modal',
+        '$rootScope',
         'ngTableParams',
-        function ($scope, $filter, NgTableParams) {
+        function ($scope, $filter, $modal, $rootScope, NgTableParams) {
             'use strict';
 
             var initialSorting;
@@ -34,7 +36,17 @@ angular.module(
             });
 
             $scope.showInfo = function (object) {
-                console.log('showinfo: ' + object);
+                var modalInstance, scope;
+                
+                scope = $rootScope.$new(true);
+                scope.object = object;
+                
+                modalInstance = $modal.open({
+                    templateUrl: 'templates/object-info-modal-template.html',
+                    controller: 'eu.water-switch-on.sip.controllers.objectInfoModalController',
+                    scope: scope,
+                    size: 'lg'
+                });
             };
         }
     ]
