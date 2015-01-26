@@ -10,7 +10,7 @@ angular.module(
 
             var i;
 
-            $scope.reps = $scope.object.representation;
+            $scope.reps = $scope.object.representation ? $scope.object.representation : [];
 
             for(i = 0; i < $scope.reps.length; ++i) {
                 $scope.reps[i]._status = {

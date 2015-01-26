@@ -13,7 +13,7 @@
                         <label>Temporal resolution:</label>
                     </div>
                     <div class="col-lg-9">
-                        {{(rep.temporalresolution || 'n/a'}}
+                        {{rep.temporalresolution || 'n/a'}}
                     </div>
                 </div>
                 <div class="row">
@@ -21,7 +21,7 @@
                         <label>Spatial resolution:</label>
                     </div>
                     <div class="col-lg-9">
-                        {{(rep.spatialresolution || 'n/a'}}
+                        {{rep.spatialresolution || 'n/a'}}
                     </div>
                 </div>
                 <div class="row">
@@ -50,10 +50,10 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <label>Data Access Link:</label>
+                        <label>Data access link:</label>
                     </div>
                     <div class="col-lg-9">
-                        <a href="{{rep.contentlocation}}">{{rep.contentlocation}}</a>
+                        <a href="{{rep.contentlocation}}" ng-disabled="!rep.contentlocation">{{rep.contentlocation || 'n/a'}}</a>
                     </div>
                 </div>
             </accordion-group>
