@@ -42,6 +42,8 @@ module.exports = function(config) {
         'target/dist/scripts/services/mockService.js',
         'target/dist/scripts/services/searchService.js',
         'target/dist/scripts/services/sessionService.js',
+        'target/dist/scripts/filters/_module.js',
+        'target/dist/scripts/filters/textLengthFilter.js',
         'target/dist/bower_components/angular-mocks/angular-mocks.js',
         'app/templates/datefilter-directive.html',
         'app/templates/my-profile-directive.html',
@@ -52,6 +54,7 @@ module.exports = function(config) {
         'app/templates/usb-directive.html',
         'test/spec/controllers/objectDownloadModalTest.js',
         'test/spec/controllers/objectInfoModalTest.js',
+        'test/spec/filters/textLengthFilterTest.js',
         {pattern: 'test/res/**/*.json', watched: true, included: true, served: true}
     ],
 
