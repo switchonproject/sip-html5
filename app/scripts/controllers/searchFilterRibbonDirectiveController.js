@@ -6,15 +6,15 @@ angular.module(
             '$scope',
             function ($scope) {
                 'use strict';
-                $scope.keywords = ['Biological', 'Chemical', 'Physical', 'Benthic', 'Biomass', 'Descriptive',
-                    'Fish', 'Nekton', 'Pigment', 'Benthic species', 'Fish species', 'Macrophyte species',
-                    'Nekton species', 'Phytoplankton species', 'Zooplankton species',
-                    'Dissolved Gas', 'Dissolved Solids', 'Major', 'Minor', 'Carbon',
-                    'Nitrogen', 'Phosphorus', 'Other organic chemical', 'PCBs', 'Pesticide', 'Area, atmosphere',
-                    'Area, ice', 'flux', 'discharge', 'evaporation', 'precipitation', 'wind', 'ice', 'lake', 'ocean',
-                    'snow', 'stream', 'Optical, water', 'air', 'water', 'suspended solids', 'soil', 'Biological community',
-                    'Biological taxa', 'Indicator Organisms', 'Inorganic', 'Nutrient', 'Organic', 'Oxygen Demand',
-                    'Radiochemical ', 'Stable Isotopes', 'Area', 'Density', 'Energy', 'Length', 'Level', 'Optical',
-                    'Pressure', 'Temperature', 'Velocity', 'Volume', 'Water content'];
+                $scope.keywords = ['air', 'Area', 'Atmosphere', 'Benthic', 'Benthic species', 
+                    'Biological', 'Biological community', 'Biological taxa', 'Biomass', 'Carbon', 
+                    'Chemical', 'Density', 'Descriptive', 'discharge', 'Dissolved Gas', 'Dissolved Solids', 
+                    'Energy', 'evaporation', 'Fish', 'Fish species', 'flux', 'Ice', 'Indicator Organisms', 
+                    'Inorganic', 'lake', 'Length', 'Level', 'Macrophyte species', 'Major', 'Minor', 'Nekton', 
+                    'Nekton species', 'Nitrogen', 'Nutrient', 'ocean', 'Optical', 'Organic', 'Other organic chemical', 
+                    'Oxygen Demand', 'PCBs', 'Pesticide', 'Phosphorus', 'Physical', 'Phytoplankton species', 'Pigment', 
+                    'precipitation', 'Pressure', 'Radiochemical ', 'snow', 'soil', 'Stable Isotopes', 'stream', 
+                    'suspended solids', 'Temperature', 'Velocity', 'Volume', 'water', 'Water content', 'wind', 
+                    'Zooplankton species'];
             }]
         );

@@ -5,15 +5,27 @@ angular.module(
             function ($resource) {
                 'use strict';
 
-                var service = $resource('data/resultSet.json', {});
+                var searchService = $resource('data/resultSet.json', {});
+                var cuashiKeywordsService = $resource('data/resultSet.json', {});
 
                 var searchFunction = function ()
                 {
-                    return service.get();
+                    return searchService.get();
+                };
+
+                var loadKeywordListFunction = function (keywordGroup)
+                {
+                    switch (keywordGroup) {
+                        case 'cuashi':
+                            return cuashiKeywordsService.get();
+                        default:
+                            return '[]';
+                    }
                 };
 
                 return {
-                    search: searchFunction
+                    search: searchFunction,
+                    loadKeywordList :loadKeywordListFunction
                 };
             }
         ]);
