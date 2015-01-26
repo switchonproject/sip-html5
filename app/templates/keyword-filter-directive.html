@@ -1,5 +1,11 @@
 <div class="panel panel-default">
     <div class="panel-body">
-        <input type="text" ng-model="keyword" typeahead="keyword for keyword in keywordList | filter:$viewValue | limitTo:8" class="form-control">
+        <!--<input type="text" ng-model="keyword" 
+               typeahead="keyword for keyword in keywordList | filter:$viewValue | limitTo:8" 
+               typeahead-editable="false"
+               class="form-control">-->
+        <select name="{{keywordGroup}}" id="{{keywordGroup}}" 
+                ng-model="keyword" ng-options="keyword for keyword in keywordList" 
+                class="form-control" size="8" multiple ></select>
     </div>
 </div>

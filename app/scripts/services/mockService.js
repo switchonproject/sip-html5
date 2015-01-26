@@ -6,7 +6,12 @@ angular.module(
                 'use strict';
 
                 var searchService = $resource('data/resultSet.json', {});
-                var cuashiKeywordsService = $resource('data/resultSet.json', {});
+                var cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
+                    query: {
+                        method: 'GET',
+                        params: {
+                        },
+                        isArray: true}});
 
                 var searchFunction = function ()
                 {
@@ -17,7 +22,7 @@ angular.module(
                 {
                     switch (keywordGroup) {
                         case 'cuashi':
-                            return cuashiKeywordsService.get();
+                            return cuashiKeywordsService.query();
                         default:
                             return '[]';
                     }
@@ -25,7 +30,7 @@ angular.module(
 
                 return {
                     search: searchFunction,
-                    loadKeywordList :loadKeywordListFunction
+                    loadKeywordList: loadKeywordListFunction
                 };
             }
         ]);

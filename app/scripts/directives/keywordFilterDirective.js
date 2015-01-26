@@ -7,7 +7,7 @@ angular.module(
 
             return {
                 restrict: 'E',
-                templateUrl: 'templates/datefilter-directive.html',
+                templateUrl: 'templates/keyword-filter-directive.html',
                 scope: {
                      filterExpressions: '=',
                      keywordGroup:'@',

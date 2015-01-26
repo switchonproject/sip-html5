@@ -1,7 +1,7 @@
 angular.module(
         'eu.water-switch-on.sip.controllers'
         ).controller(
-        'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
+        'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
         [
             '$scope', 
             'eu.water-switch-on.sip.services.MockService',
