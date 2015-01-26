@@ -19,7 +19,7 @@ angular.module(
                     if (parameter)
                     {
                         filterExpression = (keyword + ':');
-                        filterExpression += ('"' + parameter + '" ');
+                        filterExpression += ('"' + parameter + '"');
                     }
                     
                     return filterExpression;

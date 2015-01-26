@@ -13,6 +13,27 @@ angular.module(
                         },
                         isArray: true}});
 
+                var inspireKeywordsService = $resource('data/inspireKeywords.json', {}, {
+                    query: {
+                        method: 'GET',
+                        params: {
+                        },
+                        isArray: true}});
+
+                var inspireTopicsService = $resource('data/inspireTopics.json', {}, {
+                    query: {
+                        method: 'GET',
+                        params: {
+                        },
+                        isArray: true}});
+              
+                var keywordsService = $resource('data/keywords.json', {}, {
+                    query: {
+                        method: 'GET',
+                        params: {
+                        },
+                        isArray: true}});
+
                 var searchFunction = function ()
                 {
                     return searchService.get();
@@ -21,10 +42,16 @@ angular.module(
                 var loadKeywordListFunction = function (keywordGroup)
                 {
                     switch (keywordGroup) {
-                        case 'cuashi':
+                        case 'cuashi_keyword':
                             return cuashiKeywordsService.query();
+                        case 'inspire_keyword':
+                            return inspireKeywordsService.query();
+                        case 'inspire_topic':
+                            return inspireTopicsService.query();
+                        case 'keyword':
+                            return keywordsService.query();
                         default:
-                            return '[]';
+                            return null;
                     }
                 };
 
