@@ -1,0 +1,1506 @@
+{
+    "$self": "/SWITCHON.RESOURCE/51",
+    "id": 51,
+    "fromdate": "2012-01-01T00:00:00.000Z",
+    "accessconditions": {
+        "$self": "/SWITCHON.TAG/866",
+        "id": 866,
+        "name": "other",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/145",
+            "id": 145,
+            "name": "access conditions",
+            "description": "License regulating the conditions for access and use of the data (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "spatialcoverage": {
+        "$self": "/SWITCHON.GEOM/55",
+        "id": 55,
+        "geo_field": "SRID=4326;POLYGON ((-180 -90, 180 -90, 180 90, -180 90, -180 -90))"
+    },
+    "todate": "2015-01-01T00:00:00.000Z",
+    "srid": {
+        "$self": "/SWITCHON.TAG/226",
+        "id": 226,
+        "name": "EPSG:4326",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/167",
+            "id": 167,
+            "name": "srid",
+            "description": "The Spatial Reference System Identifier (SRID) of the spatial coverage of the resource EPSG format (open group with some predefined tags)."
+        },
+        "description": "WGS 84 / World Geodetic System 1984"
+    },
+    "conformity": {
+        "$self": "/SWITCHON.TAG/253",
+        "id": 253,
+        "name": "Not evaluated",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/150",
+            "id": 150,
+            "name": "conformity",
+            "description": "This is a citation of the implementing rules adopted under Article 7(1) of Directive 2007/2/EC or other specification to which a particular resource conforms. (fixed group)"
+        },
+        "description": "Not evaluated"
+    },
+    "language": {
+        "$self": "/SWITCHON.TAG/145",
+        "id": 145,
+        "name": "eng",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/157",
+            "id": 157,
+            "name": "language",
+            "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+        },
+        "description": "English"
+    },
+    "description": "As part of an international effort to set up domain specific data portals as a service for the scientific community, climate data are collected, stored at DKRZ and disseminated through the World Data Center Climate (WDCC). The WDCC focuses on climate data products, specifically those resulting from climate simulations. Archival of raw data from satellites or climate models is not desired. Climate and Environmental Retrieval and Archive (CERA). CERA is a database based Catalog and Archive. The catalogue information is made up of several modules which do extend the basic information given in the entry block.",
+    "type": {
+        "$self": "/SWITCHON.TAG/254",
+        "id": 254,
+        "name": "external data",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/164",
+            "id": 164,
+            "name": "resource type",
+            "description": "SIP internal type of the resource (fixed group)."
+        },
+        "description": "This is data available as open data from any source on the Internet in a format, which can be directly used in experiments in the Laboratory."
+    },
+    "location": {
+        "$self": "/SWITCHON.TAG/865",
+        "id": 865,
+        "name": "World",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/158",
+            "id": 158,
+            "name": "location",
+            "description": "Geographic Location of the resource (covered by the data). E.g. Continent, Country, Region, City, etc. Open Group. (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "topiccategory": {
+        "$self": "/SWITCHON.TAG/230",
+        "id": 230,
+        "name": "climatologyMeteorologyAtmosphere",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/168",
+            "id": 168,
+            "name": "topic category",
+            "description": "High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search (fixed group)."
+        },
+        "description": "processes and phenomena of the atmosphere. Examples: cloud cover, weather, climate, atmospheric conditions, climate change, precipitation"
+    },
+    "creationdate": "2012-01-01T00:00:00.000Z",
+    "name": "CERA Gateway",
+    "licensestatement": "Creative Commons License: All data and pages available from WDCC are licensed under a Creative Commons License (http://creativecommons.org/licenses/by-nc-sa/2.0/de/deed.en) as far as those conditions are not in any way modified by the following conditions or by any conditions specific to data or pages. Special data owner conditions: You must agree with the special data owner conditions (CERA WWW-Gateway >> 'Browse experiments' >> 'Show datasets' >> Click on dataset name >> 'Distribution'). If there is a conflict between the creative common licence and the special data owner conditions, the latter shall have precedence. Always quote reference: Articles, papers, or written scientific works of any form, based in whole or in part on data supplied by WDCC, will contain an acknowledgment concerning the supplied data. Always quote reference of the experiment in the citation index when using WDCC data (CERA WWW-Gateway >> 'Browse experiments' >> 'Experiment information' >> 'CERA UI Compact' >> 'Citation'. In addition to your comments and suggestions, we are VERY interested in how you use the data we distribute. We would be most appreciative if you would send us a line or two describing your application of these data to data@dkrz.de. Used freely for research only: Data from the projects available on the WDCC server may be used freely for research only. Non-research use of WDCC data: If you do not feel able to accept the conditions for access to the WDCC research data service, you may still be able to acquire data via WDCC Data Services. Please contact data@dkrz.de. Personal account: The WDCC will provide you with a personal account and password. If you copy, distribute, display and perform the data you may do it only under the conditions identical to this one. You are responsible for maintaining the confidentiality of any password(s) you are given to access the WDCC Site, and are fully responsible for all activities that occur under your password(s). You agree to notify WDCC immediately of any unauthorized use of your password(s). Liablity / Warranty: The data are delivered to the user without a warranty of any kind. The user is aware that the data were generated in keeping with the current state of science and technology. The WDCC assumes no obligations on the basis of this agreement towards third parties. There is no liability of the WDCC for any harm arising from the delivery and subsequent processing of the data products. The user exempts the WDCC from any liability towards third parties.",
+    "tags": [{
+            "$self": "/SWITCHON.TAG/926",
+            "id": 926,
+            "name": "humidity",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/927",
+            "id": 927,
+            "name": "snow",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/872",
+            "id": 872,
+            "name": "water",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/928",
+            "id": 928,
+            "name": "aerosol",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/929",
+            "id": 929,
+            "name": "absorption",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/930",
+            "id": 930,
+            "name": "backscatter",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/931",
+            "id": 931,
+            "name": "extinction",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/932",
+            "id": 932,
+            "name": "angstrom",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/933",
+            "id": 933,
+            "name": "carbon",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/934",
+            "id": 934,
+            "name": "mass",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/935",
+            "id": 935,
+            "name": "scattering",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/880",
+            "id": 880,
+            "name": "albedo",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/936",
+            "id": 936,
+            "name": "spectrum",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/937",
+            "id": 937,
+            "name": "size",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/898",
+            "id": 898,
+            "name": "sea ice",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/938",
+            "id": 938,
+            "name": "density",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/908",
+            "id": 908,
+            "name": "pressure",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/914",
+            "id": 914,
+            "name": "temperature",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/939",
+            "id": 939,
+            "name": "cloud",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/940",
+            "id": 940,
+            "name": "sea level",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/941",
+            "id": 941,
+            "name": "altitude",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/942",
+            "id": 942,
+            "name": "amplitude",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/943",
+            "id": 943,
+            "name": "anthropogenic",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/944",
+            "id": 944,
+            "name": "CO",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/945",
+            "id": 945,
+            "name": "sulfur",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/946",
+            "id": 946,
+            "name": "asian",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/947",
+            "id": 947,
+            "name": "european",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/948",
+            "id": 948,
+            "name": "north american",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/949",
+            "id": 949,
+            "name": "forest",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/950",
+            "id": 950,
+            "name": "lake",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/951",
+            "id": 951,
+            "name": "sea",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/952",
+            "id": 952,
+            "name": "vorticity",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/953",
+            "id": 953,
+            "name": "organic",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/954",
+            "id": 954,
+            "name": "matter",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/868",
+            "id": 868,
+            "name": "atmosphere",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/955",
+            "id": 955,
+            "name": "condensed",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/956",
+            "id": 956,
+            "name": "sulfide",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/957",
+            "id": 957,
+            "name": "sulfate",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/958",
+            "id": 958,
+            "name": "convective",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/959",
+            "id": 959,
+            "name": "energy",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/890",
+            "id": 890,
+            "name": "heat",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/960",
+            "id": 960,
+            "name": "stream",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/961",
+            "id": 961,
+            "name": "gravity",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/962",
+            "id": 962,
+            "name": "crystal",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/963",
+            "id": 963,
+            "name": "dew",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/964",
+            "id": 964,
+            "name": "ammonium",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/965",
+            "id": 965,
+            "name": "dust",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/966",
+            "id": 966,
+            "name": "nitrate",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/967",
+            "id": 967,
+            "name": "seasalt",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/968",
+            "id": 968,
+            "name": "carbon dioxide",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/969",
+            "id": 969,
+            "name": "CO2",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/970",
+            "id": 970,
+            "name": "droplets",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/971",
+            "id": 971,
+            "name": "vapor",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/972",
+            "id": 972,
+            "name": "optical",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/973",
+            "id": 973,
+            "name": "zenith",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/974",
+            "id": 974,
+            "name": "ocean",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/975",
+            "id": 975,
+            "name": "O2",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/976",
+            "id": 976,
+            "name": "N2",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/906",
+            "id": 906,
+            "name": "solar radiation",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/896",
+            "id": 896,
+            "name": "runoff",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/977",
+            "id": 977,
+            "name": "biogenic",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/978",
+            "id": 978,
+            "name": "burning",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/979",
+            "id": 979,
+            "name": "velocity",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/980",
+            "id": 980,
+            "name": "brightness",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/117",
+            "id": 117,
+            "name": "Soil",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/155",
+                "id": 155,
+                "name": "keywords - INSPIRE themes 1.0",
+                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+            },
+            "description": "Soils and subsoil characterised according to depth, texture, structure and content of particles and organic material, stoniness, erosion, where appropriate mean slope and anticipated water storage capacity."
+        }, {
+            "$self": "/SWITCHON.TAG/981",
+            "id": 981,
+            "name": "production",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/982",
+            "id": 982,
+            "name": "roots",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/983",
+            "id": 983,
+            "name": "wood",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/984",
+            "id": 984,
+            "name": "leaves",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/985",
+            "id": 985,
+            "name": "freezing",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/869",
+            "id": 869,
+            "name": "precipitation",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/986",
+            "id": 986,
+            "name": "rainfall",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/885",
+            "id": 885,
+            "name": "snowfall",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/987",
+            "id": 987,
+            "name": "respiration",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/988",
+            "id": 988,
+            "name": "frozen",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/989",
+            "id": 989,
+            "name": "sediment",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/990",
+            "id": 990,
+            "name": "radiation",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/991",
+            "id": 991,
+            "name": "glacier",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/992",
+            "id": 992,
+            "name": "geopotential",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/993",
+            "id": 993,
+            "name": "isotope",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/892",
+            "id": 892,
+            "name": "moisture",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/888",
+            "id": 888,
+            "name": "evaporation",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/994",
+            "id": 994,
+            "name": "evapotranspiration",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/995",
+            "id": 995,
+            "name": "mass concentration",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/996",
+            "id": 996,
+            "name": "mass fraction",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/997",
+            "id": 997,
+            "name": "mole concenration",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/998",
+            "id": 998,
+            "name": "mole fraction",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/999",
+            "id": 999,
+            "name": "model",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1000",
+            "id": 1000,
+            "name": "orographic",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/909",
+            "id": 909,
+            "name": "ozone",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1001",
+            "id": 1001,
+            "name": "oxygen",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1002",
+            "id": 1002,
+            "name": "photosynthesis",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1003",
+            "id": 1003,
+            "name": "pore water",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1004",
+            "id": 1004,
+            "name": "pore",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1005",
+            "id": 1005,
+            "name": "pore volume",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1006",
+            "id": 1006,
+            "name": "flux",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1007",
+            "id": 1007,
+            "name": "radar",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/124",
+            "id": 124,
+            "name": "topography",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1008",
+            "id": 1008,
+            "name": "salinity",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1009",
+            "id": 1009,
+            "name": "sensor",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1010",
+            "id": 1010,
+            "name": "saturation",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1011",
+            "id": 1011,
+            "name": "surface",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1012",
+            "id": 1012,
+            "name": "upwelling",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1013",
+            "id": 1013,
+            "name": "tendancy",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1014",
+            "id": 1014,
+            "name": "tidal",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1015",
+            "id": 1015,
+            "name": "thermal",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1016",
+            "id": 1016,
+            "name": "vegetation",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/1017",
+            "id": 1017,
+            "name": "speed",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/262",
+            "id": 262,
+            "name": "dataset",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/166",
+                "id": 166,
+                "name": "scope",
+                "description": "Scope of the resource. A codelist used in hierarchyLevel, DQ_Scope.level, and updateScope (fixed group with tags from a standard codelist)"
+            },
+            "description": "information applies to the dataset"
+        }],
+    "contact": {
+        "$self": "/SWITCHON.CONTACT/40",
+        "id": 40,
+        "organisation": "DKRZ WDCC",
+        "description": null,
+        "name": "test",
+        "email": "data@dkrz.de",
+        "url": null,
+        "role": {
+            "$self": "/SWITCHON.TAG/221",
+            "id": 221,
+            "name": "pointOfContact",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/165",
+                "id": 165,
+                "name": "role",
+                "description": "Function performed by the responsible party (fixed group, standard codelist)."
+            },
+            "description": "Party that can be contacted for acquiring knowledge about or acquisition of the data resource. Person or organization that can be contacted to acquire data on the resource."
+        }
+    },
+    "geography": null,
+    "representation": [{
+            "$self": "/SWITCHON.REPRESENTATION/49",
+            "id": 49,
+            "name": "CERA Gateway Representation",
+            "description": "Representation of Resource CERA Gateway",
+            "content": null,
+            "type": {
+                "$self": "/SWITCHON.TAG/212",
+                "id": 212,
+                "name": "original data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/163",
+                    "id": 163,
+                    "name": "representation type",
+                    "description": "SIP internal type of the representation of the resource (fixed group)."
+                },
+                "description": "The representation holds the original data of the resource"
+            },
+            "protocol": {
+                "$self": "/SWITCHON.TAG/197",
+                "id": 197,
+                "name": "WWW:LINK-1.0-http--link",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/161",
+                    "id": 161,
+                    "name": "protocol",
+                    "description": "Protocol of the service that can be accessed at the contentLocation of the resource representation (open group with several predefined tags from standard codelists)."
+                },
+                "description": "Web Address (URL), should be used when no further information about the resource is available"
+            },
+            "applicationprofile": null,
+            "uuid": null,
+            "temporalresolution": "tr1",
+            "spatialresolution": "sr1",
+            "spatialscale": "ss1",
+            "contentlocation": "http://cera-www.dkrz.de/WDCC/ui/Index.jsp",
+            "tags": [],
+            "contenttype": {
+                "$self": "/SWITCHON.TAG/65",
+                "id": 65,
+                "name": "text/html",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/151",
+                    "id": 151,
+                    "name": "content type",
+                    "description": "MIME Type of the representation (open group which several predefined tags)."
+                },
+                "description": "Hypertext Markup Language"
+            },
+            "uploadstatus": null,
+            "uploadmessage": null
+        }],
+    "lastmodificationdate": "2012-01-01T00:00:00.000Z",
+    "metadata": [{
+            "$self": "/SWITCHON.METADATA/98",
+            "id": 98,
+            "name": "SWITCH-ON Basic Meta-Data",
+            "tags": [],
+            "description": "Meta-Data record created, derived or imported by the SWITCH-ON project according to the SWITCH-ON Standard Information Model (SIM) for Meta-Data for the SWITCH-ON Spatial Information Platform (SIP).",
+            "contact": {
+                "$self": "/SWITCHON.CONTACT/37",
+                "id": 37,
+                "organisation": "SWITCH-ON",
+                "description": "Sharing Water-related Information to Tackle Changes in the Hydrosphere – for Operational Needs (SWITCH-ON).",
+                "name": "Emma Lagerbäck Adolphi",
+                "email": "emma.l.adolphi@gmail.com",
+                "url": "http://www.water-switch-on.eu/",
+                "role": {
+                    "$self": "/SWITCHON.TAG/218",
+                    "id": 218,
+                    "name": "user",
+                    "taggroup": {
+                        "$self": "/SWITCHON.TAGGROUP/165",
+                        "id": 165,
+                        "name": "role",
+                        "description": "Function performed by the responsible party (fixed group, standard codelist)."
+                    },
+                    "description": "Party that uses the resource. Person or organization that is, or can be, the key user of the resource."
+                }
+            },
+            "type": {
+                "$self": "/SWITCHON.TAG/177",
+                "id": 177,
+                "name": "basic meta-data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/160",
+                    "id": 160,
+                    "name": "meta-data type",
+                    "description": "SIP internal type of the Meta-Data Record (fixed group)."
+                },
+                "description": "Type of the Meta-Data Record. \"basic meta-data\" refers to meta-data collected by switch-on according to the SIM meta-data schema. In fact, this meta-meta-data record refers to enclosing resource meta-data record."
+            },
+            "language": {
+                "$self": "/SWITCHON.TAG/145",
+                "id": 145,
+                "name": "eng",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/157",
+                    "id": 157,
+                    "name": "language",
+                    "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+                },
+                "description": "English"
+            },
+            "standard": {
+                "$self": "/SWITCHON.TAG/1387",
+                "id": 1387,
+                "name": "SWITCH-ON SIM",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/159",
+                    "id": 159,
+                    "name": "meta-data standard",
+                    "description": "Official standard on which the meta-data record is based (open group with some predefined tags)."
+                },
+                "description": "Meta-Data Record compliant to the Standard Information Model (SIM) of the Spatial Information Platform (SIP) of the EU FP7 project SWITCH-ON."
+            },
+            "uuid": null,
+            "contentlocation": null,
+            "creationdate": "2012-01-01T00:00:00.000Z",
+            "contenttype": null,
+            "content": null
+        }, {
+            "$self": "/SWITCHON.METADATA/99",
+            "id": 99,
+            "name": "Basic Lineage Meta-Data",
+            "tags": [],
+            "description": "As part of an international effort to set up domain specific data portals as a service for the scientific community, climate data are collected, stored at DKRZ and disseminated through the World Data Center Climate (WDCC). The WDCC focuses on climate data products, specifically those resulting from climate simulations. Archival of raw data from satellites or climate models is not desired.",
+            "contact": null,
+            "type": {
+                "$self": "/SWITCHON.TAG/180",
+                "id": 180,
+                "name": "lineage meta-data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/160",
+                    "id": 160,
+                    "name": "meta-data type",
+                    "description": "SIP internal type of the Meta-Data Record (fixed group)."
+                },
+                "description": "Type of the Meta-Data Record. \"lineage meta-data\" refers to meta-data about the lineage of the resource, e.g. a protocol of an experiment."
+            },
+            "language": {
+                "$self": "/SWITCHON.TAG/145",
+                "id": 145,
+                "name": "eng",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/157",
+                    "id": 157,
+                    "name": "language",
+                    "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+                },
+                "description": "English"
+            },
+            "standard": null,
+            "uuid": null,
+            "contentlocation": null,
+            "creationdate": "2012-01-01T00:00:00.000Z",
+            "contenttype": null,
+            "content": null
+        }],
+    "accesslimitations": {
+        "$self": "/SWITCHON.TAG/1",
+        "id": 1,
+        "name": "no limitation",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/146",
+            "id": 146,
+            "name": "access limitations",
+            "description": "Limitations on public access in accordance to Article 13 of Directive 2007/2/EC (fixed group with tags from a standard codelist)."
+        },
+        "description": "no limitation"
+    },
+    "uuid": "urn:x-waterswitchon:dataset:dkrz:wdcc:cera:gateway:ela4",
+    "collection": {
+        "$self": "/SWITCHON.TAG/925",
+        "id": 925,
+        "name": "CERA - WDCC - World Data Center for Climate",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/149",
+            "id": 149,
+            "name": "collection",
+            "description": "Assigns the resource to a collection of resources for cataloguing purposes, e.g. SWITCH-ON Experiment Results, etc. (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "publicationdate": "2012-01-01T00:00:00.000Z"
+}
