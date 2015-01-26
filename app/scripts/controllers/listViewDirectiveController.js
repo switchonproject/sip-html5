@@ -48,6 +48,20 @@ angular.module(
                     size: 'lg'
                 });
             };
+            
+            $scope.showDownload = function (object) {
+                var modalInstance, scope;
+                
+                scope = $rootScope.$new(true);
+                scope.object = object;
+
+                modalInstance = $modal.open({
+                    templateUrl: 'templates/object-download-modal-template.html',
+                    controller: 'eu.water-switch-on.sip.controllers.objectDownloadModalController',
+                    scope: scope,
+                    size: 'lg'
+                });
+            };
         }
     ]
 );
