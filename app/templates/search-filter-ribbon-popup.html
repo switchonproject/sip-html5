@@ -24,7 +24,7 @@
                 </tabset>
             </div>
 
-            <div class="switchon-ribbon-panel">
+            <div class="switchon-ribbon-panel last">
                 <tabset>
                     <tab heading="Europe">
                         <countries-filter filter-expressions="filterExpressions" country-group="countries_europe"></countries-filter>
@@ -33,6 +33,19 @@
                         <countries-filter filter-expressions="filterExpressions" country-group="countries_world"></countries-filter>
                     </tab>
                 </tabset>
+            </div>
+
+            <div class="switchon-ribbon-footer">
+                <span bs-tooltip
+                      data-placement="left"
+                      data-trigger="hover"
+                      data-delay="{show: 400, hide: 100}"
+                      data-title="Clear"
+                      class="btn-invisible btn-icon"
+                      ng-click="clear()">
+                    <i class="glyphicon glyphicon-remove-circle"></i>
+                </span>
+                <span>Clear current search filters and options</span>
             </div>
         </div>
     </div>
