@@ -17,7 +17,8 @@ angular.module(
             $scope.isResultShowing = false;
             $scope.state = $state;
             
-            $scope.filterExpressions = {universalSearchString: 'text:"anytext"'};
+            $scope.filterExpressions = {};
+            $scope.filterExpressions.universalSearchString = '';
             $scope.filterExpressions.fromDate = null;
             $scope.filterExpressions.toDate = null;
             $scope.data.resultSet = null;
