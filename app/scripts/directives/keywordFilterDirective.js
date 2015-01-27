@@ -9,13 +9,13 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/keyword-filter-directive.html',
                 scope: {
-                     filterExpressions: '=',
-                     keywordGroup:'@',
+                    filterExpressions: '=',
+                    keywordGroup: '@'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController'
-                /*controllerAs: 'usb',
-                transclude:true,
-                bindToController:true*/
+                    /*controllerAs: 'usb',
+                     transclude:true,
+                     bindToController:true*/
             };
         }
     ]);

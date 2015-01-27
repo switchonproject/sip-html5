@@ -1,22 +1,22 @@
 angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
-    'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
+    'eu.water-switch-on.sip.controllers.countriesFilterDirectiveController',
     [
         '$scope',
         'eu.water-switch-on.sip.services.MockService',
         function ($scope, MockService) {
             'use strict';
 
-            console.log('loading keywords for group ' + $scope.keywordGroup);
-            $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
-            $scope.keyword = null;
+            console.log('loading countries for group ' + $scope.countryGroup);
+            $scope.countryList = MockService.loadCountriesList($scope.countryGroup);
+            $scope.country = null;
 
-            $scope.createFilterExpression = function (keyword, parameter) {
+            $scope.createFilterExpression = function (country, parameter) {
                 var filterExpression;
 
                 if (parameter) {
-                    filterExpression = (keyword + ':');
+                    filterExpression = (country + ':');
                     filterExpression += ('"' + parameter + '"');
                 }
 
@@ -33,9 +33,10 @@ angular.module(
                 }
             };
 
-            $scope.$watch('keyword', function (newValue) {
+            $scope.$watch('country', function (newValue) {
+
                 if (newValue) {
-                    var filterExpression = $scope.createFilterExpression($scope.keywordGroup, newValue);
+                    var filterExpression = $scope.createFilterExpression('geo', newValue);
                     $scope.appendFilterExpression(filterExpression);
                 }
             });
