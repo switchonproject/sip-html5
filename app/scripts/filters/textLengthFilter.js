@@ -13,7 +13,8 @@ angular.module(
             return new RegExp('[' + s.replace(escapePattern, '\\$&') + ']', f);
         };
 
-        /* filter to cut of text if it is longer than the given length. the filter has the following options
+        /* filter to cut of text if it is longer than the given length. if the input or the txtlen are null or undefined
+         * the filter will return 'null'. the filter has the following parameters
          * 
          * - input: string, the text input, if it is not a string the behaviour may not be as expected
          * - txtLen: integer, the length of the resulting string, including 'tpl'
@@ -32,7 +33,7 @@ angular.module(
             var _exact, _sentence, _sentenceDelimiters, _tpl, match, out, regex;
 
             if (!input || txtLen === undefined || txtLen === null) {
-                throw 'Illegal filter usage: no input or txtLen';
+                return null;
             }
 
             if (txtLen >= input.length) {

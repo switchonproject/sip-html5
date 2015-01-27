@@ -18,23 +18,17 @@ describe('Text length filter Test Suite', function () {
         ));
 
         it('filter - no input', function () {
-            try {
-                txtLen(null);
-                // fail if no exception
-                expect(false).toBe(true);
-            } catch (e) {
-                expect(e).toBeDefined();
-            }
+            var output;
+
+            output = txtLen(null);
+            expect(output).toBe(null);
         });
         
         it('filter - no length', function () {
-            try {
-                txtLen('', null);
-                // fail if no exception
-                expect(false).toBe(true);
-            } catch (e) {
-                expect(e).toBeDefined();
-            }
+            var output;
+
+            output = txtLen('', null);
+            expect(output).toBe(null);
         });
         
         it('filter - length 0, default tpl', function () {
