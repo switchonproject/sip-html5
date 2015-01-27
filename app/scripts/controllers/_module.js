@@ -3,8 +3,10 @@ angular.module(
     [
         'ui.bootstrap.dropdown',
         'ui.bootstrap.alert',
+        'ui.bootstrap.popover',
         'ui.bootstrap.modal',
         'mgcrea.ngStrap.popover',
+        'ui.bootstrap.accordion',
         'leaflet-directive'
     ]
 );

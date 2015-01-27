@@ -5,11 +5,13 @@ angular.module(
         'eu.water-switch-on.sip.controllers',
         'eu.water-switch-on.sip.directives',
         'eu.water-switch-on.sip.services',
+        'eu.water-switch-on.sip.filters',
         'ui.bootstrap.tpls',
         'ui.bootstrap.tabs',
         'ui.bootstrap.typeahead',
         'ui.router',
-        'ngResource'
+        'ngResource',
+        'ngTable'
     ]
 ).config(
     [

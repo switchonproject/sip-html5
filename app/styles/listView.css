@@ -1,0 +1,22 @@
+.tools {
+    width: 85px;
+}
+
+.name {
+    width: 20%;
+    min-width: 150px;
+}
+
+.date {
+    width: 220px;
+    min-width: 88px;
+}
+
+.btn-icon:hover {
+    cursor: pointer;
+}
+
+.btn-icon.disabled {
+    cursor: default;
+    opacity: 0.55;
+}

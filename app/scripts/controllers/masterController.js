@@ -11,8 +11,6 @@ angular.module(
             $scope.data = {};
             $scope.data.message = 'Application loaded';
             $scope.data.messageType = 'success';
-            $scope.data.resources = [];
-            $scope.data.query = null;
 
             $scope.isResultShowing = false;
             $scope.state = $state;

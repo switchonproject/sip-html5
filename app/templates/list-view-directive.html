@@ -1,0 +1,38 @@
+<table ng-table="tableParams" class="table table-striped table-bordered table-hover">
+    <tr ng-repeat="node in $data">
+        <td data-title="'Name'" sortable="'object.name'" class="name">{{node.object.name}}</td>
+        <td data-title="'Description'" sortable="'object.description'">{{node.object.description | txtLen:80:false:null:true}}</td>
+        <td data-title="'Start date'" sortable="'object.fromdate'" class="date">{{node.object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}</td>
+        <td data-title="'End date'" sortable="'object.todate'" class="date">{{node.object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}</td>
+        <td data-title="'Tools'" class="tools">
+            <span popover="Info"
+                  popover-trigger="mouseenter"
+                  popover-placement="left"
+                  class="btn-invisible btn-icon"
+                  ng-click="showInfo(node.object)" >
+                <i class="glyphicon glyphicon-info-sign"></i>
+            </span>
+            <span popover="Download" 
+                  popover-trigger="mouseenter"
+                  popover-placement="left"
+                  class="btn-invisible"
+                  ng-click="showDownload(node.object)">
+                <i class="glyphicon glyphicon-download"></i>
+            </span>
+            <span popover="Bookmark" 
+                  popover-trigger="mouseenter"
+                  popover-placement="left"
+                  class="btn-invisible btn-icon disabled"
+                  ng-click="" >
+                <i class="glyphicon glyphicon-bookmark"></i>
+            </span>
+            <span popover="Share" 
+                  popover-trigger="mouseenter"
+                  popover-placement="left"
+                  class="btn-invisible btn-icon disabled" 
+                  ng-click="" >
+                <i class="glyphicon glyphicon-share"></i>
+            </span>
+        </td>
+    </tr>
+</table>
