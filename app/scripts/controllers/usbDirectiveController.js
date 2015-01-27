@@ -5,8 +5,7 @@ angular.module(
         [
             '$scope',
             'eu.water-switch-on.sip.services.SearchService',
-            'eu.water-switch-on.sip.services.MockService',
-            function ($scope, SearchService, MockService) {
+            function ($scope, SearchService) {
                 'use strict';
 
                 $scope.pattern = /^(\w+:".+"\s?)+$/;

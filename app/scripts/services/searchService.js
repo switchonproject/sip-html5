@@ -30,7 +30,7 @@ angular.module(
 
                 var searchFunction = function (universalSearchString, limit, offset)
                 {
-                    var queryObject = {"list": [{"key": "Query", "value": universalSearchString}]};
+                    var queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
                     return searchResource.search({
                         limit: limit,
                         offset: offset

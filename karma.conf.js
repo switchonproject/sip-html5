@@ -34,7 +34,6 @@ module.exports = function(config) {
         'target/dist/scripts/controllers/myWorkspaceDirectiveController.js',
         'target/dist/scripts/controllers/myProfileDirectiveController.js',
         'target/dist/scripts/controllers/searchFilterRibbonDirectiveController.js',
-        'target/dist/scripts/controllers/objectInfoModalController.js',
         'target/dist/scripts/controllers/keywordFilterDirectiveController.js',
         'target/dist/scripts/controllers/listViewDirectiveController.js',
         'target/dist/scripts/controllers/objectInfoModalController.js',
