@@ -1,63 +1,108 @@
 angular.module(
-        'eu.water-switch-on.sip.services'
-        ).factory('eu.water-switch-on.sip.services.MockService',
-        ['$resource',
-            function ($resource) {
-                'use strict';
+    'eu.water-switch-on.sip.services'
+).factory('eu.water-switch-on.sip.services.MockService',
+    ['$resource',
+        function ($resource) {
+            'use strict';
 
-                var searchService = $resource('data/resultSet.json', {});
-                var cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
+            var searchService, cuashiKeywordsService, inspireKeywordsService,
+                inspireTopicsService, keywordsService, countriesEuropeService,
+                countriesWorldService, searchFunction, loadKeywordListFunction,
+                loadCountriesListFunction;
 
-                var inspireKeywordsService = $resource('data/inspireKeywords.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
+            searchService = $resource('data/resultSet.json', {});
 
-                var inspireTopicsService = $resource('data/inspireTopics.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
-              
-                var keywordsService = $resource('data/keywords.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
+            cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
 
-                var searchFunction = function ()
-                {
+            inspireKeywordsService = $resource('data/inspireKeywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            inspireTopicsService = $resource('data/inspireTopics.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            keywordsService = $resource('data/keywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            countriesEuropeService = $resource('data/countriesEurope.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: false
+                }
+            });
+
+            countriesWorldService = $resource('data/countriesWorld.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: false
+                }
+            });
+
+            searchFunction =
+                function () {
                     return searchService.get();
                 };
 
-                var loadKeywordListFunction = function (keywordGroup)
-                {
+            loadKeywordListFunction =
+                function (keywordGroup) {
                     switch (keywordGroup) {
-                        case 'cuashi_keyword':
-                            return cuashiKeywordsService.query();
-                        case 'inspire_keyword':
-                            return inspireKeywordsService.query();
-                        case 'inspire_topic':
-                            return inspireTopicsService.query();
-                        case 'keyword':
-                            return keywordsService.query();
-                        default:
-                            return null;
+                    case 'cuashi_keyword':
+                        return cuashiKeywordsService.query();
+                    case 'inspire_keyword':
+                        return inspireKeywordsService.query();
+                    case 'inspire_topic':
+                        return inspireTopicsService.query();
+                    case 'keyword':
+                        return keywordsService.query();
+                    default:
+                        return null;
                     }
                 };
 
-                return {
-                    search: searchFunction,
-                    loadKeywordList: loadKeywordListFunction
+            loadCountriesListFunction =
+                function (countryGroup) {
+                    switch (countryGroup) {
+                    case 'countries_world':
+                        return countriesWorldService.query();
+                    case 'countries_europe':
+                        return countriesEuropeService.query();
+                    default:
+                        return null;
+                    }
                 };
-            }
+
+            return {
+                search: searchFunction,
+                loadKeywordList: loadKeywordListFunction,
+                loadCountriesList: loadCountriesListFunction
+            };
+        }
         ]);

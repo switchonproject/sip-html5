@@ -1,17 +1,18 @@
 angular.module(
     'eu.water-switch-on.sip.directives'
-).directive('searchFilterRibbon',
+).directive('countriesFilter',
     [
         function () {
             'use strict';
+
             return {
                 restrict: 'E',
-                templateUrl: 'templates/search-filter-ribbon-directive.html',
+                templateUrl: 'templates/countries-filter-directive.html',
                 scope: {
                     filterExpressions: '=',
-                    notificationFunction: '&?'
+                    countryGroup: '@'
                 },
-                controller: 'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.countriesFilterDirectiveController'
             };
         }
     ]);
