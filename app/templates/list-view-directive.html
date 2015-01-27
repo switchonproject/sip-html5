@@ -5,30 +5,38 @@
         <td data-title="'Start date'" sortable="'object.fromdate'" class="date">{{node.object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}</td>
         <td data-title="'End date'" sortable="'object.todate'" class="date">{{node.object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}</td>
         <td data-title="'Tools'" class="tools">
-            <span popover="Info"
-                  popover-trigger="mouseenter"
-                  popover-placement="left"
+            <span bs-tooltip
+                  data-placement="left"
+                  data-trigger="hover"
+                  data-delay="{show: 400, hide: 100}"
+                  data-title="Info"
                   class="btn-invisible btn-icon"
-                  ng-click="showInfo(node.object)" >
+                  ng-click="showInfo(node.object)">
                 <i class="glyphicon glyphicon-info-sign"></i>
             </span>
-            <span popover="Download" 
-                  popover-trigger="mouseenter"
-                  popover-placement="left"
+            <span bs-tooltip
+                  data-placement="left"
+                  data-trigger="hover"
+                  data-delay="{show: 400, hide: 100}"
+                  data-title="Download"
                   class="btn-invisible"
                   ng-click="showDownload(node.object)">
                 <i class="glyphicon glyphicon-download"></i>
             </span>
-            <span popover="Bookmark" 
-                  popover-trigger="mouseenter"
-                  popover-placement="left"
+            <span bs-tooltip
+                  data-placement="left"
+                  data-trigger="hover"
+                  data-delay="{show: 400, hide: 100}"
+                  data-title="Bookmark"
                   class="btn-invisible btn-icon disabled"
                   ng-click="" >
                 <i class="glyphicon glyphicon-bookmark"></i>
             </span>
-            <span popover="Share" 
-                  popover-trigger="mouseenter"
-                  popover-placement="left"
+            <span bs-tooltip
+                  data-placement="left"
+                  data-trigger="hover"
+                  data-delay="{show: 400, hide: 100}"
+                  data-title="Share"
                   class="btn-invisible btn-icon disabled" 
                   ng-click="" >
                 <i class="glyphicon glyphicon-share"></i>
