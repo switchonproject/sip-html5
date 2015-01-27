@@ -20,6 +20,30 @@
     margin-top: 100px;
 }
 
+.switchon-ribbon-panel {
+    float:left;
+    clear:none;
+    height: 240px;
+    border-right-color: #999999;
+    border-right-width: 1px;
+    border-right-style: solid;
+    margin: 8px;
+    padding-right: 8px;
+}
+
+.switchon-ribbon {
+    width: 100%;
+}
+
+.switchon-ribbon-popover
+{
+    max-width: 1000px;
+}
+
+.switchon-ribbon-popover.bottom > .arrow {
+    left: 10%;
+}
+
 .navbar-brand {
     padding-top: 3px;
 }

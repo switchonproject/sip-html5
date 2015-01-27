@@ -6,12 +6,11 @@ angular.module(
                 'use strict';
                 //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
 
-                var username = ' ';
-                var password = ' ';
+                var username = 'admin@SWITCHON';
+                var password = 'cismet';
                 var authdata = Base64.encode(username + ':' + password);
 
-
-                var resultSet = $resource('http://kif:8890/searches/BELIS2.de.cismet.belis2.server.search.BelisObjectsWktSearch/results',
+                var searchResource = $resource('http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
                         {
                             limit: 20,
                             offset: 0,
@@ -26,19 +25,19 @@ angular.module(
                         },
                         isArray: false,
                         headers: {'Authorization': 'Basic ' + authdata}
-                    },
-                    searchTest: {
-                        method: 'GET',
-                        params: {
-                            query: '@query',
-                            limit: '@limit',
-                            offset: '@offset'
-                        },
-                        isArray: false
                     }
                 });
 
-                return {searchResource:resultSet};
+                var searchFunction = function (universalSearchString, limit, offset)
+                {
+                    var queryObject = {"list": [{"key": "Query", "value": universalSearchString}]};
+                    return searchResource.search({
+                        limit: limit,
+                        offset: offset
+                    }, queryObject);
+                };
+
+                return {search: searchFunction};
             }
         ])
 

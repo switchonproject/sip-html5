@@ -1,7 +1,7 @@
-<form  class="form-inline" 
+<form  class="navbar-form navbar-left" 
        name="universalSearchBox" 
        id="universalSearchBox" 
-       role="form"  
+       role="search"  
        novalidate >
 
     <div class="form-group" 
@@ -24,10 +24,14 @@
         <button ng-click="clear()" class="btn btn-default">Clear</button>
     </div>
 
-    <p class="help-block error" ng-show="!universalSearchBox.filterExpressionInput.$error.required
+    <p class="help-block error" ng-show="notificationFunction === undefined && !universalSearchBox.filterExpressionInput.$error.required
                     && universalSearchBox.filterExpressionInput.$invalid">
         This filter expression is not valid. 
         Try <strong>expression</strong><strong>:</strong><i>"parameter"</i>, e.g. keyword:"water quality".
     </p>
-    <p class="help-block info" ng-show="universalSearchBox.filterExpressionInput.$error.required">Please enter a filter expression,  e.g. keyword:"water quality".</p>
+
+    <p class="help-block info" ng-show="notificationFunction === undefined &&
+                    universalSearchBox.filterExpressionInput.$error.required">
+        Please enter a filter expression,  e.g. keyword:"water quality".
+    </p>
 </form>

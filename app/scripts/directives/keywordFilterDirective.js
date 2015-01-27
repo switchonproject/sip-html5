@@ -1,19 +1,18 @@
 angular.module(
     'eu.water-switch-on.sip.directives'
-).directive('usb',
+).directive('keywordFilter',
     [
         function () {
             'use strict';
 
             return {
                 restrict: 'E',
-                templateUrl: 'templates/usb-directive.html',
+                templateUrl: 'templates/keyword-filter-directive.html',
                 scope: {
                      filterExpressions: '=',
-                     resultSet: '=resourceCollection',
-                     notificationFunction: '&?'
+                     keywordGroup:'@',
                 },
-                controller: 'eu.water-switch-on.sip.controllers.usbDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController'
                 /*controllerAs: 'usb',
                 transclude:true,
                 bindToController:true*/

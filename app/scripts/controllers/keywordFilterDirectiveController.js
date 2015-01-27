@@ -1,12 +1,17 @@
 angular.module(
         'eu.water-switch-on.sip.controllers'
         ).controller(
-        'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
+        'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
         [
-            '$scope',
-            function ($scope) {
+            '$scope', 
+            'eu.water-switch-on.sip.services.MockService',
+            function ($scope, MockService) {
                 'use strict';
-
+                
+                console.log('loading keywords for group '+$scope.keywordGroup);
+                $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
+                $scope.keyword = null;
+                
                 $scope.createFilterExpression = function (keyword, parameter)
                 {
                     var filterExpression;
@@ -14,7 +19,7 @@ angular.module(
                     if (parameter)
                     {
                         filterExpression = (keyword + ':');
-                        filterExpression += ('"' + parameter + '" ');
+                        filterExpression += ('"' + parameter + '"');
                     }
                     
                     return filterExpression;
@@ -34,21 +39,11 @@ angular.module(
                     }
                 };
 
-
-                $scope.$watch('filterExpressions.fromDate', function (newValue) {
-
-                    if(newValue)
-                    {
-                        var filterExpression = $scope.createFilterExpression('fromDate', newValue);
-                        $scope.appendFilterExpression(filterExpression);
-                    }
-                });
-
-                $scope.$watch('filterExpressions.toDate', function (newValue) {
+                $scope.$watch('keyword', function (newValue) {
 
                     if(newValue)
                     {
-                        var filterExpression = $scope.createFilterExpression('toDate', newValue);
+                        var filterExpression = $scope.createFilterExpression($scope.keywordGroup, newValue);
                         $scope.appendFilterExpression(filterExpression);
                     }
                 });

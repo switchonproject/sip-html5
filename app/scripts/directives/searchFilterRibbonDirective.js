@@ -1,19 +1,17 @@
 angular.module(
     'eu.water-switch-on.sip.directives'
-).directive('usb',
+).directive('searchFilterRibbon',
     [
         function () {
             'use strict';
-
             return {
                 restrict: 'E',
-                templateUrl: 'templates/usb-directive.html',
+                templateUrl: 'templates/search-filter-ribbon-directive.html',
                 scope: {
                      filterExpressions: '=',
-                     resultSet: '=resourceCollection',
                      notificationFunction: '&?'
                 },
-                controller: 'eu.water-switch-on.sip.controllers.usbDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController'
                 /*controllerAs: 'usb',
                 transclude:true,
                 bindToController:true*/

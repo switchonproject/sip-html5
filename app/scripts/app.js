@@ -6,10 +6,8 @@ angular.module(
         'eu.water-switch-on.sip.directives',
         'eu.water-switch-on.sip.services',
         'eu.water-switch-on.sip.filters',
-        'ui.bootstrap.tpls',
         'ui.router',
-        'ngResource',
-        'ngTable'
+        'ngResource'
     ]
 ).config(
     [
