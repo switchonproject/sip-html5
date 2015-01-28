@@ -40,14 +40,13 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="switchon-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+                    <!--<ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">
                                 All categories <span class="caret"></span>
-                                <!-- all categories directive -->
                             </a>
                         </li>
-                    </ul>
+                    </ul>-->
                     <!-- search filter ribbon -->
                     <search-filter-ribbon filter-expressions="filterExpressions" 
                          notification-function="showMessage(message, type)">
@@ -58,7 +57,7 @@
                          resource-collection="data.resultSet" 
                          notification-function="showMessage(message, type)">
                     </usb> 
-                    <my-workspace workspace-name="SWITCH-ON"></my-workspace>
+                    <!--<my-workspace workspace-name="SWITCH-ON"></my-workspace>-->
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
@@ -69,7 +68,7 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="switchon-navbar-collapse-1">
-                    <div class="nav navbar-nav navbar-left" role="group" aria-label="resultViewToggle">
+                   <!-- <div class="nav navbar-nav navbar-left" role="group" aria-label="resultViewToggle">
                         <button type="button"
                                 class="btn btn-default switchon-viewbutton" 
                                 ng-click="toggleResultView()"
@@ -77,7 +76,7 @@
                                 ng-disabled="!(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')">
                             <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
                         </button>
-                    </div>
+                    </div>-->
                     <alert ng-hide="data.message === null" 
                            type="{{data.messageType}}"
                            close="doCloseMessage()"
@@ -90,7 +89,7 @@
                                 ng-class="{active: state.current.name === 'list'}">
                             <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                         </button>
-                        <button type="button" 
+                        <!--<button type="button" 
                                 class="btn btn-default switchon-viewbutton" 
                                 ng-click="activateView('th')"
                                 ng-class="{active: state.current.name === 'th'}">
@@ -101,7 +100,7 @@
                                 ng-click="activateView('map')"
                                 ng-class="{active: state.current.name === 'map'}">
                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-                        </button>
+                        </button>-->
                     </div>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
