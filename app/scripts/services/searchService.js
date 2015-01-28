@@ -57,7 +57,7 @@ angular.module(
 
                 searchSuccess = function (data) {
                     var classesError, classesSuccess, nodes;
-
+                    data.$collection = data.$collection.slice(0, 20);
                     nodes = data.$collection;
 
                     classesSuccess = function (data) {
