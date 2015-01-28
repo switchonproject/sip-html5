@@ -27,8 +27,25 @@
     border-right-color: #999999;
     border-right-width: 1px;
     border-right-style: solid;
-    margin: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
     padding-right: 8px;
+}
+
+.switchon-ribbon-panel.last {
+    border:none;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.switchon-ribbon-footer {
+    float:none;
+    clear:both;
+    min-height: 40px;
+    border-top-color: #999999;
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding-top: 8px;
 }
 
 .switchon-ribbon {

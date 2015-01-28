@@ -35,7 +35,7 @@ angular.module(
 
             $scope.$watch('keyword', function (newValue) {
                 if (newValue) {
-                    var filterExpression = $scope.createFilterExpression($scope.keywordGroup, newValue);
+                    var filterExpression = $scope.createFilterExpression($scope.keywordParameter, newValue);
                     $scope.appendFilterExpression(filterExpression);
                 }
             });
