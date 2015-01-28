@@ -7,6 +7,7 @@ angular.module(
         'eu.water-switch-on.sip.services',
         'eu.water-switch-on.sip.filters',
         'ui.router',
+        'ui.bootstrap.tpls',
         'ngResource'
     ]
 ).config(
@@ -55,115 +56,196 @@ angular.module(
 );
 
 angular.module(
-        'eu.water-switch-on.sip.controllers'
-        ).controller(
-        'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
-        [
-            '$scope',
-            function ($scope) {
-                'use strict';
+    'eu.water-switch-on.sip.controllers'
+).controller(
+    'eu.water-switch-on.sip.controllers.countriesFilterDirectiveController',
+    [
+        '$scope',
+        'eu.water-switch-on.sip.services.MockService',
+        function ($scope, MockService) {
+            'use strict';
 
-                $scope.createFilterExpression = function (keyword, parameter)
-                {
-                    var filterExpression;
+            console.log('loading countries for group ' + $scope.countryGroup);
+            $scope.countryList = MockService.loadCountriesList($scope.countryGroup);
+            $scope.country = null;
 
-                    if (parameter)
-                    {
-                        filterExpression = (keyword + ':');
-                        filterExpression += ('"' + parameter + '" ');
+            $scope.createFilterExpression = function (country, parameter) {
+                var filterExpression;
+
+                if (parameter) {
+                    filterExpression = (country + ':');
+                    filterExpression += ('"' + parameter + '"');
+                }
+
+                return filterExpression;
+            };
+
+            $scope.appendFilterExpression = function (filterExpression) {
+                if (filterExpression && filterExpression.length > 0) {
+                    if ($scope.filterExpressions.universalSearchString) {
+                        $scope.filterExpressions.universalSearchString += (' ' + filterExpression);
+                    } else {
+                        $scope.filterExpressions.universalSearchString = filterExpression;
                     }
-                    
-                    return filterExpression;
-                };
-                
-                $scope.appendFilterExpression = function(filterExpression)
-                {
-                    if(filterExpression && filterExpression.length > 0)
-                    {
-                        if ($scope.filterExpressions.universalSearchString) {
-                            $scope.filterExpressions.universalSearchString += (' '+filterExpression);
-                        }
-                        else
-                        {
-                            $scope.filterExpressions.universalSearchString = filterExpression;
-                        }
+                }
+            };
+
+            $scope.$watch('country', function (newValue) {
+
+                if (newValue) {
+                    var filterExpression = $scope.createFilterExpression('geo', newValue);
+                    $scope.appendFilterExpression(filterExpression);
+                }
+            });
+        }
+    ]
+);
+
+angular.module(
+    'eu.water-switch-on.sip.controllers'
+).controller(
+    'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
+    [
+        '$scope',
+        function ($scope) {
+            'use strict';
+
+            $scope.createFilterExpression = function (keyword, parameter) {
+                var filterExpression;
+
+                if (parameter) {
+                    filterExpression = (keyword + ':');
+                    filterExpression += ('"' + parameter + '" ');
+                }
+
+                return filterExpression;
+            };
+
+            $scope.appendFilterExpression = function (filterExpression) {
+                if (filterExpression && filterExpression.length > 0) {
+                    if ($scope.filterExpressions.universalSearchString) {
+                        $scope.filterExpressions.universalSearchString += (' ' + filterExpression);
+                    } else {
+                        $scope.filterExpressions.universalSearchString = filterExpression;
                     }
-                };
+                }
+            };
 
 
-                $scope.$watch('filterExpressions.fromDate', function (newValue) {
+            $scope.$watch('filterExpressions.fromDate', function (newValue) {
 
-                    if(newValue)
-                    {
-                        var filterExpression = $scope.createFilterExpression('fromDate', newValue);
-                        $scope.appendFilterExpression(filterExpression);
-                    }
-                });
+                if (newValue) {
+                    var filterExpression = $scope.createFilterExpression('fromDate', newValue);
+                    $scope.appendFilterExpression(filterExpression);
+                }
+            });
 
-                $scope.$watch('filterExpressions.toDate', function (newValue) {
+            $scope.$watch('filterExpressions.toDate', function (newValue) {
 
-                    if(newValue)
-                    {
-                        var filterExpression = $scope.createFilterExpression('toDate', newValue);
-                        $scope.appendFilterExpression(filterExpression);
-                    }
-                });
-            }
-        ]
-        );
+                if (newValue) {
+                    var filterExpression = $scope.createFilterExpression('toDate', newValue);
+                    $scope.appendFilterExpression(filterExpression);
+                }
+            });
+        }
+    ]
+);
 
 angular.module(
         'eu.water-switch-on.sip.controllers'
         ).controller(
-        'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
+        'eu.water-switch-on.sip.controllers.defaultViewController',
         [
-            '$scope', 
+            '$scope',
+            'eu.water-switch-on.sip.services.SearchService',
             'eu.water-switch-on.sip.services.MockService',
-            function ($scope, MockService) {
+            function ($scope, SearchService, MockService) {
                 'use strict';
-                
-                console.log('loading keywords for group '+$scope.keywordGroup);
-                $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
-                $scope.keyword = null;
-                
-                $scope.createFilterExpression = function (keyword, parameter)
-                {
-                    var filterExpression;
 
-                    if (parameter)
-                    {
-                        filterExpression = (keyword + ':');
-                        filterExpression += ('"' + parameter + '"');
-                    }
-                    
-                    return filterExpression;
-                };
-                
-                $scope.appendFilterExpression = function(filterExpression)
+                //$scope.filterExpressions = {universalSearchString:'text:"undefined"'};     
+                $scope.filterExpressions = {universalSearchString: 'text:"anytext"'};
+
+                //var queryObject = {'list': [{'key': 'LeuchteEnabled', 'value': 'true'}, {'key': 'GeometryFromWkt', 'value': 'POLYGON ((2582375.3331009173 5681538.290594944, 2582494.6975608254 5681538.290594944, 2582494.6975608254 5681583.652933975, 2582375.3331009173 5681583.652933975, 2582375.3331009173 5681538.290594944))'}]};
+
+                $scope.performSearch = function (searchForm)
                 {
-                    if(filterExpression && filterExpression.length > 0)
-                    {
-                        if ($scope.filterExpressions.universalSearchString) {
-                            $scope.filterExpressions.universalSearchString += (' '+filterExpression);
-                        }
-                        else
-                        {
-                            $scope.filterExpressions.universalSearchString = filterExpression;
-                        }
-                    }
+                    $scope.resultSet = MockService.search();
                 };
 
-                $scope.$watch('keyword', function (newValue) {
-
-                    if(newValue)
-                    {
-                        var filterExpression = $scope.createFilterExpression($scope.keywordGroup, newValue);
-                        $scope.appendFilterExpression(filterExpression);
+                $scope.performRealSearch = function (searchForm)
+                {
+                    // If form is invalid, return and let AngularJS show validation errors.
+                    if (searchForm.$invalid) {
+                        //$scope.universalSearchString = "not submitted";
+                        console.error("Search String not valid");
+                        return;
                     }
-                });
+
+                    console.log("Search String:" + $scope.filterExpressions.universalSearchString);
+                    SearchService.search({
+                        //query: $scope.filterExpressions.universalSearchString,
+                        limit: 100,
+                        offset: 0
+                    }, queryObject,
+                            function (data)
+                            {
+                                console.log(angular.toJson(data, true));
+                                $scope.resultSet = data;
+                            },
+                            function (data)
+                            {
+                                console.error(angular.toJson(data, true));
+                            });
+                };
             }
+
         ]
         );
+
+angular.module(
+    'eu.water-switch-on.sip.controllers'
+).controller(
+    'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
+    [
+        '$scope',
+        'eu.water-switch-on.sip.services.MockService',
+        function ($scope, MockService) {
+            'use strict';
+
+            console.log('loading keywords for group ' + $scope.keywordGroup);
+            $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
+            $scope.keyword = null;
+
+            $scope.createFilterExpression = function (keyword, parameter) {
+                var filterExpression;
+
+                if (parameter) {
+                    filterExpression = (keyword + ':');
+                    filterExpression += ('"' + parameter + '"');
+                }
+
+                return filterExpression;
+            };
+
+            $scope.appendFilterExpression = function (filterExpression) {
+                if (filterExpression && filterExpression.length > 0) {
+                    if ($scope.filterExpressions.universalSearchString) {
+                        $scope.filterExpressions.universalSearchString += (' ' + filterExpression);
+                    } else {
+                        $scope.filterExpressions.universalSearchString = filterExpression;
+                    }
+                }
+            };
+
+            $scope.$watch('keyword', function (newValue) {
+                if (newValue) {
+                    var filterExpression = $scope.createFilterExpression($scope.keywordParameter, newValue);
+                    $scope.appendFilterExpression(filterExpression);
+                }
+            });
+        }
+    ]
+);
 
 angular.module(
     'eu.water-switch-on.sip.controllers'
@@ -431,94 +513,105 @@ angular.module(
         );
 
 angular.module(
-        'eu.water-switch-on.sip.controllers'
-        ).controller(
-        'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController',
-        [
-            '$scope',
-            function ($scope) {
-                'use strict';
-                $scope.keywords = ['air', 'Area', 'Atmosphere', 'Benthic', 'Benthic species', 
-                    'Biological', 'Biological community', 'Biological taxa', 'Biomass', 'Carbon', 
-                    'Chemical', 'Density', 'Descriptive', 'discharge', 'Dissolved Gas', 'Dissolved Solids', 
-                    'Energy', 'evaporation', 'Fish', 'Fish species', 'flux', 'Ice', 'Indicator Organisms', 
-                    'Inorganic', 'lake', 'Length', 'Level', 'Macrophyte species', 'Major', 'Minor', 'Nekton', 
-                    'Nekton species', 'Nitrogen', 'Nutrient', 'ocean', 'Optical', 'Organic', 'Other organic chemical', 
-                    'Oxygen Demand', 'PCBs', 'Pesticide', 'Phosphorus', 'Physical', 'Phytoplankton species', 'Pigment', 
-                    'precipitation', 'Pressure', 'Radiochemical ', 'snow', 'soil', 'Stable Isotopes', 'stream', 
-                    'suspended solids', 'Temperature', 'Velocity', 'Volume', 'water', 'Water content', 'wind', 
-                    'Zooplankton species'];
-            }]
-        );
+    'eu.water-switch-on.sip.controllers'
+    ).controller(
+    'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController',
+    [
+        '$scope',
+        function ($scope) {
+            'use strict';
+            $scope.clear = function () {
+                $scope.filterExpressions.universalSearchString = '';
+                $scope.filterExpressions.fromDate = null;
+                $scope.filterExpressions.toDate = null;
+            };
+        }]
+    );
 angular.module(
-        'eu.water-switch-on.sip.controllers'
-        ).controller(
-        'eu.water-switch-on.sip.controllers.usbDirectiveController',
-        [
-            '$scope',
-            'eu.water-switch-on.sip.services.SearchService',
-            function ($scope, SearchService) {
-                'use strict';
+    'eu.water-switch-on.sip.controllers'
+).controller(
+    'eu.water-switch-on.sip.controllers.usbDirectiveController',
+    [
+        '$scope',
+        'eu.water-switch-on.sip.services.SearchService',
+        function ($scope, SearchService) {
+            'use strict';
 
-                $scope.pattern = /^(\w+:".+"\s?)+$/;
+            $scope.pattern = /^(\w+:".+"\s?)+$/;
 
-                $scope.clear = function () {
-                    $scope.filterExpressions.universalSearchString = '';
-                    $scope.filterExpressions.fromDate = null;
-                    $scope.filterExpressions.toDate = null;
-                };
+            $scope.clear = function () {
+                $scope.filterExpressions.universalSearchString = '';
+                $scope.filterExpressions.fromDate = null;
+                $scope.filterExpressions.toDate = null;
+            };
 
-                $scope.performSearch = function (searchForm)
-                {
-                    // If form is invalid, return and let AngularJS show validation errors.
-                    if (searchForm.$invalid) {
-                        $scope.notificationFunction({
-                            message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
-                            type: 'warning'
-                        });
-                        return;
-                    }
+            $scope.performSearch = function (searchForm) {
+                // If form is invalid, return and let AngularJS show validation errors.
+                if (searchForm.$invalid) {
+                    $scope.notificationFunction({
+                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
+                        type: 'warning'
+                    });
+                    return;
+                }
 
-                    $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 100, 0);
-                };
+                $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 100, 0);
+            };
 
 
-                $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
+            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
 
-                    if (oldValue === false && newValue === true)
-                    {
-                        $scope.notificationFunction({
-                            message: 'Please enter a filter expression,  e.g. keyword:"water quality".',
-                            type: 'info'
-                        });
-                    }
+                if (oldValue === false && newValue === true) {
+                    $scope.notificationFunction({
+                        message: 'Please enter a filter expression,  e.g. keyword:"water quality".',
+                        type: 'info'
+                    });
+                }
 
-                });
+            });
 
-                $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
+            $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
 
-                    if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
-                            $scope.universalSearchBox.filterExpressionInput.$invalid)
-                    {
-                        $scope.notificationFunction({
-                            message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
-                            type: 'warning'
-                        });
-                    }
-                });
-            }
-        ]
-        );
+                if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
+                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
+                    $scope.notificationFunction({
+                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
+                        type: 'warning'
+                    });
+                }
+            });
+        }
+    ]
+);
 
 angular.module(
     'eu.water-switch-on.sip.directives',
     [
         'ngTable',
-        'ui.bootstrap.tpls',
         'ui.bootstrap.tabs',
-        'ui.bootstrap.typeahead'
+        'ui.bootstrap.typeahead',
+        'mgcrea.ngStrap.tooltip'
     ]
 );
+angular.module(
+    'eu.water-switch-on.sip.directives'
+).directive('countriesFilter',
+    [
+        function () {
+            'use strict';
+
+            return {
+                restrict: 'E',
+                templateUrl: 'templates/countries-filter-directive.html',
+                scope: {
+                    filterExpressions: '=',
+                    countryGroup: '@'
+                },
+                controller: 'eu.water-switch-on.sip.controllers.countriesFilterDirectiveController'
+            };
+        }
+    ]);
+
 angular.module(
     'eu.water-switch-on.sip.directives'
 ).directive('dateFilter',
@@ -530,12 +623,12 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/datefilter-directive.html',
                 scope: {
-                     filterExpressions: '=',
+                    filterExpressions: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.dateFilterDirectiveController'
-                /*controllerAs: 'usb',
-                transclude:true,
-                bindToController:true*/
+                    /*controllerAs: 'usb',
+                     transclude:true,
+                     bindToController:true*/
             };
         }
     ]);
@@ -551,13 +644,14 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/keyword-filter-directive.html',
                 scope: {
-                     filterExpressions: '=',
-                     keywordGroup:'@',
+                    filterExpressions: '=',
+                    keywordGroup: '@',
+                    keywordParameter: '@',
                 },
                 controller: 'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController'
-                /*controllerAs: 'usb',
-                transclude:true,
-                bindToController:true*/
+                    /*controllerAs: 'usb',
+                     transclude:true,
+                     bindToController:true*/
             };
         }
     ]);
@@ -648,13 +742,10 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/search-filter-ribbon-directive.html',
                 scope: {
-                     filterExpressions: '=',
-                     notificationFunction: '&?'
+                    filterExpressions: '=',
+                    notificationFunction: '&?'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController'
-                /*controllerAs: 'usb',
-                transclude:true,
-                bindToController:true*/
             };
         }
     ]);
@@ -703,7 +794,8 @@ angular.module(
             return new RegExp('[' + s.replace(escapePattern, '\\$&') + ']', f);
         };
 
-        /* filter to cut of text if it is longer than the given length. the filter has the following options
+        /* filter to cut of text if it is longer than the given length. if the input or the txtlen are null or undefined
+         * the filter will return 'null'. the filter has the following parameters
          * 
          * - input: string, the text input, if it is not a string the behaviour may not be as expected
          * - txtLen: integer, the length of the resulting string, including 'tpl'
@@ -722,7 +814,7 @@ angular.module(
             var _exact, _sentence, _sentenceDelimiters, _tpl, match, out, regex;
 
             if (!input || txtLen === undefined || txtLen === null) {
-                throw 'Illegal filter usage: no input or txtLen';
+                return null;
             }
 
             if (txtLen >= input.length) {
@@ -804,74 +896,120 @@ angular.module(
     ]
 );
 angular.module(
-        'eu.water-switch-on.sip.services'
-        ).factory('eu.water-switch-on.sip.services.MockService',
-        ['$resource',
-            function ($resource) {
-                'use strict';
+    'eu.water-switch-on.sip.services'
+).factory('eu.water-switch-on.sip.services.MockService',
+    ['$resource',
+        function ($resource) {
+            'use strict';
 
-                var searchService = $resource('data/resultSet.json', {});
-                var cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
+            var searchService, cuashiKeywordsService, inspireKeywordsService,
+                inspireTopicsService, keywordsService, countriesEuropeService,
+                countriesWorldService, searchFunction, loadKeywordListFunction,
+                loadCountriesListFunction;
 
-                var inspireKeywordsService = $resource('data/inspireKeywords.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
+            searchService = $resource('data/resultSet.json', {});
 
-                var inspireTopicsService = $resource('data/inspireTopics.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
-              
-                var keywordsService = $resource('data/keywords.json', {}, {
-                    query: {
-                        method: 'GET',
-                        params: {
-                        },
-                        isArray: true}});
+            cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
 
-                var searchFunction = function ()
-                {
+            inspireKeywordsService = $resource('data/inspireKeywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            inspireTopicsService = $resource('data/inspireTopics.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            keywordsService = $resource('data/keywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            countriesEuropeService = $resource('data/countriesEurope.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: false
+                }
+            });
+
+            countriesWorldService = $resource('data/countriesWorld.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: false
+                }
+            });
+
+            searchFunction =
+                function () {
                     return searchService.get();
                 };
 
-                var loadKeywordListFunction = function (keywordGroup)
-                {
+            loadKeywordListFunction =
+                function (keywordGroup) {
                     switch (keywordGroup) {
-                        case 'cuashi_keyword':
-                            return cuashiKeywordsService.query();
-                        case 'inspire_keyword':
-                            return inspireKeywordsService.query();
-                        case 'inspire_topic':
-                            return inspireTopicsService.query();
-                        case 'keyword':
-                            return keywordsService.query();
-                        default:
-                            return null;
+                    case 'cuashi_keyword':
+                        return cuashiKeywordsService.query();
+                    case 'inspire_keyword':
+                        return inspireKeywordsService.query();
+                    case 'inspire_topic':
+                        return inspireTopicsService.query();
+                    case 'keyword':
+                        return keywordsService.query();
+                    default:
+                        return null;
                     }
                 };
 
-                return {
-                    search: searchFunction,
-                    loadKeywordList: loadKeywordListFunction
+            loadCountriesListFunction =
+                function (countryGroup) {
+                    switch (countryGroup) {
+                    case 'countries_world':
+                        return countriesWorldService.query();
+                    case 'countries_europe':
+                        return countriesEuropeService.query();
+                    default:
+                        return null;
+                    }
                 };
-            }
+
+            return {
+                search: searchFunction,
+                loadKeywordList: loadKeywordListFunction,
+                loadCountriesList: loadCountriesListFunction
+            };
+        }
         ]);
 
 angular.module(
         'eu.water-switch-on.sip.services'
         ).factory('eu.water-switch-on.sip.services.SearchService',
         ['$resource', 'eu.water-switch-on.sip.services.Base64',
-            function ($resource, Base64) {
+            '$q',
+            function ($resource, Base64, $q) {
                 'use strict';
                 //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
 
@@ -897,18 +1035,155 @@ angular.module(
                     }
                 });
 
-                var searchFunction = function (universalSearchString, limit, offset)
-                {
-                    var queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
-                    return searchResource.search({
-                        limit: limit,
-                        offset: offset
-                    }, queryObject);
+            var searchFunction = function (universalSearchString, limit, offset, progressCallback) {
+                // TODO: hardcoded request url, domain
+                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess;
+
+                noop = angular.noop;
+
+                deferred = $q.defer();
+
+                queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
+
+                // current value, max value, type, max = 0 indicates indeterminate
+                (progressCallback || noop)(0, 0, 'success');
+
+                result = {
+                    $promise: deferred.promise,
+                    $resolved: false
                 };
 
-                return {search: searchFunction};
-            }
-        ])
+                searchResult = searchResource.search(
+                    {
+                        limit: limit,
+                        offset: offset
+                    },
+                    queryObject
+                );
+
+                searchSuccess = function (data) {
+                    var classesError, classesSuccess, nodes;
+                    data.$collection = data.$collection.slice(0, 20);
+                    nodes = data.$collection;
+
+                    classesSuccess = function (data) {
+                        var allError, allSuccess, classCache, classname, entityResource, i, objectId, objsQ,
+                            objPromise, singleProgressF, resolvedObjsCount;
+
+                        classCache = [];
+                        for (i = 0; i < data.$collection.length; ++i) {
+                            classCache[data.$collection[i].key] = data.$collection[i].value;
+                        }
+
+                        objsQ = [];
+                        entityResource = $resource(
+                            'http://localhost:8890/SWITCHON.:classname/:objId',
+                            {
+                                omitNullValues: true,
+                                deduplicate: true
+                            },
+                            {
+                                get: {
+                                    method: 'GET',
+                                    isArray: false,
+                                    headers: {'Authorization': 'Basic ' + authdata}
+                                }
+                            }
+                        );
+
+                        resolvedObjsCount = 0;
+                        (progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
+
+                        singleProgressF = function () {
+                            (progressCallback || noop)(++resolvedObjsCount, nodes.length, 'success');
+                        };
+
+                        for (i = 0; i < nodes.length; ++i) {
+                            classname = classCache[nodes[i].classId];
+                            objectId = nodes[i].objectId;
+
+                            objPromise = entityResource.get({classname: classname, objId: objectId}).$promise;
+                            objPromise['finally'](singleProgressF);
+
+                            objsQ[i] = objPromise;
+                        }
+
+                        allSuccess = function (objs) {
+                            var key;
+
+                            for (i = 0; i < nodes.length; ++i) {
+                                nodes[i].object = objs[i];
+                            }
+
+                            // doing the same as ngResource: copying the results in the already returned obj (shallow)
+                            for (key in searchResult) {
+                                if (searchResult.hasOwnProperty(key) &&
+                                        !(key.charAt(0) === '$' && key.charAt(1) === '$')) {
+                                    result[key] = searchResult[key];
+                                }
+                            }
+
+                            deferred.resolve(result);
+                        };
+
+                        allError = function (data, status) {
+                            (progressCallback || noop)(1, 1, 'error');
+
+                            result.$error = 'cannot lookup class names';
+                            result.$data = data;
+                            result.$status = status;
+                            result.$resolved = true;
+
+                            deferred.reject(result);
+                        };
+
+                        $q.all(objsQ).then(allSuccess, allError);
+                    };
+
+                    classesError = function (data, status) {
+                        (progressCallback || noop)(1, 1, 'error');
+
+                        result.$error = 'cannot lookup class names';
+                        result.$data = data;
+                        result.$status = status;
+                        result.$resolved = true;
+
+                        deferred.reject(result);
+                    };
+
+                    $resource(
+                        'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                        {},
+                        {
+                            exec: {
+                                method: 'POST',
+                                isArray: false,
+                                headers: {'Authorization': 'Basic ' + authdata}
+                            }
+                        }
+                    ).exec(
+                        {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
+                    ).$promise.then(classesSuccess, classesError);
+                };
+
+                searchError = function (data, status) {
+                    (progressCallback || noop)(1, 1, 'error');
+
+                    result.$error = 'cannot search for resources';
+                    result.$data = data;
+                    result.$status = status;
+                    result.$resolved = true;
+                    deferred.reject(result);
+                };
+
+                searchResult.$promise.then(searchSuccess, searchError);
+
+                return result;
+            };
+
+            return {search: searchFunction};
+        }
+    ])
 
         .factory('eu.water-switch-on.sip.services.Base64', function () {
             /* jshint ignore:start */

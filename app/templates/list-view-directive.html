@@ -5,7 +5,7 @@
         <td data-title="'Start date'" sortable="'object.fromdate'" class="date">{{node.object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}</td>
         <td data-title="'End date'" sortable="'object.todate'" class="date">{{node.object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}</td>
         <td data-title="'Tools'" class="tools">
-            <span bs-tooltip
+            <!--<span bs-tooltip
                   data-placement="left"
                   data-trigger="hover"
                   data-delay="{show: 400, hide: 100}"
@@ -13,17 +13,17 @@
                   class="btn-invisible btn-icon"
                   ng-click="showInfo(node.object)">
                 <i class="glyphicon glyphicon-info-sign"></i>
-            </span>
+            </span>-->
             <span bs-tooltip
                   data-placement="left"
                   data-trigger="hover"
                   data-delay="{show: 400, hide: 100}"
-                  data-title="Download"
+                  data-title="Show Download Link"
                   class="btn-invisible"
                   ng-click="showDownload(node.object)">
                 <i class="glyphicon glyphicon-download"></i>
             </span>
-            <span bs-tooltip
+            <!--<span bs-tooltip
                   data-placement="left"
                   data-trigger="hover"
                   data-delay="{show: 400, hide: 100}"
@@ -40,7 +40,7 @@
                   class="btn-invisible btn-icon disabled" 
                   ng-click="" >
                 <i class="glyphicon glyphicon-share"></i>
-            </span>
+            </span>-->
         </td>
     </tr>
 </table>
