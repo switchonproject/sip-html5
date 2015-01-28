@@ -187,6 +187,54 @@ describe('Search Service Test Suite', function () {
                 expect(result.$collection[3].object).toBeDefined();
             });
         });
+        
+        it('SearchService - 4 obj - proper progress indication', function () {
+            var progress, result, resultSet;
+            
+            inject(function (_SEARCH_SERVICE_TEST_4NODES_) {
+                resultSet = _SEARCH_SERVICE_TEST_4NODES_;
+            });
+            
+            progress = [];
+            
+            $httpBackend.whenPOST(
+                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                {'list':[{'key':'Query', 'value':'testquery'}]}
+            ).respond(200, resultSet);
+            $httpBackend.whenPOST(
+                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
+            ).respond(200, {$collection: [{key: 27, value: 'testclass'}]});
+    
+            runs(function () {
+                var i, objId;
+                
+                for(i = 0; i < resultSet.$collection.length; ++i) {
+                    objId = resultSet.$collection[i].objectId;
+                    $httpBackend.expectGET(
+                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=true&omitNullValues=true'
+                    ).respond(200, objs[objId]);
+                }
+                result = search('testquery', null, null, function(val, max, type) {
+                    progress.push({val: val, max: max, type: type})
+                });
+                $httpBackend.flush();
+            });
+            
+            waitsFor(function () {
+                return result.$resolved;
+            }, 'not properly updated $resolved', 500);
+            
+            runs(function () {
+                expect(progress.length).toBe(6);
+                expect(progress[0]).toEqual({val: 0, max: 0, type: 'success'});
+                expect(progress[1]).toEqual({val: 0, max: 4, type: 'success'});
+                expect(progress[2]).toEqual({val: 1, max: 4, type: 'success'});
+                expect(progress[3]).toEqual({val: 2, max: 4, type: 'success'});
+                expect(progress[4]).toEqual({val: 3, max: 4, type: 'success'});
+                expect(progress[5]).toEqual({val: 4, max: 4, type: 'success'});
+            });
+        });
                 
         it('SearchService - proper result - 400 obj', function () {
             var result, resultSet;
