@@ -2,7 +2,8 @@ angular.module(
         'eu.water-switch-on.sip.services'
         ).factory('eu.water-switch-on.sip.services.SearchService',
         ['$resource', 'eu.water-switch-on.sip.services.Base64',
-            function ($resource, Base64) {
+            '$q',
+            function ($resource, Base64, $q) {
                 'use strict';
                 //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
 
@@ -28,18 +29,152 @@ angular.module(
                     }
                 });
 
-                var searchFunction = function (universalSearchString, limit, offset)
-                {
-                    var queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
-                    return searchResource.search({
-                        limit: limit,
-                        offset: offset
-                    }, queryObject);
+            var searchFunction = function (universalSearchString, limit, offset, progressCallback) {
+                // TODO: hardcoded request url, domain
+                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess;
+
+                noop = angular.noop;
+
+                deferred = $q.defer();
+
+                queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
+
+                // current value, max value, type, max = 0 indicates indeterminate
+                (progressCallback || noop)(0, 0, 'success');
+
+                result = {
+                    $promise: deferred.promise,
+                    $resolved: false
                 };
 
-                return {search: searchFunction};
-            }
-        ])
+                searchResult = searchResource.search(
+                    {
+                        limit: limit,
+                        offset: offset
+                    },
+                    queryObject
+                );
+
+                searchSuccess = function (data) {
+                    var classesError, classesSuccess, nodes;
+
+                    nodes = data.$collection;
+
+                    classesSuccess = function (data) {
+                        var allError, allSuccess, classCache, classname, entityResource, i, objectId, objsQ,
+                            objPromise, singleProgressF, resolvedObjsCount;
+
+                        classCache = [];
+                        for (i = 0; i < data.$collection.length; ++i) {
+                            classCache[data.$collection[i].key] = data.$collection[i].value;
+                        }
+
+                        objsQ = [];
+                        entityResource = $resource(
+                            'http://localhost:8890/SWITCHON.:classname/:objId',
+                            {
+                                omitNullValues: true,
+                                deduplicate: true
+                            },
+                            {
+                                get: {
+                                    method: 'GET',
+                                    isArray: false,
+                                    headers: {'Authorization': 'Basic ' + authdata}
+                                }
+                            }
+                        );
+
+                        resolvedObjsCount = 0;
+                        (progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
+
+                        singleProgressF = function () {
+                            (progressCallback || noop)(++resolvedObjsCount, nodes.length, 'success');
+                        };
+
+                        for (i = 0; i < nodes.length; ++i) {
+                            classname = classCache[nodes[i].classId];
+                            objectId = nodes[i].objectId;
+
+                            objPromise = entityResource.get({classname: classname, objId: objectId}).$promise;
+                            objPromise['finally'](singleProgressF);
+
+                            objsQ[i] = objPromise;
+                        }
+
+                        allSuccess = function (objs) {
+                            var key;
+
+                            for (i = 0; i < nodes.length; ++i) {
+                                nodes[i].object = objs[i];
+                            }
+
+                            // doing the same as ngResource: copying the results in the already returned obj (shallow)
+                            for (key in searchResult) {
+                                if (searchResult.hasOwnProperty(key) &&
+                                        !(key.charAt(0) === '$' && key.charAt(1) === '$')) {
+                                    result[key] = searchResult[key];
+                                }
+                            }
+
+                            deferred.resolve(result);
+                        };
+
+                        allError = function (data) {
+                            (progressCallback || noop)(1, 1, 'error');
+
+                            result.$error = 'cannot lookup objects';
+                            result.$response = data;
+                            result.$resolved = true;
+
+                            deferred.reject(result);
+                        };
+
+                        $q.all(objsQ).then(allSuccess, allError);
+                    };
+
+                    classesError = function (data) {
+                        (progressCallback || noop)(1, 1, 'error');
+
+                        result.$error = 'cannot lookup class names';
+                        result.$response = data;
+                        result.$resolved = true;
+
+                        deferred.reject(result);
+                    };
+
+                    $resource(
+                        'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                        {},
+                        {
+                            exec: {
+                                method: 'POST',
+                                isArray: false,
+                                headers: {'Authorization': 'Basic ' + authdata}
+                            }
+                        }
+                    ).exec(
+                        {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
+                    ).$promise.then(classesSuccess, classesError);
+                };
+
+                searchError = function (data) {
+                    (progressCallback || noop)(1, 1, 'error');
+
+                    result.$error = 'cannot search for resources';
+                    result.$response = data;
+                    result.$resolved = true;
+                    deferred.reject(result);
+                };
+
+                searchResult.$promise.then(searchSuccess, searchError);
+
+                return result;
+            };
+
+            return {search: searchFunction};
+        }
+    ])
 
         .factory('eu.water-switch-on.sip.services.Base64', function () {
             /* jshint ignore:start */
