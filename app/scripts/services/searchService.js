@@ -156,7 +156,7 @@ angular.module(
                             }
                         }
                     ).exec(
-                        {'list': []}
+                        {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
                     ).$promise.then(classesSuccess, classesError);
                 };
 
