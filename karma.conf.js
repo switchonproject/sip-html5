@@ -71,6 +71,7 @@ module.exports = function(config) {
         'test/spec/controllers/objectDownloadModalTest.js',
         'test/spec/controllers/objectInfoModalTest.js',
         'test/spec/filters/textLengthFilterTest.js',
+        'test/spec/services/searchServiceTest.js',
         {pattern: 'test/res/**/*.json', watched: true, included: true, served: true}
     ],
 
@@ -103,7 +104,6 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true,
-    
     
     preprocessors: {
         '**/*.json': ['gb-json2js'],

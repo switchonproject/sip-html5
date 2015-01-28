@@ -120,12 +120,11 @@ angular.module(
                             deferred.resolve(result);
                         };
 
-                        allError = function (data, status) {
+                        allError = function (data) {
                             (progressCallback || noop)(1, 1, 'error');
 
-                            result.$error = 'cannot lookup class names';
-                            result.$data = data;
-                            result.$status = status;
+                            result.$error = 'cannot lookup objects';
+                            result.$response = data;
                             result.$resolved = true;
 
                             deferred.reject(result);
@@ -134,12 +133,11 @@ angular.module(
                         $q.all(objsQ).then(allSuccess, allError);
                     };
 
-                    classesError = function (data, status) {
+                    classesError = function (data) {
                         (progressCallback || noop)(1, 1, 'error');
 
                         result.$error = 'cannot lookup class names';
-                        result.$data = data;
-                        result.$status = status;
+                        result.$response = data;
                         result.$resolved = true;
 
                         deferred.reject(result);
@@ -160,12 +158,11 @@ angular.module(
                     ).$promise.then(classesSuccess, classesError);
                 };
 
-                searchError = function (data, status) {
+                searchError = function (data) {
                     (progressCallback || noop)(1, 1, 'error');
 
                     result.$error = 'cannot search for resources';
-                    result.$data = data;
-                    result.$status = status;
+                    result.$response = data;
                     result.$resolved = true;
                     deferred.reject(result);
                 };
