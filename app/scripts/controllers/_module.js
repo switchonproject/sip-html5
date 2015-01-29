@@ -6,6 +6,7 @@ angular.module(
         'ui.bootstrap.modal',
         'mgcrea.ngStrap.popover',
         'ui.bootstrap.accordion',
-        'leaflet-directive'
+        'leaflet-directive',
+        'ui.bootstrap.progressbar'
     ]
 );

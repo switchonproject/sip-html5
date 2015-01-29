@@ -8,7 +8,6 @@ angular.module(
         function ($scope, MockService) {
             'use strict';
 
-            console.log('loading countries for group ' + $scope.countryGroup);
             $scope.countryList = MockService.loadCountriesList($scope.countryGroup);
             $scope.country = null;
 
