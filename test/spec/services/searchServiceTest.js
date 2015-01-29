@@ -227,7 +227,7 @@ describe('Search Service Test Suite', function () {
             
             runs(function () {
                 expect(progress.length).toBe(6);
-                expect(progress[0]).toEqual({val: 0, max: 0, type: 'success'});
+                expect(progress[0]).toEqual({val: 0, max: -1, type: 'success'});
                 expect(progress[1]).toEqual({val: 0, max: 4, type: 'success'});
                 expect(progress[2]).toEqual({val: 1, max: 4, type: 'success'});
                 expect(progress[3]).toEqual({val: 2, max: 4, type: 'success'});

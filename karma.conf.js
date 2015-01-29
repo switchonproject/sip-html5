@@ -67,6 +67,7 @@ module.exports = function(config) {
         'app/templates/resultset-directive.html',
         'app/templates/search-filter-ribbon-directive.html',
         'app/templates/search-filter-ribbon-popup.html',
+        'app/templates/search-progress-modal-template.html',
         'app/templates/usb-directive.html',
         'test/spec/controllers/objectDownloadModalTest.js',
         'test/spec/controllers/objectInfoModalTest.js',

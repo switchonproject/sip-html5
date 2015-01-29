@@ -8,7 +8,6 @@ angular.module(
         function ($scope, MockService) {
             'use strict';
 
-            console.log('loading keywords for group ' + $scope.keywordGroup);
             $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
             $scope.keyword = null;
 
