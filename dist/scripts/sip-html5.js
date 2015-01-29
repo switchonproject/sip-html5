@@ -51,7 +51,8 @@ angular.module(
         'ui.bootstrap.modal',
         'mgcrea.ngStrap.popover',
         'ui.bootstrap.accordion',
-        'leaflet-directive'
+        'leaflet-directive',
+        'ui.bootstrap.progressbar'
     ]
 );
 
@@ -65,7 +66,6 @@ angular.module(
         function ($scope, MockService) {
             'use strict';
 
-            console.log('loading countries for group ' + $scope.countryGroup);
             $scope.countryList = MockService.loadCountriesList($scope.countryGroup);
             $scope.country = null;
 
@@ -152,57 +152,6 @@ angular.module(
 );
 
 angular.module(
-        'eu.water-switch-on.sip.controllers'
-        ).controller(
-        'eu.water-switch-on.sip.controllers.defaultViewController',
-        [
-            '$scope',
-            'eu.water-switch-on.sip.services.SearchService',
-            'eu.water-switch-on.sip.services.MockService',
-            function ($scope, SearchService, MockService) {
-                'use strict';
-
-                //$scope.filterExpressions = {universalSearchString:'text:"undefined"'};     
-                $scope.filterExpressions = {universalSearchString: 'text:"anytext"'};
-
-                //var queryObject = {'list': [{'key': 'LeuchteEnabled', 'value': 'true'}, {'key': 'GeometryFromWkt', 'value': 'POLYGON ((2582375.3331009173 5681538.290594944, 2582494.6975608254 5681538.290594944, 2582494.6975608254 5681583.652933975, 2582375.3331009173 5681583.652933975, 2582375.3331009173 5681538.290594944))'}]};
-
-                $scope.performSearch = function (searchForm)
-                {
-                    $scope.resultSet = MockService.search();
-                };
-
-                $scope.performRealSearch = function (searchForm)
-                {
-                    // If form is invalid, return and let AngularJS show validation errors.
-                    if (searchForm.$invalid) {
-                        //$scope.universalSearchString = "not submitted";
-                        console.error("Search String not valid");
-                        return;
-                    }
-
-                    console.log("Search String:" + $scope.filterExpressions.universalSearchString);
-                    SearchService.search({
-                        //query: $scope.filterExpressions.universalSearchString,
-                        limit: 100,
-                        offset: 0
-                    }, queryObject,
-                            function (data)
-                            {
-                                console.log(angular.toJson(data, true));
-                                $scope.resultSet = data;
-                            },
-                            function (data)
-                            {
-                                console.error(angular.toJson(data, true));
-                            });
-                };
-            }
-
-        ]
-        );
-
-angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
     'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
@@ -212,7 +161,6 @@ angular.module(
         function ($scope, MockService) {
             'use strict';
 
-            console.log('loading keywords for group ' + $scope.keywordGroup);
             $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
             $scope.keyword = null;
 
@@ -533,9 +481,82 @@ angular.module(
     'eu.water-switch-on.sip.controllers.usbDirectiveController',
     [
         '$scope',
+        '$rootScope',
+        '$modal',
         'eu.water-switch-on.sip.services.SearchService',
-        function ($scope, SearchService) {
+        function ($scope, $rootScope, $modal, SearchService) {
             'use strict';
+
+            var processCallback, status;
+
+            status = {
+                current: 0,
+                max: 0,
+                type: null
+            };
+
+            $scope.status = status;
+
+            processCallback = function (current, max, type) {
+                status.max = max;
+                status.type = type;
+
+                // start of search (indeterminate)
+                if (max === -1 && type === 'success') {
+                    if ($scope.notificationFunction) {
+                        $scope.notificationFunction({
+                            message: 'Search started',
+                            type: 'info'
+                        });
+                    }
+
+                    status.current = current;
+
+                    // search completed
+                } else if (current > 0 && current < max && type === 'success') {
+
+                    //normalise  to 100%
+                    status.current = (current / max * 100);
+
+                } else if (current === max && type === 'success') {
+
+
+                    if (current > 0) {
+                        status.current = 100;
+                        if ($scope.notificationFunction) {
+                            $scope.notificationFunction({
+                                message: 'Search completed, ' + current + ' results found',
+                                type: 'success'
+                            });
+                        }
+                    } else {
+                        status.current = 0;
+                        if ($scope.notificationFunction) {
+                            $scope.notificationFunction({
+                                message: 'Search completed, but no results found',
+                                type: 'warning'
+                            });
+                        }
+                    }
+
+                    if ($scope.progressModal) {
+                        $scope.progressModal.close();
+                    }
+                    // search error   
+                } else if (type === 'error') {
+                    if ($scope.notificationFunction) {
+                        $scope.notificationFunction({
+                            message: 'Search could no be perfomed:' + $scope.resultSet.$error,
+                            type: 'danger'
+                        });
+                    }
+
+                    if ($scope.progressModal) {
+                        $scope.progressModal.close();
+                    }
+                }
+
+            };
 
             $scope.pattern = /^(\w+:".+"\s?)+$/;
 
@@ -555,9 +576,26 @@ angular.module(
                     return;
                 }
 
-                $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 100, 0);
+                $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, processCallback);
+
+                $scope.showProgress(status);
             };
 
+            $scope.showProgress = function (status) {
+                var modalScope;
+
+                modalScope = $rootScope.$new(true);
+                modalScope.status = status;
+                modalScope.closeInfoView = function () {
+                    $scope.progressModal.close();
+                };
+
+                $scope.progressModal = $modal.open({
+                    templateUrl: 'templates/search-progress-modal-template.html',
+                    scope: modalScope,
+                    size: 'lg'
+                });
+            };
 
             $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
 
@@ -573,7 +611,7 @@ angular.module(
             $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
 
                 if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
-                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
+                    $scope.universalSearchBox.filterExpressionInput.$invalid) {
                     $scope.notificationFunction({
                         message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
                         type: 'warning'
@@ -582,7 +620,7 @@ angular.module(
             });
         }
     ]
-);
+    );
 
 angular.module(
     'eu.water-switch-on.sip.directives',
@@ -1017,7 +1055,7 @@ angular.module(
                 var password = 'cismet';
                 var authdata = Base64.encode(username + ':' + password);
 
-                var searchResource = $resource('http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
+                var searchResource = $resource('http://switchon.cismet.de:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
                         {
                             limit: 20,
                             offset: 0,
@@ -1045,8 +1083,8 @@ angular.module(
 
                 queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
 
-                // current value, max value, type, max = 0 indicates indeterminate
-                (progressCallback || noop)(0, 0, 'success');
+                // current value, max value, type, max = -1 indicates indeterminate
+                (progressCallback || noop)(0, -1, 'success');
 
                 result = {
                     $promise: deferred.promise,
@@ -1077,7 +1115,7 @@ angular.module(
 
                         objsQ = [];
                         entityResource = $resource(
-                            'http://localhost:8890/SWITCHON.:classname/:objId',
+                            'http://switchon.cismet.de:8890/SWITCHON.:classname/:objId',
                             {
                                 omitNullValues: true,
                                 deduplicate: true
@@ -1126,33 +1164,31 @@ angular.module(
                             deferred.resolve(result);
                         };
 
-                        allError = function (data, status) {
-                            (progressCallback || noop)(1, 1, 'error');
-
-                            result.$error = 'cannot lookup class names';
-                            result.$data = data;
-                            result.$status = status;
+                        allError = function (data) {
+                            result.$error = 'cannot lookup objects';
+                            result.$response = data;
                             result.$resolved = true;
 
                             deferred.reject(result);
+                            
+                            (progressCallback || noop)(1, 1, 'error');
                         };
 
                         $q.all(objsQ).then(allSuccess, allError);
                     };
 
-                    classesError = function (data, status) {
-                        (progressCallback || noop)(1, 1, 'error');
-
+                    classesError = function (data) {
                         result.$error = 'cannot lookup class names';
-                        result.$data = data;
-                        result.$status = status;
+                        result.$response = data;
                         result.$resolved = true;
 
                         deferred.reject(result);
+                        
+                        (progressCallback || noop)(1, 1, 'error');                        
                     };
 
                     $resource(
-                        'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                        'http://switchon.cismet.de:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                         {},
                         {
                             exec: {
@@ -1166,14 +1202,14 @@ angular.module(
                     ).$promise.then(classesSuccess, classesError);
                 };
 
-                searchError = function (data, status) {
-                    (progressCallback || noop)(1, 1, 'error');
+                searchError = function (data) {
 
                     result.$error = 'cannot search for resources';
-                    result.$data = data;
-                    result.$status = status;
+                    result.$response = data;
                     result.$resolved = true;
                     deferred.reject(result);
+
+                    (progressCallback || noop)(1, 1, 'error');
                 };
 
                 searchResult.$promise.then(searchSuccess, searchError);

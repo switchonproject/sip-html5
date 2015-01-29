@@ -606,7 +606,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        placement=\"bottom\"\r" +
     "\n" +
-    "        data-trigger=\"click\"\r" +
+    "        auto-close=\"1\"\r" +
     "\n" +
     "        bs-popover>\r" +
     "\n" +
@@ -745,6 +745,51 @@ angular.module('').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('templates/search-progress-modal-template.html',
+    "<div class=\"modal-header\">\r" +
+    "\n" +
+    "    <strong>Please wait, search is in progress.</strong>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<div class=\"modal-body\">\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "      \r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <progressbar class=\"progress-striped active\" \r" +
+    "\n" +
+    "                         max=\"200\" \r" +
+    "\n" +
+    "                         value=\"status.current+100\" \r" +
+    "\n" +
+    "                         type=\"{{status.type}}\">\r" +
+    "\n" +
+    "            </progressbar>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<div class=\"modal-footer\">\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('templates/usb-directive.html',
     "<form  class=\"navbar-form navbar-left\" \r" +
     "\n" +
@@ -790,10 +835,6 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </button>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "        <button ng-click=\"clear()\" class=\"btn btn-default\">Clear</button>\r" +
-    "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
@@ -816,7 +857,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        Please enter a filter expression,  e.g. keyword:\"water quality\".\r" +
     "\n" +
-    "    </p>\r" +
+    "    </p>    \r" +
     "\n" +
     "</form>"
   );
