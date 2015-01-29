@@ -39,8 +39,8 @@ angular.module(
 
                 queryObject = {'list': [{'key': 'Query', 'value': universalSearchString}]};
 
-                // current value, max value, type, max = 0 indicates indeterminate
-                (progressCallback || noop)(0, 0, 'success');
+                // current value, max value, type, max = -1 indicates indeterminate
+                (progressCallback || noop)(0, -1, 'success');
 
                 result = {
                     $promise: deferred.promise,
@@ -121,26 +121,26 @@ angular.module(
                         };
 
                         allError = function (data) {
-                            (progressCallback || noop)(1, 1, 'error');
-
                             result.$error = 'cannot lookup objects';
                             result.$response = data;
                             result.$resolved = true;
 
                             deferred.reject(result);
+                            
+                            (progressCallback || noop)(1, 1, 'error');
                         };
 
                         $q.all(objsQ).then(allSuccess, allError);
                     };
 
                     classesError = function (data) {
-                        (progressCallback || noop)(1, 1, 'error');
-
                         result.$error = 'cannot lookup class names';
                         result.$response = data;
                         result.$resolved = true;
 
                         deferred.reject(result);
+                        
+                        (progressCallback || noop)(1, 1, 'error');                        
                     };
 
                     $resource(
@@ -159,12 +159,13 @@ angular.module(
                 };
 
                 searchError = function (data) {
-                    (progressCallback || noop)(1, 1, 'error');
 
                     result.$error = 'cannot search for resources';
                     result.$response = data;
                     result.$resolved = true;
                     deferred.reject(result);
+
+                    (progressCallback || noop)(1, 1, 'error');
                 };
 
                 searchResult.$promise.then(searchSuccess, searchError);
