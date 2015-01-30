@@ -20,6 +20,47 @@
     margin-top: 100px;
 }
 
+.switchon-ribbon-panel {
+    float:left;
+    clear:none;
+    height: 240px;
+    border-right-color: #999999;
+    border-right-width: 1px;
+    border-right-style: solid;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding-right: 8px;
+}
+
+.switchon-ribbon-panel.last {
+    border:none;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.switchon-ribbon-footer {
+    float:none;
+    clear:both;
+    min-height: 40px;
+    border-top-color: #999999;
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding-top: 8px;
+}
+
+.switchon-ribbon {
+    width: 100%;
+}
+
+.switchon-ribbon-popover
+{
+    max-width: 1000px;
+}
+
+.switchon-ribbon-popover.bottom > .arrow {
+    left: 10%;
+}
+
 .navbar-brand {
     padding-top: 3px;
 }

@@ -11,13 +11,14 @@ angular.module(
             $scope.data = {};
             $scope.data.message = 'Application loaded';
             $scope.data.messageType = 'success';
-            $scope.data.resources = [];
-            $scope.data.query = null;
 
             $scope.isResultShowing = false;
             $scope.state = $state;
             
-            $scope.filterExpressions = {universalSearchString: 'text:"anytext"'};
+            $scope.filterExpressions = {};
+            $scope.filterExpressions.universalSearchString = '';
+            $scope.filterExpressions.fromDate = null;
+            $scope.filterExpressions.toDate = null;
             $scope.data.resultSet = null;
 
             $scope.activateView = function (state) {

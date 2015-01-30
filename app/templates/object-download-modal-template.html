@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h3 class="modal-title">Downloads of {{object.name}}</h3>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <accordion close-others="false">
+            <accordion-group ng-repeat="rep in reps" is-open="rep._status.open">
+                <accordion-heading>
+                    {{rep.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}"></i> 
+                </accordion-heading>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Temporal resolution:</label>
+                    </div>
+                    <div class="col-lg-9">
+                        {{rep.temporalresolution || 'n/a'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Spatial resolution:</label>
+                    </div>
+                    <div class="col-lg-9">
+                        {{rep.spatialresolution || 'n/a'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Spatial scale:</label>
+                    </div>
+                    <div class="col-lg-9">
+                        {{rep.spatialscale || 'n/a'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Mime type:</label>
+                    </div>
+                    <div class="col-lg-9">
+                        {{rep.contenttype.name || 'n/a'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Data access function:</label>
+                    </div>
+                    <div class="col-lg-9">
+                        {{rep.function.name || 'n/a'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Data access link:</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <a href="{{rep.contentlocation}}" ng-disabled="!rep.contentlocation">{{rep.contentlocation || 'n/a'}}</a>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="closeDownloadView()">OK</button>
+</div>

@@ -12,16 +12,18 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet" type="text/css"/>
+        <link href="bower_components/ng-table/dist/ng-table.css" rel="stylesheet" type="text/css"/>
         <!-- build:css() -->
         <link rel="stylesheet" href="styles/switchon.css">
         <link href="styles/myWorkspace.css" rel="stylesheet" type="text/css"/>
+        <link href="styles/listView.css" rel="stylesheet" type="text/css"/>
         <!-- endbuild -->
     </head>
     <body ng-app="eu.water-switch-on.sip" ng-controller="eu.water-switch-on.sip.controllers.masterController">
         <!--[if lt IE 7]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+        
         <!-- the real nav -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -46,9 +48,16 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="navbar-form navbar-left">
-                        <usb filter-expressions="filterExpressions" resource-collection="data.resultSet"></usb>
-                    </div>
+                    <!-- search filter ribbon -->
+                    <search-filter-ribbon filter-expressions="filterExpressions" 
+                         notification-function="showMessage(message, type)">
+                    </search-filter-ribbon>   
+                    
+                    <!-- search directive -->
+                    <usb filter-expressions="filterExpressions" 
+                         resource-collection="data.resultSet" 
+                         notification-function="showMessage(message, type)">
+                    </usb> 
                     <my-workspace workspace-name="SWITCH-ON"></my-workspace>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -102,17 +111,7 @@
         
         <div id="wrapper" class="toggled" ng-class="{toggled: !isResultShowing || !(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')}">
             <div id="sidebar-wrapper">
-                
-                
-                    <resultSet result-set="data.resultSet"></resultSet>
-                
-                <div class="panel panel-default">
-               <!-- <ul class="sidebar-nav">
-                    <li>Resources</li>
-                    <li>Keywords</li>
-                    <li>etc...</li>
-                </ul>-->
-                    </div>
+                <resultSet result-set="data.resultSet"></resultSet>
             </div>
             
             <div id="page-content-wrapper">
@@ -133,12 +132,15 @@
         <!-- bower:js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.js" type="text/javascript"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.tpl.js" type="text/javascript"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js" type="text/javascript"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
         <script src="bower_components/leaflet/dist/leaflet.js" type="text/javascript"></script>
         <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js" type="text/javascript"></script>
         <script src="bower_components/angular-resource/angular-resource.js" type="text/javascript"></script>
+        <script src="bower_components/ng-table/dist/ng-table.js" type="text/javascript"></script>
         <!-- endbower -->
 
         <!-- build:js() -->
@@ -151,16 +153,28 @@
         <script src="scripts/controllers/resultSetDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/myWorkspaceDirectiveController.js" type="text/javascript"></script>
         <script src="scripts/controllers/myProfileDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/searchFilterRibbonDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/keywordFilterDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/countriesFilterDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/listViewDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/objectInfoModalController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/objectDownloadModalController.js" type="text/javascript"></script>
         <script src="scripts/directives/_module.js"></script>
         <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/dateFilterDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/resultSetDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/myWorkspaceDirective.js" type="text/javascript"></script>
         <script src="scripts/directives/myProfileDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/searchFilterRibbonDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/keywordFilterDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/countriesFilterDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/listViewDirective.js" type="text/javascript"></script>
         <script src="scripts/services/_module.js"></script>
         <script src="scripts/services/mockService.js" type="text/javascript"></script>
         <script src="scripts/services/searchService.js" type="text/javascript"></script>
         <script src="scripts/services/sessionService.js" type="text/javascript"></script>
+        <script src="scripts/filters/_module.js" type="text/javascript"></script>
+        <script src="scripts/filters/textLengthFilter.js" type="text/javascript"></script>
         <!-- endbuild -->
     </body>
 </html>

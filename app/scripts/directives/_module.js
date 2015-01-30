@@ -1,5 +1,9 @@
 angular.module(
     'eu.water-switch-on.sip.directives',
     [
+        'ngTable',
+        'ui.bootstrap.tabs',
+        'ui.bootstrap.typeahead',
+        'mgcrea.ngStrap.tooltip'
     ]
 );

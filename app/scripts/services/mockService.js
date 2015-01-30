@@ -1,19 +1,108 @@
 angular.module(
-        'eu.water-switch-on.sip.services'
-        ).factory('eu.water-switch-on.sip.services.MockService',
-        ['$resource',
-            function ($resource) {
-                'use strict';
+    'eu.water-switch-on.sip.services'
+).factory('eu.water-switch-on.sip.services.MockService',
+    ['$resource',
+        function ($resource) {
+            'use strict';
 
-                var service = $resource('data/resultSet.json', {});
+            var searchService, cuashiKeywordsService, inspireKeywordsService,
+                inspireTopicsService, keywordsService, countriesEuropeService,
+                countriesWorldService, searchFunction, loadKeywordListFunction,
+                loadCountriesListFunction;
 
-                var searchFunction = function ()
-                {
-                    return service.get();
+            searchService = $resource('data/resultSet.json', {});
+
+            cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            inspireKeywordsService = $resource('data/inspireKeywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            inspireTopicsService = $resource('data/inspireTopics.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            keywordsService = $resource('data/keywords.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: true
+                }
+            });
+
+            countriesEuropeService = $resource('data/countriesEurope.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: false
+                }
+            });
+
+            countriesWorldService = $resource('data/countriesWorld.json', {}, {
+                query: {
+                    method: 'GET',
+                    params: {
+                    },
+                    isArray: false
+                }
+            });
+
+            searchFunction =
+                function () {
+                    return searchService.get();
                 };
 
-                return {
-                    search: searchFunction
+            loadKeywordListFunction =
+                function (keywordGroup) {
+                    switch (keywordGroup) {
+                    case 'cuashi_keyword':
+                        return cuashiKeywordsService.query();
+                    case 'inspire_keyword':
+                        return inspireKeywordsService.query();
+                    case 'inspire_topic':
+                        return inspireTopicsService.query();
+                    case 'keyword':
+                        return keywordsService.query();
+                    default:
+                        return null;
+                    }
                 };
-            }
+
+            loadCountriesListFunction =
+                function (countryGroup) {
+                    switch (countryGroup) {
+                    case 'countries_world':
+                        return countriesWorldService.query();
+                    case 'countries_europe':
+                        return countriesEuropeService.query();
+                    default:
+                        return null;
+                    }
+                };
+
+            return {
+                search: searchFunction,
+                loadKeywordList: loadKeywordListFunction,
+                loadCountriesList: loadCountriesListFunction
+            };
+        }
         ]);

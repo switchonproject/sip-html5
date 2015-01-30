@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <h3 class="modal-title">Object info of {{object.name}}</h3>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Name:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Description:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.description}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Keywords:</label>
+            </div>
+            <div class="col-lg-9">
+                <span ng-repeat="tag in object.tags">
+                    <span class="label label-primary">{{tag.name}}</span>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Topic:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.topiccategory.name ? object.topiccategory.name : '[none]'}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Point of Contact:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.contact.name ? object.contact.name : '[none]'}} ({{object.contact.organisation ? object.contact.organisation : 'no organisation'}})
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Time Range:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}} - {{object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Last modification:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.lastmodificationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Access limitations:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.accesslimitations.name ? object.accesslimitations.name : 'unknown'}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>License:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.licensestatement ? object.licensestatement : 'unknown'}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="closeInfoView()">OK</button>
+</div>

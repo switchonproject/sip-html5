@@ -1,0 +1,374 @@
+{
+    "$self": "/SWITCHON.RESOURCE/132",
+    "id": 132,
+    "fromdate": "2012-01-01T00:00:00.000Z",
+    "accessconditions": {
+        "$self": "/SWITCHON.TAG/866",
+        "id": 866,
+        "name": "other",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/145",
+            "id": 145,
+            "name": "access conditions",
+            "description": "License regulating the conditions for access and use of the data (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "spatialcoverage": {
+        "$self": "/SWITCHON.GEOM/136",
+        "id": 136,
+        "geo_field": "SRID=4326;POLYGON ((-180 -90, 180 -90, 180 90, -180 90, -180 -90))"
+    },
+    "todate": "2013-12-31T00:00:00.000Z",
+    "srid": {
+        "$self": "/SWITCHON.TAG/226",
+        "id": 226,
+        "name": "EPSG:4326",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/167",
+            "id": 167,
+            "name": "srid",
+            "description": "The Spatial Reference System Identifier (SRID) of the spatial coverage of the resource EPSG format (open group with some predefined tags)."
+        },
+        "description": "WGS 84 / World Geodetic System 1984"
+    },
+    "conformity": {
+        "$self": "/SWITCHON.TAG/253",
+        "id": 253,
+        "name": "Not evaluated",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/150",
+            "id": 150,
+            "name": "conformity",
+            "description": "This is a citation of the implementing rules adopted under Article 7(1) of Directive 2007/2/EC or other specification to which a particular resource conforms. (fixed group)"
+        },
+        "description": "Not evaluated"
+    },
+    "language": {
+        "$self": "/SWITCHON.TAG/145",
+        "id": 145,
+        "name": "eng",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/157",
+            "id": 157,
+            "name": "language",
+            "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+        },
+        "description": "English"
+    },
+    "description": "The GlobCover Portal provides access to the results of the GlobCover project. GlobCover is an ESA initiative which began in 2005 in partnership with JRC, EEA, FAO, UNEP, GOFC-GOLD and IGBP. The aim of the project was to develop a service capable of delivering global composites and land cover maps using as input observations from the 300m MERIS sensor on board the ENVISAT satellite mission. ESA makes available the land cover maps, which cover 2 periods: December 2004 - June 2006 and January - December 2009.",
+    "type": {
+        "$self": "/SWITCHON.TAG/254",
+        "id": 254,
+        "name": "external data",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/164",
+            "id": 164,
+            "name": "resource type",
+            "description": "SIP internal type of the resource (fixed group)."
+        },
+        "description": "This is data available as open data from any source on the Internet in a format, which can be directly used in experiments in the Laboratory."
+    },
+    "location": {
+        "$self": "/SWITCHON.TAG/865",
+        "id": 865,
+        "name": "World",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/158",
+            "id": 158,
+            "name": "location",
+            "description": "Geographic Location of the resource (covered by the data). E.g. Continent, Country, Region, City, etc. Open Group. (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "topiccategory": {
+        "$self": "/SWITCHON.TAG/236",
+        "id": 236,
+        "name": "imageryBaseMapsEarthCover",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/168",
+            "id": 168,
+            "name": "topic category",
+            "description": "High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search (fixed group)."
+        },
+        "description": "base maps Examples: land cover, topographic maps, imagery, unclassified images, annotations"
+    },
+    "creationdate": "2012-01-01T00:00:00.000Z",
+    "name": "Global Land Cover Product (2005 to 2006)",
+    "licensestatement": "The GlobCover products have been processed by ESA and by the Université catholique de Louvain. They are made available to the public by ESA. You may use the GlobCover land cover map for educational and/or scientific purposes, without any fee on the condition that you credit ESA and the Université catholique de Louvain as the source of the GlobCover products: Copyright notice: © ESA 2010 and UCLouvain Should you write any scientific publication on the results of research activities that use GlobCover products as input, you shall acknowledge the ESA GlobCover Project in the text of the publication and provide ESA with an electronic copy of the publication (due@esa.int). If you wish to use the GlobCover products in advertising or in any commercial promotion, you shall acknowledge the ESA GlobCover Project and you must submit the layout to ESA for approval beforehand (due@esa.int).",
+    "tags": [{
+            "$self": "/SWITCHON.TAG/140",
+            "id": 140,
+            "name": "earth science",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/131",
+            "id": 131,
+            "name": "land surface",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/156",
+                "id": 156,
+                "name": "keywords - open",
+                "description": "User defined to describe the subject (open group with several predefined tags)."
+            },
+            "description": "n/a"
+        }, {
+            "$self": "/SWITCHON.TAG/107",
+            "id": 107,
+            "name": "Land use",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/155",
+                "id": 155,
+                "name": "keywords - INSPIRE themes 1.0",
+                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+            },
+            "description": "Territory characterised according to its current and future planned functional dimension or socio-economic purpose (e.g. residential, industrial, commercial, agricultural, forestry, recreational)."
+        }, {
+            "$self": "/SWITCHON.TAG/106",
+            "id": 106,
+            "name": "Land cover",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/155",
+                "id": 155,
+                "name": "keywords - INSPIRE themes 1.0",
+                "description": "Keywords from  Gemet – INSPIREthemes, version 1.0, publication, 2008-06-01 Hydrography (fixed group)."
+            },
+            "description": "Physical and biological cover of the earth's surface including artificial surfaces, agricultural areas, forests, (semi-)natural areas, wetlands, water bodies."
+        }, {
+            "$self": "/SWITCHON.TAG/262",
+            "id": 262,
+            "name": "dataset",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/166",
+                "id": 166,
+                "name": "scope",
+                "description": "Scope of the resource. A codelist used in hierarchyLevel, DQ_Scope.level, and updateScope (fixed group with tags from a standard codelist)"
+            },
+            "description": "information applies to the dataset"
+        }],
+    "contact": {
+        "$self": "/SWITCHON.CONTACT/62",
+        "id": 62,
+        "organisation": "ESA",
+        "description": null,
+        "name": "test2",
+        "email": "fabrizio.ramoino@esa.int spaceinimages@esa.int education@esa.int",
+        "url": null,
+        "role": {
+            "$self": "/SWITCHON.TAG/221",
+            "id": 221,
+            "name": "pointOfContact",
+            "taggroup": {
+                "$self": "/SWITCHON.TAGGROUP/165",
+                "id": 165,
+                "name": "role",
+                "description": "Function performed by the responsible party (fixed group, standard codelist)."
+            },
+            "description": "Party that can be contacted for acquiring knowledge about or acquisition of the data resource. Person or organization that can be contacted to acquire data on the resource."
+        }
+    },
+    "geography": null,
+    "representation": [{
+            "$self": "/SWITCHON.REPRESENTATION/130",
+            "id": 130,
+            "name": "Global Land Cover Product (2005 to 2006) Representation",
+            "description": "Representation of Resource Global Land Cover Product (2005 to 2006)",
+            "content": null,
+            "type": {
+                "$self": "/SWITCHON.TAG/212",
+                "id": 212,
+                "name": "original data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/163",
+                    "id": 163,
+                    "name": "representation type",
+                    "description": "SIP internal type of the representation of the resource (fixed group)."
+                },
+                "description": "The representation holds the original data of the resource"
+            },
+            "function": {
+                "$self": "/SWITCHON.TAG/71",
+                "id": 71,
+                "name": "download",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/152",
+                    "id": 152,
+                    "name": "function",
+                    "description": "Function that can be perfomred following the contentLocation link to the resource representation (fixed group, standard codelist)."
+                },
+                "description": "link will get resource. The function of the link is to get a representation of the resource"
+            },
+            "protocol": {
+                "$self": "/SWITCHON.TAG/197",
+                "id": 197,
+                "name": "WWW:LINK-1.0-http--link",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/161",
+                    "id": 161,
+                    "name": "protocol",
+                    "description": "Protocol of the service that can be accessed at the contentLocation of the resource representation (open group with several predefined tags from standard codelists)."
+                },
+                "description": "Web Address (URL), should be used when no further information about the resource is available"
+            },
+            "applicationprofile": null,
+            "uuid": null,
+            "temporalresolution": null,
+            "spatialresolution": "300000m",
+            "spatialscale": null,
+            "contentlocation": "http://due.esrin.esa.int/globcover/LandCover_V2.2/Globcover_V2.2_Global.zip",
+            "tags": [],
+            "contenttype": {
+                "$self": "/SWITCHON.TAG/53",
+                "id": 53,
+                "name": "application/zip",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/151",
+                    "id": 151,
+                    "name": "content type",
+                    "description": "MIME Type of the representation (open group which several predefined tags)."
+                },
+                "description": "zip archive file format"
+            },
+            "uploadstatus": null,
+            "uploadmessage": null
+        }],
+    "lastmodificationdate": "2012-01-01T00:00:00.000Z",
+    "metadata": [{
+            "$self": "/SWITCHON.METADATA/253",
+            "id": 253,
+            "name": "SWITCH-ON Basic Meta-Data",
+            "tags": [],
+            "description": "Meta-Data record created, derived or imported by the SWITCH-ON project according to the SWITCH-ON Standard Information Model (SIM) for Meta-Data for the SWITCH-ON Spatial Information Platform (SIP).",
+            "contact": {
+                "$self": "/SWITCHON.CONTACT/37",
+                "id": 37,
+                "organisation": "SWITCH-ON",
+                "description": "Sharing Water-related Information to Tackle Changes in the Hydrosphere – for Operational Needs (SWITCH-ON).",
+                "name": "Emma Lagerbäck Adolphi",
+                "email": "emma.l.adolphi@gmail.com",
+                "url": "http://www.water-switch-on.eu/",
+                "role": {
+                    "$self": "/SWITCHON.TAG/218",
+                    "id": 218,
+                    "name": "user",
+                    "taggroup": {
+                        "$self": "/SWITCHON.TAGGROUP/165",
+                        "id": 165,
+                        "name": "role",
+                        "description": "Function performed by the responsible party (fixed group, standard codelist)."
+                    },
+                    "description": "Party that uses the resource. Person or organization that is, or can be, the key user of the resource."
+                }
+            },
+            "type": {
+                "$self": "/SWITCHON.TAG/177",
+                "id": 177,
+                "name": "basic meta-data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/160",
+                    "id": 160,
+                    "name": "meta-data type",
+                    "description": "SIP internal type of the Meta-Data Record (fixed group)."
+                },
+                "description": "Type of the Meta-Data Record. \"basic meta-data\" refers to meta-data collected by switch-on according to the SIM meta-data schema. In fact, this meta-meta-data record refers to enclosing resource meta-data record."
+            },
+            "language": {
+                "$self": "/SWITCHON.TAG/145",
+                "id": 145,
+                "name": "eng",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/157",
+                    "id": 157,
+                    "name": "language",
+                    "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+                },
+                "description": "English"
+            },
+            "standard": {
+                "$self": "/SWITCHON.TAG/1387",
+                "id": 1387,
+                "name": "SWITCH-ON SIM",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/159",
+                    "id": 159,
+                    "name": "meta-data standard",
+                    "description": "Official standard on which the meta-data record is based (open group with some predefined tags)."
+                },
+                "description": "Meta-Data Record compliant to the Standard Information Model (SIM) of the Spatial Information Platform (SIP) of the EU FP7 project SWITCH-ON."
+            },
+            "uuid": null,
+            "contentlocation": null,
+            "creationdate": "2012-01-01T00:00:00.000Z",
+            "contenttype": null,
+            "content": null
+        }, {
+            "$self": "/SWITCHON.METADATA/254",
+            "id": 254,
+            "name": "Basic Lineage Meta-Data",
+            "tags": [],
+            "description": "\"The geometric corrections are done using the AMORGOS tool (Bourg et al., 2007) provided by ESA and developed by ACRI. AMORGOS gives the geographical location (latitude and longitude) and the altitude for every pixel in the unprojected grid image. Software inputs are the MERIS FRS data, altitude files and operational or precise orbit files. Digital Elevation Model (DEM) used for orthorectification is based on the ACE DEM and is called Getasse 30. The atmospheric correction permits to transform Top of Atmosphere (TOA) radiances into surface reflectances. The effects of Rayleigh and aerosol scattering and gaseous absorption are taken into account. A neural network based on the so-called MOMO method (Fischer and Grassl, 1991) is applied with several inputs. Major input is the aerosol content which is taken from LARS_RR_L3 monthly products for 2009. Ozone is derived from European Climate Meteorological Weather Forecast (ECMWF) data present in the MERIS auxiliary data, O2 and H2O are derived from particular spectral bands plus polynomial coefficients from LUT delivered by ESA (Pelligrini et al., 2004). Two methods are combined to screen clouds, the first one using the MOMO method already quoted, and the second one using thresholds of reflectance on the bands at 443, 753, 760 and 865 nm. From the first method, two output states (clear and cloud) are possible and with the second one, four states can be detected (clear, thin cloud, dense cloud and snow). The final cloud mask merges both results excluding snow and clear states. The “Cloud Top Height” is also estimated for a better determination of cloud shadows and the snow reflectance is kept at its TOA level. The original MERIS level 1B Land/Ocean mask that covers sea, oceans, and the largest in-land lakes is applied and the reflectances are computed only for the unmasked water bodies. Yet, this mask presents some geo-location inaccuracies and is therefore not absolutely correct. In order to take into account these inaccuracies, a Land/Water and Water/Land reclassification is applied to finally generate status “Land”, “Water” or “Flooded” (corresponding to pixels declared wrongly as “Land” before the reclassification). Two methods are combined to reduce the directional effects due to variations of sun and view geometry in the successive measurements of surface reflectances. The Mean Compositing method (Vancutsem et al., 2007) is first processed over a compositing period of reference. This period is of 2 weeks for the internal biweekly composites, of 2 months for the bimonthly composites and of 12 months for the annual composite. An iterative procedure is then applied for detecting “valid” surface reflectance values. Finally, a mean is applied over the “valid” surface spectral reflectances at several temporal frequencies according to the products type. \"",
+            "contact": null,
+            "type": {
+                "$self": "/SWITCHON.TAG/180",
+                "id": 180,
+                "name": "lineage meta-data",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/160",
+                    "id": 160,
+                    "name": "meta-data type",
+                    "description": "SIP internal type of the Meta-Data Record (fixed group)."
+                },
+                "description": "Type of the Meta-Data Record. \"lineage meta-data\" refers to meta-data about the lineage of the resource, e.g. a protocol of an experiment."
+            },
+            "language": {
+                "$self": "/SWITCHON.TAG/145",
+                "id": 145,
+                "name": "eng",
+                "taggroup": {
+                    "$self": "/SWITCHON.TAGGROUP/157",
+                    "id": 157,
+                    "name": "language",
+                    "description": "The language(s) used within the resource or in which the metadata elements are expressed.  The value domain of this tag is limited to the languages defined in ISO 639-2."
+                },
+                "description": "English"
+            },
+            "standard": null,
+            "uuid": null,
+            "contentlocation": null,
+            "creationdate": "2012-01-01T00:00:00.000Z",
+            "contenttype": null,
+            "content": null
+        }],
+    "accesslimitations": {
+        "$self": "/SWITCHON.TAG/1",
+        "id": 1,
+        "name": "no limitation",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/146",
+            "id": 146,
+            "name": "access limitations",
+            "description": "Limitations on public access in accordance to Article 13 of Directive 2007/2/EC (fixed group with tags from a standard codelist)."
+        },
+        "description": "no limitation"
+    },
+    "uuid": "urn:x-waterswitchon:dataset:europeanspaceagency:globallandcoverproduct2005-06:ela4",
+    "collection": {
+        "$self": "/SWITCHON.TAG/1150",
+        "id": 1150,
+        "name": "ESA Globcover 2005-06",
+        "taggroup": {
+            "$self": "/SWITCHON.TAGGROUP/149",
+            "id": 149,
+            "name": "collection",
+            "description": "Assigns the resource to a collection of resources for cataloguing purposes, e.g. SWITCH-ON Experiment Results, etc. (open group with some predefined tags)."
+        },
+        "description": "n/a"
+    },
+    "publicationdate": "2012-01-01T00:00:00.000Z"
+}

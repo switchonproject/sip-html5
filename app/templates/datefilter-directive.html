@@ -6,16 +6,16 @@
                role="form"  
                novalidate>
             <div class="form-group">
-                <label for="fromDate">Start Date: </label>
-                <input class="form-control" name="fromDate" id="fromDate" type="date" 
-                       ng-model="fromDate"
+                <label for="fromDateField">Start Date: </label>
+                <input class="form-control" name="fromDateField" id="fromDateField" type="date" 
+                       ng-model="filterExpressions.fromDate"
                        />
             </div>
 
             <div class="form-group">
-                <label for="toDate">End Date: </label>
-                <input class="form-control" name="toDate" id="toDate" type="date" 
-                       placeholder="yyyy-MM-dd" ng-model="toDate"/>
+                <label for="toDateField">End Date: </label>
+                <input class="form-control" name="toDateField" id="toDateField" type="date" 
+                       placeholder="yyyy-MM-dd" ng-model="filterExpressions.toDate"/>
             </div>
         </form>
     </div>

@@ -21,7 +21,9 @@
     "bootstrap": "3.3.1",
     "angular-ui-router": "0.2.13",
     "leaflet": "0.7.3",
-    "angular-leaflet-directive": "0.7.11"
+    "angular-leaflet-directive": "0.7.11",
+    "angular-strap": "2.1.6",
+    "ng-table": "0.4.3"
   },
   "devDependencies": {
     "angular-mocks": "1.2.25",

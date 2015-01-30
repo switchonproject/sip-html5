@@ -10,7 +10,8 @@ angular.module(
                 templateUrl: 'templates/usb-directive.html',
                 scope: {
                      filterExpressions: '=',
-                     resultSet: '=resourceCollection'
+                     resultSet: '=resourceCollection',
+                     notificationFunction: '&?'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.usbDirectiveController'
                 /*controllerAs: 'usb',

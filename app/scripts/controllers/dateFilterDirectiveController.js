@@ -1,43 +1,49 @@
 angular.module(
-        'eu.water-switch-on.sip.controllers'
-        ).controller(
-        'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
-        [
-            '$scope', '$filter',
-            function ($scope, $filter) {
-                'use strict';
+    'eu.water-switch-on.sip.controllers'
+).controller(
+    'eu.water-switch-on.sip.controllers.dateFilterDirectiveController',
+    [
+        '$scope',
+        function ($scope) {
+            'use strict';
 
-                //$scope.fromDate; = new Date(2013, 9, 22);
-                //$scope.toDate;  = new Date(2015, 1, 15);
+            $scope.createFilterExpression = function (keyword, parameter) {
+                var filterExpression;
 
-                //var dateformat = 'yyyy-MM-dd HH:mm:ss Z'
-                var dateformat = 'yyyy-MM-dd';
-                $scope.createFilterExpression = function (keyword, parameter)
-                {
-                    var filterExpression = '';
+                if (parameter) {
+                    filterExpression = (keyword + ':');
+                    filterExpression += ('"' + parameter + '" ');
+                }
 
-                    if (typeof parameter !== 'undefined' && parameter !== null && parameter instanceof Date)
-                    {
-                        filterExpression += (keyword + ':');
-                        filterExpression += ('"' + $filter('date')(parameter, dateformat) + '" ');
-                        
+                return filterExpression;
+            };
+
+            $scope.appendFilterExpression = function (filterExpression) {
+                if (filterExpression && filterExpression.length > 0) {
+                    if ($scope.filterExpressions.universalSearchString) {
+                        $scope.filterExpressions.universalSearchString += (' ' + filterExpression);
+                    } else {
+                        $scope.filterExpressions.universalSearchString = filterExpression;
                     }
-                    console.log(filterExpression);
-                    return filterExpression;
-                };
+                }
+            };
 
 
-                $scope.$watch('fromDate', function () {
+            $scope.$watch('filterExpressions.fromDate', function (newValue) {
 
-                    var filterExpression = $scope.createFilterExpression('fromDate', $scope.fromDate);
-                    $scope.filterExpressions.universalSearchString += filterExpression;
-                });
+                if (newValue) {
+                    var filterExpression = $scope.createFilterExpression('fromDate', newValue);
+                    $scope.appendFilterExpression(filterExpression);
+                }
+            });
 
-                $scope.$watch('toDate', function () {
+            $scope.$watch('filterExpressions.toDate', function (newValue) {
 
-                    var filterExpression = $scope.createFilterExpression('toDate', $scope.toDate);
-                    $scope.filterExpressions.universalSearchString += filterExpression;
-                });
-            }
-        ]
-        );
+                if (newValue) {
+                    var filterExpression = $scope.createFilterExpression('toDate', newValue);
+                    $scope.appendFilterExpression(filterExpression);
+                }
+            });
+        }
+    ]
+);

@@ -1,3 +1,39 @@
+.tools {
+    width: 85px;
+}
+
+.name {
+    width: 20%;
+    min-width: 150px;
+}
+
+.date {
+    width: 220px;
+    min-width: 88px;
+}
+
+.btn-icon:hover {
+    cursor: pointer;
+}
+
+.btn-icon.disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+.btn-xs.ws-button {
+    background-color: transparent;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.ws-button:hover {
+    border-color: #ccc
+}
+
+.dropdown-menu.hoverdropdown {
+    margin: 0px;
+}
 .switchon-viewbutton {
     margin-top: 8px;
     margin-bottom: 3px;
@@ -18,6 +54,30 @@
     width: 300px;
     height: 100%;
     margin-top: 100px;
+}
+
+.switchon-ribbon-panel {
+    float:left;
+    clear:none;
+    height: 240px;
+    border-right-color: #999999;
+    border-right-width: 1px;
+    border-right-style: solid;
+    margin: 8px;
+    padding-right: 8px;
+}
+
+.switchon-ribbon {
+    width: 100%;
+}
+
+.switchon-ribbon-popover
+{
+    max-width: 1000px;
+}
+
+.switchon-ribbon-popover.bottom > .arrow {
+    left: 10%;
 }
 
 .navbar-brand {
@@ -124,3 +184,59 @@
         margin-right: 0;
     }
 }
+/*
+***************************************************
+
+cismet GmbH, Saarbruecken, Germany
+
+              ... and it just works.
+
+***************************************************
+*/
+/* 
+    Created on : 14.01.2015, 09:11:24
+    Author     : Pascal Dihé <pascal.dihe@cismet.de>
+*/
+
+
+/*
+usb
+{
+    border-width: 2px;
+    border-bottom-color:  darkgreen;
+    border-style: solid;
+    margin: 10px;
+    float:left;
+    clear:both;
+}
+
+usb div
+{
+    border-width: 1px;
+    border-color:  fuchsia;
+    border-style: dotted;
+    margin: 3px;
+    float:left;
+    clear:none;
+}
+
+usb input
+{
+    float:left;
+    clear:none;
+}
+
+usb input.static
+{
+    color:blue;
+    font-style: italic;
+}
+
+
+
+usb input.ng-invalid {
+    color:white;
+    background: red;
+  }
+
+*/
