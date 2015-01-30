@@ -99,18 +99,23 @@
             <icon>DownFillTriangleIcon%7Cxsmall</icon>
           </controlProperties>
         </control>
-        <control controlID="19" controlTypeID="com.balsamiq.mockups::Canvas" x="938" y="150" w="51" h="39" measuredW="100" measuredH="70" zOrder="19" locked="false" isInGroup="0">
+        <control controlID="19" controlTypeID="com.balsamiq.mockups::Canvas" x="938" y="151" w="39" h="39" measuredW="100" measuredH="70" zOrder="20" locked="false" isInGroup="0">
           <controlProperties>
             <color>15658734</color>
           </controlProperties>
         </control>
-        <control controlID="20" controlTypeID="com.balsamiq.mockups::Label" x="940" y="157" w="48" h="-1" measuredW="25" measuredH="24" zOrder="20" locked="false" isInGroup="0">
+        <control controlID="20" controlTypeID="com.balsamiq.mockups::Label" x="940" y="157" w="48" h="-1" measuredW="25" measuredH="24" zOrder="19" locked="false" isInGroup="0">
           <controlProperties>
             <align>center</align>
             <bold>true</bold>
             <color>0</color>
             <size>16</size>
             <text>GO</text>
+          </controlProperties>
+        </control>
+        <control controlID="21" controlTypeID="com.balsamiq.mockups::Icon" x="946" y="158" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="21" locked="false" isInGroup="0">
+          <controlProperties>
+            <icon>SearchIcon%7Csmall</icon>
           </controlProperties>
         </control>
       </groupChildrenDescriptors>
