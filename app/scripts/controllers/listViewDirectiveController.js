@@ -9,11 +9,10 @@ angular.module(
         '$rootScope',
         'ngTableParams',
         'eu.water-switch-on.sip.services.TagGroupService',
-        '$q',
-        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService, $q) {
+        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService) {
             'use strict';
 
-            var initialSorting, keywordLookupLists = {};
+            var initialSorting, keywordLookupLists, generateKeywordList;
 
             $scope.$watch('tableData', function () {
                 $scope.tableParams.reload();
@@ -21,6 +20,22 @@ angular.module(
 
             initialSorting = {};
             initialSorting['object.name'] = 'asc';
+            keywordLookupLists = {};
+            generateKeywordList = function (keywordGroup) {
+                var keywordList = TagGroupService.getKeywordList(keywordGroup);
+                if (!keywordList.$resolved) {
+                    console.log('keyword list not yet resolved');
+                    keywordList.$promise.then(function () {
+                        console.log('keyword list generated');
+                        keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
+                    });
+                } else {
+                    keywordLookupLists[keywordGroup] =  keywordList.join('|').toLowerCase().split('|');
+                }
+            };
+
+            generateKeywordList('cuashi-keyword');
+            keywordLookupLists['query-keyword'] = $scope.queryKeywordList;
 
             $scope.tableParams = new NgTableParams({
                 page: 1,
@@ -70,31 +85,9 @@ angular.module(
                     if (keywordLookupLists.hasOwnProperty(keywordGroup)) {
                         return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
                     }
-
-                    // lazy load keyword list
-                    var keywordList = TagGroupService.getKeywordList(keywordGroup);
-                    if (!keywordList.$resolved) {
-                        console.log('keyword list not yet resolved');
-                        keywordList.$promise.then(function () {
-                            if (keywordList.length > 0) {
-                                if (!keywordLookupLists.hasOwnProperty(keywordGroup))
-                                {
-                                    console.log('generating lookup list');
-                                    keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
-                                    return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
-                                }
-                                return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
-                            }
-                            return false;
-                        });
-                    } else {
-                        console.log('keyword list already resolved');
-                        keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
-                        return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
-                    }
                 }
                 return false;
             };
         }
     ]
-    );
+);
