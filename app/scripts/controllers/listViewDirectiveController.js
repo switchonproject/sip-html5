@@ -1,6 +1,6 @@
 angular.module(
     'eu.water-switch-on.sip.controllers'
-).controller(
+    ).controller(
     'eu.water-switch-on.sip.controllers.listViewDirectiveController',
     [
         '$scope',
@@ -8,10 +8,12 @@ angular.module(
         '$modal',
         '$rootScope',
         'ngTableParams',
-        function ($scope, $filter, $modal, $rootScope, NgTableParams) {
+        'eu.water-switch-on.sip.services.TagGroupService',
+        '$q',
+        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService, $q) {
             'use strict';
 
-            var initialSorting;
+            var initialSorting, keywordLookupLists = {};
 
             $scope.$watch('tableData', function () {
                 $scope.tableParams.reload();
@@ -37,10 +39,10 @@ angular.module(
 
             $scope.showInfo = function (object) {
                 var modalInstance, scope;
-                
+
                 scope = $rootScope.$new(true);
                 scope.object = object;
-                
+
                 modalInstance = $modal.open({
                     templateUrl: 'templates/object-info-modal-template.html',
                     controller: 'eu.water-switch-on.sip.controllers.objectInfoModalController',
@@ -48,10 +50,10 @@ angular.module(
                     size: 'lg'
                 });
             };
-            
+
             $scope.showDownload = function (object) {
                 var modalInstance, scope;
-                
+
                 scope = $rootScope.$new(true);
                 scope.object = object;
 
@@ -62,6 +64,37 @@ angular.module(
                     size: 'lg'
                 });
             };
+
+            $scope.isHighlightKeyword = function (keywordGroup, keyword) {
+                if (keyword !== undefined) {
+                    if (keywordLookupLists.hasOwnProperty(keywordGroup)) {
+                        return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
+                    }
+
+                    // lazy load keyword list
+                    var keywordList = TagGroupService.getKeywordList(keywordGroup);
+                    if (!keywordList.$resolved) {
+                        console.log('keyword list not yet resolved');
+                        keywordList.$promise.then(function () {
+                            if (keywordList.length > 0) {
+                                if (!keywordLookupLists.hasOwnProperty(keywordGroup))
+                                {
+                                    console.log('generating lookup list');
+                                    keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
+                                    return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
+                                }
+                                return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
+                            }
+                            return false;
+                        });
+                    } else {
+                        console.log('keyword list already resolved');
+                        keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
+                        return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
+                    }
+                }
+                return false;
+            };
         }
     ]
-);
+    );

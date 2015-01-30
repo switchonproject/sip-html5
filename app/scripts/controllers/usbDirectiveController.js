@@ -81,7 +81,7 @@ angular.module(
 
             };
 
-            $scope.pattern = /^(\w+:".+"\s?)+$/;
+            $scope.pattern = /(^[A-Za-z_\-]+:"[\s\S]+"+\s?$)+/;
 
             $scope.clear = function () {
                 $scope.filterExpressions.universalSearchString = '';
