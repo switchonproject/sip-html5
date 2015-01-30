@@ -69,7 +69,7 @@ angular.module(
                 } else if (type === 'error') {
                     if ($scope.notificationFunction) {
                         $scope.notificationFunction({
-                            message: 'Search could no be perfomed:' + $scope.resultSet.$error,
+                            message: 'Search could not be perfomed:' + $scope.resultSet.$error,
                             type: 'danger'
                         });
                     }
