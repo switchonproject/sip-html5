@@ -11,7 +11,7 @@ angular.module(
                 var password = 'cismet';
                 var authdata = Base64.encode(username + ':' + password);
 
-                var searchResource = $resource('http://switchon.cismet.de:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
+                var searchResource = $resource('http://switchon.cismet.de/legacy-rest1/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
                         {
                             limit: 20,
                             offset: 0,
@@ -71,7 +71,7 @@ angular.module(
 
                         objsQ = [];
                         entityResource = $resource(
-                            'http://switchon.cismet.de:8890/SWITCHON.:classname/:objId',
+                            'http://switchon.cismet.de/legacy-rest1/SWITCHON.:classname/:objId',
                             {
                                 omitNullValues: true,
                                 deduplicate: true
@@ -144,7 +144,7 @@ angular.module(
                     };
 
                     $resource(
-                        'http://switchon.cismet.de:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                        'http://switchon.cismet.de/legacy-rest1/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                         {},
                         {
                             exec: {
