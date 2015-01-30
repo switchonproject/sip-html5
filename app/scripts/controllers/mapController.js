@@ -10,11 +10,10 @@ angular.module(
         function ($scope, $window, $timeout, leafletData) {
             'use strict';
 
-            var drawCtrl, featureGroup, fireResize, mapSearchIcon, wkt;
+            var drawCtrl, featureGroup, fireResize, MapSearchIcon, wkt;
 
 
             // ---- resize START ----
-            
             fireResize = function (animate) {
                 $scope.currentHeight = $window.innerHeight - 100;
                 $scope.currentWidth = $window.innerWidth - ($scope.isResultShowing ? 250 : 0);
@@ -38,10 +37,9 @@ angular.module(
             angular.element($window).bind('resize', function () {
                 fireResize(false);
             });
-            
             // ---- resize END ----
-            
-            mapSearchIcon = L.Icon.extend({
+
+            MapSearchIcon = L.Icon.extend({
                 options: {
                     shadowUrl: null,
                     iconAnchor: new L.Point(16, 31),
@@ -74,27 +72,27 @@ angular.module(
                         }
                     },
                     marker: {
-                        icon: new mapSearchIcon()
+                        icon: new MapSearchIcon()
                     }
                 },
                 edit: {
                     featureGroup: featureGroup
                 }
             });
-            
+
             leafletData.getMap('mainmap').then(function (map) {
                 map.addLayer(featureGroup);
                 map.addControl(drawCtrl);
-                
-                map.on('draw:created', function(event) {
+
+                map.on('draw:created', function (event) {
                     featureGroup.removeLayer($scope.searchGeomLayer);
                     $scope.searchGeomLayer = event.layer;
                     featureGroup.addLayer($scope.searchGeomLayer);
                 });
-                
-                map.on('draw:deleted', function(event) {
+
+                map.on('draw:deleted', function (event) {
                     event.layers.eachLayer(function (layer) {
-                        if(layer === $scope.searchGeomLayer) {
+                        if (layer === $scope.searchGeomLayer) {
                             featureGroup.removeLayer($scope.searchGeomLayer);
                             $scope.searchGeomLayer = null;
                         }
