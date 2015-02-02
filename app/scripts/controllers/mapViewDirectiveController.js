@@ -103,6 +103,17 @@ angular.module(
                 if (layer !== null) {
                     featureGroup.addLayer($scope.searchGeomLayer);
                 }
+                
+                if($scope.centerSearchGeometry) {
+                    leafletData.getMap('mainmap').then(function (map) {
+                        map.fitBounds(featureGroup.getBounds(), {
+                            animate: true, 
+                            pan: {animate: true, duration: 0.6},
+                            zoom: {animate: true},
+                            maxZoom: $scope.preserveZoomOnCenter ? map.getZoom() : null
+                        });
+                    });
+                }
             };
 
             internalChange = false;

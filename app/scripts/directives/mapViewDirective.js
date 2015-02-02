@@ -10,7 +10,9 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/map-view-directive.html',
                 scope: {
-                    searchGeomWkt: '='
+                    searchGeomWkt: '=',
+                    centerSearchGeometry: '=',
+                    preserveZoomOnCenter: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.mapViewDirectiveController'
             };
