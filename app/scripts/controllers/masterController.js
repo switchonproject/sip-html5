@@ -11,6 +11,7 @@ angular.module(
             $scope.data = {};
             $scope.data.message = 'Application loaded';
             $scope.data.messageType = 'success';
+            $scope.data.searchGeomWkt = '';
 
             $scope.isResultShowing = false;
             $scope.state = $state;
@@ -38,6 +39,16 @@ angular.module(
                 $scope.data.message = message;
                 $scope.data.messageType = type;
             };
+            
+            $scope.$watch('data.searchGeomWkt', function(n, o) {
+                if(n !== undefined && n !== o) {
+                    if($scope.filterExpressions.universalSearchString) {
+                        $scope.filterExpressions.universalSearchString += ' geo:"' + n + '"';
+                    } else {
+                        $scope.filterExpressions.universalSearchString = 'geo:"' + n + '"';
+                    }
+                }
+            });
         }
     ]
 );
