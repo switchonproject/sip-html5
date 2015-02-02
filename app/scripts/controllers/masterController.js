@@ -11,6 +11,7 @@ angular.module(
             $scope.data = {};
             $scope.data.message = 'Application loaded';
             $scope.data.messageType = 'success';
+            $scope.data.searchGeomWkt = '';
 
             $scope.isResultShowing = false;
             $scope.state = $state;

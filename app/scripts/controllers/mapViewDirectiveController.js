@@ -1,7 +1,7 @@
 angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
-    'eu.water-switch-on.sip.controllers.mapController',
+    'eu.water-switch-on.sip.controllers.mapViewDirectiveController',
     [
         '$scope',
         '$window',
@@ -10,7 +10,7 @@ angular.module(
         function ($scope, $window, $timeout, leafletData) {
             'use strict';
 
-            var drawCtrl, featureGroup, fireResize, MapSearchIcon, wkt;
+            var drawCtrl, featureGroup, fireResize, internalChange, MapSearchIcon, setSearchGeom, wicket;
 
 
             // ---- resize START ----
@@ -47,7 +47,7 @@ angular.module(
                     iconUrl: 'images/search_point_icon_32.png'
                 }
             });
-            wkt = new Wkt.Wkt();
+            wicket = new Wkt.Wkt();
             featureGroup = new L.FeatureGroup();
             drawCtrl = new L.Control.Draw({
                 draw: {
@@ -85,19 +85,60 @@ angular.module(
                 map.addControl(drawCtrl);
 
                 map.on('draw:created', function (event) {
-                    featureGroup.removeLayer($scope.searchGeomLayer);
-                    $scope.searchGeomLayer = event.layer;
-                    featureGroup.addLayer($scope.searchGeomLayer);
+                    setSearchGeom(event.layer);
                 });
 
                 map.on('draw:deleted', function (event) {
                     event.layers.eachLayer(function (layer) {
                         if (layer === $scope.searchGeomLayer) {
-                            featureGroup.removeLayer($scope.searchGeomLayer);
-                            $scope.searchGeomLayer = null;
+                            setSearchGeom(null);
                         }
                     });
                 });
+            });
+
+            setSearchGeom = function (layer) {
+                featureGroup.removeLayer($scope.searchGeomLayer);
+                $scope.searchGeomLayer = layer;
+                if (layer !== null) {
+                    featureGroup.addLayer($scope.searchGeomLayer);
+                }
+            };
+
+            internalChange = false;
+            $scope.$watch('searchGeomLayer', function (n, o) {
+                var wkt;
+
+                if (internalChange) {
+                    internalChange = false;
+                } else {
+                    if (n !== undefined && n !== o) {
+                        if (n === null) {
+                            wkt = '';
+                        } else {
+                            wicket.fromObject(n);
+                            wkt = wicket.write();
+                        }
+                        internalChange = true;
+                        $scope.searchGeomWkt = wkt;
+                    }
+                }
+            });
+
+            $scope.$watch('searchGeomWkt', function (n, o) {
+                if (internalChange) {
+                    internalChange = false;
+                } else {
+                    if (n && n !== o) {
+                        try {
+                            wicket.read(n);
+                            internalChange = true;
+                            setSearchGeom(wicket.toObject({color: '#7dcd7c', icon: new MapSearchIcon()}));
+                        } catch (e) {
+                            // ignore illegal wkt
+                        }
+                    }
+                }
             });
         }
     ]
