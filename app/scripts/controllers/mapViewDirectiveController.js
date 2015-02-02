@@ -66,11 +66,8 @@ angular.module(
                             color: '#7dcd7c'
                         }
                     },
-                    circle: {
-                        shapeOptions: {
-                            color: '#7dcd7c'
-                        }
-                    },
+                    // no circles for starters as not compatible with WKT
+                    circle: false,
                     marker: {
                         icon: new MapSearchIcon()
                     }
@@ -104,10 +101,10 @@ angular.module(
                     featureGroup.addLayer($scope.searchGeomLayer);
                 }
                 
-                if($scope.centerSearchGeometry) {
+                if ($scope.centerSearchGeometry) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(featureGroup.getBounds(), {
-                            animate: true, 
+                            animate: true,
                             pan: {animate: true, duration: 0.6},
                             zoom: {animate: true},
                             maxZoom: $scope.preserveZoomOnCenter ? map.getZoom() : null
