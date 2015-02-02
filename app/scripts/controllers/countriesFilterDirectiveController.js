@@ -4,11 +4,11 @@ angular.module(
     'eu.water-switch-on.sip.controllers.countriesFilterDirectiveController',
     [
         '$scope',
-        'eu.water-switch-on.sip.services.MockService',
-        function ($scope, MockService) {
+        'eu.water-switch-on.sip.services.TagGroupService',
+        function ($scope, TagGroupService) {
             'use strict';
 
-            $scope.countryList = MockService.loadCountriesList($scope.countryGroup);
+            $scope.countryList = TagGroupService.getCountryList($scope.countryGroup);
             $scope.country = null;
 
             $scope.createFilterExpression = function (country, parameter) {

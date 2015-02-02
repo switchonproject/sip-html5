@@ -8,7 +8,12 @@
 }
 
 .date {
-    width: 220px;
+    width: 180px;
+    min-width: 88px;
+}
+
+.tags {
+    width: 200px;
     min-width: 88px;
 }
 

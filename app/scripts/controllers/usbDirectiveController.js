@@ -69,7 +69,7 @@ angular.module(
                 } else if (type === 'error') {
                     if ($scope.notificationFunction) {
                         $scope.notificationFunction({
-                            message: 'Search could no be perfomed:' + $scope.resultSet.$error,
+                            message: 'Search could not be perfomed:' + $scope.resultSet.$error,
                             type: 'danger'
                         });
                     }
@@ -81,7 +81,7 @@ angular.module(
 
             };
 
-            $scope.pattern = /^(\w+:".+"\s?)+$/;
+            $scope.pattern = /(^[A-Za-z_\-]+:"[\s\S]+"+\s?$)+/;
 
             $scope.clear = function () {
                 $scope.filterExpressions.universalSearchString = '';
