@@ -9,12 +9,12 @@ angular.module(
                 getCountryListFunction;
 
             tagResources = {
-                'cuashi-keyword': 'data/cuashiKeywords.json',
-                'inspire-keyword': 'data/inspireKeywords.json',
-                'inspire-topic': 'data/freeKeywords.json',
-                'free-keyword': 'data/inspireTopics.json',
-                'world-country': 'data/countriesWorld.json',
-                'europe-country': 'data/countriesEurope.json'
+                'keyword-cuashi': 'data/cuashiKeywords.json',
+                'keyword-inspire': 'data/inspireKeywords.json',
+                'topic-inspire': 'data/inspireTopics.json',
+                'keyword-free': 'data/freeKeywords.json',
+                'country-world': 'data/countriesWorld.json',
+                'country-europe': 'data/countriesEurope.json'
             };
 
             tagGroups = {};
@@ -40,7 +40,7 @@ angular.module(
                     return tagGroups[tagGroup];
                 }
 
-                console.warn('unkonow  tag group:' + tagGroup);
+                console.warn('unknown  tag group:' + tagGroup);
                 //return array ? [] : {};
                 return null;
             };

@@ -23,18 +23,18 @@ angular.module(
             keywordLookupLists = {};
             generateKeywordList = function (keywordGroup) {
                 var keywordList = TagGroupService.getKeywordList(keywordGroup);
-                if (!keywordList.$resolved) {
+                if (keywordList && !keywordList.$resolved) {
                     console.log('keyword list not yet resolved');
                     keywordList.$promise.then(function () {
                         console.log('keyword list generated');
                         keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
                     });
-                } else {
+                } else if (keywordList) {
                     keywordLookupLists[keywordGroup] =  keywordList.join('|').toLowerCase().split('|');
                 }
             };
 
-            generateKeywordList('cuashi-keyword');
+            generateKeywordList('keyword-cuashi');
             keywordLookupLists['query-keyword'] = $scope.queryKeywordList;
 
             $scope.tableParams = new NgTableParams({
