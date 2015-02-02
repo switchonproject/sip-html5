@@ -100,7 +100,7 @@ angular.module(
                 if (layer !== null) {
                     featureGroup.addLayer($scope.searchGeomLayer);
                 }
-                
+
                 if ($scope.centerSearchGeometry) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(featureGroup.getBounds(), {
