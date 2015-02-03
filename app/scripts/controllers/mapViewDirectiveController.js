@@ -103,7 +103,7 @@ angular.module(
                     searchGroup.addLayer($scope.searchGeomLayer);
                 }
 
-                if ($scope.centerSearchGeometry) {
+                if ($scope.centerSearchGeometry && searchGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(searchGroup.getBounds(), {
                             animate: true,
@@ -167,7 +167,7 @@ angular.module(
                     objGroup.addLayer(renderer);
                 }
                 
-                if ($scope.centerObjects) {
+                if ($scope.centerObjects && objGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(objGroup.getBounds(), {
                             animate: true,
