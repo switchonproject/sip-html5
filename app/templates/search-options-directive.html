@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Filter Options</div>
+    <div class="panel-body">
+        <form name="optionsForm" id="optionsForm" novalidate> 
+            <div class="form-group">
+                <label for="geoIntersectsOption">Search Geometry</label>
+                <div class="radio">
+                    <label>
+                        <input name="geoIntersectsOption" 
+                               id="geoIntersectsOption" 
+                               type="radio" 
+                               ng-model="data.geoIntersects" 
+                               value="true"> Intersects
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="geoEnclosesOption" 
+                               id="geoEnclosesOption" 
+                               type="radio" 
+                               ng-model="data.geoIntersects" 
+                               value="false"> Encloses
+                    </label>
+                </div>
+
+                <!--
+                <label for="geoBufferField">Geometry Buffer</label>
+                <div class="input-group input-group-sm"
+                     ng-class="{'has-error': optionsForm.geoBufferField.$invalid}">
+                    <input type="text" class="form-control" 
+                           ng-pattern="pattern" 
+                           length="8" 
+                           name="geoBufferField" 
+                           id="geoBufferField" 
+                           placeholder="buffer in meters"
+                           ng-model="data.geoBuffer">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-disabled="optionsForm.geoBufferField.$invalid" ng-click="setGeoBuffer()">Apply</button>
+                    </span>
+                </div>
+                -->
+            </div>
+        </form>
+    </div>
+</div>

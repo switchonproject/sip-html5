@@ -4,6 +4,10 @@
     height: 34px;
 }
 
+.switchon-keywordgroup {
+    width:100%;
+}
+
 .switchon-alert {
     padding-top: 7px;
     /* padding-bottom: 0px; */
@@ -23,7 +27,8 @@
 .switchon-ribbon-panel {
     float:left;
     clear:none;
-    height: 240px;
+    min-height: 230px;
+    max-width: 230px;
     border-right-color: #999999;
     border-right-width: 1px;
     border-right-style: solid;
