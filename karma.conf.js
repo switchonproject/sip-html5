@@ -58,6 +58,7 @@ module.exports = function(config) {
         'target/dist/scripts/services/searchService.js',
         'target/dist/scripts/services/sessionService.js',
         'target/dist/scripts/services/tagGroupService.js',
+        'target/dist/scripts/services/featureRendererService.js',
         'target/dist/scripts/filters/_module.js',
         'target/dist/scripts/filters/textLengthFilter.js',
         'target/dist/bower_components/angular-mocks/angular-mocks.js',
