@@ -7,6 +7,7 @@ describe('Map View Directive Test Suite', function () {
 
         beforeEach(function () {
             module('eu.water-switch-on.sip.controllers');
+            module('de.cismet.cids.services');
             module('leaflet-directive');
         });
 
