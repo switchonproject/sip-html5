@@ -116,7 +116,8 @@ angular.module(
                 $scope.progressModal = $modal.open({
                     templateUrl: 'templates/search-progress-modal-template.html',
                     scope: modalScope,
-                    size: 'lg'
+                    size: 'lg',
+                    backdrop: 'static'
                 });
             };
 
