@@ -3,3 +3,8 @@ angular.module(
     [
     ]
 );
+angular.module(
+    'de.cismet.cids.services',
+    [
+    ]
+);

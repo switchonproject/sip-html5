@@ -21,6 +21,7 @@ angular.module(
             $scope.filterExpressions.fromDate = null;
             $scope.filterExpressions.toDate = null;
             $scope.data.resultSet = null;
+            $scope.data.resultObjects = [];
 
             $scope.activateView = function (state) {
                 $scope.showMessage(state + ' view showing', 'success');
@@ -47,6 +48,20 @@ angular.module(
                     } else {
                         $scope.filterExpressions.universalSearchString = 'geo:"' + n + '"';
                     }
+                }
+            });
+            
+            $scope.$watch('data.resultSet.$collection', function(n, o) {
+                var i, objs;
+                
+                if(n && n !== o) {
+                    objs = [];
+                    
+                    for(i = 0; i < n.length; ++i) {
+                        objs.push(n[i].object);
+                    }
+                    
+                    $scope.data.resultObjects = objs;
                 }
             });
         }

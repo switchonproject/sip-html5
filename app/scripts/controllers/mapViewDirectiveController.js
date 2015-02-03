@@ -7,13 +7,14 @@ angular.module(
         '$window',
         '$timeout',
         'leafletData',
-        function ($scope, $window, $timeout, leafletData) {
+        'de.cismet.cids.services.featureRendererService',
+        function ($scope, $window, $timeout, leafletData, rendererService) {
             'use strict';
 
-            var drawCtrl, featureGroup, fireResize, internalChange, MapSearchIcon, setSearchGeom, wicket;
+            var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects, 
+                setSearchGeom, wicket;
 
-
-            // ---- resize START ----
+            // <editor-fold defaultstate="collapsed" desc=" resize " >
             fireResize = function (animate) {
                 $scope.currentHeight = $window.innerHeight - 100;
                 $scope.currentWidth = $window.innerWidth - ($scope.isResultShowing ? 250 : 0);
@@ -37,8 +38,9 @@ angular.module(
             angular.element($window).bind('resize', function () {
                 fireResize(false);
             });
-            // ---- resize END ----
-
+            // </editor-fold>
+            
+            // <editor-fold defaultstate="collapsed" desc=" search geom " >
             MapSearchIcon = L.Icon.extend({
                 options: {
                     shadowUrl: null,
@@ -48,7 +50,7 @@ angular.module(
                 }
             });
             wicket = new Wkt.Wkt();
-            featureGroup = new L.FeatureGroup();
+            searchGroup = new L.FeatureGroup();
             drawCtrl = new L.Control.Draw({
                 draw: {
                     polyline: {
@@ -73,12 +75,12 @@ angular.module(
                     }
                 },
                 edit: {
-                    featureGroup: featureGroup
+                    featureGroup: searchGroup
                 }
             });
 
             leafletData.getMap('mainmap').then(function (map) {
-                map.addLayer(featureGroup);
+                map.addLayer(searchGroup);
                 map.addControl(drawCtrl);
 
                 map.on('draw:created', function (event) {
@@ -95,15 +97,15 @@ angular.module(
             });
 
             setSearchGeom = function (layer) {
-                featureGroup.removeLayer($scope.searchGeomLayer);
+                searchGroup.removeLayer($scope.searchGeomLayer);
                 $scope.searchGeomLayer = layer;
                 if (layer !== null) {
-                    featureGroup.addLayer($scope.searchGeomLayer);
+                    searchGroup.addLayer($scope.searchGeomLayer);
                 }
 
                 if ($scope.centerSearchGeometry) {
                     leafletData.getMap('mainmap').then(function (map) {
-                        map.fitBounds(featureGroup.getBounds(), {
+                        map.fitBounds(searchGroup.getBounds(), {
                             animate: true,
                             pan: {animate: true, duration: 0.6},
                             zoom: {animate: true},
@@ -148,6 +150,45 @@ angular.module(
                     }
                 }
             });
+            // </editor-fold>
+            
+            // <editor-fold defaultstate="collapsed" desc=" objects " >
+            objGroup = new L.FeatureGroup();
+            leafletData.getMap('mainmap').then(function (map) {
+                objGroup.addTo(map);
+            });
+
+            setObjects = function (objs) {
+                var i, renderer;
+
+                objGroup.clearLayers();
+                for(i = 0; i < objs.length; ++i) {
+                    renderer = rendererService.getFeatureRenderer(objs[i]);
+                    objGroup.addLayer(renderer);
+                }
+                
+                if ($scope.centerObjects) {
+                    leafletData.getMap('mainmap').then(function (map) {
+                        map.fitBounds(objGroup.getBounds(), {
+                            animate: true,
+                            pan: {animate: true, duration: 0.6},
+                            zoom: {animate: true},
+                            maxZoom: $scope.preserveZoomOnCenter ? map.getZoom() : null
+                        });
+                    });
+                }
+            };
+            
+            $scope.$watch('objects', function(n, o) {
+                if(n && n !== o) {
+                    setObjects(n);
+                }
+            });
+            
+            if ($scope.objects) {
+                setObjects($scope.objects);
+            }
+            // </editor-fold>
         }
     ]
 );

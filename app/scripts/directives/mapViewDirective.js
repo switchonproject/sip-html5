@@ -12,7 +12,9 @@ angular.module(
                 scope: {
                     searchGeomWkt: '=',
                     centerSearchGeometry: '=',
-                    preserveZoomOnCenter: '='
+                    preserveZoomOnCenter: '=',
+                    objects: '=',
+                    centerObjects: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.mapViewDirectiveController'
             };
