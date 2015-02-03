@@ -62,7 +62,8 @@ angular.module(
                     templateUrl: 'templates/object-info-modal-template.html',
                     controller: 'eu.water-switch-on.sip.controllers.objectInfoModalController',
                     scope: scope,
-                    size: 'lg'
+                    size: 'lg',
+                    backdrop: 'static'
                 });
             };
 
@@ -76,7 +77,8 @@ angular.module(
                     templateUrl: 'templates/object-download-modal-template.html',
                     controller: 'eu.water-switch-on.sip.controllers.objectDownloadModalController',
                     scope: scope,
-                    size: 'lg'
+                    size: 'lg',
+                    backdrop: 'static'
                 });
             };
 
