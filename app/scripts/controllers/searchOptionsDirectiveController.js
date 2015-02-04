@@ -19,6 +19,12 @@ angular.module(
                 console.log($scope.optionsForm.geoBufferField.$invalid);
             };
 
+            $scope.setLimit = function () {
+                var filterExpression = $scope.createFilterExpression('limit', $scope.data.limit);
+                $scope.appendFilterExpression(filterExpression);
+                console.log($scope.optionsForm.geoBufferField.$invalid);
+            };
+
             $scope.createFilterExpression = function (keyword, parameter) {
                 var filterExpression;
 

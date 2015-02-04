@@ -2,34 +2,35 @@
     <div class="panel-heading">Filter Options</div>
     <div class="panel-body">
         <form name="optionsForm" id="optionsForm" novalidate> 
-            <div class="form-group">
-                <label for="geoIntersectsOption">Search Geometry</label>
-                <div class="radio">
-                    <label>
-                        <input name="geoIntersectsOption" 
-                               id="geoIntersectsOption" 
-                               type="radio" 
-                               ng-model="data.geoIntersects" 
-                               value="true"> Intersects
-                    </label>
+            <div class="form-group ">
+                <label for="geoIntersectsOption">Geospatial Search</label>
+                <div class="form-inline">
+                    <div class="radio">
+                        <label>
+                            <input name="geoIntersectsOption" 
+                                   id="geoIntersectsOption" 
+                                   type="radio" 
+                                   ng-model="data.geoIntersects" 
+                                   value="true"> Intersects
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input name="geoEnclosesOption" 
+                                   id="geoEnclosesOption" 
+                                   type="radio" 
+                                   ng-model="data.geoIntersects" 
+                                   value="false"> Encloses
+                        </label>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label>
-                        <input name="geoEnclosesOption" 
-                               id="geoEnclosesOption" 
-                               type="radio" 
-                               ng-model="data.geoIntersects" 
-                               value="false"> Encloses
-                    </label>
-                </div>
-
-                <!--
-                <label for="geoBufferField">Geometry Buffer</label>
+            </div>
+            <div class="form-group ">
                 <div class="input-group input-group-sm"
                      ng-class="{'has-error': optionsForm.geoBufferField.$invalid}">
                     <input type="text" class="form-control" 
                            ng-pattern="pattern" 
-                           length="8" 
+                           length="6" 
                            name="geoBufferField" 
                            id="geoBufferField" 
                            placeholder="buffer in meters"
@@ -38,7 +39,22 @@
                         <button class="btn btn-default" type="button" ng-disabled="optionsForm.geoBufferField.$invalid" ng-click="setGeoBuffer()">Apply</button>
                     </span>
                 </div>
-                -->
+            </div>
+            <div class="form-group ">
+                <label for="geoIntersectsOption">Limit Search Results</label>
+                <div class="input-group input-group-sm"
+                     ng-class="{'has-error': optionsForm.limitField.$invalid}">
+                    <input type="number" class="form-control" 
+                           min="0" 
+                           max="50" 
+                           ngMinlength="1"
+                           id="limitField" 
+                           name="limitField" 
+                           ng-model="data.limit">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-disabled="optionsForm.limitField.$invalid" ng-click="setLimit()">Apply</button>
+                    </span>
+                </div>
             </div>
         </form>
     </div>
