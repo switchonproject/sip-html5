@@ -1,0 +1,232 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1396" measuredH="1236" mockupW="1180" mockupH="1043">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="216" y="203" w="1180" h="1033" measuredW="1180" measuredH="1033" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/symbols.bmml#Firefox%205%20Windows</src>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="231" y="335" w="1150" h="889" measuredW="1150" measuredH="889" zOrder="1" locked="true" isInGroup="-1">
+      <controlProperties>
+        <override controlID="0" x="0" y="0" w="1150" h="889"/>
+        <override controlID="1" x="211" y="149" w="156" h="39"/>
+        <override controlID="2" x="0" y="224" w="1150" h="665">
+          <src>./assets/OSM-Europe-complete.png</src>
+        </override>
+        <override controlID="3" x="359" y="150" w="582" h="39"/>
+        <override controlID="4" x="218" y="159" w="112" h="-1"/>
+        <override controlID="5" x="0" y="219" w="1150" h="-1"/>
+        <override controlID="6" x="1080" y="202" w="-1" h="-1"/>
+        <override controlID="7" x="1105" y="200" w="-1" h="-1"/>
+        <override controlID="9" x="159" y="158" w="44" h="-1"/>
+        <override controlID="10" x="0" y="191" w="1150" h="-1"/>
+        <override controlID="11" x="1098" y="263" w="-1" h="-1"/>
+        <override controlID="12" x="0" y="0" w="1150" h="137"/>
+        <override controlID="13" x="21" y="150" w="125" h="39"/>
+        <override controlID="14" x="117" y="167" w="-1" h="-1"/>
+        <override controlID="15" x="1016" y="153" w="106" h="30"/>
+        <override controlID="8" x="1053" y="202" w="-1" h="-1"/>
+        <override controlID="17" x="367" y="158" w="566" h="-1">
+          <text>%20</text>
+        </override>
+        <override controlID="18" x="334" y="161" w="-1" h="-1"/>
+        <override controlID="19" x="938" y="150" w="51" h="39"/>
+        <override controlID="20" x="940" y="157" w="48" h="-1"/>
+        <override controlID="16" x="1122" y="167" w="-1" h="-1"/>
+        <override controlID="-1"/>
+        <src>./assets/symbols.bmml#SIP%20Application</src>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::StickyNote" x="715" y="193" w="295" h="90" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>11820806</color>
+        <text>*Geospatial%20Search*%0AUsing%20a%20coordinate%20filter%20%28bounding%20box%2C%20polygon%2C%20point%29%20for%20geospatial%20search.</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Component" x="238" y="534" w="980" h="21" measuredW="980" measuredH="21" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <override controlID="2">
+          <text>Boundingbox%20for%20geospatial%20search%20selected%3A%20449.964%20km%B2</text>
+        </override>
+        <src>./assets/symbols.bmml#status-notification</src>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::RoundButton" x="762" y="586" w="340" h="281" measuredW="32" measuredH="32" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>2848996</borderColor>
+        <color>10470904</color>
+        <shape>rectangle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="600" y="493" w="-1" h="-1" measuredW="424" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>geo%3A%22BBOX%28%5C-160%2C%20-20%2C%2075%2C%2036%29%22%20geo%5C-enclosure%3A%22true%22%20geo%5C-buffer%3A%22100000%22</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="__group__" x="762" y="645" w="28" h="26" measuredW="28" measuredH="26" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>bs-badge-success</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="28" h="26" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="34">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>40463</borderColor>
+            <color>40463</color>
+            <shape>circle</shape>
+            <size>10</size>
+            <text>1</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::RoundButton" x="931" y="508" w="28" h="26" measuredW="32" measuredH="32" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>circle</shape>
+        <size>10</size>
+        <text>2</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::StickyNote" x="805" y="564" w="500" h="244" measuredW="109" measuredH="123" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>The%20_coordinate-based%20geospatial%20search_%20filter%20can%20furthermore%20be%20controlled%20by%20different%20options%3A%0A%20%0A-%201%29%20The%20user%20can%20define%20whether%20resources%20are%20returnd%20that%20intersect%20with%20the%20search%20polygon%20or%20resources%20that%20are%20enclosed%20in%20the%20search%20polygon%20%28e.g.%20only%20data%20exactly%20inside%20the%20catchment%20area%29%20.%20Intersection%20would%20for%20example%20return%20all%20resources%20with%20spatial%20extent%20of%20the%20world%20%28%28%5C-180%2C%20-90%2C%20180%2C%2090%29%29%20%0A%20%0A-%202%29%20The%20user%20can%20furthermore%20speficy%20an%20additional%20buffer%20that%20is%20appeded%20to%20the%20current%20_search%20polygon_%2C%20e.g.%20to%20find%20also%20data%20of%20nearby%20basins%20or%20catchments.%20This%20option%20is%20mainly%20useful%20in%20conjunction%20with%20the%20%22intersection%22%20option.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Arrow" x="777" y="526" w="154" h="111" measuredW="150" measuredH="100" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::StickyNote" x="587" y="353" w="419" h="112" measuredW="109" measuredH="123" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*User%20Story%202%3A*%20_As%20a%20hydrologist%2C%20i%20need%20to%20find%20all%20available%20data%20%28Emma%u2019s%20data%29%20for%20my%20catchment%28s%29%20at%20once%2C%20so%20i%20can%20build%20my%20catchment%20experiment%20database._</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Canvas" x="444" y="526" w="339" h="247" measuredW="100" measuredH="70" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::IconLabel" x="452" y="744" w="-1" h="-1" measuredW="265" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>6710886</color>
+        <icon>CircledXIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Clear%20current%20search%20filters%20and%20options</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::HRule" x="452" y="734" w="316" h="-1" measuredW="100" measuredH="10" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10066329</color>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Canvas" x="533" y="564" w="72" h="9" measuredW="100" measuredH="70" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+      </controlProperties>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::HRule" x="459" y="559" w="146" h="-1" measuredW="100" measuredH="10" zOrder="13" locked="false" isInGroup="-1"/>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::RoundButton" x="462" y="534" w="72" h="37" measuredW="32" measuredH="32" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>14540253</color>
+        <shape>roundRect</shape>
+        <size>14</size>
+        <text>CUASHI</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Canvas" x="462" y="564" w="72" h="9" measuredW="100" measuredH="70" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::List" x="462" y="573" w="128" h="158" measuredW="100" measuredH="321" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <selectedIndex>-1</selectedIndex>
+        <text>Area%0AArea%2C%20atmosphere%0AArea%2C%20ice%0ABenthic%0ABenthic%20species%0ABiological%0ABiological%20community%0ABiological%20taxa%0ABiomass%2C%20phytoplankton%0ABiomass%2C%20zooplankton%0ACarbon%0AChemical%0ADensity%0ADescriptive%0ADissolved%20Gas</text>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="590" y="573" w="-1" h="156" measuredW="16" measuredH="100" zOrder="17" locked="false" isInGroup="-1"/>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::VRule" x="616" y="534" w="-1" h="197" measuredW="10" measuredH="100" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Label" x="626" y="577" w="151" h="-1" measuredW="104" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <state>up</state>
+        <text>Geospatial%20Filter</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="627" y="601" w="-1" h="-1" measuredW="90" measuredH="39" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28%20%29%20intersection%0A%28o%29%20enclosure</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="__group__" x="631" y="536" w="146" h="39" measuredW="146" measuredH="39" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>Keyword%20Tab</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="74" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="59">
+          <controlProperties>
+            <bold>true</bold>
+            <borderColor>16777215</borderColor>
+            <shape>roundRect</shape>
+            <size>14</size>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="74" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="59">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="25" w="146" h="-1" measuredW="100" measuredH="10" zOrder="2" locked="false" isInGroup="59"/>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="3" y="0" w="72" h="37" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="59">
+          <controlProperties>
+            <bold>true</bold>
+            <color>14540253</color>
+            <shape>roundRect</shape>
+            <size>14</size>
+            <text>Options</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="3" y="30" w="72" h="9" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="59">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Icon" x="404" y="859" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <icon>HandPointIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Label" x="627" y="648" w="135" h="-1" measuredW="131" measuredH="21" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <state>up</state>
+        <text>Buffer%3A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20m</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::TextInput" x="668" y="646" w="73" h="-1" measuredW="59" measuredH="27" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>100000</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
