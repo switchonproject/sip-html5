@@ -11,6 +11,7 @@ angular.module(
             $scope.data = {};
             $scope.data.message = 'Application loaded';
             $scope.data.messageType = 'success';
+            $scope.data.searchGeomWkt = '';
 
             $scope.isResultShowing = false;
             $scope.state = $state;
@@ -20,6 +21,7 @@ angular.module(
             $scope.filterExpressions.fromDate = null;
             $scope.filterExpressions.toDate = null;
             $scope.data.resultSet = null;
+            $scope.data.resultObjects = [];
 
             $scope.activateView = function (state) {
                 $scope.showMessage(state + ' view showing', 'success');
@@ -38,6 +40,30 @@ angular.module(
                 $scope.data.message = message;
                 $scope.data.messageType = type;
             };
+            
+            $scope.$watch('data.searchGeomWkt', function(n, o) {
+                if(n !== undefined && n !== o) {
+                    if($scope.filterExpressions.universalSearchString) {
+                        $scope.filterExpressions.universalSearchString += ' geo:"' + n + '"';
+                    } else {
+                        $scope.filterExpressions.universalSearchString = 'geo:"' + n + '"';
+                    }
+                }
+            });
+            
+            $scope.$watch('data.resultSet.$collection', function(n, o) {
+                var i, objs;
+                
+                if(n && n !== o) {
+                    objs = [];
+                    
+                    for(i = 0; i < n.length; ++i) {
+                        objs.push(n[i].object);
+                    }
+                    
+                    $scope.data.resultObjects = objs;
+                }
+            });
         }
     ]
 );

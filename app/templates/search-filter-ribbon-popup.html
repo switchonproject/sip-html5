@@ -4,43 +4,85 @@
     <div class="popover-content">
         <div class="switchon-ribbon">
             <div class="switchon-ribbon-panel">
-                <tabset>
-                    <tab heading="Topic Category">
-                        <keyword-filter filter-expressions="filterExpressions" 
-                                        keyword-group="inspire_topic"
-                                        keyword-parameter="topic"></keyword-filter>
-                    </tab>
-                    <tab heading="CUASHI">
-                        <keyword-filter filter-expressions="filterExpressions" 
-                                        keyword-group="cuashi_keyword"
-                                        keyword-parameter="keyword"></keyword-filter>
-                    </tab>
-                    <tab heading="INSPIRE">
-                        <keyword-filter filter-expressions="filterExpressions" 
-                                        keyword-group="inspire_keyword"
-                                        keyword-parameter="keyword"></keyword-filter>
-                    </tab>
-                    <tab heading="Open Keywords">
-                        <keyword-filter filter-expressions="filterExpressions" 
-                                        keyword-group="keyword"
-                                        keyword-parameter="keyword"></keyword-filter>
-                    </tab>
-                </tabset>
+                <div class="btn-group switchon-keywordgroup" dropdown is-open="keywordFilters.isopen">
+                    <button type="button" 
+                            class="btn btn-default dropdown-toggle" 
+                            dropdown-toggle 
+                            ng-init="keywordFilters.keywordGroup = 'CUASHI Keywords'"
+                            style="width:100%">
+                        {{keywordFilters.keywordGroup}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <label class="btn" ng-model="keywordFilters.keywordGroup" 
+                                   btn-radio="'TOPIC Categories'" 
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                TOPIC Categories
+                            </label>
+                        </li>
+                        <li>
+                            <label class="btn" 
+                                   ng-model="keywordFilters.keywordGroup" 
+                                   btn-radio="'CUASHI Keywords'" 
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                CUASHI Keywords
+                            </label>
+                        </li>
+                        <li>
+                            <label class="btn" 
+                                   ng-model="keywordFilters.keywordGroup" 
+                                   btn-radio="'INSPIRE Keywords'" 
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">INSPIRE Keywords
+                            </label>
+                        </li>
+                        <li>
+                            <label 
+                                class="btn" 
+                                ng-model="keywordFilters.keywordGroup" 
+                                btn-radio="'Free Keywords'" 
+                                ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                Free Keywords
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" class="ng-hide"
+                                filter-expressions="filterExpressions" 
+                                keyword-group="topic-inspire"
+                                keyword-parameter="topic"></keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUASHI Keywords'" class="ng-hide"
+                                filter-expressions="filterExpressions" 
+                                keyword-group="keyword-cuashi"
+                                keyword-parameter="keyword"></keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" class="ng-hide"
+                                filter-expressions="filterExpressions" 
+                                keyword-group="keyword-inspire"
+                                keyword-parameter="keyword"></keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Free Keywords'" class="ng-hide"
+                                filter-expressions="filterExpressions" 
+                                keyword-group="keyword-free"
+                                keyword-parameter="keyword"></keyword-filter>
             </div>
-            
+
             <div class="switchon-ribbon-panel">
                 <date-filter filter-expressions="filterExpressions"></date-filter>
             </div>
 
-            <div class="switchon-ribbon-panel last">
+            <div class="switchon-ribbon-panel">
                 <tabset>
                     <tab heading="Europe">
-                        <countries-filter filter-expressions="filterExpressions" country-group="countries_europe"></countries-filter>
+                        <countries-filter filter-expressions="filterExpressions" country-group="country-europe"></countries-filter>
                     </tab>
                     <tab heading="World">
-                        <countries-filter filter-expressions="filterExpressions" country-group="countries_world"></countries-filter>
+                        <countries-filter filter-expressions="filterExpressions" country-group="country-world"></countries-filter>
                     </tab>
                 </tabset>
+            </div>
+
+            <div class="switchon-ribbon-panel last">
+                <search-options filter-expressions="filterExpressions"></search-options>
             </div>
 
             <div class="switchon-ribbon-footer">

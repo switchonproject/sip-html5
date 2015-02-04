@@ -4,11 +4,11 @@ angular.module(
     'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController',
     [
         '$scope',
-        'eu.water-switch-on.sip.services.MockService',
-        function ($scope, MockService) {
+        'eu.water-switch-on.sip.services.TagGroupService',
+        function ($scope, TagGroupService) {
             'use strict';
 
-            $scope.keywordList = MockService.loadKeywordList($scope.keywordGroup);
+            $scope.keywordList = TagGroupService.getKeywordList($scope.keywordGroup);
             $scope.keyword = null;
 
             $scope.createFilterExpression = function (keyword, parameter) {

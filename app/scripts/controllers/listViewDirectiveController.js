@@ -1,6 +1,6 @@
 angular.module(
     'eu.water-switch-on.sip.controllers'
-).controller(
+    ).controller(
     'eu.water-switch-on.sip.controllers.listViewDirectiveController',
     [
         '$scope',
@@ -8,10 +8,11 @@ angular.module(
         '$modal',
         '$rootScope',
         'ngTableParams',
-        function ($scope, $filter, $modal, $rootScope, NgTableParams) {
+        'eu.water-switch-on.sip.services.TagGroupService',
+        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService) {
             'use strict';
 
-            var initialSorting;
+            var initialSorting, keywordLookupLists, generateKeywordList;
 
             $scope.$watch('tableData', function () {
                 $scope.tableParams.reload();
@@ -19,6 +20,22 @@ angular.module(
 
             initialSorting = {};
             initialSorting['object.name'] = 'asc';
+            keywordLookupLists = {};
+            generateKeywordList = function (keywordGroup) {
+                var keywordList = TagGroupService.getKeywordList(keywordGroup);
+                if (keywordList && !keywordList.$resolved) {
+                    console.log('keyword list not yet resolved');
+                    keywordList.$promise.then(function () {
+                        console.log('keyword list generated');
+                        keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
+                    });
+                } else if (keywordList) {
+                    keywordLookupLists[keywordGroup] =  keywordList.join('|').toLowerCase().split('|');
+                }
+            };
+
+            generateKeywordList('keyword-cuashi');
+            keywordLookupLists['query-keyword'] = $scope.queryKeywordList;
 
             $scope.tableParams = new NgTableParams({
                 page: 1,
@@ -37,21 +54,22 @@ angular.module(
 
             $scope.showInfo = function (object) {
                 var modalInstance, scope;
-                
+
                 scope = $rootScope.$new(true);
                 scope.object = object;
-                
+
                 modalInstance = $modal.open({
                     templateUrl: 'templates/object-info-modal-template.html',
                     controller: 'eu.water-switch-on.sip.controllers.objectInfoModalController',
                     scope: scope,
-                    size: 'lg'
+                    size: 'lg',
+                    backdrop: 'static'
                 });
             };
-            
+
             $scope.showDownload = function (object) {
                 var modalInstance, scope;
-                
+
                 scope = $rootScope.$new(true);
                 scope.object = object;
 
@@ -59,8 +77,18 @@ angular.module(
                     templateUrl: 'templates/object-download-modal-template.html',
                     controller: 'eu.water-switch-on.sip.controllers.objectDownloadModalController',
                     scope: scope,
-                    size: 'lg'
+                    size: 'lg',
+                    backdrop: 'static'
                 });
+            };
+
+            $scope.isHighlightKeyword = function (keywordGroup, keyword) {
+                if (keyword !== undefined) {
+                    if (keywordLookupLists.hasOwnProperty(keywordGroup)) {
+                        return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
+                    }
+                }
+                return false;
             };
         }
     ]

@@ -6,6 +6,7 @@ angular.module(
         'eu.water-switch-on.sip.directives',
         'eu.water-switch-on.sip.services',
         'eu.water-switch-on.sip.filters',
+        'de.cismet.cids.services',
         'ui.router',
         'ui.bootstrap.tpls',
         'ngResource'

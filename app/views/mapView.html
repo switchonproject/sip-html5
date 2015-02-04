@@ -1,4 +1,7 @@
-<div ng-controller="eu.water-switch-on.sip.controllers.mapController">
-    <leaflet id="mainmap" defaults="defaults" center="center" width="{{currentWidth}}" height="{{currentHeight}}"></leaflet>
+<div>
+    <map-view search-geom-wkt="data.searchGeomWkt"
+              center-search-geometry="true"
+              preserve-zoom-on-center="true"
+              objects="data.resultObjects"
+              center-objects="true"></map-view>
 </div>
-

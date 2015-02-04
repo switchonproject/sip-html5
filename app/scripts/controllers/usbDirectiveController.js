@@ -69,7 +69,7 @@ angular.module(
                 } else if (type === 'error') {
                     if ($scope.notificationFunction) {
                         $scope.notificationFunction({
-                            message: 'Search could no be perfomed:' + $scope.resultSet.$error,
+                            message: 'Search could not be perfomed: ' + $scope.resultSet.$error,
                             type: 'danger'
                         });
                     }
@@ -81,7 +81,7 @@ angular.module(
 
             };
 
-            $scope.pattern = /^(\w+:".+"\s?)+$/;
+            $scope.pattern = /(^[A-Za-z_\-]+:"[\s\S]+"+\s?$)+/;
 
             $scope.clear = function () {
                 $scope.filterExpressions.universalSearchString = '';
@@ -100,7 +100,7 @@ angular.module(
                 }
 
                 $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, processCallback);
-
+                
                 $scope.showProgress(status);
             };
 
@@ -109,14 +109,18 @@ angular.module(
 
                 modalScope = $rootScope.$new(true);
                 modalScope.status = status;
-                modalScope.closeInfoView = function () {
-                    $scope.progressModal.close();
-                };
 
                 $scope.progressModal = $modal.open({
                     templateUrl: 'templates/search-progress-modal-template.html',
                     scope: modalScope,
-                    size: 'lg'
+                    size: 'lg',
+                    backdrop: 'static'
+                });
+                // issue #32 - check if the eror occurred before the dialog has actually been shown
+                $scope.progressModal.opened.then(function () {
+                    if (status.type === 'error') {
+                        $scope.progressModal.close();
+                    }
                 });
             };
 
