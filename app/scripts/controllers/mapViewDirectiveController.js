@@ -11,10 +11,22 @@ angular.module(
         function ($scope, $window, $timeout, leafletData, rendererService) {
             'use strict';
 
-            var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects, 
+            var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
                 setSearchGeom, wicket;
 
-            // <editor-fold defaultstate="collapsed" desc=" resize " >
+            angular.extend($scope, {
+                defaults: {
+                    tileLayer: 'http://{s}.opentopomap.org/{z}/{x}/{y}.png',
+                    //maxZoom: 14,
+                    path: {
+                        weight: 10,
+                        color: '#800000',
+                        opacity: 1
+                    }
+                }
+            });
+
+            // ---- resize START ----
             fireResize = function (animate) {
                 $scope.currentHeight = $window.innerHeight - 100;
                 $scope.currentWidth = $window.innerWidth - ($scope.isResultShowing ? 250 : 0);
@@ -33,13 +45,13 @@ angular.module(
                 }, 500);
             });
 
-            $scope.center = {lat: 49.245166, lng: 6.936809, zoom: 18};
+            $scope.center = {lat: 49.245166, lng: 6.936809, zoom: 4};
 
             angular.element($window).bind('resize', function () {
                 fireResize(false);
             });
             // </editor-fold>
-            
+
             // <editor-fold defaultstate="collapsed" desc=" search geom " >
             MapSearchIcon = L.Icon.extend({
                 options: {
@@ -55,17 +67,17 @@ angular.module(
                 draw: {
                     polyline: {
                         shapeOptions: {
-                            color: '#7dcd7c'
+                            color: '#800000'
                         }
                     },
                     polygon: {
                         shapeOptions: {
-                            color: '#7dcd7c'
+                            color: '#800000'
                         }
                     },
                     rectangle: {
                         shapeOptions: {
-                            color: '#7dcd7c'
+                            color: '#800000'
                         }
                     },
                     // no circles for starters as not compatible with WKT
@@ -178,13 +190,13 @@ angular.module(
                     });
                 }
             };
-            
-            $scope.$watch('objects', function(n, o) {
-                if(n && n !== o) {
+
+            $scope.$watch('objects', function (n, o) {
+                if (n && n !== o) {
                     setObjects(n);
                 }
             });
-            
+
             if ($scope.objects) {
                 setObjects($scope.objects);
             }
