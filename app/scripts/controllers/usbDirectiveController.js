@@ -84,9 +84,7 @@ angular.module(
             $scope.pattern = /(^[A-Za-z_\-]+:"[\s\S]+"+\s?$)+/;
 
             $scope.clear = function () {
-                $scope.filterExpressions.universalSearchString = '';
-                $scope.filterExpressions.fromDate = null;
-                $scope.filterExpressions.toDate = null;
+                $scope.filterExpressions.clear();
             };
 
             $scope.performSearch = function (searchForm) {

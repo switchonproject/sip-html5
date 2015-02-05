@@ -11,12 +11,9 @@ angular.module(
                 scope: {
                     filterExpressions: '=',
                     keywordGroup: '@',
-                    keywordParameter: '@',
+                    keywordParameter: '@'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController'
-                    /*controllerAs: 'usb',
-                     transclude:true,
-                     bindToController:true*/
             };
         }
     ]);

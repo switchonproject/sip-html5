@@ -10,7 +10,7 @@
                             <input name="geoIntersectsOption" 
                                    id="geoIntersectsOption" 
                                    type="radio" 
-                                   ng-model="data.geoIntersects" 
+                                   ng-model="filterExpressions.optionGeoIntersetcs.value" 
                                    value="true"> Intersects
                         </label>
                     </div>
@@ -19,7 +19,7 @@
                             <input name="geoEnclosesOption" 
                                    id="geoEnclosesOption" 
                                    type="radio" 
-                                   ng-model="data.geoIntersects" 
+                                   ng-model="filterExpressions.optionGeoIntersetcs.value" 
                                    value="false"> Encloses
                         </label>
                     </div>
@@ -34,7 +34,7 @@
                            name="geoBufferField" 
                            id="geoBufferField" 
                            placeholder="buffer in meters"
-                           ng-model="data.geoBuffer">
+                           ng-model="filterExpressions.optionGeoBuffer.value">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" ng-disabled="optionsForm.geoBufferField.$invalid" ng-click="setGeoBuffer()">Apply</button>
                     </span>
@@ -50,9 +50,11 @@
                            ngMinlength="1"
                            id="limitField" 
                            name="limitField" 
-                           ng-model="data.limit">
+                           ng-model="filterExpressions.optionLimit.value">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-disabled="optionsForm.limitField.$invalid" ng-click="setLimit()">Apply</button>
+                        <button class="btn btn-default" type="button" 
+                                ng-disabled="optionsForm.limitField.$invalid" 
+                                ng-click="setLimit()">Apply</button>
                     </span>
                 </div>
             </div>

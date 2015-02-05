@@ -12,9 +12,6 @@ angular.module(
                     filterExpressions: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.dateFilterDirectiveController'
-                    /*controllerAs: 'usb',
-                     transclude:true,
-                     bindToController:true*/
             };
         }
     ]);

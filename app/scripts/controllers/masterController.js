@@ -5,21 +5,19 @@ angular.module(
     [
         '$scope',
         '$state',
-        function ($scope, $state) {
+        'FilterExpressions',
+        'FilterExpression',
+        function ($scope, $state, FilterExpressions, FilterExpression) {
             'use strict';
 
             $scope.data = {};
             $scope.data.message = 'Application loaded';
             $scope.data.messageType = 'success';
-            $scope.data.searchGeomWkt = '';
 
             $scope.isResultShowing = false;
             $scope.state = $state;
-            
-            $scope.filterExpressions = {};
-            $scope.filterExpressions.universalSearchString = '';
-            $scope.filterExpressions.fromDate = null;
-            $scope.filterExpressions.toDate = null;
+            $scope.filterExpressions = FilterExpressions; // singleton instance
+            $scope.filterExpressions.geo = new FilterExpression('geo');
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
 
@@ -40,27 +38,27 @@ angular.module(
                 $scope.data.message = message;
                 $scope.data.messageType = type;
             };
-            
-            $scope.$watch('data.searchGeomWkt', function(n, o) {
-                if(n !== undefined && n !== o) {
-                    if($scope.filterExpressions.universalSearchString) {
-                        $scope.filterExpressions.universalSearchString += ' geo:"' + n + '"';
-                    } else {
-                        $scope.filterExpressions.universalSearchString = 'geo:"' + n + '"';
+
+            $scope.$watch('data.searchGeomWkt', function (n, o) {
+                if (n !== undefined && n !== o) {
+                    if (!$scope.filterExpressions.geo) {
+                        $scope.filterExpressions.geo = new FilterExpression('geo');
                     }
+                    $scope.filterExpressions.geo.value = n;
+                    $scope.filterExpressions.geo.displayValue = 'GEOMETRY FROM MAP';
                 }
             });
-            
-            $scope.$watch('data.resultSet.$collection', function(n, o) {
+
+            $scope.$watch('data.resultSet.$collection', function (n, o) {
                 var i, objs;
-                
-                if(n && n !== o) {
+
+                if (n && n !== o) {
                     objs = [];
-                    
-                    for(i = 0; i < n.length; ++i) {
+
+                    for (i = 0; i < n.length; ++i) {
                         objs.push(n[i].object);
                     }
-                    
+
                     $scope.data.resultObjects = objs;
                 }
             });

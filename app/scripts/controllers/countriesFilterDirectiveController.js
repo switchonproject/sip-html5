@@ -5,38 +5,23 @@ angular.module(
     [
         '$scope',
         'eu.water-switch-on.sip.services.TagGroupService',
-        function ($scope, TagGroupService) {
+        'FilterExpression',
+        function ($scope, TagGroupService, FilterExpression) {
             'use strict';
 
+            if (!$scope.filterExpressions.geo) {
+                $scope.filterExpressions.geo = new FilterExpression('geo');
+            }
+
             $scope.countryList = TagGroupService.getCountryList($scope.countryGroup);
-            $scope.country = null;
 
-            $scope.createFilterExpression = function (country, parameter) {
-                var filterExpression;
-
-                if (parameter) {
-                    filterExpression = (country + ':');
-                    filterExpression += ('"' + parameter + '"');
-                }
-
-                return filterExpression;
-            };
-
-            $scope.appendFilterExpression = function (filterExpression) {
-                if (filterExpression && filterExpression.length > 0) {
-                    if ($scope.filterExpressions.universalSearchString) {
-                        $scope.filterExpressions.universalSearchString += (' ' + filterExpression);
-                    } else {
-                        $scope.filterExpressions.universalSearchString = filterExpression;
-                    }
-                }
-            };
-
-            $scope.$watch('country', function (newValue) {
-
-                if (newValue) {
-                    var filterExpression = $scope.createFilterExpression('geo', newValue);
-                    $scope.appendFilterExpression(filterExpression);
+            $scope.$watch('filterExpressions.geo.selectedCountry', function (newValue, oldValue) {
+                if (newValue && (newValue !== oldValue) && newValue.length > 0
+                        && $scope.countryList.hasOwnProperty(newValue[0])
+                        && ($scope.filterExpressions.geo.value !== $scope.countryList[newValue[0]])) {
+                    $scope.filterExpressions.geo.value = $scope.countryList[newValue[0]];
+                    $scope.filterExpressions.geo.displayValue = newValue[0];
+                    console.log(newValue[0] + ' <- ' + oldValue);
                 }
             });
         }

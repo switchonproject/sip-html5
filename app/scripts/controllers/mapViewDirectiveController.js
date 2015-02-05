@@ -155,7 +155,7 @@ angular.module(
                         try {
                             wicket.read(n);
                             internalChange = true;
-                            setSearchGeom(wicket.toObject({color: '#7dcd7c', icon: new MapSearchIcon()}));
+                            setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
                         } catch (e) {
                             // ignore illegal wkt
                         }
@@ -200,6 +200,18 @@ angular.module(
             if ($scope.objects) {
                 setObjects($scope.objects);
             }
+
+            var nexrad = L.tileLayer.wms("http://gis.lebensministerium.at/wmsgw/gs103601/?&service=wms&version=1.1.1&request=GetCapabilities", {
+                layers: 'LFRZ:DRAINAGEBASIN',
+                format: 'image/png',
+                transparent: true,
+                attribution: "Lebensministerium AT"
+            });
+            //var opentopo = L.tileLayer('http://{s}.opentopomap.org/{z}/{x}/{y}.png');
+            leafletData.getMap('mainmap').then(function (map) {
+                //opentopo.addTo(map);
+                nexrad.addTo(map);
+            });
             // </editor-fold>
         }
     ]

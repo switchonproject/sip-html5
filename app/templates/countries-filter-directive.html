@@ -5,7 +5,7 @@
                typeahead-editable="false"
                class="form-control">-->
         <select name="{{countryGroup}}" id="{{countryGroup}}" 
-                ng-model="country" ng-options="country for (country, geom) in countryList" 
+                ng-model="filterExpressions.geo.selectedCountry" ng-options="country as country for (country, geom) in countryList" 
                 class="form-control" size="8" multiple ></select>
     </div>
 </div>
