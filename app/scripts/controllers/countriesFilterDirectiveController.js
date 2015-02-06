@@ -12,9 +12,7 @@ angular.module(
             $scope.countryList = TagGroupService.getCountryList($scope.countryGroup);
 
             $scope.$watch('filterExpression.selectedCountry', function (newValue, oldValue) {
-                if (newValue && (newValue !== oldValue) && newValue.length > 0
-                        && $scope.countryList.hasOwnProperty(newValue[0])
-                        && ($scope.filterExpression.value !== $scope.countryList[newValue[0]])) {
+                if (newValue && (newValue !== oldValue) && newValue.length > 0 && $scope.countryList.hasOwnProperty(newValue[0]) && ($scope.filterExpression.value !== $scope.countryList[newValue[0]])) {
                     $scope.filterExpression.value = $scope.countryList[newValue[0]];
                     $scope.filterExpression.displayValue = newValue[0];
                 }

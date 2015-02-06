@@ -19,6 +19,7 @@ angular.module(
             };
 
             $scope.status = status;
+            $scope.customFilterExpression = '';
 
             processCallback = function (current, max, type) {
                 status.max = max;
@@ -87,6 +88,56 @@ angular.module(
                 $scope.filterExpressions.clear();
             };
 
+            $scope.getTagIcon = function (type) {
+                switch (type) {
+                case 'keyword':
+                    return 'glyphicon glyphicon-tags';
+                case 'topic':
+                    return 'glyphicon glyphicon-tag';
+                case 'geo':
+                    return 'glyphicon glyphicon-globe';
+                case 'fromDate':
+                    return 'glyphicon glyphicon-chevron-left';
+                case 'toDate':
+                    return 'glyphicon glyphicon-chevron-right';
+                case 'text':
+                    return 'glyphicon glyphicon-pencil';
+                case 'geo-intersects':
+                    return 'glyphicon glyphicon-log-out';
+                case 'geo-buffer':
+                    return 'glyphicon glyphicon-record';
+                case 'limit':
+                    return 'glyphicon glyphicon-indent-right';
+                default:
+                    return 'glyphicon glyphicon-pushpin';
+                }
+            };
+
+            $scope.getTagStyle = function (type) {
+                switch (type) {
+                case 'keyword':
+                    return 'label-success';
+                case 'topic':
+                    return 'label-success';
+                case 'geo':
+                    return 'label-success';
+                case 'fromDate':
+                    return 'label-success';
+                case 'toDate':
+                    return 'label-success';
+                case 'text':
+                    return 'label-success';
+                case 'geo-intersects':
+                    return 'label-warning';
+                case 'geo-buffer':
+                    return 'label-warning';
+                case 'limit':
+                    return 'label-warning';
+                default:
+                    return 'label-default';
+                }
+            };
+
             $scope.performSearch = function (searchForm) {
                 // If form is invalid, return and let AngularJS show validation errors.
                 if (searchForm.$invalid) {
@@ -98,7 +149,7 @@ angular.module(
                 }
 
                 $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, processCallback);
-                
+
                 $scope.showProgress(status);
             };
 
@@ -130,19 +181,23 @@ angular.module(
                         type: 'info'
                     });
                 }
-
             });
 
             $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
 
                 if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
-                    $scope.universalSearchBox.filterExpressionInput.$invalid) {
+                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
                     $scope.notificationFunction({
                         message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
                         type: 'warning'
                     });
                 }
             });
+
+            // FIXME comparing with angular.equals on filter expressions might be slow
+            $scope.$watch('filterExpressions.list', function () {
+                $scope.enumeratedTags = $scope.filterExpressions.enumerateTags();
+            }, true);
         }
     ]
-    );
+);

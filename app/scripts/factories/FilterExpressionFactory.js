@@ -9,8 +9,9 @@
  */
 
 angular.module(
-        'eu.water-switch-on.sip.factories'
-        ).factory('FilterExpression', [function () {
+    'eu.water-switch-on.sip.factories'
+).factory('FilterExpression',
+    [function () {
         'use strict';
 
         // Define the constructor function.
@@ -24,23 +25,22 @@ angular.module(
             this.displayValue = null;
             this.multiple = (multiple === undefined) ? false : multiple;
             this.renderer = (renderer === undefined) ? this.RENDERER__TO_STRING : renderer;
-
-            // define methods that may be overriden by object instance
-            this.getDisplayValue = function () {
-                return this.displayValue || this.value;
-            };
-
-            this.isValid = function () {
-                if (this.multiple === true) {
-                    return (this.value && this.value.constructor === Array && this.value.length > 0);
-                }
-
-                return this.value ? true : false;
-            };
         }
 
         // Define the common methods using the prototype
         // and standard prototypal inheritance.  
+        FilterExpression.prototype.getDisplayValue = function () {
+            return this.displayValue || this.value;
+        };
+
+        FilterExpression.prototype.isValid = function () {
+            if (this.multiple === true) {
+                return (this.value && this.value.constructor === Array && this.value.length > 0);
+            }
+
+            return this.value ? true : false;
+        };
+
         FilterExpression.prototype.getFilterExpression = function () {
             var filterExpression, arrayLength, i, concatFilter;
 
@@ -75,32 +75,39 @@ angular.module(
             this.value = this.defaultValue;
             this.displayValue = null;
         };
-        
+
         FilterExpression.prototype.enumerateTags = function () {
-            var tags, i, arrayLength;
+            var tags, i, arrayLength, tag;
             tags = [];
-            if(this.isValid()) {
-                if(this.isMultiple()) {
+
+            function removeTag() {
+                return function () {
+                    tag.origin.value.splice(tag.index, 1);
+                };
+            }
+
+            if (this.isValid() && this.value !== this.defaultValue) {
+                if (this.isMultiple()) {
                     arrayLength = this.value.length;
                     for (i = 0; i < arrayLength; i++) {
-                        var tag = {};
+                        tag = {};
                         tag.name = this.value[i];
-                        tag.remove = function() {
-                            this.value.splice(i, 1);
-                        };
+                        tag.type = this.parameter;
+                        tag.origin = this;
+                        tag.index = i;
+                        tag.remove = removeTag();
                         tags.push(tag);
                     }
                 } else {
-                    var tag = {};
+                    tag = {};
                     tag.name = this.getDisplayValue();
+                    tag.type = this.parameter;
                     tag.origin = this;
-                    tag.remove = function() {
-                            this.origin.clear();
-                        };
+                    tag.remove = removeTag();
                     tags.push(tag);
                 }
             }
-            
+
             return tags;
         };
 
