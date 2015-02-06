@@ -17,7 +17,15 @@ angular.module(
             $scope.isResultShowing = false;
             $scope.state = $state;
             $scope.filterExpressions = FilterExpressions; // singleton instance
-            $scope.filterExpressions.geo = new FilterExpression('geo');
+            $scope.filterExpressions.addFilterExpression('keyword', new FilterExpression('keyword',[], true));
+            $scope.filterExpressions.addFilterExpression('topic', new FilterExpression('topic'));
+            $scope.filterExpressions.addFilterExpression('fromDate', new FilterExpression('fromDate'));
+            $scope.filterExpressions.addFilterExpression('toDate', new FilterExpression('toDate'));
+            $scope.filterExpressions.addFilterExpression('geo', new FilterExpression('geo'));
+            $scope.filterExpressions.addFilterExpression('geoIntersects', new FilterExpression('geo-intersects', 'false'));
+            $scope.filterExpressions.addFilterExpression('geoBuffer', new FilterExpression('geo-buffer'));
+            $scope.filterExpressions.addFilterExpression('limit', new FilterExpression('limit', 20));
+
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
 

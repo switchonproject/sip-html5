@@ -9,76 +9,112 @@
  */
 
 angular.module(
-    'eu.water-switch-on.sip.factories'
-).factory('FilterExpression', [ function () {
-    'use strict';
+        'eu.water-switch-on.sip.factories'
+        ).factory('FilterExpression', [function () {
+        'use strict';
 
-    // Define the constructor function.
-    function FilterExpression(parameter, defaultValue, multiple, renderer) {
-        if (parameter === undefined || parameter === null) {
-            throw 'The parameter property of a FilterExpression cannot be null!';
-        }
-        this.parameter = parameter;
-        this.defaultValue = (defaultValue === undefined) ? null : defaultValue;
-        this.value = this.defaultValue;
-        this.displayValue = null;
-        this.multiple = (multiple === undefined) ? false : multiple;
-        this.renderer = (renderer === undefined) ? this.RENDERER__TO_STRING : renderer;
-
-        // define methods that may be overriden by object instance
-        this.getDisplayValue = function () {
-            return this.displayValue || this.value;
-        };
-
-        this.isValid = function () {
-            if (this.multiple === true) {
-                return (this.value && this.value.constructor === Array && this.value.length > 0);
+        // Define the constructor function.
+        function FilterExpression(parameter, defaultValue, multiple, renderer) {
+            if (parameter === undefined || parameter === null) {
+                throw 'The parameter property of a FilterExpression cannot be null!';
             }
+            this.parameter = parameter;
+            this.defaultValue = (defaultValue === undefined) ? null : defaultValue;
+            this.value = (defaultValue === undefined) ? null : defaultValue;
+            this.displayValue = null;
+            this.multiple = (multiple === undefined) ? false : multiple;
+            this.renderer = (renderer === undefined) ? this.RENDERER__TO_STRING : renderer;
 
-            return this.value ? true : false;
-        };
-    }
+            // define methods that may be overriden by object instance
+            this.getDisplayValue = function () {
+                return this.displayValue || this.value;
+            };
 
-    // Define the common methods using the prototype
-    // and standard prototypal inheritance.  
-    FilterExpression.prototype.getFilterExpression = function () {
-        var filterExpression, arrayLength, i, concatFilter;
-
-        concatFilter = function (parameter, value) {
-            var concatExpression = (parameter + ':' + '"' + value + '"');
-            return concatExpression;
-        };
-
-        if (this.isValid()) {
-            if (this.isMultiple()) {
-                arrayLength = this.value.length;
-                for (i = 0; i < arrayLength; i++) {
-                    if (i === 0) {
-                        filterExpression = concatFilter(this.parameter, this.value[i]);
-                    } else {
-                        filterExpression += ' ';
-                        filterExpression += concatFilter(this.parameter, this.value[i]);
-                    }
+            this.isValid = function () {
+                if (this.multiple === true) {
+                    return (this.value && this.value.constructor === Array && this.value.length > 0);
                 }
-            } else {
-                filterExpression = concatFilter(this.parameter, this.value);
-            }
+
+                return this.value ? true : false;
+            };
         }
-        return filterExpression;
-    };
 
-    FilterExpression.prototype.isMultiple = function () {
-        return this.multiple === true;
-    };
+        // Define the common methods using the prototype
+        // and standard prototypal inheritance.  
+        FilterExpression.prototype.getFilterExpression = function () {
+            var filterExpression, arrayLength, i, concatFilter;
 
-    FilterExpression.prototype.clear = function () {
-        this.value = this.defaultValue;
-        this.displayValue = null;
-    };
+            concatFilter = function (parameter, value) {
+                var concatExpression = (parameter + ':' + '"' + value + '"');
+                return concatExpression;
+            };
 
-    // define constants
-    FilterExpression.RENDERER__TO_STRING = 'renderer_tostring';
+            if (this.isValid()) {
+                if (this.isMultiple()) {
+                    arrayLength = this.value.length;
+                    for (i = 0; i < arrayLength; i++) {
+                        if (i === 0) {
+                            filterExpression = concatFilter(this.parameter, this.value[i]);
+                        } else {
+                            filterExpression += ' ';
+                            filterExpression += concatFilter(this.parameter, this.value[i]);
+                        }
+                    }
+                } else {
+                    filterExpression = concatFilter(this.parameter, this.value);
+                }
+            }
+            return filterExpression;
+        };
 
-    return FilterExpression;
-}]);
+        FilterExpression.prototype.isMultiple = function () {
+            return this.multiple === true;
+        };
+
+        FilterExpression.prototype.clear = function () {
+            this.value = this.defaultValue;
+            this.displayValue = null;
+        };
+        
+        FilterExpression.prototype.enumerateTags = function () {
+            var tags, i, arrayLength;
+            tags = [];
+            if(this.isValid()) {
+                if(this.isMultiple()) {
+                    arrayLength = this.value.length;
+                    for (i = 0; i < arrayLength; i++) {
+                        var tag = {};
+                        tag.name = this.value[i];
+                        tag.remove = function() {
+                            this.value.splice(i, 1);
+                        };
+                        tags.push(tag);
+                    }
+                } else {
+                    var tag = {};
+                    tag.name = this.getDisplayValue();
+                    tag.origin = this;
+                    tag.remove = function() {
+                            this.origin.clear();
+                        };
+                    tags.push(tag);
+                }
+            }
+            
+            return tags;
+        };
+
+        // define constants
+        FilterExpression.RENDERER__TO_STRING = 'renderer_tostring';
+
+        Object.defineProperties(FilterExpression.prototype, {
+            'valid': {
+                'get': function () {
+                    return this.isValid();
+                }
+            }
+        });
+
+        return FilterExpression;
+    }]);
 

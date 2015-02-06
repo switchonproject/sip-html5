@@ -9,7 +9,7 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/countries-filter-directive.html',
                 scope: {
-                    filterExpressions: '=',
+                    filterExpression: '=',
                     countryGroup: '@'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.countriesFilterDirectiveController'
