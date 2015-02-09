@@ -12,7 +12,7 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket;
+                setSearchGeom, wicket, nexrad;
 
             angular.extend($scope, {
                 defaults: {
@@ -143,6 +143,7 @@ angular.module(
                         }
                         internalChange = true;
                         $scope.searchGeomWkt = wkt;
+                        $scope.searchGeomTitle = wicket.type;
                     }
                 }
             });
@@ -155,15 +156,18 @@ angular.module(
                         try {
                             wicket.read(n);
                             internalChange = true;
-                            setSearchGeom(wicket.toObject({color: '#7dcd7c', icon: new MapSearchIcon()}));
+                            setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
                         } catch (e) {
                             // ignore illegal wkt
                         }
+                    } else if (n === null) {
+                        searchGroup.removeLayer($scope.searchGeomLayer);
+                        $scope.searchGeomLayer = undefined;
                     }
                 }
             });
             // </editor-fold>
-            
+
             // <editor-fold defaultstate="collapsed" desc=" objects " >
             objGroup = new L.FeatureGroup();
             leafletData.getMap('mainmap').then(function (map) {
@@ -200,6 +204,18 @@ angular.module(
             if ($scope.objects) {
                 setObjects($scope.objects);
             }
+
+            nexrad = L.tileLayer.wms('http://gis.lebensministerium.at/wmsgw/gs103601/?&service=wms&version=1.1.1&request=GetCapabilities', {
+                layers: 'LFRZ:DRAINAGEBASIN',
+                format: 'image/png',
+                transparent: true,
+                attribution: 'Lebensministerium AT'
+            });
+            //var opentopo = L.tileLayer('http://{s}.opentopomap.org/{z}/{x}/{y}.png');
+            leafletData.getMap('mainmap').then(function (map) {
+                //opentopo.addTo(map);
+                nexrad.addTo(map);
+            });
             // </editor-fold>
         }
     ]

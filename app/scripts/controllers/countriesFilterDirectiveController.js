@@ -8,35 +8,13 @@ angular.module(
         function ($scope, TagGroupService) {
             'use strict';
 
+            $scope.filterExpression.selectedCountry = null;
             $scope.countryList = TagGroupService.getCountryList($scope.countryGroup);
-            $scope.country = null;
 
-            $scope.createFilterExpression = function (country, parameter) {
-                var filterExpression;
-
-                if (parameter) {
-                    filterExpression = (country + ':');
-                    filterExpression += ('"' + parameter + '"');
-                }
-
-                return filterExpression;
-            };
-
-            $scope.appendFilterExpression = function (filterExpression) {
-                if (filterExpression && filterExpression.length > 0) {
-                    if ($scope.filterExpressions.universalSearchString) {
-                        $scope.filterExpressions.universalSearchString += (' ' + filterExpression);
-                    } else {
-                        $scope.filterExpressions.universalSearchString = filterExpression;
-                    }
-                }
-            };
-
-            $scope.$watch('country', function (newValue) {
-
-                if (newValue) {
-                    var filterExpression = $scope.createFilterExpression('geo', newValue);
-                    $scope.appendFilterExpression(filterExpression);
+            $scope.$watch('filterExpression.selectedCountry', function (newValue, oldValue) {
+                if (newValue && (newValue !== oldValue) && newValue.length > 0 && $scope.countryList.hasOwnProperty(newValue[0]) && ($scope.filterExpression.value !== $scope.countryList[newValue[0]])) {
+                    $scope.filterExpression.value = $scope.countryList[newValue[0]];
+                    $scope.filterExpression.displayValue = newValue[0];
                 }
             });
         }

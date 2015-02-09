@@ -24,9 +24,9 @@ angular.module(
             generateKeywordList = function (keywordGroup) {
                 var keywordList = TagGroupService.getKeywordList(keywordGroup);
                 if (keywordList && !keywordList.$resolved) {
-                    console.log('keyword list not yet resolved');
+                    //console.log('keyword list not yet resolved');
                     keywordList.$promise.then(function () {
-                        console.log('keyword list generated');
+                        //console.log('keyword list generated');
                         keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
                     });
                 } else if (keywordList) {
@@ -34,7 +34,9 @@ angular.module(
                 }
             };
 
+            // generate a list with all-lowercase keywords
             generateKeywordList('keyword-cuashi');
+            // this is the list that contains the keyywords of the curretn query
             keywordLookupLists['query-keyword'] = $scope.queryKeywordList;
 
             $scope.tableParams = new NgTableParams({

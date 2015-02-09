@@ -1,7 +1,8 @@
 <div>
-    <map-view search-geom-wkt="data.searchGeomWkt"
+    <map-view search-geom-wkt="geoFilterExpression.value"
+              search-geom-title="geoFilterExpression.displayValue"
               center-search-geometry="true"
-              preserve-zoom-on-center="true"
+              preserve-zoom-on-center="false"
               objects="data.resultObjects"
               center-objects="true"></map-view>
 </div>
