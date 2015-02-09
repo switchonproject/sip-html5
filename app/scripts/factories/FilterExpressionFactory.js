@@ -21,7 +21,10 @@ angular.module(
             }
             this.parameter = parameter;
             this.defaultValue = (defaultValue === undefined) ? null : defaultValue;
-            this.value = (defaultValue === undefined) ? null : defaultValue;
+            // if default value is an object it has to be cloned!
+            this.value = (defaultValue === undefined) ? null :
+                    ((this.defaultValue !== null && typeof this.defaultValue === 'object') ?
+                            JSON.parse(JSON.stringify(this.defaultValue)) : this.defaultValue);
             this.displayValue = null;
             this.multiple = (multiple === undefined) ? false : multiple;
             this.renderer = (renderer === undefined) ? this.RENDERER__TO_STRING : renderer;
@@ -41,8 +44,8 @@ angular.module(
             return this.value ? true : false;
         };
 
-        FilterExpression.prototype.getFilterExpression = function () {
-            var filterExpression, arrayLength, i, concatFilter;
+        FilterExpression.prototype.getFilterExpressionString = function () {
+            var filterExpressionString, arrayLength, i, concatFilter;
 
             concatFilter = function (parameter, value) {
                 var concatExpression = (parameter + ':' + '"' + value + '"');
@@ -54,17 +57,29 @@ angular.module(
                     arrayLength = this.value.length;
                     for (i = 0; i < arrayLength; i++) {
                         if (i === 0) {
-                            filterExpression = concatFilter(this.parameter, this.value[i]);
+                            filterExpressionString = concatFilter(this.parameter, this.value[i]);
                         } else {
-                            filterExpression += ' ';
-                            filterExpression += concatFilter(this.parameter, this.value[i]);
+                            filterExpressionString += ' ';
+                            filterExpressionString += concatFilter(this.parameter, this.value[i]);
                         }
                     }
                 } else {
-                    filterExpression = concatFilter(this.parameter, this.value);
+                    filterExpressionString = concatFilter(this.parameter, this.value);
                 }
             }
-            return filterExpression;
+            return filterExpressionString;
+        };
+
+        FilterExpression.prototype.setArrayValue = function (arrayValue) {
+            if (this.isMultiple()) {
+                if (!this.value) {
+                    this.value = [];
+                }
+                this.value.push(arrayValue);
+                return true;
+            }
+
+            return false;
         };
 
         FilterExpression.prototype.isMultiple = function () {
@@ -72,7 +87,12 @@ angular.module(
         };
 
         FilterExpression.prototype.clear = function () {
-            this.value = this.defaultValue;
+            if (this.defaultValue !== null && typeof this.defaultValue === 'object') {
+                this.value = JSON.parse(JSON.stringify(this.defaultValue));
+            } else {
+                this.value = this.defaultValue;
+            }
+
             this.displayValue = null;
         };
 
@@ -82,7 +102,11 @@ angular.module(
 
             function removeTag() {
                 return function () {
-                    tag.origin.value.splice(tag.index, 1);
+                    if (tag.origin.isMultiple()) {
+                        tag.origin.value.splice(tag.index, 1);
+                    } else {
+                        tag.origin.value = null;
+                    }
                 };
             }
 
@@ -95,7 +119,7 @@ angular.module(
                         tag.type = this.parameter;
                         tag.origin = this;
                         tag.index = i;
-                        tag.remove = removeTag();
+                        tag.remove = removeTag(true);
                         tags.push(tag);
                     }
                 } else {
@@ -103,7 +127,7 @@ angular.module(
                     tag.name = this.getDisplayValue();
                     tag.type = this.parameter;
                     tag.origin = this;
-                    tag.remove = removeTag();
+                    tag.remove = removeTag(false);
                     tags.push(tag);
                 }
             }
@@ -113,6 +137,31 @@ angular.module(
 
         // define constants
         FilterExpression.RENDERER__TO_STRING = 'renderer_tostring';
+
+        FilterExpression.FILTER__GEO = 'geo';
+        FilterExpression.FILTER__GEO_INTERSECTS = 'geo-intersects';
+        FilterExpression.FILTER__GEO_BUFFER = 'geo-buffer';
+        FilterExpression.FILTER__KEYWORD = 'keyword';
+        FilterExpression.FILTER__TOPIC = 'topic';
+        FilterExpression.FILTER__CATEGORY = 'category';
+        FilterExpression.FILTER__DATE_START = 'fromDate';
+        FilterExpression.FILTER__DATE_END = 'toDate';
+        FilterExpression.FILTER__OPTION_LIMIT = 'limit';
+        FilterExpression.FILTER__TEXT = 'text';
+
+        FilterExpression.FILTERS = [
+            FilterExpression.FILTER__GEO,
+            FilterExpression.FILTER__GEO_INTERSECTS,
+            FilterExpression.FILTER__GEO_BUFFER,
+            FilterExpression.FILTER__KEYWORD,
+            FilterExpression.FILTER__TOPIC,
+            FilterExpression.FILTER__CATEGORY,
+            FilterExpression.FILTER__DATE_START,
+            FilterExpression.FILTER__DATE_END,
+            FilterExpression.FILTER__OPTION_LIMIT,
+            FilterExpression.FILTER__OPTION_LIMIT,
+            FilterExpression.FILTER__TEXT
+        ];
 
         Object.defineProperties(FilterExpression.prototype, {
             'valid': {

@@ -7,7 +7,8 @@ angular.module(
         '$rootScope',
         '$modal',
         'eu.water-switch-on.sip.services.SearchService',
-        function ($scope, $rootScope, $modal, SearchService) {
+        'FilterExpression',
+        function ($scope, $rootScope, $modal, SearchService, FilterExpression) {
             'use strict';
 
             var processCallback, status;
@@ -20,6 +21,7 @@ angular.module(
 
             $scope.status = status;
             $scope.customFilterExpression = '';
+            $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
 
             processCallback = function (current, max, type) {
                 status.max = max;
@@ -82,57 +84,60 @@ angular.module(
 
             };
 
-            $scope.pattern = /(^[A-Za-z_\-]+:"[\s\S]+"+\s?$)+/;
-
             $scope.clear = function () {
                 $scope.filterExpressions.clear();
             };
 
+            // Styling of Search Filters.. into CSS but how?
             $scope.getTagIcon = function (type) {
                 switch (type) {
-                case 'keyword':
+                case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
-                case 'topic':
+                case FilterExpression.FILTER__TOPIC:
                     return 'glyphicon glyphicon-tag';
-                case 'geo':
+                case FilterExpression.FILTER__GEO:
                     return 'glyphicon glyphicon-globe';
-                case 'fromDate':
+                case FilterExpression.FILTER__DATE_START:
                     return 'glyphicon glyphicon-chevron-left';
-                case 'toDate':
+                case FilterExpression.FILTER__DATE_END:
                     return 'glyphicon glyphicon-chevron-right';
-                case 'text':
+                case FilterExpression.FILTER__TEXT:
                     return 'glyphicon glyphicon-pencil';
-                case 'geo-intersects':
+                case FilterExpression.FILTER__GEO_INTERSECTS:
                     return 'glyphicon glyphicon-log-out';
-                case 'geo-buffer':
+                case FilterExpression.FILTER__GEO_BUFFER:
                     return 'glyphicon glyphicon-record';
-                case 'limit':
+                case FilterExpression.FILTER__OPTION_LIMIT:
                     return 'glyphicon glyphicon-indent-right';
+                case FilterExpression.FILTER__CATEGORY:
+                    return 'glyphicon glyphicon-bookmark';
                 default:
-                    return 'glyphicon glyphicon-pushpin';
+                    return 'glyphicon glyphicon-flash';
                 }
             };
 
             $scope.getTagStyle = function (type) {
                 switch (type) {
-                case 'keyword':
+                case FilterExpression.FILTER__KEYWORD:
                     return 'label-success';
-                case 'topic':
+                case FilterExpression.FILTER__TOPIC:
                     return 'label-success';
-                case 'geo':
+                case FilterExpression.FILTER__GEO:
                     return 'label-success';
-                case 'fromDate':
+                case FilterExpression.FILTER__DATE_START:
                     return 'label-success';
-                case 'toDate':
+                case FilterExpression.FILTER__DATE_END:
                     return 'label-success';
-                case 'text':
-                    return 'label-success';
-                case 'geo-intersects':
+                case FilterExpression.FILTER__TEXT:
+                    return 'label-info';
+                case FilterExpression.FILTER__GEO_INTERSECTS:
                     return 'label-warning';
-                case 'geo-buffer':
+                case FilterExpression.FILTER__GEO_BUFFER:
                     return 'label-warning';
-                case 'limit':
+                case FilterExpression.FILTER__OPTION_LIMIT:
                     return 'label-warning';
+                case FilterExpression.FILTER__CATEGORY:
+                    return 'label-success';
                 default:
                     return 'label-default';
                 }
@@ -173,16 +178,19 @@ angular.module(
                 });
             };
 
-            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
+            // input box ist empty. Show default message. 
+            // disabled since clearing the box after parsing triggers this message
+//            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
+//
+//                if (oldValue === false && newValue === true) {
+//                    $scope.notificationFunction({
+//                        message: 'Please enter a filter expression,  e.g. keyword:"water quality"',
+//                        type: 'info'
+//                    });
+//                }
+//            });
 
-                if (oldValue === false && newValue === true) {
-                    $scope.notificationFunction({
-                        message: 'Please enter a filter expression,  e.g. keyword:"water quality".',
-                        type: 'info'
-                    });
-                }
-            });
-
+            // input is invalid according to regex pattern
             $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
 
                 if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
@@ -198,6 +206,56 @@ angular.module(
             $scope.$watch('filterExpressions.list', function () {
                 $scope.enumeratedTags = $scope.filterExpressions.enumerateTags();
             }, true);
+
+            $scope.$watch('customFilterExpression', function (newExpression) {
+                if (newExpression) {
+                    var filterExpressionString, param, value, filterExpression, filterExpressions;
+                    filterExpressionString = newExpression.split($scope.pattern);
+                    param = filterExpressionString[1];
+                    value = filterExpressionString[2];
+                    if (param && value) {
+                        if (FilterExpression.FILTERS.indexOf(param) === -1) {
+                            $scope.notificationFunction({
+                                message: 'The filter parameter "' + param + '" is unknown. The search may deliver unexpected results.',
+                                type: 'info'
+                            });
+                        }
+
+                        filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(param);
+                        if (!filterExpressions || filterExpressions.length < 1) {
+                            filterExpression = new FilterExpression(param);
+                            filterExpression.value = value;
+                            filterExpression.displayValue = value;
+                            // triggers update
+                            $scope.filterExpressions.addFilterExpression(filterExpression);
+                        } else {
+                            // should trigger update when comparing with angular.equals
+                            // we pick the 1st array element.
+                            // FIXME: what if there are multiple FE with the same param?
+                            filterExpression = filterExpressions[0];
+                            if (filterExpression.isMultiple()) {
+                                filterExpression.setArrayValue(value);
+                                // no display value for arrays!
+                            } else {
+                                filterExpression.value = value;
+                                filterExpression.displayValue = value;
+                            }
+
+                            $scope.notificationFunction({
+                                message: 'New filter for "' + param + '" applied',
+                                type: 'success'
+                            });
+                        }
+                    } else {
+                        $scope.notificationFunction({
+                            message: 'The filter expression "' + newExpression + '" is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
+                            type: 'warning'
+                        });
+                    }
+                    // reset when expression parsed
+                    $scope.customFilterExpression = '';
+                } // else: ignore
+            });
         }
     ]
 );
