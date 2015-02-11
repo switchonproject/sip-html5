@@ -1,6 +1,6 @@
 <div>
     <div class="page-header" ng-hide='data.resultSet.$collection' style="text-align: center">
-        <h1>No data available, please perform a search</h1>
+        <img class="img-responsive" style="width:100%" src="images/switchon-logo-transparent.png" alt="SWITCH-ON"/>
     </div>
-    <list-view ng-show='data.resultSet.$collection' table-data='data.resultSet.$collection'></list-view>
+    <list-view ng-show='data.resultSet.$collection' filter-expressions="filterExpressions" table-data='data.resultSet.$collection'></list-view>
 </div>

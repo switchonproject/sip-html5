@@ -9,7 +9,8 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/resultset-directive.html',
                 scope: {
-                     resultSet: '='
+                    resultSet: '=',
+                    selectedObject: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.resultSetDirectiveController'
             };

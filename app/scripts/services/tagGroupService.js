@@ -10,6 +10,7 @@ angular.module(
 
             tagResources = {
                 'keyword-cuashi': 'data/cuashiKeywords.json',
+                'keyword-cuashi-toplevel': 'data/cuashiToplevelKeywords.json',
                 'keyword-inspire': 'data/inspireKeywords.json',
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
