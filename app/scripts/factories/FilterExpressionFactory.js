@@ -75,8 +75,11 @@ angular.module(
                 if (!this.value) {
                     this.value = [];
                 }
-                this.value.push(arrayValue);
-                return true;
+                
+                if(this.value.indexOf(arrayValue) === -1) {
+                    this.value.push(arrayValue);
+                    return true;
+                }
             }
 
             return false;
