@@ -2,16 +2,16 @@
 
     <div class="container nowrap"> 
         <strong>Resources</strong> ({{resultSet.$total}})
-        <ul class="pagination pagination-sm">
+<!--        <ul class="pagination pagination-sm">
             <li ng-class="{disabled: !resultSet.$previous}"><a href="#" aria-label="Previous" ng-click="alert();"><span aria-hidden="true">&laquo;</span></a></li>
             <li ng-class="{disabled: resultSet.$next}"><a href="#" aria-label="Next" ng-click="alert();"><span aria-hidden="true">&raquo;</span></a></li>
-        </ul>
+        </ul>-->
     </div>
 
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="node in resultSet.$collection">  
-            <span class="btn-link" ng-click="alert();">{{node.name}}</span>
-            <p><small>{{node.description}}</small></p>
+            <span class="btn-link" ng-click="$parent.selectedObject = $index">{{node.name}}</span>
+            <p style="line-height: normal;"><small><small>{{node.object.description | txtLen:80:false:'...':true}}</small></small></p>
         </li>
     </ul>
 

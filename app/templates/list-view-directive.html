@@ -1,16 +1,24 @@
 <table ng-table="tableParams" class="table table-striped table-bordered table-hover">
     <tr ng-repeat="node in $data">
         <td data-title="'Name'" sortable="'object.name'" class="name">{{node.object.name}}</td>
-        <td data-title="'Description'">{{node.object.description| txtLen:80:false:null:true}}</td>
+        
+        <td data-title="'Description'">
+            <span>{{node.object.description | txtLen:80:false:'':true}}</span>
+            <span ng-hide="node.object.description.length < 80"><a ng-click="showInfo(node.object)">...</a></span>
+        </td>
+        
         <td data-title="'Temporal Extent'" sortable="'object.fromdate'" class="date">
             {{node.object.fromdate| date: "dd.MM.yyyy"}} - 
             {{node.object.todate| date: "dd.MM.yyyy"}}
         </td>
+        
         <td data-title="'Keywords'" class="tags">
-            <span ng-repeat="tag in node.object.tags">
-                <span class="label" ng-class="isHighlightKeyword('keyword-cuashi', tag.name) ? 'label-success' : 'label-default'">{{tag.name}}</span>
+            <span ng-repeat="tag in node.object.tags | orderBy:'name'">
+                <span ng-hide="config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)" 
+                      class="label" ng-class="isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'">{{tag.name}}</span>
             </span>
         </td>
+        
         <td data-title="'Tools'" class="tools">
             <span bs-tooltip
                   data-placement="left"
@@ -39,7 +47,7 @@
                   ng-click="" >
                 <i class="glyphicon glyphicon-bookmark"></i>
             </span>
-            <span bs-tooltip
+<!--            <span bs-tooltip
                   data-placement="left"
                   data-trigger="hover"
                   data-delay="{show: 400, hide: 100}"
@@ -47,7 +55,7 @@
                   class="btn-invisible btn-icon disabled" 
                   ng-click="" >
                 <i class="glyphicon glyphicon-share"></i>
-            </span>
+            </span>-->
         </td>
     </tr>
 </table>

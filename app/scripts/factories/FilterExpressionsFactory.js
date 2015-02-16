@@ -29,9 +29,9 @@ angular.module(
                             theFilterExpression = this.list[keys[i]];
                             if (theFilterExpression instanceof FilterExpression && theFilterExpression.isValid()) {
                                 if (uss.length === 0) {
-                                    uss = theFilterExpression.getFilterExpression();
+                                    uss = theFilterExpression.getFilterExpressionString();
                                 } else {
-                                    uss += (' ' + theFilterExpression.getFilterExpression());
+                                    uss += (' ' + theFilterExpression.getFilterExpressionString());
                                 }
                             }
                         }
@@ -75,12 +75,14 @@ angular.module(
                 return removed;
             };
 
-            filterExpressions.getFilterExpressionsByType = function (type) {
+            filterExpressions.getFilterExpressionsByType = function (type, partialMatch) {
                 var i, arrayLength, filterExpressionList;
                 filterExpressionList = [];
                 arrayLength = filterExpressions.list.length;
                 for (i = 0; i < arrayLength; i++) {
-                    if (filterExpressions.list[i].parameter === type) {
+                    if (partialMatch && filterExpressions.list[i].parameter.indexOf(type) !== -1) {
+                        filterExpressionList.push(filterExpressions.list[i]);
+                    } else if (filterExpressions.list[i].parameter === type) {
                         filterExpressionList.push(filterExpressions.list[i]);
                     }
                 }

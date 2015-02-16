@@ -54,7 +54,7 @@
                 </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUASHI Keywords'" 
                                 class="ng-hide"
-                                filter-expression="keywordsFilterExpression" 
+                                filter-expression="keywordsCuashiFilterExpression" 
                                 keyword-group="keyword-cuashi">      
                 </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" 
@@ -69,11 +69,13 @@
                 </keyword-filter>
             </div>
 
-            <div class="switchon-ribbon-panel">
+            <!-- FIXME: Date Filter Directive does not work properly in latest versions of 
+            Firefox and Internet Explorer. See https://github.com/switchonproject/sip-html5/issues/48 -->
+<!--            <div class="switchon-ribbon-panel">
                 <date-filter from-date-filter-expression="fromDateFilterExpression"
                              to-date-filter-expression="toDateFilterExpression">
                 </date-filter>
-            </div>
+            </div>-->
 
             <div class="switchon-ribbon-panel">
                 <tabset>

@@ -4,7 +4,6 @@
            id="universalSearchBox" 
            role="search"  
            novalidate >
-
         <div class="form-group" 
              ng-class="{'has-error': !universalSearchBox.filterExpressionInput.$error.required
                          && universalSearchBox.filterExpressionInput.$invalid}" >
@@ -25,8 +24,7 @@
                     ng-pattern="pattern"
                     required/>
             </div>
-            <button ng-click="performSearch(universalSearchBox)" ng-disabled="universalSearchBox.filterExpressionInput.$error.required
-                        || universalSearchBox.filterExpressionInput.$invalid" class="btn btn-primary">
+            <button ng-click="performSearch(universalSearchBox)" ng-disabled="enumeratedTags.length < 1" class="btn btn-primary">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
 

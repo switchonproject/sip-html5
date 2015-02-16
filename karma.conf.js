@@ -62,6 +62,7 @@ module.exports = function(config) {
         'target/dist/scripts/filters/_module.js',
         'target/dist/scripts/filters/textLengthFilter.js',
         'target/dist/scripts/factories/_module.js',
+        'target/dist/scripts/factories/AppConfigFactory.js',
         'target/dist/scripts/factories/FilterExpressionFactory.js',
         'target/dist/scripts/factories/FilterExpressionsFactory.js',
         'target/dist/bower_components/angular-mocks/angular-mocks.js',

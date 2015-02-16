@@ -31,7 +31,7 @@ angular.module(
                 if (max === -1 && type === 'success') {
                     if ($scope.notificationFunction) {
                         $scope.notificationFunction({
-                            message: 'Search started',
+                            message: 'Search for resources is in progress.',
                             type: 'info'
                         });
                     }
@@ -51,7 +51,8 @@ angular.module(
                         status.current = 100;
                         if ($scope.notificationFunction) {
                             $scope.notificationFunction({
-                                message: 'Search completed, ' + current + ' results found',
+                                message: 'Search completed, ' + current +
+                                    (current > 1 ? ' ressource' : ' ressources') + ' found in the SWITCH-ON Meta-Data Repository',
                                 type: 'success'
                             });
                         }
@@ -59,7 +60,7 @@ angular.module(
                         status.current = 0;
                         if ($scope.notificationFunction) {
                             $scope.notificationFunction({
-                                message: 'Search completed, but no results found',
+                                message: 'Search completed, but no matching ressources found in the SWITCH-ON Meta-Data Repository',
                                 type: 'warning'
                             });
                         }
@@ -93,6 +94,8 @@ angular.module(
                 switch (type) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
+                case FilterExpression.FILTER__KEYWORD_CUASHI:
+                    return 'glyphicon glyphicon-copyright-mark';
                 case FilterExpression.FILTER__TOPIC:
                     return 'glyphicon glyphicon-tag';
                 case FilterExpression.FILTER__GEO:
@@ -120,6 +123,8 @@ angular.module(
                 switch (type) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'label-success';
+                case FilterExpression.FILTER__KEYWORD_CUASHI:
+                    return 'label-info';
                 case FilterExpression.FILTER__TOPIC:
                     return 'label-success';
                 case FilterExpression.FILTER__GEO:
@@ -145,12 +150,14 @@ angular.module(
 
             $scope.performSearch = function (searchForm) {
                 // If form is invalid, return and let AngularJS show validation errors.
+                // Disabled since an empty form is also invalid. FIXME!
                 if (searchForm.$invalid) {
-                    $scope.notificationFunction({
-                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
-                        type: 'warning'
-                    });
-                    return;
+//                    $scope.notificationFunction({
+//                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
+//                        type: 'warning'
+//                    });
+//                    return;
+                    console.log('This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality"');
                 }
 
                 $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, processCallback);
@@ -196,7 +203,7 @@ angular.module(
                 if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
                         $scope.universalSearchBox.filterExpressionInput.$invalid) {
                     $scope.notificationFunction({
-                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality".',
+                        message: 'This search filter expression is not valid. Please use expression:"parameter", e.g. keyword:"water quality".',
                         type: 'warning'
                     });
                 }
@@ -216,7 +223,7 @@ angular.module(
                     if (param && value) {
                         if (FilterExpression.FILTERS.indexOf(param) === -1) {
                             $scope.notificationFunction({
-                                message: 'The filter parameter "' + param + '" is unknown. The search may deliver unexpected results.',
+                                message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
                                 type: 'info'
                             });
                         }
@@ -242,13 +249,13 @@ angular.module(
                             }
 
                             $scope.notificationFunction({
-                                message: 'New filter for "' + param + '" applied',
+                                message: 'Search filter "' + param + '" successfully applied.',
                                 type: 'success'
                             });
                         }
                     } else {
                         $scope.notificationFunction({
-                            message: 'The filter expression "' + newExpression + '" is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
+                            message: 'The search filter expression "' + newExpression + '" entered is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
                             type: 'warning'
                         });
                     }

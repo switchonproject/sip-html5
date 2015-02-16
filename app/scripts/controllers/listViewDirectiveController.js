@@ -1,6 +1,6 @@
 angular.module(
     'eu.water-switch-on.sip.controllers'
-    ).controller(
+).controller(
     'eu.water-switch-on.sip.controllers.listViewDirectiveController',
     [
         '$scope',
@@ -9,12 +9,15 @@ angular.module(
         '$rootScope',
         'ngTableParams',
         'eu.water-switch-on.sip.services.TagGroupService',
-        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService) {
+        'AppConfig',
+        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService, AppConfig) {
             'use strict';
 
-            var initialSorting, keywordLookupLists, generateKeywordList;
+            var initialSorting, keywordLookupLists, generateKeywordList, generateQueryKeywordList;
 
             $scope.$watch('tableData', function () {
+                // this is the list that contains the keyywords of the current query
+                generateQueryKeywordList();
                 $scope.tableParams.reload();
             });
 
@@ -34,10 +37,28 @@ angular.module(
                 }
             };
 
+            generateQueryKeywordList = function () {
+                var filterExpression, filterExpressions, i, keywordList;
+                keywordList = [];
+                filterExpressions = $scope.filterExpressions.getFilterExpressionsByType('keyword', true);
+                for (i = 0; i < filterExpressions.length; i++) {
+                    filterExpression = filterExpressions[i];
+                    if (filterExpression && filterExpression.isValid()) {
+                        if (filterExpression.value.constructor === Array) {
+                            keywordList = keywordList.concat(filterExpression.value.join('|').toLowerCase().split('|'));
+                        } else {
+                            keywordList.push(filterExpression.value.toLowerCase());
+                        }
+                    }
+                }
+
+                keywordLookupLists['query-keyword'] = keywordList;
+            };
+
             // generate a list with all-lowercase keywords
             generateKeywordList('keyword-cuashi');
-            // this is the list that contains the keyywords of the curretn query
-            keywordLookupLists['query-keyword'] = $scope.queryKeywordList;
+
+            $scope.config = AppConfig.listView;
 
             $scope.tableParams = new NgTableParams({
                 page: 1,

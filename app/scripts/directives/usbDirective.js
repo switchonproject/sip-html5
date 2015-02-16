@@ -14,9 +14,6 @@ angular.module(
                      notificationFunction: '&?'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.usbDirectiveController'
-                /*controllerAs: 'usb',
-                transclude:true,
-                bindToController:true*/
             };
         }
     ]);

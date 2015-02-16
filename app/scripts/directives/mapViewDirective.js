@@ -15,7 +15,8 @@ angular.module(
                     centerSearchGeometry: '=',
                     preserveZoomOnCenter: '=',
                     objects: '=',
-                    centerObjects: '='
+                    centerObjects: '=',
+                    selectedObject: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.mapViewDirectiveController'
             };

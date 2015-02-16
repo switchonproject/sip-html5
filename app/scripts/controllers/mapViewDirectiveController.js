@@ -8,15 +8,18 @@ angular.module(
         '$timeout',
         'leafletData',
         'de.cismet.cids.services.featureRendererService',
-        function ($scope, $window, $timeout, leafletData, rendererService) {
+        'AppConfig',
+        function ($scope, $window, $timeout, leafletData, rendererService, AppConfig) {
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket, nexrad;
+                setSearchGeom, wicket, nexrad, config;
+
+            config = AppConfig.mapView;
 
             angular.extend($scope, {
                 defaults: {
-                    tileLayer: 'http://{s}.opentopomap.org/{z}/{x}/{y}.png',
+                    tileLayer: config.backgroundLayer,
                     //maxZoom: 14,
                     path: {
                         weight: 10,
@@ -45,7 +48,7 @@ angular.module(
                 }, 500);
             });
 
-            $scope.center = {lat: 49.245166, lng: 6.936809, zoom: 4};
+            $scope.center = config.home;
 
             angular.element($window).bind('resize', function () {
                 fireResize(false);
@@ -178,11 +181,11 @@ angular.module(
                 var i, renderer;
 
                 objGroup.clearLayers();
-                for(i = 0; i < objs.length; ++i) {
+                for (i = 0; i < objs.length; ++i) {
                     renderer = rendererService.getFeatureRenderer(objs[i]);
                     objGroup.addLayer(renderer);
                 }
-                
+ 
                 if ($scope.centerObjects && objGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(objGroup.getBounds(), {
@@ -217,6 +220,23 @@ angular.module(
                 nexrad.addTo(map);
             });
             // </editor-fold>
+
+            $scope.$watch('selectedObject', function (n) {
+                if (n !== -1 && $scope.centerObjects && objGroup.getLayers().length > n) {
+                    leafletData.getMap('mainmap').then(function (map) {
+                        // FIXME: probably use with layer ids?
+                        // see https://github.com/Leaflet/Leaflet/issues/1805
+                        var layer = objGroup.getLayers()[n];
+                        layer.setStyle({fillOpacity: 0.4, fill: true, fillColor: '#1589FF'});
+                        map.fitBounds(layer.getBounds(), {
+                            animate: true,
+                            pan: {animate: true, duration: 0.6},
+                            zoom: {animate: true},
+                            maxZoom: $scope.preserveZoomOnCenter ? map.getZoom() : null
+                        });
+                    });
+                }
+             });
         }
     ]
 );

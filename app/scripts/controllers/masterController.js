@@ -7,24 +7,33 @@ angular.module(
         '$state',
         'FilterExpressions',
         'FilterExpression',
-        function ($scope, $state, FilterExpressions, FilterExpression) {
+        'eu.water-switch-on.sip.services.TagGroupService',
+        function ($scope, $state, FilterExpressions, FilterExpression, TagGroupService) {
             'use strict';
 
             $scope.data = {};
-            $scope.data.message = 'Application loaded';
+            $scope.data.message = 'Welcome to the SWITCH-ON Spatial Information Platform!';
             $scope.data.messageType = 'success';
+            $scope.data.selectedObject = -1;
+            // FIXME: move to categories directive -----------------------------
+            $scope.data.categories = TagGroupService.getKeywordList('keyword-cuashi-toplevel');
+            // FIXME: move to categories directive -----------------------------
             $scope.isResultShowing = false;
             $scope.state = $state;
 
             $scope.filterExpressions = FilterExpressions; // singleton instance
             $scope.geoFilterExpression = new FilterExpression('geo');
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
+            // FIXME: move to categories directive ? -----------------------------
+            $scope.categoriesFilterExpression = new FilterExpression('keyword-cuashi', [], true);
+            $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
+            // FIXME: move to categories directive ? -----------------------------
 
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
 
             $scope.activateView = function (state) {
-                $scope.showMessage(state + ' view showing', 'success');
+                //$scope.showMessage(state + ' view showing', 'success');
                 $state.go(state, {});
             };
 
@@ -62,6 +71,8 @@ angular.module(
                     }
 
                     $scope.data.resultObjects = objs;
+                    $scope.data.resultSet.$total = n.length;
+                    $scope.data.selectedObject = -1;
                 }
             });
         }
