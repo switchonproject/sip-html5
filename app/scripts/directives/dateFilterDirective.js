@@ -9,12 +9,9 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/datefilter-directive.html',
                 scope: {
-                    filterExpressions: '='
-                },
-                controller: 'eu.water-switch-on.sip.controllers.dateFilterDirectiveController'
-                    /*controllerAs: 'usb',
-                     transclude:true,
-                     bindToController:true*/
+                    fromDateFilterExpression: '=',
+                    toDateFilterExpression: '='
+                }
             };
         }
     ]);

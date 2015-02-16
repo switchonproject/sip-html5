@@ -37,8 +37,7 @@
                             </label>
                         </li>
                         <li>
-                            <label 
-                                class="btn" 
+                            <label class="btn" 
                                 ng-model="keywordFilters.keywordGroup" 
                                 btn-radio="'Free Keywords'" 
                                 ng-click="keywordFilters.isopen = !keywordFilters.isopen">
@@ -48,41 +47,56 @@
                     </ul>
                 </div>
 
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" class="ng-hide"
-                                filter-expressions="filterExpressions" 
-                                keyword-group="topic-inspire"
-                                keyword-parameter="topic"></keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUASHI Keywords'" class="ng-hide"
-                                filter-expressions="filterExpressions" 
-                                keyword-group="keyword-cuashi"
-                                keyword-parameter="keyword"></keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" class="ng-hide"
-                                filter-expressions="filterExpressions" 
-                                keyword-group="keyword-inspire"
-                                keyword-parameter="keyword"></keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Free Keywords'" class="ng-hide"
-                                filter-expressions="filterExpressions" 
-                                keyword-group="keyword-free"
-                                keyword-parameter="keyword"></keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" 
+                                class="ng-hide"
+                                filter-expression="topicFilterExpression" 
+                                keyword-group="topic-inspire">
+                </keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUASHI Keywords'" 
+                                class="ng-hide"
+                                filter-expression="keywordsFilterExpression" 
+                                keyword-group="keyword-cuashi">      
+                </keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" 
+                                class="ng-hide"
+                                filter-expression="keywordsFilterExpression" 
+                                keyword-group="keyword-inspire">
+                </keyword-filter>
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Free Keywords'" 
+                                class="ng-hide"
+                                filter-expression="keywordsFilterExpression" 
+                                keyword-group="keyword-free">        
+                </keyword-filter>
             </div>
 
             <div class="switchon-ribbon-panel">
-                <date-filter filter-expressions="filterExpressions"></date-filter>
+                <date-filter from-date-filter-expression="fromDateFilterExpression"
+                             to-date-filter-expression="toDateFilterExpression">
+                </date-filter>
             </div>
 
             <div class="switchon-ribbon-panel">
                 <tabset>
                     <tab heading="Europe">
-                        <countries-filter filter-expressions="filterExpressions" country-group="country-europe"></countries-filter>
+                        <countries-filter 
+                            filter-expression="geoFilterExpression" 
+                            country-group="country-europe">
+                        </countries-filter>
                     </tab>
                     <tab heading="World">
-                        <countries-filter filter-expressions="filterExpressions" country-group="country-world"></countries-filter>
+                        <countries-filter 
+                            filter-expression="geoFilterExpression" 
+                            country-group="country-world">
+                        </countries-filter>
                     </tab>
                 </tabset>
             </div>
 
             <div class="switchon-ribbon-panel last">
-                <search-options filter-expressions="filterExpressions"></search-options>
+                <search-options geo-intersects-filter-expression="geoIntersectsFilterExpression"
+                                geo-buffer-filter-expression="geoBufferFilterExpression"
+                                limit-filter-expression="limitFilterExpression">
+                </search-options>
             </div>
 
             <div class="switchon-ribbon-footer">

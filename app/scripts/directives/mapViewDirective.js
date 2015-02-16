@@ -11,6 +11,7 @@ angular.module(
                 templateUrl: 'templates/map-view-directive.html',
                 scope: {
                     searchGeomWkt: '=',
+                    searchGeomTitle: '=',
                     centerSearchGeometry: '=',
                     preserveZoomOnCenter: '=',
                     objects: '=',
