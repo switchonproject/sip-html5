@@ -8,6 +8,7 @@ describe('Search Service Test Suite', function () {
             module('ngResource');
             module('eu.water-switch-on.sip.services');
             module('mocks');
+            module('eu.water-switch-on.sip.factories');
         });
         
         beforeEach(inject(
@@ -15,10 +16,12 @@ describe('Search Service Test Suite', function () {
                 '$httpBackend',
                 '$templateCache',
                 'eu.water-switch-on.sip.services.SearchService',
-                function (httpBackend, templateCache, SearchService) {
+                'AppConfig',
+                function (httpBackend, templateCache, SearchService, appConfig) {
                     $httpBackend = httpBackend;
                     $templateCache = templateCache;
                     search = SearchService.search;
+                    AppConfig = appConfig;
                 }
             ]
         ));

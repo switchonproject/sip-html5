@@ -2,12 +2,13 @@ describe('Map View Directive Test Suite', function () {
     'use strict';
 
     describe('Map View Directive Controller Tests', function () {
-        var $controller, $rootScope, $timeout, $window, leafletData,
+        var $controller, $rootScope, $timeout, $window, leafletData, AppConfig,
             ctrl, scope;
 
         beforeEach(function () {
             module('eu.water-switch-on.sip.controllers');
             module('de.cismet.cids.services');
+            module('eu.water-switch-on.sip.factories');
             module('leaflet-directive');
         });
 
@@ -18,12 +19,14 @@ describe('Map View Directive Test Suite', function () {
                 '$window',
                 '$timeout',
                 'leafletData',
-                function (controller, rootscope, window, timeout, leaflet) {
+                'AppConfig',
+                function (controller, rootscope, window, timeout, leaflet, appConfig) {
                     $controller = controller;
                     $rootScope = rootscope;
                     $window = window;
                     $timeout = timeout;
                     leafletData = leaflet;
+                    AppConfig = appConfig;
                 }
             ]
         ));
@@ -36,7 +39,8 @@ describe('Map View Directive Test Suite', function () {
                     $scope: scope,
                     $window: $window,
                     $timeout: $timeout,
-                    leafletData: leafletData
+                    leafletData: leafletData,
+                    AppConfig: AppConfig
                 }
             );
             scope.$digest();

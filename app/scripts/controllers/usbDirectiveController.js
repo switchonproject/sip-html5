@@ -150,6 +150,7 @@ angular.module(
 
             $scope.performSearch = function (searchForm) {
                 // If form is invalid, return and let AngularJS show validation errors.
+                // Disabled since an empty form is also invalid. FIXME!
                 if (searchForm.$invalid) {
 //                    $scope.notificationFunction({
 //                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
