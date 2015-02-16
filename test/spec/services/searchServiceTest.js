@@ -2,7 +2,7 @@ describe('Search Service Test Suite', function () {
     'use strict';
     
     describe('Search Service Tests', function () {
-        var $httpBackend, $templateCache, objs, search;
+        var $httpBackend, $templateCache, objs, search, AppConfig;
         
         beforeEach(function () {
             module('ngResource');
@@ -131,7 +131,7 @@ describe('Search Service Test Suite', function () {
     
             runs(function () {
                 $httpBackend.expectGET(
-                    'http://localhost:8890/SWITCHON.testclass/1?deduplicate=true&omitNullValues=true'
+                    'http://localhost:8890/SWITCHON.testclass/1?deduplicate=false&omitNullValues=true'
                 ).respond(500, 'no obj');
                 result = search('testquery');
                 $httpBackend.flush();
@@ -170,7 +170,7 @@ describe('Search Service Test Suite', function () {
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
-                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=true&omitNullValues=true'
+                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
                 result = search('testquery');
@@ -215,7 +215,7 @@ describe('Search Service Test Suite', function () {
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
-                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=true&omitNullValues=true'
+                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
                 result = search('testquery', null, null, function(val, max, type) {
@@ -261,7 +261,7 @@ describe('Search Service Test Suite', function () {
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
-                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=true&omitNullValues=true'
+                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
                 result = search('testquery');
