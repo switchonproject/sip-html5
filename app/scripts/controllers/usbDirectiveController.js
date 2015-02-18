@@ -52,7 +52,7 @@ angular.module(
                         if ($scope.notificationFunction) {
                             $scope.notificationFunction({
                                 message: 'Search completed, ' + current +
-                                    (current > 1 ? ' ressource' : ' ressources') + ' found in the SWITCH-ON Meta-Data Repository',
+                                    (current > 1 ? ' ressources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
                                 type: 'success'
                             });
                         }
@@ -60,7 +60,7 @@ angular.module(
                         status.current = 0;
                         if ($scope.notificationFunction) {
                             $scope.notificationFunction({
-                                message: 'Search completed, but no matching ressources found in the SWITCH-ON Meta-Data Repository',
+                                message: 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
                                 type: 'warning'
                             });
                         }
