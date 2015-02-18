@@ -57,7 +57,7 @@ describe('Search Service Test Suite', function () {
     
             runs(function () {
                 $httpBackend.expectPOST(
-                    'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                    AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                     {'list':[{'key':'Query', 'value':null}]}
                 ).respond(500, 'illegal query');
                 result = search(null);
@@ -80,7 +80,7 @@ describe('Search Service Test Suite', function () {
     
             runs(function () {
                 $httpBackend.expectPOST(
-                    'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                    AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                     {'list':[{'key':'Query', 'value':'testquery'}]}
                 ).respond(500);
                 result = search('testquery');
@@ -92,14 +92,14 @@ describe('Search Service Test Suite', function () {
             var result;
             
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
             ).respond(200, {$collection: []});
             
     
             runs(function () {
                 $httpBackend.expectPOST(
-                    'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                    AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                     {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
                 ).respond(500, 'class lookup error');
                 result = search('testquery');
@@ -121,17 +121,17 @@ describe('Search Service Test Suite', function () {
             var result;
             
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
             ).respond(200, {$collection: [{classId: 1, objectId: 1}]});
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                 {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
             ).respond(200, {$collection: [{key: 1, value: 'testclass'}]});
     
             runs(function () {
                 $httpBackend.expectGET(
-                    'http://localhost:8890/SWITCHON.testclass/1?deduplicate=false&omitNullValues=true'
+                    AppConfig.searchService.host+'/SWITCHON.testclass/1?deduplicate=false&omitNullValues=true'
                 ).respond(500, 'no obj');
                 result = search('testquery');
                 $httpBackend.flush();
@@ -156,11 +156,11 @@ describe('Search Service Test Suite', function () {
             });
             
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
             ).respond(200, resultSet);
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                 {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
             ).respond(200, {$collection: [{key: 27, value: 'testclass'}]});
     
@@ -170,7 +170,7 @@ describe('Search Service Test Suite', function () {
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
-                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
+                        AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
                 result = search('testquery');
@@ -201,11 +201,11 @@ describe('Search Service Test Suite', function () {
             progress = [];
             
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
             ).respond(200, resultSet);
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                 {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
             ).respond(200, {$collection: [{key: 27, value: 'testclass'}]});
     
@@ -215,7 +215,7 @@ describe('Search Service Test Suite', function () {
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
-                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
+                        AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
                 result = search('testquery', null, null, function(val, max, type) {
@@ -247,11 +247,11 @@ describe('Search Service Test Suite', function () {
             });
             
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
             ).respond(200, resultSet);
             $httpBackend.whenPOST(
-                'http://localhost:8890/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
+                AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                 {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
             ).respond(200, {$collection: [{key: 27, value: 'testclass'}]});
     
@@ -261,7 +261,7 @@ describe('Search Service Test Suite', function () {
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
-                        'http://localhost:8890/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
+                        AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
                 result = search('testquery');
