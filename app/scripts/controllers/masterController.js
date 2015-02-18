@@ -8,8 +8,11 @@ angular.module(
         'FilterExpressions',
         'FilterExpression',
         'eu.water-switch-on.sip.services.TagGroupService',
-        function ($scope, $state, FilterExpressions, FilterExpression, TagGroupService) {
+        'AppConfig',
+        function ($scope, $state, FilterExpressions, FilterExpression, TagGroupService, AppConfig) {
             'use strict';
+
+            $scope.config = AppConfig;
 
             $scope.data = {};
             $scope.data.message = 'Welcome to the SWITCH-ON Spatial Information Platform!';
