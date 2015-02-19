@@ -22,7 +22,7 @@ angular.module(
             $scope.filterExpressions.addFilterExpression($scope.toDateFilterExpression);
             $scope.geoIntersectsFilterExpression = new FilterExpression('geo-intersects', 'false');
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
-            $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', 0);
+            $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', null);
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
             $scope.limitFilterExpression = new FilterExpression('limit', 20);
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);

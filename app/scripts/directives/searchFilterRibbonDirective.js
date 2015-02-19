@@ -9,6 +9,7 @@ angular.module(
                 templateUrl: 'templates/search-filter-ribbon-directive.html',
                 scope: {
                     filterExpressions: '=',
+                    performSearch: '&searchFunction',
                     notificationFunction: '&?'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController'

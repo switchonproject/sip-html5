@@ -103,15 +103,43 @@
 
             <div class="switchon-ribbon-footer">
                 <span bs-tooltip
-                      data-placement="left"
+                      data-placement="top"
                       data-trigger="hover"
                       data-delay="{show: 400, hide: 100}"
-                      data-title="Clear"
-                      class="btn-invisible btn-icon"
-                      ng-click="clear()">
-                    <i class="glyphicon glyphicon-remove-circle"></i>
+                      data-title="Close the Search Filter Dialog"
+                      aria-label="Close"
+                      name="closeButton"
+                      id="close-button"
+                      class="btn btn-default"
+                      ng-click="$hide()">
+                    <span class="glyphicon glyphicon-remove"></span>
                 </span>
-                <span>Clear current search filters and options</span>
+                <span bs-tooltip
+                      data-placement="top"
+                      data-trigger="hover"
+                      data-delay="{show: 400, hide: 100}"
+                      data-title="Clear all Search Filters"
+                      aria-label="Clear"
+                      name="clearButton"
+                      id="clear-button"
+                      class="btn btn btn-default"
+                      ng-disabled="filterExpressions.enumeratedTags.length < 1"
+                      ng-click="clear()">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </span>
+                <span bs-tooltip
+                      data-placement="top"
+                      data-trigger="hover"
+                      data-delay="{show: 400, hide: 100}"
+                      data-title="Search for resources"
+                      aria-label="Clear"
+                      name="clearButton"
+                      id="clear-botton"
+                      class="btn btn-primary"
+                      ng-disabled="filterExpressions.enumeratedTags.length < 1"
+                      ng-click="$hide(); performSearch()">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
             </div>
         </div>
     </div>

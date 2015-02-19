@@ -58,12 +58,13 @@
 
                 <!-- search filter ribbon -->
                 <search-filter-ribbon filter-expressions="filterExpressions" 
+                                      search-function="performSearch()" 
                                       notification-function="showMessage(message, type)">
                 </search-filter-ribbon>   
 
                 <!-- search directive -->
                 <usb filter-expressions="filterExpressions" 
-                     resource-collection="data.resultSet" 
+                     search-function="performSearch()" 
                      notification-function="showMessage(message, type)">
                 </usb> 
                 <my-workspace workspace-name="SWITCH-ON" ng-show="config.gui.dev === true"></my-workspace>
