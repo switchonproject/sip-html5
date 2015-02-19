@@ -8,7 +8,7 @@
                     <button type="button" 
                             class="btn btn-default dropdown-toggle" 
                             dropdown-toggle 
-                            ng-init="keywordFilters.keywordGroup = 'CUASHI Keywords'"
+                            ng-init="keywordFilters.keywordGroup = 'CUAHSI Keywords'"
                             style="width:100%">
                         {{keywordFilters.keywordGroup}}
                         <span class="caret"></span>
@@ -24,9 +24,9 @@
                         <li>
                             <label class="btn" 
                                    ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'CUASHI Keywords'" 
+                                   btn-radio="'CUAHSI Keywords'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen">
-                                CUASHI Keywords
+                                CUAHSI Keywords
                             </label>
                         </li>
                         <li>
@@ -52,10 +52,10 @@
                                 filter-expression="topicFilterExpression" 
                                 keyword-group="topic-inspire">
                 </keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUASHI Keywords'" 
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUAHSI Keywords'" 
                                 class="ng-hide"
                                 filter-expression="keywordsCuashiFilterExpression" 
-                                keyword-group="keyword-cuashi">      
+                                keyword-group="keyword-cuahsi">      
                 </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" 
                                 class="ng-hide"

@@ -18,7 +18,7 @@ angular.module(
         appConfig.listView = {};
         appConfig.listView.highlightKeyword = 'query-keyword';
         // hide all keywords except those beloging to the Tag Group:
-        appConfig.listView.filterKeyword = 'keywords - CUASHI';
+        appConfig.listView.filterKeyword = 'keywords - CUAHSI';
 
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';

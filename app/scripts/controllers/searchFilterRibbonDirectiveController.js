@@ -12,7 +12,7 @@ angular.module(
 
             $scope.keywordsFilterExpression = new FilterExpression('keyword', [], true);
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
-//            $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuashi', [], true);
+//            $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
 //            $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             $scope.topicFilterExpression = new FilterExpression('topic');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
@@ -52,12 +52,12 @@ angular.module(
             }
 
             // FIXME: move to categories directive -----------------------------
-            keywordsCuashiFilterExpression = $scope.filterExpressions.getFilterExpressionsByType('keyword-cuashi');
+            keywordsCuashiFilterExpression = $scope.filterExpressions.getFilterExpressionsByType('keyword-cuahsi');
             if (keywordsCuashiFilterExpression && keywordsCuashiFilterExpression.length > 0) {
                 $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpression[0];
             } else {
-                console.warn('keyword-cuashi filter expression not correctly initialized!');
-                $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuashi', [], true);
+                console.warn('keyword-cuahsi filter expression not correctly initialized!');
+                $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
                 $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             }
             // FIXME: move to categories directive -----------------------------

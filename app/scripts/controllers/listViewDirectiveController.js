@@ -56,7 +56,7 @@ angular.module(
             };
 
             // generate a list with all-lowercase keywords
-            generateKeywordList('keyword-cuashi');
+            generateKeywordList('keyword-cuahsi');
 
             $scope.config = AppConfig.listView;
 

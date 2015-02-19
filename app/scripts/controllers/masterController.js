@@ -24,7 +24,7 @@ angular.module(
             $scope.data.messageType = 'success';
             $scope.data.selectedObject = -1;
             // FIXME: move to categories directive -----------------------------
-            $scope.data.categories = TagGroupService.getKeywordList('keyword-cuashi-toplevel');
+            $scope.data.categories = TagGroupService.getKeywordList('keyword-cuahsi-toplevel');
             // FIXME: move to categories directive -----------------------------
             $scope.isResultShowing = false;
             $scope.state = $state;
@@ -33,7 +33,7 @@ angular.module(
             $scope.geoFilterExpression = new FilterExpression('geo');
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression('keyword-cuashi', [], true);
+            $scope.categoriesFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 

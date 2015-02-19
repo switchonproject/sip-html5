@@ -9,8 +9,8 @@ angular.module(
                 getCountryListFunction;
 
             tagResources = {
-                'keyword-cuashi': 'data/cuashiKeywords.json',
-                'keyword-cuashi-toplevel': 'data/cuashiToplevelKeywords.json',
+                'keyword-cuahsi': 'data/cuahsiKeywords.json',
+                'keyword-cuahsi-toplevel': 'data/cuahsiToplevelKeywords.json',
                 'keyword-inspire': 'data/inspireKeywords.json',
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
