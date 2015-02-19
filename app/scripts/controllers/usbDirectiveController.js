@@ -8,13 +8,19 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
+            var textFilterExpression;
+
             $scope.customFilterExpression = '';
             $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
 
-// currently not needed, clear button disabled
-//            $scope.clear = function () {
-//                $scope.filterExpressions.clear();
-//            };
+            textFilterExpression = $scope.filterExpressions.getFilterExpressionsByType('text');
+            if (textFilterExpression && textFilterExpression.length > 0) {
+                $scope.geoFilterExpression = textFilterExpression[0];
+            } else {
+                //console.warn('text filter expression not correctly initialized!');
+                $scope.textFilterExpression = new FilterExpression('text', null, false, false, null);
+                $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
+            }
 
             // Styling of Search Filters.. into CSS but how?
             $scope.getTagIcon = function (type) {
@@ -144,19 +150,15 @@ angular.module(
                             }
 
                             $scope.notificationFunction({
-                                message: 'Search filter "' + param + '" successfully applied.',
+                                message: 'Search filter "' + param + '" successfully applied with value "' + value + '".',
                                 type: 'success'
                             });
+                            // reset when expression successfully parsed 
+                            //$scope.customFilterExpression = '';
                         }
-                    } else {
-                        $scope.notificationFunction({
-                            message: 'The search filter expression "' + newExpression + '" entered is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
-                            type: 'warning'
-                        });
                     }
-                    // reset when expression parsed
-                    $scope.customFilterExpression = '';
-                } // else: ignore
+                    $scope.textFilterExpression.value = newExpression;
+                } // else: ignore. The string entered should be used for fulltext search
             });
         }
     ]

@@ -120,11 +120,8 @@ angular.module(
 
                 // start of search (indeterminate)
                 if (max === -1 && type === 'success') {
-                    if ($scope.notificationFunction) {
-                        $scope.notificationFunction({
-                            message: 'Search for resources is in progress.',
-                            type: 'info'
-                        });
+                    if ($scope.showMessage) {
+                        $scope.showMessage('Search for resources is in progress.', 'info');
                     }
 
                     $scope.data.searchStatus.current = current;
@@ -136,24 +133,18 @@ angular.module(
                     $scope.data.searchStatus.current = (current / max * 100);
 
                 } else if (current === max && type === 'success') {
-
-
                     if (current > 0) {
                         $scope.data.searchStatus.current = 100;
-                        if ($scope.notificationFunction) {
-                            $scope.notificationFunction({
-                                message: 'Search completed, ' + current +
+                        if ($scope.showMessage) {
+                            $scope.showMessage('Search completed, ' + current +
                                     (current > 1 ? ' ressources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
-                                type: 'success'
-                            });
+                                    'success');
                         }
                     } else {
                         $scope.data.searchStatus.current = 0;
-                        if ($scope.notificationFunction) {
-                            $scope.notificationFunction({
-                                message: 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
-                                type: 'warning'
-                            });
+                        if ($scope.showMessage) {
+                            $scope.showMessage('Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
+                                'warning');
                         }
                     }
 
@@ -162,11 +153,8 @@ angular.module(
                     }
                     // search error   
                 } else if (type === 'error') {
-                    if ($scope.notificationFunction) {
-                        $scope.notificationFunction({
-                            message: 'Search could not be perfomed: ' + $scope.resultSet.$error,
-                            type: 'danger'
-                        });
+                    if ($scope.showMessage) {
+                        $scope.showMessage('Search could not be perfomed: ' + $scope.resultSet.$error, 'danger');
                     }
 
                     if ($scope.progressModal) {
