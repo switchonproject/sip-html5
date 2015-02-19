@@ -16,6 +16,7 @@ angular.module(
 
         var appConfig = {};
         appConfig.listView = {};
+        // highlight the keywords beloging to the following tag group
         appConfig.listView.highlightKeyword = 'query-keyword';
         // hide all keywords except those beloging to the Tag Group:
         appConfig.listView.filterKeyword = 'keywords - CUAHSI';
