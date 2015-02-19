@@ -53,6 +53,11 @@
     padding-top: 8px;
 }
 
+.switchon-ribbon-footer > span {
+    float:right;
+    margin-left: 8px;
+}
+
 .switchon-ribbon {
     width: 100%;
 }
@@ -92,12 +97,11 @@
     font-style: normal;
 }
 .tag a {
-    color: darkred;
-    cursor: pointer;
-    opacity: 0.6;
+     cursor: pointer;
+     opacity: 0.5;
 }
 .tag a:hover {
-    opacity: 1.0
+    opacity: 1.0;
 }
 
 .tag a {
@@ -190,6 +194,24 @@
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+label-default a i {
+    color:#474747;
+}
+.label-primary a i {
+    color:#2B6393;
+}
+.label-success a i {
+    color:#499349;
+}
+.label-info a i {
+    color:#469DB6;
+}
+.label-warning a i {
+    color:#C38D41;
+}
+.label-danger a i {
+    color:#A83C39;
 }
 @media(min-width:768px) {
     #wrapper {

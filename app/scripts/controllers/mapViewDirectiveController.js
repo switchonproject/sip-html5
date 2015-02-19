@@ -13,7 +13,7 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket, nexrad, config;
+                setSearchGeom, wicket, config;
 
             config = AppConfig.mapView;
 
@@ -208,17 +208,6 @@ angular.module(
                 setObjects($scope.objects);
             }
 
-            nexrad = L.tileLayer.wms('http://gis.lebensministerium.at/wmsgw/gs103601/?&service=wms&version=1.1.1&request=GetCapabilities', {
-                layers: 'LFRZ:DRAINAGEBASIN',
-                format: 'image/png',
-                transparent: true,
-                attribution: 'Lebensministerium AT'
-            });
-            //var opentopo = L.tileLayer('http://{s}.opentopomap.org/{z}/{x}/{y}.png');
-            leafletData.getMap('mainmap').then(function (map) {
-                //opentopo.addTo(map);
-                nexrad.addTo(map);
-            });
             // </editor-fold>
 
             $scope.$watch('selectedObject', function (n) {

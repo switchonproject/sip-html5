@@ -9,9 +9,9 @@
                          && universalSearchBox.filterExpressionInput.$invalid}" >
             
             <div class="form-control">
-                <span ng-repeat="tag in enumeratedTags">
+                <span ng-repeat="tag in filterExpressions.enumeratedTags">
                     <span class="tag label" ng-class="getTagStyle(tag.type)">
-                        <span ng-class="getTagIcon(tag.type)"> </span> {{tag.name}}<a><i ng-click="tag.remove()" class="glyphicon glyphicon-remove-circle glyphicon-red"></i></a>
+                        <span ng-class="getTagIcon(tag.type)"> </span> {{tag.name}}<a><i ng-click="tag.remove()" class="glyphicon glyphicon-remove"></i></a>
                     </span>
                 </span>
 
@@ -24,11 +24,11 @@
                     ng-pattern="pattern"
                     required/>
             </div>
-            <button ng-click="performSearch(universalSearchBox)" ng-disabled="enumeratedTags.length < 1" class="btn btn-primary">
+            <button ng-click="performSearch()" ng-disabled="filterExpressions.enumeratedTags.length < 1" class="btn btn-primary">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
 
-            <button ng-click="clear()" class="btn btn-default">Clear</button>
+<!--            <button ng-click="clear()" class="btn btn-default">Clear</button>-->
         </div>
 
         <p class="help-block error" ng-show="notificationFunction === undefined && !universalSearchBox.filterExpressionInput.$error.required

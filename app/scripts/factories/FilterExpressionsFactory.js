@@ -17,6 +17,7 @@ angular.module(
 
             var filterExpressions = {};
             filterExpressions.list = [];
+            filterExpressions.enumeratedTags = [];
 
             Object.defineProperties(filterExpressions, {
                 'universalSearchString': {
