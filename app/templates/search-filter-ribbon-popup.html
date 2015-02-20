@@ -136,7 +136,8 @@
                       name="clearButton"
                       id="clear-botton"
                       class="btn btn-primary"
-                      ng-disabled="filterExpressions.enumeratedTags.length < 1"
+                      ng-disabled="((filterExpressions.enumeratedTags.length < 1)
+                      && (!textFilterExpression.value || textFilterExpression.value.length < 3))"
                       ng-click="$hide(); performSearch()">
                     <span class="glyphicon glyphicon-search"></span>
                 </span>

@@ -137,7 +137,7 @@ angular.module(
                         $scope.data.searchStatus.current = 100;
                         if ($scope.showMessage) {
                             $scope.showMessage('Search completed, ' + current +
-                                    (current > 1 ? ' ressources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
+                                    (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
                                     'success');
                         }
                     } else {

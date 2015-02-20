@@ -8,19 +8,21 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
-            var textFilterExpression;
+            var textFilterExpressions, oldValue, newValue;
 
-            $scope.customFilterExpression = '';
+            $scope.textFilterExpression = null;
             $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
 
-            textFilterExpression = $scope.filterExpressions.getFilterExpressionsByType('text');
-            if (textFilterExpression && textFilterExpression.length > 0) {
-                $scope.geoFilterExpression = textFilterExpression[0];
+            textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
+            if (textFilterExpressions && textFilterExpressions.length > 0) {
+                $scope.textFilterExpression = textFilterExpressions[0];
             } else {
                 //console.warn('text filter expression not correctly initialized!');
                 $scope.textFilterExpression = new FilterExpression('text', null, false, false, null);
                 $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
             }
+
+            oldValue = $scope.textFilterExpression.value;
 
             // Styling of Search Filters.. into CSS but how?
             $scope.getTagIcon = function (type) {
@@ -88,7 +90,6 @@ angular.module(
 
             // Show info message when input box ist empty and no filters have been defined. 
             $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
-
                 if (oldValue === false && newValue === true && $scope.filterExpressions.enumeratedTags.length < 1) {
                     $scope.notificationFunction({
                         message: 'Please define a Filter Expression or enter a query to search for resources in the SIP Meta-Data Repository',
@@ -111,16 +112,18 @@ angular.module(
 //            });
 
             $scope.$watch('filterExpressions.list', function () {
-                $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
-            }, true); // FIXME comparing with angular.equals on filter expressions might be slow
+                newValue = $scope.textFilterExpression.value;
 
-            $scope.$watch('customFilterExpression', function (newExpression) {
-                if (newExpression) {
+                //no user input in text box, recreate tags
+                if (newValue === oldValue) {
+                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
+                } else if (newValue) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
-                    filterExpressionString = newExpression.split($scope.pattern);
+                    filterExpressionString = newValue.split($scope.pattern);
                     /** @type {string} */
                     param = filterExpressionString[1];
                     value = filterExpressionString[2];
+                    // user entered a valid filter expression
                     if (param && value) {
                         param = param.toLowerCase();
                         if (FilterExpression.FILTERS.indexOf(param) === -1) {
@@ -155,13 +158,12 @@ angular.module(
                                 type: 'success'
                             });
                             // reset when expression successfully parsed 
-                            $scope.customFilterExpression = '';
+                            $scope.textFilterExpression.clear();
                         }
                     }
-                    // if not parseable: The string entered should be used for fulltext search!
-                    $scope.textFilterExpression.value = newExpression;
-                } // else: ignore. 
-            });
+                }
+                oldValue = $scope.textFilterExpression.value;
+            }, true); // FIXME comparing with angular.equals on filter expressions might be slow
         }
     ]
 );

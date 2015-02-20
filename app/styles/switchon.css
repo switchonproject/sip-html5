@@ -1,3 +1,7 @@
+body {
+    min-width:1024px;
+}
+
 .switchon-viewbutton {
     margin-top: 8px;
     margin-bottom: 3px;
@@ -71,16 +75,24 @@
     left: 10%;
 }
 
+.switchon-ribbon-popover.bottom-left {
+    margin-top: 14px;
+}
+
+.switchon-ribbon-popover.bottom-left > .arrow {
+    left: 10%;
+}
+
 
 .usb-form-control {
-    min-width: 600px;
+    min-width: 500px;
     padding: 1px 2px;
     line-height: 2;
 }
 
 .usb-tag-container {
     float: left;
-    max-width: 450px;
+    max-width: 350px;
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;

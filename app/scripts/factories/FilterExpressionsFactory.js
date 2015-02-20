@@ -54,6 +54,7 @@ angular.module(
                         theFilterExpression.clear();
                     }
                 }
+                filterExpressions.enumeratedTags = [];
             };
 
             filterExpressions.addFilterExpression = function (filterExpression) {

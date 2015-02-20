@@ -8,7 +8,7 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
-            var geoFilterExpressions, keywordsCuashiFilterExpression;
+            var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions;
 
             $scope.keywordsFilterExpression = new FilterExpression('keyword', [], true);
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
@@ -52,9 +52,9 @@ angular.module(
             }
 
             // FIXME: move to categories directive -----------------------------
-            keywordsCuashiFilterExpression = $scope.filterExpressions.getFilterExpressionsByType('keyword-cuahsi');
-            if (keywordsCuashiFilterExpression && keywordsCuashiFilterExpression.length > 0) {
-                $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpression[0];
+            keywordsCuashiFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('keyword-cuahsi');
+            if (keywordsCuashiFilterExpressions && keywordsCuashiFilterExpressions.length > 0) {
+                $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpressions[0];
             } else {
                 console.warn('keyword-cuahsi filter expression not correctly initialized!');
                 $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
@@ -62,10 +62,17 @@ angular.module(
             }
             // FIXME: move to categories directive -----------------------------
 
+            textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
+            if (textFilterExpressions && textFilterExpressions.length > 0) {
+                $scope.textFilterExpression = textFilterExpressions[0];
+            } else {
+                console.warn('text filter expression not correctly initialized!');
+                $scope.textFilterExpression = new FilterExpression('text', null, false, false, null);
+                $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
+            }
+
             $scope.clear = function () {
                 $scope.filterExpressions.clear();
-                $scope.filterExpressions.fromDate = null;
-                $scope.filterExpressions.toDate = null;
             };
         }]
 );

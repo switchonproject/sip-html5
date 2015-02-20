@@ -6,9 +6,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SWITCH-ON SIP v0.2 ALPHA (2015-02-18)</title>
-        <meta name="description" content="SWITCH-ON SIP v0.1">
-        <meta name="viewport" content="width=device-width">
+        <title>SWITCH-ON SIP v0.3 ALPHA (2015-02-20)</title>
+        <meta name="description" content="SWITCH-ON SIP v0.3">
+        <meta name="viewport" content="width=1024">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet" type="text/css"/>
@@ -55,7 +55,7 @@
                         </li>
                     </ul>
                 </div>
-
+                
                 <!-- search filter ribbon -->
                 <search-filter-ribbon filter-expressions="filterExpressions" 
                                       search-function="performSearch()" 
@@ -67,7 +67,7 @@
                      search-function="performSearch()" 
                      notification-function="showMessage(message, type)">
                 </usb> 
-                <my-workspace workspace-name="SWITCH-ON" ng-show="config.gui.dev === false"></my-workspace>
+                <my-workspace workspace-name="SWITCH-ON" ng-disabled="config.gui.dev !== true"></my-workspace>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>

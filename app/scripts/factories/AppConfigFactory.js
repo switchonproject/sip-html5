@@ -34,7 +34,7 @@ angular.module(
         appConfig.mapView.home.zoom = 4;
 
         appConfig.gui = {};
-        appConfig.gui.dev = false;
+        appConfig.gui.dev = true;
 
         return appConfig;
     }]);

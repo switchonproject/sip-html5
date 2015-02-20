@@ -23,15 +23,14 @@
                         name="filterExpressionInput" 
                         id="filterExpressionInput" 
                         type="text" 
-
                         placeholder="Please enter a query" 
-                        ng-model="customFilterExpression" 
+                        ng-model="textFilterExpression.value" 
                         required/>
                 </div>
             </div>
             <button ng-click="performSearch()" 
                     ng-disabled="((filterExpressions.enumeratedTags.length === 0) 
-                        && (!customFilterExpression || customFilterExpression.length < 3))" 
+                        && (!textFilterExpression.value || textFilterExpression.value.length < 3))" 
                     class="btn btn-primary">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
