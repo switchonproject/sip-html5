@@ -1,4 +1,4 @@
-<div class="switchon-usb">
+<!--<div class="switchon-usb">-->
     <form  class="navbar-form navbar-left" 
            name="universalSearchBox" 
            id="universalSearchBox" 
@@ -8,25 +8,30 @@
              ng-class="{'has-error': !universalSearchBox.filterExpressionInput.$error.required
                          && universalSearchBox.filterExpressionInput.$invalid}" >
             
-            <div class="form-control">
-                <span ng-repeat="tag in filterExpressions.enumeratedTags">
-                    <span class="tag label" 
-                          ng-class="getTagStyle(tag.type)">
-                        <span ng-class="getTagIcon(tag.type)"> </span> {{tag.name}}<a><i ng-click="tag.remove()" class="glyphicon glyphicon-remove"></i></a>
+            <div class="form-control usb-form-control">
+                <div class="usb-tag-container">
+                    <span ng-repeat="tag in filterExpressions.enumeratedTags">
+                        <span class="tag label" 
+                              ng-class="getTagStyle(tag.type)">
+                            <span ng-class="getTagIcon(tag.type)"> </span> {{tag.name}}<a><i ng-click="tag.remove()" class="glyphicon glyphicon-remove"></i></a>
+                        </span>
                     </span>
-                </span>
+                </div>
 
-                <input
-                    name="filterExpressionInput" 
-                    id="filterExpressionInput" 
-                    type="text" 
-                    size="20" 
-                    placeholder="keyword:" 
-                    ng-model="customFilterExpression" 
-                    required/>
+                <div class="usb-input-container">
+                    <input class="switchon-usb-input"
+                        name="filterExpressionInput" 
+                        id="filterExpressionInput" 
+                        type="text" 
+
+                        placeholder="Please enter a query" 
+                        ng-model="customFilterExpression" 
+                        required/>
+                </div>
             </div>
             <button ng-click="performSearch()" 
-                    ng-disabled="filterExpressions.enumeratedTags.length < 1 && (customFilterExpression === null || customFilterExpression.length < 1)" 
+                    ng-disabled="((filterExpressions.enumeratedTags.length === 0) 
+                        && (!customFilterExpression || customFilterExpression.length < 3))" 
                     class="btn btn-primary">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
@@ -46,4 +51,4 @@
             Please enter a filter expression,  e.g. keyword:"water quality".
         </p>    
     </form>
-</div>
+<!--</div>-->

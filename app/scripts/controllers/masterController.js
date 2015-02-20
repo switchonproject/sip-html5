@@ -98,7 +98,7 @@ angular.module(
                 var modalScope;
 
                 modalScope = $rootScope.$new(true);
-                modalScope.searchStatus = searchStatus;
+                modalScope.status = searchStatus;
 
                 $scope.progressModal = $modal.open({
                     templateUrl: 'templates/search-progress-modal-template.html',

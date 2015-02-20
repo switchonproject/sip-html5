@@ -52,6 +52,8 @@ angular.module(
                 }
             };
 
+            // get the Filter Icon
+            // FIXME: function could be put into a service
             $scope.getTagStyle = function (type, forCloseIcon) {
                 var prefix;
                 prefix = (forCloseIcon === true) ? 'switchon-close-icon-' : '';
@@ -84,44 +86,43 @@ angular.module(
                 }
             };
 
+            // Show info message when input box ist empty and no filters have been defined. 
+            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
 
-
-            // input box ist empty. Show default message. 
-            // disabled since clearing the box after parsing triggers this message
-//            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
-//
-//                if (oldValue === false && newValue === true) {
-//                    $scope.notificationFunction({
-//                        message: 'Please enter a filter expression,  e.g. keyword:"water quality"',
-//                        type: 'info'
-//                    });
-//                }
-//            });
-
-            // input is invalid according to regex pattern
-            $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
-
-                if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
-                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
+                if (oldValue === false && newValue === true && $scope.filterExpressions.enumeratedTags.length < 1) {
                     $scope.notificationFunction({
-                        message: 'This search filter expression is not valid. Please use expression:"parameter", e.g. keyword:"water quality".',
-                        type: 'warning'
+                        message: 'Please define a Filter Expression or enter a query to search for resources in the SIP Meta-Data Repository',
+                        type: 'info'
                     });
                 }
             });
 
-            // FIXME comparing with angular.equals on filter expressions might be slow
+            // input is invalid according to regex pattern
+            // Disabled: User is allowed to enter $whatever that is used for fulltext search! -> text:"$whatever"
+//            $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
+//
+//                if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
+//                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
+//                    $scope.notificationFunction({
+//                        message: 'This search filter expression is not valid. Please use expression:"parameter", e.g. keyword:"water quality".',
+//                        type: 'warning'
+//                    });
+//                }
+//            });
+
             $scope.$watch('filterExpressions.list', function () {
                 $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
-            }, true);
+            }, true); // FIXME comparing with angular.equals on filter expressions might be slow
 
             $scope.$watch('customFilterExpression', function (newExpression) {
                 if (newExpression) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
                     filterExpressionString = newExpression.split($scope.pattern);
+                    /** @type {string} */
                     param = filterExpressionString[1];
                     value = filterExpressionString[2];
                     if (param && value) {
+                        param = param.toLowerCase();
                         if (FilterExpression.FILTERS.indexOf(param) === -1) {
                             $scope.notificationFunction({
                                 message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
@@ -154,11 +155,12 @@ angular.module(
                                 type: 'success'
                             });
                             // reset when expression successfully parsed 
-                            //$scope.customFilterExpression = '';
+                            $scope.customFilterExpression = '';
                         }
                     }
+                    // if not parseable: The string entered should be used for fulltext search!
                     $scope.textFilterExpression.value = newExpression;
-                } // else: ignore. The string entered should be used for fulltext search
+                } // else: ignore. 
             });
         }
     ]

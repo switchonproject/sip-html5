@@ -71,22 +71,39 @@
     left: 10%;
 }
 
-.switchon-usb {
 
+.usb-form-control {
+    min-width: 600px;
+    padding: 1px 2px;
+    line-height: 2;
 }
 
-.switchon-usb input {
-    
-    margin: 0px;
+.usb-tag-container {
+    float: left;
+    max-width: 450px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.usb-input-container {
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.usb-input-container input {
     font-family: sans-serif;
     font-size: 12px;
-    border: 1px solid transparent;
+    border: none;
     padding: 0px;
     background: transparent;
     color: #000;
     outline: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
+    margin-left: 6px;
+    padding-right: 6px;
+    margin-bottom: auto;
+    margin-top: auto;
+    width:100%;
 }
 
 /* adapted from http://maxwells.github.io/bootstrap-tags.html */

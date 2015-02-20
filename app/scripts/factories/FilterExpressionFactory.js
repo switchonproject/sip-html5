@@ -14,7 +14,15 @@ angular.module(
     [function () {
         'use strict';
 
-        // Define the constructor function.
+        /**
+         * @constructor
+         * @param {string} parameter
+         * @param {object} defaultValue
+         * @param {boolean} multiple
+         * @param {boolean} visible
+         * @param {string} editor
+         * @returns {FilterExpression}
+         */
         function FilterExpression(parameter, defaultValue, multiple, visible, editor) {
             if (parameter === undefined || parameter === null) {
                 throw 'The parameter property of a FilterExpression cannot be null!';
@@ -128,7 +136,12 @@ angular.module(
             return tags;
         };
 
-        // Tag sub-type
+        /**
+         * @constructor
+         * @param {FilterExpression} filterExpression
+         * @param {object} arrayValue
+         * @returns {FilterExpression.Tag}
+         */
         FilterExpression.prototype.Tag = function (filterExpression, arrayValue) {
             if (filterExpression === undefined || filterExpression === null) {
                 console.error('The filterExpression property of a FilterTag cannot be null!');
