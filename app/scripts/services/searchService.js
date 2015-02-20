@@ -2,8 +2,8 @@ angular.module(
     'eu.water-switch-on.sip.services'
     ).factory('eu.water-switch-on.sip.services.SearchService',
     ['$resource', 'eu.water-switch-on.sip.services.Base64',
-        '$q', 'AppConfig',
-        function ($resource, Base64, $q, AppConfig) {
+        '$q', '$interval', 'AppConfig',
+        function ($resource, Base64, $q, $interval, AppConfig) {
             'use strict';
             //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
             var config, authdata, searchResource, searchFunction;
@@ -33,7 +33,7 @@ angular.module(
 
             searchFunction = function (universalSearchString, limit, offset, progressCallback) {
                 //TODO: hardcoded request url, domain
-                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess;
+                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess, timer, fakeProgress;
 
                 noop = angular.noop;
 
@@ -45,6 +45,12 @@ angular.module(
 
                 // current value, max value, type, max = -1 indicates indeterminate
                 (progressCallback || noop)(0, -1, 'success');
+
+                fakeProgress = 0;
+                timer = $interval (function () {
+                    (progressCallback || noop)(fakeProgress, -1, 'success');
+                    fakeProgress++;
+                }, 100, 100);
 
                 result = {
                     $promise: deferred.promise,
@@ -66,7 +72,7 @@ angular.module(
 
                     classesSuccess = function (data) {
                         var allError, allSuccess, classCache, classname, entityResource, i, objectId, objsQ,
-                            objPromise, singleProgressF, resolvedObjsCount;
+                            objPromise, singleProgressF, resolvedObjsCount, fakeProgressActive;
 
                         classCache = [];
                         for (i = 0; i < data.$collection.length; ++i) {
@@ -92,9 +98,16 @@ angular.module(
                         );
 
                         resolvedObjsCount = 0;
-                        (progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
+                        fakeProgressActive = true;
+
+                        // real progress starts at 100 and this then scaled to 200 by callback
+                        //(progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
 
                         singleProgressF = function () {
+                            if (fakeProgressActive === true) {
+                                fakeProgressActive = !$interval.cancel(timer);
+                            }
+
                             (progressCallback || noop)(++resolvedObjsCount, nodes.length, 'success');
                         };
 
@@ -135,7 +148,7 @@ angular.module(
                             result.$resolved = true;
 
                             deferred.reject(result);
-
+                            $interval.cancel(timer);
                             (progressCallback || noop)(1, 1, 'error');
                         };
 

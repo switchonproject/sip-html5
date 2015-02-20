@@ -115,7 +115,11 @@ angular.module(
             };
 
             searchProcessCallback = function (current, max, type) {
+                // the maximum object count
                 $scope.data.searchStatus.max = max;
+                // the real object count
+                $scope.data.searchStatus.objects = current;
+                // the scaled progress: 0 <fake progress> 100 <real progress> 200
                 $scope.data.searchStatus.type = type;
 
                 // start of search (indeterminate)
@@ -124,17 +128,20 @@ angular.module(
                         $scope.showMessage('Search for resources is in progress.', 'info');
                     }
 
+                    // count up fake progress to 100
+
                     $scope.data.searchStatus.current = current;
+                    console.log(current);
 
                     // search completed
                 } else if (current > 0 && current < max && type === 'success') {
 
-                    //normalise  to 100%
-                    $scope.data.searchStatus.current = (current / max * 100);
+                    //normalise to 100% and count up to 200
+                    $scope.data.searchStatus.current = 100 + (current / max * 100);
 
                 } else if (current === max && type === 'success') {
                     if (current > 0) {
-                        $scope.data.searchStatus.current = 100;
+                        $scope.data.searchStatus.current = 200;
                         if ($scope.showMessage) {
                             $scope.showMessage('Search completed, ' + current +
                                     (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
