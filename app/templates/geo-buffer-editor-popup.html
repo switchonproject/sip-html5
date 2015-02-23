@@ -1,0 +1,17 @@
+<div class="popover switchon-ribbon-popover" id="geo-buffer-editor">
+    <div class="arrow"></div>
+    <div class="popover-content">
+        <form name="optionsForm" id="optionsForm" novalidate> 
+            <div class="form-group" ng-class="{'has-error': optionsForm.geoBufferField.$invalid}">
+                <input type="number" class="form-control" 
+                       min="0" 
+                       max="1000000" 
+                       ngMinlength="1"
+                       name="geoBufferField" 
+                       id="geoBufferField" 
+                       placeholder="buffer in meters"
+                       ng-model="data.editorValue">
+            </div>
+        </form>
+    </div>
+</div>

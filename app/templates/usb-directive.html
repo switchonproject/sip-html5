@@ -10,11 +10,8 @@
             
             <div class="form-control usb-form-control">
                 <div class="usb-tag-container">
-                    <span ng-repeat="tag in filterExpressions.enumeratedTags">
-                        <span class="tag label" 
-                              ng-class="getTagStyle(tag.type)">
-                            <span ng-class="getTagIcon(tag.type)"> </span> {{tag.name}}<a><i ng-click="tag.remove()" class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+                    <span ng-repeat="tag in filterExpressions.enumeratedTags"
+                          search-filter-tag tag="tag">
                     </span>
                 </div>
 

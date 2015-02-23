@@ -41,8 +41,8 @@ angular.module(
 
         // Define the common methods using the prototype
         // and standard prototypal inheritance.  
-        FilterExpression.prototype.getDisplayValue = function () {
-            return this.displayValue || this.value;
+        FilterExpression.prototype.getDisplayValue = function (value) {
+            return this.displayValue || (value === undefined ? this.value : value);
         };
 
         FilterExpression.prototype.isValid = function () {
@@ -150,7 +150,7 @@ angular.module(
 
             this.origin = filterExpression;
             this.type = this.origin.parameter;
-            this.name = this.origin.isMultiple() ? arrayValue : this.origin.getDisplayValue();
+            this.name = this.origin.isMultiple() ? arrayValue : this.origin.getDisplayValue(this.origin.value);
             this.arrayValue = arrayValue;
 
             FilterExpression.prototype.Tag.prototype.remove = function () {

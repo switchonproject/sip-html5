@@ -129,9 +129,7 @@ angular.module(
                     }
 
                     // count up fake progress to 100
-
                     $scope.data.searchStatus.current = current;
-                    console.log(current);
 
                     // search completed
                 } else if (current > 0 && current < max && type === 'success') {

@@ -71,10 +71,6 @@ body {
     max-width: 1000px;
 }
 
-.switchon-ribbon-popover.bottom > .arrow {
-    left: 10%;
-}
-
 .switchon-ribbon-popover.bottom-left {
     margin-top: 14px;
 }
