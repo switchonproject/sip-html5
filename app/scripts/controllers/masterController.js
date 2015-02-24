@@ -168,7 +168,7 @@ angular.module(
                     // search error   
                 } else if (type === 'error') {
                     if ($scope.showMessage) {
-                        $scope.showMessage('Search could not be perfomed: ' + $scope.resultSet.$error, 'danger');
+                        $scope.showMessage('Search could not be perfomed: ' + $scope.data.resultSet.$error, 'danger');
                     }
 
                     if ($scope.progressModal) {
