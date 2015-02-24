@@ -12,7 +12,7 @@
             {{node.object.todate| date: "dd.MM.yyyy"}}
         </td>
         
-        <td data-title="'CUASHI Keywords'" class="tags">
+        <td data-title="'Keywords'" class="tags">
             <span ng-repeat="tag in node.object.tags | orderBy:'name'">
                 <span ng-hide="config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)" 
                       class="label" ng-class="isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'">{{tag.name}}</span>

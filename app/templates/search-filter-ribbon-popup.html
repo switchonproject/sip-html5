@@ -8,40 +8,41 @@
                     <button type="button" 
                             class="btn btn-default dropdown-toggle" 
                             dropdown-toggle 
-                            ng-init="keywordFilters.keywordGroup = 'CUAHSI Keywords'"
+                            ng-init="keywordFilters.keywordGroup = 'Free Keywords'"
                             style="width:100%">
                         {{keywordFilters.keywordGroup}}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <label class="btn" ng-model="keywordFilters.keywordGroup" 
+                            <label class="btn btn-invisible" 
+                                ng-model="keywordFilters.keywordGroup" 
+                                btn-radio="'Free Keywords'" 
+                                ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                Free Keywords
+                            </label>
+                        </li>
+                        <li>
+                            <label class="btn btn-invisible" ng-model="keywordFilters.keywordGroup" 
                                    btn-radio="'TOPIC Categories'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen">
                                 TOPIC Categories
                             </label>
                         </li>
                         <li>
-                            <label class="btn" 
-                                   ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'CUAHSI Keywords'" 
-                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
-                                CUAHSI Keywords
-                            </label>
-                        </li>
-                        <li>
-                            <label class="btn" 
+                            <label class="btn btn-invisible" 
                                    ng-model="keywordFilters.keywordGroup" 
                                    btn-radio="'INSPIRE Keywords'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen">INSPIRE Keywords
                             </label>
                         </li>
                         <li>
-                            <label class="btn" 
-                                ng-model="keywordFilters.keywordGroup" 
-                                btn-radio="'Free Keywords'" 
-                                ng-click="keywordFilters.isopen = !keywordFilters.isopen">
-                                Free Keywords
+                            <label class="btn btn-invisible" 
+                                   ng-disabled="true"
+                                   ng-model="keywordFilters.keywordGroup" 
+                                   btn-radio="'CUAHSI Keywords'" 
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                CUAHSI Keywords
                             </label>
                         </li>
                     </ul>

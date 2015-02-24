@@ -29,7 +29,7 @@ angular.module(
                 'templates/geo-buffer-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
 
-            $scope.limitFilterExpression = new FilterExpression('limit', 20, false, true,
+            $scope.limitFilterExpression = new FilterExpression('limit', 5, false, true,
                 'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
