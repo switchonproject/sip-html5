@@ -14,8 +14,16 @@ angular.module(
     [function () {
         'use strict';
 
-        // Define the constructor function.
-        function FilterExpression(parameter, defaultValue, multiple, renderer) {
+        /**
+         * @constructor
+         * @param {string} parameter
+         * @param {object} defaultValue
+         * @param {boolean} multiple
+         * @param {boolean} visible
+         * @param {string} editor
+         * @returns {FilterExpression}
+         */
+        function FilterExpression(parameter, defaultValue, multiple, visible, editor) {
             if (parameter === undefined || parameter === null) {
                 throw 'The parameter property of a FilterExpression cannot be null!';
             }
@@ -27,13 +35,14 @@ angular.module(
                             JSON.parse(JSON.stringify(this.defaultValue)) : this.defaultValue);
             this.displayValue = null;
             this.multiple = (multiple === undefined) ? false : multiple;
-            this.renderer = (renderer === undefined) ? this.RENDERER__TO_STRING : renderer;
+            this.visible = (visible === undefined) ? true : visible;
+            this.editor = (editor === undefined) ? null : editor;
         }
 
         // Define the common methods using the prototype
         // and standard prototypal inheritance.  
-        FilterExpression.prototype.getDisplayValue = function () {
-            return this.displayValue || this.value;
+        FilterExpression.prototype.getDisplayValue = function (value) {
+            return this.displayValue || (value === undefined ? this.value : value);
         };
 
         FilterExpression.prototype.isValid = function () {
@@ -42,6 +51,14 @@ angular.module(
             }
 
             return this.value ? true : false;
+        };
+
+        FilterExpression.prototype.isEditable = function () {
+            return this.editor ? true : false;
+        };
+
+        FilterExpression.prototype.isVisible = function () {
+            return (this.visible === true) ? true : false;
         };
 
         FilterExpression.prototype.getFilterExpressionString = function () {
@@ -75,8 +92,8 @@ angular.module(
                 if (!this.value) {
                     this.value = [];
                 }
-                
-                if(this.value.indexOf(arrayValue) === -1) {
+
+                if (this.value.indexOf(arrayValue) === -1) {
                     this.value.push(arrayValue);
                     return true;
                 }
@@ -103,39 +120,55 @@ angular.module(
             var tags, i, arrayLength, tag;
             tags = [];
 
-            function removeTag() {
-                return function () {
-                    if (tag.origin.isMultiple()) {
-                        tag.origin.value.splice(tag.index, 1);
-                    } else {
-                        tag.origin.value = null;
-                    }
-                };
-            }
-
-            if (this.isValid() && this.value !== this.defaultValue) {
+            if (this.isVisible() === true && this.isValid() === true && this.value !== this.defaultValue) {
                 if (this.isMultiple()) {
                     arrayLength = this.value.length;
                     for (i = 0; i < arrayLength; i++) {
-                        tag = {};
-                        tag.name = this.value[i];
-                        tag.type = this.parameter;
-                        tag.origin = this;
-                        tag.index = i;
-                        tag.remove = removeTag(true);
+                        tag = new this.Tag(this, this.value[i]);
                         tags.push(tag);
                     }
                 } else {
-                    tag = {};
-                    tag.name = this.getDisplayValue();
-                    tag.type = this.parameter;
-                    tag.origin = this;
-                    tag.remove = removeTag(false);
+                    tag = new this.Tag(this);
                     tags.push(tag);
                 }
             }
 
             return tags;
+        };
+
+        /**
+         * @constructor
+         * @param {FilterExpression} filterExpression
+         * @param {object} arrayValue
+         * @returns {FilterExpression.Tag}
+         */
+        FilterExpression.prototype.Tag = function (filterExpression, arrayValue) {
+            if (filterExpression === undefined || filterExpression === null) {
+                console.error('The filterExpression property of a FilterTag cannot be null!');
+                throw 'The filterExpression property of a FilterTag cannot be null!';
+            }
+
+            this.origin = filterExpression;
+            this.type = this.origin.parameter;
+            this.name = this.origin.isMultiple() ? arrayValue : this.origin.getDisplayValue(this.origin.value);
+            this.arrayValue = arrayValue;
+
+            FilterExpression.prototype.Tag.prototype.remove = function () {
+                if (this.origin.isMultiple()) {
+                    this.origin.value.splice(this.origin.value.indexOf(this.arrayValue), 1);
+                } else {
+                    this.origin.value = null;
+                }
+            };
+
+            FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
+                if (this.origin.isMultiple()) {
+                    console.log(this.type + ':"' + this.arrayValue + '"');
+                    return this.type + ':"' + this.arrayValue + '"';
+                }
+
+                return this.origin.getFilterExpressionString();
+            };
         };
 
         // define constants

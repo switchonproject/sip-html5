@@ -1,0 +1,16 @@
+<div class="popover switchon-ribbon-popover" id="geoEditor">
+    <div class="arrow"></div>
+    <div class="popover-content">
+        <form name="geoBufferForm" id="geoForm" novalidate> 
+            <div class="form-group" ng-class="{'has-error': geoForm.geoBufferField.$invalid}">
+                <input type="text" 
+                       class="form-control" 
+                       size="30"
+                       name="geoField" 
+                       id="geoField" 
+                       placeholder="WKT String"
+                       ng-model="data.editorValue">
+            </div>
+        </form>
+    </div>
+</div>

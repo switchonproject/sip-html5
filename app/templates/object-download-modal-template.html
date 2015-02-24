@@ -61,5 +61,16 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="closeDownloadView()">OK</button>
+    <span bs-tooltip
+          data-placement="top"
+          data-trigger="hover"
+          data-delay="{show: 400, hide: 100}"
+          data-title="Close Dialog"
+          aria-label="Close"
+          name="clearButton"
+          id="clear-button"
+          class="btn btn-default"
+          ng-click="closeDownloadView()">
+        <span class="glyphicon glyphicon-remove"></span>
+    </span>
 </div>

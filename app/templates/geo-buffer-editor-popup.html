@@ -1,0 +1,17 @@
+<div class="popover switchon-ribbon-popover" id="geoBufferEditor">
+    <div class="arrow"></div>
+    <div class="popover-content">
+        <form name="geoBufferForm" id="geoBufferForm" novalidate> 
+            <div class="form-group" ng-class="{'has-error': geoBufferForm.geoBufferField.$invalid}">
+                <input type="number" 
+                       class="form-control" 
+                       min="0" 
+                       max="99999" 
+                       name="geoBufferField" 
+                       id="geoBufferField" 
+                       placeholder="buffer"
+                       ng-model="data.editorValue">
+            </div>
+        </form>
+    </div>
+</div>

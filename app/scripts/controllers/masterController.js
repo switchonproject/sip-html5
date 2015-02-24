@@ -24,16 +24,25 @@ angular.module(
             $scope.data.messageType = 'success';
             $scope.data.selectedObject = -1;
             // FIXME: move to categories directive -----------------------------
-            $scope.data.categories = TagGroupService.getKeywordList('keyword-cuahsi-toplevel');
+            $scope.data.categories = TagGroupService.getKeywordList('category-default');
             // FIXME: move to categories directive -----------------------------
             $scope.isResultShowing = false;
             $scope.state = $state;
 
             $scope.filterExpressions = FilterExpressions; // singleton instance
-            $scope.geoFilterExpression = new FilterExpression('geo');
+            $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
+                'templates/geo-editor-popup.html');
+            $scope.geoFilterExpression.getDisplayValue = function (value) {
+                if (value && value.indexOf('(') !== -1) {
+                    return value.substring(0, value.indexOf('('));
+                }
+
+                return 'undefined';
+            };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
+
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
+            $scope.categoriesFilterExpression = new FilterExpression('category');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
@@ -98,7 +107,7 @@ angular.module(
                 var modalScope;
 
                 modalScope = $rootScope.$new(true);
-                modalScope.searchStatus = searchStatus;
+                modalScope.status = searchStatus;
 
                 $scope.progressModal = $modal.open({
                     templateUrl: 'templates/search-progress-modal-template.html',
@@ -115,45 +124,41 @@ angular.module(
             };
 
             searchProcessCallback = function (current, max, type) {
+                // the maximum object count
                 $scope.data.searchStatus.max = max;
+                // the real object count
+                $scope.data.searchStatus.objects = current;
+                // the scaled progress: 0 <fake progress> 100 <real progress> 200
                 $scope.data.searchStatus.type = type;
 
                 // start of search (indeterminate)
                 if (max === -1 && type === 'success') {
-                    if ($scope.notificationFunction) {
-                        $scope.notificationFunction({
-                            message: 'Search for resources is in progress.',
-                            type: 'info'
-                        });
+                    if ($scope.showMessage) {
+                        $scope.showMessage('Search for resources is in progress.', 'info');
                     }
 
+                    // count up fake progress to 100
                     $scope.data.searchStatus.current = current;
 
                     // search completed
                 } else if (current > 0 && current < max && type === 'success') {
 
-                    //normalise  to 100%
-                    $scope.data.searchStatus.current = (current / max * 100);
+                    //normalise to 100% and count up to 200
+                    $scope.data.searchStatus.current = 100 + (current / max * 100);
 
                 } else if (current === max && type === 'success') {
-
-
                     if (current > 0) {
-                        $scope.data.searchStatus.current = 100;
-                        if ($scope.notificationFunction) {
-                            $scope.notificationFunction({
-                                message: 'Search completed, ' + current +
-                                    (current > 1 ? ' ressources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
-                                type: 'success'
-                            });
+                        $scope.data.searchStatus.current = 200;
+                        if ($scope.showMessage) {
+                            $scope.showMessage('Search completed, ' + current +
+                                    (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
+                                    'success');
                         }
                     } else {
                         $scope.data.searchStatus.current = 0;
-                        if ($scope.notificationFunction) {
-                            $scope.notificationFunction({
-                                message: 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
-                                type: 'warning'
-                            });
+                        if ($scope.showMessage) {
+                            $scope.showMessage('Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
+                                'warning');
                         }
                     }
 
@@ -162,11 +167,8 @@ angular.module(
                     }
                     // search error   
                 } else if (type === 'error') {
-                    if ($scope.notificationFunction) {
-                        $scope.notificationFunction({
-                            message: 'Search could not be perfomed: ' + $scope.resultSet.$error,
-                            type: 'danger'
-                        });
+                    if ($scope.showMessage) {
+                        $scope.showMessage('Search could not be perfomed: ' + $scope.resultSet.$error, 'danger');
                     }
 
                     if ($scope.progressModal) {

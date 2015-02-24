@@ -24,7 +24,7 @@ angular.module(
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';
         appConfig.searchService.password = 'cismet';
-        appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        appConfig.searchService.host = 'http://localhost:8890';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -34,7 +34,7 @@ angular.module(
         appConfig.mapView.home.zoom = 4;
 
         appConfig.gui = {};
-        appConfig.gui.dev = false;
+        appConfig.gui.dev = true;
 
         return appConfig;
     }]);

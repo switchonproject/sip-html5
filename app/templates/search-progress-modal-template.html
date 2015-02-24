@@ -1,10 +1,13 @@
 <div class="modal-header">
-    <strong>Please wait, search is in progress.</strong>
+    <center><h4>Please wait, search is in progress.</h4></center>
 </div>
 <div class="modal-body">
     <progressbar class="progress-striped active" 
                  max="200" 
-                 value="status.current+100" 
+                 value="status.current" 
                  type="{{status.type}}">
     </progressbar>
+    <span ng-show="status.current < 100"><i>Searching for Resources in the Meta-Data Repository.</i></span>
+    <span ng-show="status.current > 100"><i>Collecting meta-data of resource #{{status.objects}} of {{status.max}}</i></span>
 </div>
+<div class="modal-footer"></div>

@@ -6,9 +6,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SWITCH-ON SIP v0.2 ALPHA (2015-02-18)</title>
-        <meta name="description" content="SWITCH-ON SIP v0.1">
-        <meta name="viewport" content="width=device-width">
+        <title>SWITCH-ON SIP v0.3 ALPHA (2015-02-20)</title>
+        <meta name="description" content="SWITCH-ON SIP v0.3">
+        <meta name="viewport" content="width=1024">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet" type="text/css"/>
@@ -55,7 +55,7 @@
                         </li>
                     </ul>
                 </div>
-
+                
                 <!-- search filter ribbon -->
                 <search-filter-ribbon filter-expressions="filterExpressions" 
                                       search-function="performSearch()" 
@@ -67,7 +67,7 @@
                      search-function="performSearch()" 
                      notification-function="showMessage(message, type)">
                 </usb> 
-                <my-workspace workspace-name="SWITCH-ON" ng-show="config.gui.dev === true"></my-workspace>
+                <my-workspace workspace-name="SWITCH-ON" ng-disabled="config.gui.dev !== true"></my-workspace>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -98,20 +98,20 @@
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="activateView('list')"
                             ng-class="{active: state.current.name === 'list'}">
-                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                     </button>
                     <button type="button" 
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="activateView('th')"
                             ng-class="{active: state.current.name === 'th'}"
                             ng-show="config.gui.dev === true">
-                        <span class="glyphicon glyphicon glyphicon-th" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                     </button>
                     <button type="button"
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="activateView('map')"
                             ng-class="{active: state.current.name === 'map'}">
-                        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
                     </button>
                 </div>
             </div><!-- /.navbar-collapse -->
@@ -172,6 +172,7 @@
     <script src="scripts/controllers/listViewDirectiveController.js" type="text/javascript"></script>
     <script src="scripts/controllers/objectInfoModalController.js" type="text/javascript"></script>
     <script src="scripts/controllers/objectDownloadModalController.js" type="text/javascript"></script>
+    <script src="scripts/controllers/searchFilterTagDirectiveController.js" type="text/javascript"></script>
     <script src="scripts/directives/_module.js"></script>
     <script src="scripts/directives/mapViewDirective.js" type="text/javascript"></script>
     <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
@@ -184,6 +185,7 @@
     <script src="scripts/directives/countriesFilterDirective.js" type="text/javascript"></script>
     <script src="scripts/directives/listViewDirective.js" type="text/javascript"></script>
     <script src="scripts/directives/searchOptionsDirective.js" type="text/javascript"></script>
+    <script src="scripts/directives/searchFilterTagDirective.js" type="text/javascript"></script>
     <script src="scripts/services/_module.js"></script>
     <script src="scripts/services/mockService.js" type="text/javascript"></script>
     <script src="scripts/services/searchService.js" type="text/javascript"></script>
