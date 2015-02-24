@@ -3,8 +3,8 @@
         <td data-title="'Name'" sortable="'object.name'" class="name">{{node.object.name}}</td>
         
         <td data-title="'Description'">
-            <span>{{node.object.description | txtLen:80:false:'':true}}</span>
-            <span ng-hide="node.object.description.length < 80"><a ng-click="showInfo(node.object)">...</a></span>
+            <span>{{node.object.description | txtLen:160:false:'':true}}</span>
+            <span ng-hide="node.object.description.length < 160"><a ng-click="showInfo(node.object)">...</a></span>
         </td>
         
         <td data-title="'Temporal Extent'" sortable="'object.fromdate'" class="date">
@@ -29,14 +29,14 @@
                   ng-click="showInfo(node.object)">
                 <i class="glyphicon glyphicon-info-sign"></i>
             </span>
-            <span bs-tooltip
-                  data-placement="left"
-                  data-trigger="hover"
-                  data-delay="{show: 400, hide: 100}"
-                  data-title="Download"
-                  class="btn-invisible"
-                  ng-click="showDownload(node.object)">
-                <i class="glyphicon glyphicon-download"></i>
+            <span ng-repeat="representation in node.object.representation | filter:{function:'download'}"
+                  class="btn-invisible">
+                    <a href="{{representation.contentlocation}}" download 
+                       rel="nofollow"
+                       title="{{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}}"
+                       type="{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}">
+                       <i class="glyphicon glyphicon-download"></i>
+                    </a>
             </span>
  <!--           <span bs-tooltip
                   data-placement="left"
