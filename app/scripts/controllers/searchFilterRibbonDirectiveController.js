@@ -24,7 +24,7 @@ angular.module(
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
             $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', null);
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
-            $scope.limitFilterExpression = new FilterExpression('limit', 20);
+            $scope.limitFilterExpression = new FilterExpression('limit', 5);
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
             $scope.topicFilterExpression.getDisplayValue = function () {
