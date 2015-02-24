@@ -98,7 +98,14 @@ angular.module(
                         );
 
                         resolvedObjsCount = 0;
-                        fakeProgressActive = true;
+
+                        // we stop fake progresss before 1st object has been resolved
+                        // to minimze delay between fake and real progress steps
+                        if (nodes.length > 0) {
+                            fakeProgressActive = true;
+                        } else {
+                            $interval.cancel(timer);
+                        }
 
                         // real progress starts at 100 and this then scaled to 200 by callback
                         (progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
@@ -161,7 +168,7 @@ angular.module(
                         result.$resolved = true;
 
                         deferred.reject(result);
-
+                        $interval.cancel(timer);
                         (progressCallback || noop)(1, 1, 'error');
                     };
 
@@ -190,7 +197,7 @@ angular.module(
                     result.$response = data;
                     result.$resolved = true;
                     deferred.reject(result);
-
+                    $interval.cancel(timer);
                     (progressCallback || noop)(1, 1, 'error');
                 };
 
