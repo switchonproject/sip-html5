@@ -72,6 +72,78 @@ angular.module('').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('templates/geo-buffer-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"geoBufferEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <form name=\"geoBufferForm\" id=\"geoBufferForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': geoBufferForm.geoBufferField.$invalid}\">\r" +
+    "\n" +
+    "                <input type=\"number\" \r" +
+    "\n" +
+    "                       class=\"form-control\" \r" +
+    "\n" +
+    "                       min=\"0\" \r" +
+    "\n" +
+    "                       max=\"99999\" \r" +
+    "\n" +
+    "                       name=\"geoBufferField\" \r" +
+    "\n" +
+    "                       id=\"geoBufferField\" \r" +
+    "\n" +
+    "                       placeholder=\"buffer\"\r" +
+    "\n" +
+    "                       ng-model=\"data.editorValue\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/geo-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"geoEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <form name=\"geoBufferForm\" id=\"geoForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': geoForm.geoBufferField.$invalid}\">\r" +
+    "\n" +
+    "                <input type=\"text\" \r" +
+    "\n" +
+    "                       class=\"form-control\" \r" +
+    "\n" +
+    "                       size=\"30\"\r" +
+    "\n" +
+    "                       name=\"geoField\" \r" +
+    "\n" +
+    "                       id=\"geoField\" \r" +
+    "\n" +
+    "                       placeholder=\"WKT String\"\r" +
+    "\n" +
+    "                       ng-model=\"data.editorValue\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('templates/keyword-filter-directive.html',
     "<!--<div class=\"panel panel-default\">\r" +
     "\n" +
@@ -94,6 +166,43 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "<!--    </div>\r" +
     "\n" +
     "</div>-->"
+  );
+
+
+  $templateCache.put('templates/limit-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"limitEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <form name=\"limitForm\" id=\"limitForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': limitForm.limitField.$invalid}\">\r" +
+    "\n" +
+    "                <input type=\"number\" \r" +
+    "\n" +
+    "                       class=\"form-control\" \r" +
+    "\n" +
+    "                       min=\"1\" \r" +
+    "\n" +
+    "                       max=\"50\" \r" +
+    "\n" +
+    "                       name=\"limitField\" \r" +
+    "\n" +
+    "                       id=\"geoBufferField\" \r" +
+    "\n" +
+    "                       placeholder=\"limit\"\r" +
+    "\n" +
+    "                       ng-model=\"data.editorValue\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
   );
 
 
@@ -126,7 +235,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        \r" +
     "\n" +
-    "        <td data-title=\"'CUASHI Keywords'\" class=\"tags\">\r" +
+    "        <td data-title=\"'Keywords'\" class=\"tags\">\r" +
     "\n" +
     "            <span ng-repeat=\"tag in node.object.tags | orderBy:'name'\">\r" +
     "\n" +
@@ -271,13 +380,9 @@ angular.module('').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/my-workspace-directive.html',
-    "<div class=\"btn-group nav navbar-nav navbar-right\" dropdown is-open=\"status.isopen\"\r" +
+    "<div class=\"btn-group nav navbar-nav navbar-right\" dropdown is-open=\"status.isopen\">\r" +
     "\n" +
-    "     ng-mouseenter=\"popup(true)\"\r" +
-    "\n" +
-    "     ng-mouseleave=\"popup(false)\">\r" +
-    "\n" +
-    "    <button class=\"btn btn-xs navbar-btn dropdown-toggle ws-button\" \r" +
+    "    <button ng-disabled=\"true\" class=\"btn btn-xs navbar-btn dropdown-toggle ws-button\" \r" +
     "\n" +
     "            data-toggle=\"dropdown\"\r" +
     "\n" +
@@ -446,7 +551,29 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "<div class=\"modal-footer\">\r" +
     "\n" +
-    "    <button class=\"btn btn-primary\" ng-click=\"closeDownloadView()\">OK</button>\r" +
+    "    <span bs-tooltip\r" +
+    "\n" +
+    "          data-placement=\"top\"\r" +
+    "\n" +
+    "          data-trigger=\"hover\"\r" +
+    "\n" +
+    "          data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "          data-title=\"Close Dialog\"\r" +
+    "\n" +
+    "          aria-label=\"Close\"\r" +
+    "\n" +
+    "          name=\"clearButton\"\r" +
+    "\n" +
+    "          id=\"clear-button\"\r" +
+    "\n" +
+    "          class=\"btn btn-default\"\r" +
+    "\n" +
+    "          ng-click=\"closeDownloadView()\">\r" +
+    "\n" +
+    "        <span class=\"glyphicon glyphicon-remove\"></span>\r" +
+    "\n" +
+    "    </span>\r" +
     "\n" +
     "</div>"
   );
@@ -617,7 +744,29 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "<div class=\"modal-footer\">\r" +
     "\n" +
-    "    <button class=\"btn btn-primary\" ng-click=\"closeInfoView()\">OK</button>\r" +
+    "    <span bs-tooltip\r" +
+    "\n" +
+    "          data-placement=\"top\"\r" +
+    "\n" +
+    "          data-trigger=\"hover\"\r" +
+    "\n" +
+    "          data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "          data-title=\"Close Dialog\"\r" +
+    "\n" +
+    "          aria-label=\"Close\"\r" +
+    "\n" +
+    "          name=\"clearButton\"\r" +
+    "\n" +
+    "          id=\"clear-button\"\r" +
+    "\n" +
+    "          class=\"btn btn btn-default\"\r" +
+    "\n" +
+    "          ng-click=\"closeInfoView()\">\r" +
+    "\n" +
+    "        <span class=\"glyphicon glyphicon-remove\"></span>\r" +
+    "\n" +
+    "    </span>\r" +
     "\n" +
     "</div>"
   );
@@ -670,13 +819,11 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        template=\"templates/search-filter-ribbon-popup.html\"\r" +
     "\n" +
-    "        placement=\"bottom\"\r" +
-    "\n" +
-    "        target=\"#universalSearchBox\"\r" +
+    "        placement=\"bottom-left\"\r" +
     "\n" +
     "        auto-close=\"1\"\r" +
     "\n" +
-    "        bs-popover>\r" +
+    "        bs-popover=\"true\">\r" +
     "\n" +
     "    Search Filter <span class=\"caret\"></span>\r" +
     "\n" +
@@ -706,7 +853,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                            dropdown-toggle \r" +
     "\n" +
-    "                            ng-init=\"keywordFilters.keywordGroup = 'CUASHI Keywords'\"\r" +
+    "                            ng-init=\"keywordFilters.keywordGroup = 'Free Keywords'\"\r" +
     "\n" +
     "                            style=\"width:100%\">\r" +
     "\n" +
@@ -720,7 +867,23 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <label class=\"btn\" ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "                            <label class=\"btn btn-invisible\" \r" +
+    "\n" +
+    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                btn-radio=\"'Free Keywords'\" \r" +
+    "\n" +
+    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "\n" +
+    "                                Free Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn btn-invisible\" ng-model=\"keywordFilters.keywordGroup\" \r" +
     "\n" +
     "                                   btn-radio=\"'TOPIC Categories'\" \r" +
     "\n" +
@@ -734,23 +897,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <label class=\"btn\" \r" +
-    "\n" +
-    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
-    "\n" +
-    "                                   btn-radio=\"'CUASHI Keywords'\" \r" +
-    "\n" +
-    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
-    "\n" +
-    "                                CUASHI Keywords\r" +
-    "\n" +
-    "                            </label>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <label class=\"btn\" \r" +
+    "                            <label class=\"btn btn-invisible\" \r" +
     "\n" +
     "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
     "\n" +
@@ -764,15 +911,17 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <label class=\"btn\" \r" +
+    "                            <label class=\"btn btn-invisible\" \r" +
     "\n" +
-    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "                                   ng-disabled=\"true\"\r" +
     "\n" +
-    "                                btn-radio=\"'Free Keywords'\" \r" +
+    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
     "\n" +
-    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "                                   btn-radio=\"'CUAHSI Keywords'\" \r" +
     "\n" +
-    "                                Free Keywords\r" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "\n" +
+    "                                CUAHSI Keywords\r" +
     "\n" +
     "                            </label>\r" +
     "\n" +
@@ -794,13 +943,13 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                </keyword-filter>\r" +
     "\n" +
-    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'CUASHI Keywords'\" \r" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'CUAHSI Keywords'\" \r" +
     "\n" +
     "                                class=\"ng-hide\"\r" +
     "\n" +
     "                                filter-expression=\"keywordsCuashiFilterExpression\" \r" +
     "\n" +
-    "                                keyword-group=\"keyword-cuashi\">      \r" +
+    "                                keyword-group=\"keyword-cuahsi\">      \r" +
     "\n" +
     "                </keyword-filter>\r" +
     "\n" +
@@ -896,23 +1045,81 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <span bs-tooltip\r" +
     "\n" +
-    "                      data-placement=\"left\"\r" +
+    "                      data-placement=\"top\"\r" +
     "\n" +
     "                      data-trigger=\"hover\"\r" +
     "\n" +
     "                      data-delay=\"{show: 400, hide: 100}\"\r" +
     "\n" +
-    "                      data-title=\"Clear\"\r" +
+    "                      data-title=\"Close the Search Filter Dialog\"\r" +
     "\n" +
-    "                      class=\"btn-invisible btn-icon\"\r" +
+    "                      aria-label=\"Close\"\r" +
     "\n" +
-    "                      ng-click=\"clear()\">\r" +
+    "                      name=\"closeButton\"\r" +
     "\n" +
-    "                    <i class=\"glyphicon glyphicon-remove-circle\"></i>\r" +
+    "                      id=\"close-button\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-remove\"></span>\r" +
     "\n" +
     "                </span>\r" +
     "\n" +
-    "                <span>Clear current search filters and options</span>\r" +
+    "                <span bs-tooltip\r" +
+    "\n" +
+    "                      data-placement=\"top\"\r" +
+    "\n" +
+    "                      data-trigger=\"hover\"\r" +
+    "\n" +
+    "                      data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "                      data-title=\"Clear all Search Filters\"\r" +
+    "\n" +
+    "                      aria-label=\"Clear\"\r" +
+    "\n" +
+    "                      name=\"clearButton\"\r" +
+    "\n" +
+    "                      id=\"clear-button\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-disabled=\"filterExpressions.enumeratedTags.length < 1\"\r" +
+    "\n" +
+    "                      ng-click=\"clear()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-trash\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "                <span bs-tooltip\r" +
+    "\n" +
+    "                      data-placement=\"top\"\r" +
+    "\n" +
+    "                      data-trigger=\"hover\"\r" +
+    "\n" +
+    "                      data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "                      data-title=\"Search for resources\"\r" +
+    "\n" +
+    "                      aria-label=\"Clear\"\r" +
+    "\n" +
+    "                      name=\"clearButton\"\r" +
+    "\n" +
+    "                      id=\"clear-botton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-primary\"\r" +
+    "\n" +
+    "                      ng-disabled=\"((filterExpressions.enumeratedTags.length < 1)\r" +
+    "\n" +
+    "                      && (!textFilterExpression.value || textFilterExpression.value.length < 3))\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide(); performSearch()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-search\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -926,6 +1133,29 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "\r" +
     "\n"
+  );
+
+
+  $templateCache.put('templates/search-filter-tag-directive-template.html',
+    "<span class=\"tag label\" \r" +
+    "\n" +
+    "      ng-class=\"getTagStyle(tag.type)\">\r" +
+    "\n" +
+    "    <span ng-class=\"getTagIcon(tag.type)\"></span>\r" +
+    "\n" +
+    "    <span ng-if=\"!tag.origin.isEditable()\">{{tag.name}}</span>\r" +
+    "\n" +
+    "    <span ng-if=\"tag.origin.isEditable()\" \r" +
+    "\n" +
+    "          bs-popover template=\"{{tag.origin.editor}}\"\r" +
+    "\n" +
+    "          placement=\"bottom\"\r" +
+    "\n" +
+    "          auto-close=\"1\">{{tag.origin.getDisplayValue(data.editorValue)}}</span>\r" +
+    "\n" +
+    "    <a><i ng-click=\"tag.remove()\" class=\"glyphicon glyphicon-remove\"></i></a>\r" +
+    "\n" +
+    "</span>"
   );
 
 
@@ -1037,7 +1267,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/search-progress-modal-template.html',
     "<div class=\"modal-header\">\r" +
     "\n" +
-    "    <strong>Please wait, search is in progress.</strong>\r" +
+    "    <center><h4>Please wait, search is in progress.</h4></center>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
@@ -1047,18 +1277,25 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                 max=\"200\" \r" +
     "\n" +
-    "                 value=\"status.current+100\" \r" +
+    "                 value=\"status.current\" \r" +
     "\n" +
     "                 type=\"{{status.type}}\">\r" +
     "\n" +
     "    </progressbar>\r" +
     "\n" +
-    "</div>"
+    "    <span ng-show=\"status.current < 100\"><i>Searching for Resources in the Meta-Data Repository.</i></span>\r" +
+    "\n" +
+    "    <span ng-show=\"status.current > 100\"><i>Collecting meta-data of resource #{{status.objects}} of {{status.max}}</i></span>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "<div class=\"modal-footer\"></div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('templates/usb-directive.html',
-    "<div class=\"switchon-usb\">\r" +
+    "<!--<div class=\"switchon-usb\">-->\r" +
     "\n" +
     "    <form  class=\"navbar-form navbar-left\" \r" +
     "\n" +
@@ -1078,39 +1315,47 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            \r" +
     "\n" +
-    "            <div class=\"form-control\">\r" +
+    "            <div class=\"form-control usb-form-control\">\r" +
     "\n" +
-    "                <span ng-repeat=\"tag in enumeratedTags\">\r" +
+    "                <div class=\"usb-tag-container\">\r" +
     "\n" +
-    "                    <span class=\"tag label\" ng-class=\"getTagStyle(tag.type)\">\r" +
+    "                    <span ng-repeat=\"tag in filterExpressions.enumeratedTags\"\r" +
     "\n" +
-    "                        <span ng-class=\"getTagIcon(tag.type)\"> </span> {{tag.name}}<a><i ng-click=\"tag.remove()\" class=\"glyphicon glyphicon-remove-circle glyphicon-red\"></i></a>\r" +
+    "                          search-filter-tag tag=\"tag\">\r" +
     "\n" +
     "                    </span>\r" +
     "\n" +
-    "                </span>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <input\r" +
+    "                <div class=\"usb-input-container\">\r" +
     "\n" +
-    "                    name=\"filterExpressionInput\" \r" +
+    "                    <input class=\"switchon-usb-input\"\r" +
     "\n" +
-    "                    id=\"filterExpressionInput\" \r" +
+    "                        name=\"filterExpressionInput\" \r" +
     "\n" +
-    "                    type=\"text\" \r" +
+    "                        id=\"filterExpressionInput\" \r" +
     "\n" +
-    "                    size=\"20\" placeholder=\"keyword:\" \r" +
+    "                        type=\"text\" \r" +
     "\n" +
-    "                    ng-model=\"customFilterExpression\" \r" +
+    "                        placeholder=\"Please enter a query\" \r" +
     "\n" +
-    "                    ng-pattern=\"pattern\"\r" +
+    "                        ng-model=\"textFilterExpression.value\" \r" +
     "\n" +
-    "                    required/>\r" +
+    "                        required/>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <button ng-click=\"performSearch(universalSearchBox)\" ng-disabled=\"enumeratedTags.length < 1\" class=\"btn btn-primary\">\r" +
+    "            <button ng-click=\"performSearch()\" \r" +
+    "\n" +
+    "                    ng-disabled=\"((filterExpressions.enumeratedTags.length === 0) \r" +
+    "\n" +
+    "                        && (!textFilterExpression.value || textFilterExpression.value.length < 3))\" \r" +
+    "\n" +
+    "                    class=\"btn btn-primary\">\r" +
     "\n" +
     "                <span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span>\r" +
     "\n" +
@@ -1118,13 +1363,15 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "\r" +
     "\n" +
-    "            <button ng-click=\"clear()\" class=\"btn btn-default\">Clear</button>\r" +
+    "<!--            <button ng-click=\"clear()\" class=\"btn btn-default\">Clear</button>-->\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <p class=\"help-block error\" ng-show=\"notificationFunction === undefined && !universalSearchBox.filterExpressionInput.$error.required\r" +
+    "        <p class=\"help-block error\" \r" +
+    "\n" +
+    "           ng-show=\"notificationFunction === undefined && !universalSearchBox.filterExpressionInput.$error.required\r" +
     "\n" +
     "                        && universalSearchBox.filterExpressionInput.$invalid\">\r" +
     "\n" +
@@ -1146,7 +1393,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "    </form>\r" +
     "\n" +
-    "</div>"
+    "<!--</div>-->"
   );
 
 }]);

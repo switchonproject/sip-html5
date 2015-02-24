@@ -39,6 +39,10 @@
 .dropdown-menu.hoverdropdown {
     margin: 0px;
 }
+body {
+    min-width:1024px;
+}
+
 .switchon-viewbutton {
     margin-top: 8px;
     margin-bottom: 3px;
@@ -94,6 +98,11 @@
     padding-top: 8px;
 }
 
+.switchon-ribbon-footer > span {
+    float:right;
+    margin-left: 8px;
+}
+
 .switchon-ribbon {
     width: 100%;
 }
@@ -103,26 +112,47 @@
     max-width: 1000px;
 }
 
-.switchon-ribbon-popover.bottom > .arrow {
+.switchon-ribbon-popover.bottom-left {
+    margin-top: 14px;
+}
+
+.switchon-ribbon-popover.bottom-left > .arrow {
     left: 10%;
 }
 
-.switchon-usb {
 
+.usb-form-control {
+    min-width: 500px;
+    padding: 1px 2px;
+    line-height: 2;
 }
 
-.switchon-usb input {
-    
-    margin: 0px;
+.usb-tag-container {
+    float: left;
+    max-width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.usb-input-container {
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.usb-input-container input {
     font-family: sans-serif;
     font-size: 12px;
-    border: 1px solid transparent;
+    border: none;
     padding: 0px;
     background: transparent;
     color: #000;
     outline: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
+    margin-left: 6px;
+    padding-right: 6px;
+    margin-bottom: auto;
+    margin-top: auto;
+    width:100%;
 }
 
 /* adapted from http://maxwells.github.io/bootstrap-tags.html */
@@ -133,12 +163,11 @@
     font-style: normal;
 }
 .tag a {
-    color: darkred;
-    cursor: pointer;
-    opacity: 0.6;
+     cursor: pointer;
+     opacity: 0.5;
 }
 .tag a:hover {
-    opacity: 1.0
+    opacity: 1.0;
 }
 
 .tag a {
@@ -231,6 +260,24 @@
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+label-default a i {
+    color:#474747;
+}
+.label-primary a i {
+    color:#2B6393;
+}
+.label-success a i {
+    color:#499349;
+}
+.label-info a i {
+    color:#469DB6;
+}
+.label-warning a i {
+    color:#C38D41;
+}
+.label-danger a i {
+    color:#A83C39;
 }
 @media(min-width:768px) {
     #wrapper {

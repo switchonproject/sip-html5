@@ -155,7 +155,7 @@ angular.module(
             };
 
             // generate a list with all-lowercase keywords
-            generateKeywordList('keyword-cuashi');
+            generateKeywordList('keyword-cuahsi');
 
             $scope.config = AppConfig.listView;
 
@@ -378,7 +378,11 @@ angular.module(
                             internalChange = true;
                             setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
                         } catch (e) {
-                            // ignore illegal wkt
+
+                            // clear on illigegal WKT
+                            searchGroup.removeLayer($scope.searchGeomLayer);
+                            $scope.searchGeomLayer = undefined;
+                            $scope.searchGeomWkt = null;
                         }
                     } else if (n === null) {
                         searchGroup.removeLayer($scope.searchGeomLayer);
@@ -452,13 +456,18 @@ angular.module(
     'eu.water-switch-on.sip.controllers.masterController',
     [
         '$scope',
+        '$rootScope',
+        '$modal',
+        'eu.water-switch-on.sip.services.SearchService',
         '$state',
         'FilterExpressions',
         'FilterExpression',
         'eu.water-switch-on.sip.services.TagGroupService',
         'AppConfig',
-        function ($scope, $state, FilterExpressions, FilterExpression, TagGroupService, AppConfig) {
+        function ($scope, $rootScope, $modal, SearchService, $state, FilterExpressions, FilterExpression, TagGroupService, AppConfig) {
             'use strict';
+
+            var searchProcessCallback;
 
             $scope.config = AppConfig;
 
@@ -467,21 +476,35 @@ angular.module(
             $scope.data.messageType = 'success';
             $scope.data.selectedObject = -1;
             // FIXME: move to categories directive -----------------------------
-            $scope.data.categories = TagGroupService.getKeywordList('keyword-cuashi-toplevel');
+            $scope.data.categories = TagGroupService.getKeywordList('category-default');
             // FIXME: move to categories directive -----------------------------
             $scope.isResultShowing = false;
             $scope.state = $state;
 
             $scope.filterExpressions = FilterExpressions; // singleton instance
-            $scope.geoFilterExpression = new FilterExpression('geo');
+            $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
+                'templates/geo-editor-popup.html');
+            $scope.geoFilterExpression.getDisplayValue = function (value) {
+                if (value && value.indexOf('(') !== -1) {
+                    return value.substring(0, value.indexOf('('));
+                }
+
+                return 'undefined';
+            };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
+
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression('keyword-cuashi', [], true);
+            $scope.categoriesFilterExpression = new FilterExpression('category');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
+            $scope.data.searchStatus = {
+                current: 0,
+                max: 0,
+                type: null
+            };
 
             $scope.activateView = function (state) {
                 //$scope.showMessage(state + ' view showing', 'success');
@@ -526,6 +549,85 @@ angular.module(
                     $scope.data.selectedObject = -1;
                 }
             });
+
+            $scope.performSearch = function () {
+                $scope.data.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, searchProcessCallback);
+                $scope.showProgress($scope.data.searchStatus);
+            };
+
+            $scope.showProgress = function (searchStatus) {
+                var modalScope;
+
+                modalScope = $rootScope.$new(true);
+                modalScope.status = searchStatus;
+
+                $scope.progressModal = $modal.open({
+                    templateUrl: 'templates/search-progress-modal-template.html',
+                    scope: modalScope,
+                    size: 'lg',
+                    backdrop: 'static'
+                });
+                // issue #32 - check if the eror occurred before the dialog has actually been shown
+                $scope.progressModal.opened.then(function () {
+                    if ($scope.data.searchStatus.type === 'error') {
+                        $scope.progressModal.close();
+                    }
+                });
+            };
+
+            searchProcessCallback = function (current, max, type) {
+                // the maximum object count
+                $scope.data.searchStatus.max = max;
+                // the real object count
+                $scope.data.searchStatus.objects = current;
+                // the scaled progress: 0 <fake progress> 100 <real progress> 200
+                $scope.data.searchStatus.type = type;
+
+                // start of search (indeterminate)
+                if (max === -1 && type === 'success') {
+                    if ($scope.showMessage) {
+                        $scope.showMessage('Search for resources is in progress.', 'info');
+                    }
+
+                    // count up fake progress to 100
+                    $scope.data.searchStatus.current = current;
+
+                    // search completed
+                } else if (current > 0 && current < max && type === 'success') {
+
+                    //normalise to 100% and count up to 200
+                    $scope.data.searchStatus.current = 100 + (current / max * 100);
+
+                } else if (current === max && type === 'success') {
+                    if (current > 0) {
+                        $scope.data.searchStatus.current = 200;
+                        if ($scope.showMessage) {
+                            $scope.showMessage('Search completed, ' + current +
+                                    (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
+                                    'success');
+                        }
+                    } else {
+                        $scope.data.searchStatus.current = 0;
+                        if ($scope.showMessage) {
+                            $scope.showMessage('Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
+                                'warning');
+                        }
+                    }
+
+                    if ($scope.progressModal) {
+                        $scope.progressModal.close();
+                    }
+                    // search error   
+                } else if (type === 'error') {
+                    if ($scope.showMessage) {
+                        $scope.showMessage('Search could not be perfomed: ' + $scope.resultSet.$error, 'danger');
+                    }
+
+                    if ($scope.progressModal) {
+                        $scope.progressModal.close();
+                    }
+                }
+            };
         }
     ]
 );
@@ -651,38 +753,37 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
-            var geoFilterExpressions, keywordsCuashiFilterExpression;
+            var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions;
 
             $scope.keywordsFilterExpression = new FilterExpression('keyword', [], true);
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
-//            $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuashi', [], true);
-//            $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
+
             $scope.topicFilterExpression = new FilterExpression('topic');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
+
             $scope.fromDateFilterExpression = new FilterExpression('fromDate');
             $scope.filterExpressions.addFilterExpression($scope.fromDateFilterExpression);
+
             $scope.toDateFilterExpression = new FilterExpression('toDate');
             $scope.filterExpressions.addFilterExpression($scope.toDateFilterExpression);
+
             $scope.geoIntersectsFilterExpression = new FilterExpression('geo-intersects', 'false');
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
-            $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', 0);
+
+            $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', null, false, true,
+                'templates/geo-buffer-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
-            $scope.limitFilterExpression = new FilterExpression('limit', 5);
+
+            $scope.limitFilterExpression = new FilterExpression('limit', 5, false, true,
+                'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
-            $scope.topicFilterExpression.getDisplayValue = function () {
-                return (this.value && this.value.length > 0) ? this.value[0] : this.value;
+            $scope.topicFilterExpression.getDisplayValue = function (value) {
+                return (value && value.length > 0) ? value[0] : value;
             };
 
-            $scope.geoIntersectsFilterExpression.getDisplayValue = function () {
-                return this.value ? 'intersect' : 'enclose';
-            };
-
-            $scope.geoBufferFilterExpression.getDisplayValue = function () {
-                return this.value ? (
-                    this.value < 1000 ? this.value + 'm' :
-                            this.value / 1000 + 'km'
-                ) : '0m';
+            $scope.geoIntersectsFilterExpression.getDisplayValue = function (value) {
+                return value ? 'intersect' : 'enclose';
             };
 
             geoFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('geo');
@@ -690,125 +791,65 @@ angular.module(
                 $scope.geoFilterExpression = geoFilterExpressions[0];
             } else {
                 console.warn('geo filter expression not correctly initialized!');
-                $scope.geoFilterExpression = new FilterExpression('geo', [], true);
+                $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
+                    'templates/geo-editor-popup.html');
+                $scope.geoFilterExpression.getDisplayValue = function (value) {
+                    if (value && value.indexOf('(') !== -1) {
+                        return value.substring(0, value.indexOf('('));
+                    }
+
+                    return 'undefined';
+                };
                 $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
             }
 
             // FIXME: move to categories directive -----------------------------
-            keywordsCuashiFilterExpression = $scope.filterExpressions.getFilterExpressionsByType('keyword-cuashi');
-            if (keywordsCuashiFilterExpression && keywordsCuashiFilterExpression.length > 0) {
-                $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpression[0];
+            keywordsCuashiFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('keyword-cuahsi');
+            if (keywordsCuashiFilterExpressions && keywordsCuashiFilterExpressions.length > 0) {
+                $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpressions[0];
             } else {
-                console.warn('keyword-cuashi filter expression not correctly initialized!');
-                $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuashi', [], true);
+                console.warn('keyword-cuahsi filter expression not correctly initialized!');
+                $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
                 $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             }
             // FIXME: move to categories directive -----------------------------
 
+            textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
+            if (textFilterExpressions && textFilterExpressions.length > 0) {
+                $scope.textFilterExpression = textFilterExpressions[0];
+            } else {
+                //console.warn('text filter expression not correctly initialized!');
+                $scope.textFilterExpression = new FilterExpression('text', null, false, false, null);
+                $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
+            }
+
             $scope.clear = function () {
                 $scope.filterExpressions.clear();
-                $scope.filterExpressions.fromDate = null;
-                $scope.filterExpressions.toDate = null;
             };
         }]
 );
 angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
-    'eu.water-switch-on.sip.controllers.usbDirectiveController',
+    'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
     [
         '$scope',
-        '$rootScope',
-        '$modal',
-        'eu.water-switch-on.sip.services.SearchService',
         'FilterExpression',
-        function ($scope, $rootScope, $modal, SearchService, FilterExpression) {
+        function ($scope, FilterExpression) {
             'use strict';
 
-            var processCallback, status;
-
-            status = {
-                current: 0,
-                max: 0,
-                type: null
-            };
-
-            $scope.status = status;
-            $scope.customFilterExpression = '';
-            $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
-
-            processCallback = function (current, max, type) {
-                status.max = max;
-                status.type = type;
-
-                // start of search (indeterminate)
-                if (max === -1 && type === 'success') {
-                    if ($scope.notificationFunction) {
-                        $scope.notificationFunction({
-                            message: 'Search for resources is in progress.',
-                            type: 'info'
-                        });
-                    }
-
-                    status.current = current;
-
-                    // search completed
-                } else if (current > 0 && current < max && type === 'success') {
-
-                    //normalise  to 100%
-                    status.current = (current / max * 100);
-
-                } else if (current === max && type === 'success') {
-
-
-                    if (current > 0) {
-                        status.current = 100;
-                        if ($scope.notificationFunction) {
-                            $scope.notificationFunction({
-                                message: 'Search completed, ' + current +
-                                    (current > 1 ? ' ressources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
-                                type: 'success'
-                            });
-                        }
-                    } else {
-                        status.current = 0;
-                        if ($scope.notificationFunction) {
-                            $scope.notificationFunction({
-                                message: 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
-                                type: 'warning'
-                            });
-                        }
-                    }
-
-                    if ($scope.progressModal) {
-                        $scope.progressModal.close();
-                    }
-                    // search error   
-                } else if (type === 'error') {
-                    if ($scope.notificationFunction) {
-                        $scope.notificationFunction({
-                            message: 'Search could not be perfomed: ' + $scope.resultSet.$error,
-                            type: 'danger'
-                        });
-                    }
-
-                    if ($scope.progressModal) {
-                        $scope.progressModal.close();
-                    }
-                }
-
-            };
-
-            $scope.clear = function () {
-                $scope.filterExpressions.clear();
-            };
-
+            if ($scope.tag.origin.isEditable()) {
+                $scope.data = {};
+                $scope.data.editorValue = $scope.tag.origin.value;
+               
+            }
+            
             // Styling of Search Filters.. into CSS but how?
             $scope.getTagIcon = function (type) {
                 switch (type) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
-                case FilterExpression.FILTER__KEYWORD_CUASHI:
+                case FilterExpression.FILTER__KEYWORD_CUAHSI:
                     return 'glyphicon glyphicon-copyright-mark';
                 case FilterExpression.FILTER__TOPIC:
                     return 'glyphicon glyphicon-tag';
@@ -833,108 +874,106 @@ angular.module(
                 }
             };
 
-            $scope.getTagStyle = function (type) {
+            // get the Filter Icon
+            // FIXME: function could be put into a service
+            $scope.getTagStyle = function (type, forCloseIcon) {
+                var prefix;
+                prefix = (forCloseIcon === true) ? 'switchon-close-icon-' : '';
+
                 switch (type) {
                 case FilterExpression.FILTER__KEYWORD:
-                    return 'label-success';
-                case FilterExpression.FILTER__KEYWORD_CUASHI:
-                    return 'label-info';
+                    return prefix + 'label-success';
+                case FilterExpression.FILTER__KEYWORD_CUAHSI:
+                    return prefix + 'label-info';
                 case FilterExpression.FILTER__TOPIC:
-                    return 'label-success';
+                    return prefix + 'label-success';
                 case FilterExpression.FILTER__GEO:
-                    return 'label-success';
+                    return prefix + 'label-success';
                 case FilterExpression.FILTER__DATE_START:
-                    return 'label-success';
+                    return prefix + 'label-success';
                 case FilterExpression.FILTER__DATE_END:
-                    return 'label-success';
+                    return prefix + 'label-success';
                 case FilterExpression.FILTER__TEXT:
-                    return 'label-info';
+                    return prefix + 'label-info';
                 case FilterExpression.FILTER__GEO_INTERSECTS:
-                    return 'label-warning';
+                    return prefix + 'label-warning';
                 case FilterExpression.FILTER__GEO_BUFFER:
-                    return 'label-warning';
+                    return prefix + 'label-warning';
                 case FilterExpression.FILTER__OPTION_LIMIT:
-                    return 'label-warning';
+                    return prefix + 'label-warning';
                 case FilterExpression.FILTER__CATEGORY:
-                    return 'label-success';
+                    return prefix + 'label-success';
                 default:
-                    return 'label-default';
+                    return prefix + 'label-default';
                 }
             };
+        }
+    ]
+);
+angular.module(
+    'eu.water-switch-on.sip.controllers'
+).controller(
+    'eu.water-switch-on.sip.controllers.usbDirectiveController',
+    [
+        '$scope',
+        'FilterExpression',
+        function ($scope, FilterExpression) {
+            'use strict';
 
-            $scope.performSearch = function (searchForm) {
-                // If form is invalid, return and let AngularJS show validation errors.
-                // Disabled since an empty form is also invalid. FIXME!
-                if (searchForm.$invalid) {
-//                    $scope.notificationFunction({
-//                        message: 'This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
-//                        type: 'warning'
-//                    });
-//                    return;
-                    console.log('This filter expression is not valid. Try expression:"parameter", e.g. keyword:"water quality"');
-                }
+            var textFilterExpressions, oldValue, newValue;
 
-                $scope.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, processCallback);
+            $scope.textFilterExpression = null;
+            $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
 
-                $scope.showProgress(status);
-            };
+            textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
+            if (textFilterExpressions && textFilterExpressions.length > 0) {
+                $scope.textFilterExpression = textFilterExpressions[0];
+            } else {
+                //console.warn('text filter expression not correctly initialized!');
+                $scope.textFilterExpression = new FilterExpression('text', null, false, false, null);
+                $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
+            }
 
-            $scope.showProgress = function (status) {
-                var modalScope;
+            oldValue = $scope.textFilterExpression.value;
 
-                modalScope = $rootScope.$new(true);
-                modalScope.status = status;
-
-                $scope.progressModal = $modal.open({
-                    templateUrl: 'templates/search-progress-modal-template.html',
-                    scope: modalScope,
-                    size: 'lg',
-                    backdrop: 'static'
-                });
-                // issue #32 - check if the eror occurred before the dialog has actually been shown
-                $scope.progressModal.opened.then(function () {
-                    if (status.type === 'error') {
-                        $scope.progressModal.close();
-                    }
-                });
-            };
-
-            // input box ist empty. Show default message. 
-            // disabled since clearing the box after parsing triggers this message
-//            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
-//
-//                if (oldValue === false && newValue === true) {
-//                    $scope.notificationFunction({
-//                        message: 'Please enter a filter expression,  e.g. keyword:"water quality"',
-//                        type: 'info'
-//                    });
-//                }
-//            });
-
-            // input is invalid according to regex pattern
-            $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
-
-                if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
-                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
+            // Show info message when input box ist empty and no filters have been defined. 
+            $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
+                if (oldValue === false && newValue === true && $scope.filterExpressions.enumeratedTags.length < 1) {
                     $scope.notificationFunction({
-                        message: 'This search filter expression is not valid. Please use expression:"parameter", e.g. keyword:"water quality".',
-                        type: 'warning'
+                        message: 'Please define a Filter Expression or enter a query to search for resources in the SIP Meta-Data Repository',
+                        type: 'info'
                     });
                 }
             });
 
-            // FIXME comparing with angular.equals on filter expressions might be slow
-            $scope.$watch('filterExpressions.list', function () {
-                $scope.enumeratedTags = $scope.filterExpressions.enumerateTags();
-            }, true);
+            // input is invalid according to regex pattern
+            // Disabled: User is allowed to enter $whatever that is used for fulltext search! -> text:"$whatever"
+//            $scope.$watch('universalSearchBox.filterExpressionInput.$invalid', function () {
+//
+//                if (!$scope.universalSearchBox.filterExpressionInput.$error.required &&
+//                        $scope.universalSearchBox.filterExpressionInput.$invalid) {
+//                    $scope.notificationFunction({
+//                        message: 'This search filter expression is not valid. Please use expression:"parameter", e.g. keyword:"water quality".',
+//                        type: 'warning'
+//                    });
+//                }
+//            });
 
-            $scope.$watch('customFilterExpression', function (newExpression) {
-                if (newExpression) {
+            $scope.$watch('filterExpressions.list', function () {
+                newValue = $scope.textFilterExpression.value;
+
+                //no user input in text box, recreate tags
+                if (newValue === oldValue) {
+                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
+                } else if (newValue) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
-                    filterExpressionString = newExpression.split($scope.pattern);
+                    filterExpressionString = newValue.split($scope.pattern);
+                    /** @type {string} */
                     param = filterExpressionString[1];
                     value = filterExpressionString[2];
+                    // user entered a valid filter expression
                     if (param && value) {
+                        param = param.toLowerCase();
                         if (FilterExpression.FILTERS.indexOf(param) === -1) {
                             $scope.notificationFunction({
                                 message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
@@ -963,20 +1002,16 @@ angular.module(
                             }
 
                             $scope.notificationFunction({
-                                message: 'Search filter "' + param + '" successfully applied.',
+                                message: 'Search filter "' + param + '" successfully applied with value "' + value + '".',
                                 type: 'success'
                             });
+                            // reset when expression successfully parsed 
+                            $scope.textFilterExpression.clear();
                         }
-                    } else {
-                        $scope.notificationFunction({
-                            message: 'The search filter expression "' + newExpression + '" entered is not valid. Try expression:"parameter", e.g. keyword:"water quality"',
-                            type: 'warning'
-                        });
                     }
-                    // reset when expression parsed
-                    $scope.customFilterExpression = '';
-                } // else: ignore
-            });
+                }
+                oldValue = $scope.textFilterExpression.value;
+            }, true); // FIXME comparing with angular.equals on filter expressions might be slow
         }
     ]
 );
@@ -1160,9 +1195,43 @@ angular.module(
                 templateUrl: 'templates/search-filter-ribbon-directive.html',
                 scope: {
                     filterExpressions: '=',
+                    performSearch: '&searchFunction',
                     notificationFunction: '&?'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterRibbonDirectiveController'
+            };
+        }
+    ]);
+
+angular.module(
+    'eu.water-switch-on.sip.directives'
+).directive('searchFilterTag',
+    [
+        function () {
+            'use strict';
+            return {
+                restrict: 'EA',
+                templateUrl: 'templates/search-filter-tag-directive-template.html',
+                scope: {
+                    tag: '='
+                },
+                controller: 'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
+                link: function (scope) {
+                    if (scope.tag.origin.isEditable()) {
+                        scope.$on('tooltip.hide', function () {
+                            var phase;
+                            //synchronise filter expression value with editor and displayed tag value
+                            //console.log('synchronising ' + scope.tag.origin.value + ' to ' + scope.data.editorValue);
+                            scope.tag.origin.value = scope.data.editorValue;
+
+                            //safely apply the new changes
+                            phase = scope.$root.$$phase;
+                            if (phase !== '$apply' && phase !== '$digest') {
+                                scope.$apply();
+                            }
+                        });
+                    }
+                }
             };
         }
     ]);
@@ -1195,9 +1264,9 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/usb-directive.html',
                 scope: {
-                     filterExpressions: '=',
-                     resultSet: '=resourceCollection',
-                     notificationFunction: '&?'
+                    filterExpressions: '=',
+                    performSearch: '&searchFunction',
+                    notificationFunction: '&?'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.usbDirectiveController'
             };
@@ -1222,9 +1291,10 @@ angular.module(
 
         var appConfig = {};
         appConfig.listView = {};
+        // highlight the keywords beloging to the following tag group
         appConfig.listView.highlightKeyword = 'query-keyword';
         // hide all keywords except those beloging to the Tag Group:
-        appConfig.listView.filterKeyword = 'keywords - CUASHI';
+        appConfig.listView.filterKeyword = null;
 
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';
@@ -1259,8 +1329,16 @@ angular.module(
     [function () {
         'use strict';
 
-        // Define the constructor function.
-        function FilterExpression(parameter, defaultValue, multiple, renderer) {
+        /**
+         * @constructor
+         * @param {string} parameter
+         * @param {object} defaultValue
+         * @param {boolean} multiple
+         * @param {boolean} visible
+         * @param {string} editor
+         * @returns {FilterExpression}
+         */
+        function FilterExpression(parameter, defaultValue, multiple, visible, editor) {
             if (parameter === undefined || parameter === null) {
                 throw 'The parameter property of a FilterExpression cannot be null!';
             }
@@ -1272,13 +1350,14 @@ angular.module(
                             JSON.parse(JSON.stringify(this.defaultValue)) : this.defaultValue);
             this.displayValue = null;
             this.multiple = (multiple === undefined) ? false : multiple;
-            this.renderer = (renderer === undefined) ? this.RENDERER__TO_STRING : renderer;
+            this.visible = (visible === undefined) ? true : visible;
+            this.editor = (editor === undefined) ? null : editor;
         }
 
         // Define the common methods using the prototype
         // and standard prototypal inheritance.  
-        FilterExpression.prototype.getDisplayValue = function () {
-            return this.displayValue || this.value;
+        FilterExpression.prototype.getDisplayValue = function (value) {
+            return this.displayValue || (value === undefined ? this.value : value);
         };
 
         FilterExpression.prototype.isValid = function () {
@@ -1287,6 +1366,14 @@ angular.module(
             }
 
             return this.value ? true : false;
+        };
+
+        FilterExpression.prototype.isEditable = function () {
+            return this.editor ? true : false;
+        };
+
+        FilterExpression.prototype.isVisible = function () {
+            return (this.visible === true) ? true : false;
         };
 
         FilterExpression.prototype.getFilterExpressionString = function () {
@@ -1320,8 +1407,8 @@ angular.module(
                 if (!this.value) {
                     this.value = [];
                 }
-                
-                if(this.value.indexOf(arrayValue) === -1) {
+
+                if (this.value.indexOf(arrayValue) === -1) {
                     this.value.push(arrayValue);
                     return true;
                 }
@@ -1348,39 +1435,55 @@ angular.module(
             var tags, i, arrayLength, tag;
             tags = [];
 
-            function removeTag() {
-                return function () {
-                    if (tag.origin.isMultiple()) {
-                        tag.origin.value.splice(tag.index, 1);
-                    } else {
-                        tag.origin.value = null;
-                    }
-                };
-            }
-
-            if (this.isValid() && this.value !== this.defaultValue) {
+            if (this.isVisible() === true && this.isValid() === true && this.value !== this.defaultValue) {
                 if (this.isMultiple()) {
                     arrayLength = this.value.length;
                     for (i = 0; i < arrayLength; i++) {
-                        tag = {};
-                        tag.name = this.value[i];
-                        tag.type = this.parameter;
-                        tag.origin = this;
-                        tag.index = i;
-                        tag.remove = removeTag(true);
+                        tag = new this.Tag(this, this.value[i]);
                         tags.push(tag);
                     }
                 } else {
-                    tag = {};
-                    tag.name = this.getDisplayValue();
-                    tag.type = this.parameter;
-                    tag.origin = this;
-                    tag.remove = removeTag(false);
+                    tag = new this.Tag(this);
                     tags.push(tag);
                 }
             }
 
             return tags;
+        };
+
+        /**
+         * @constructor
+         * @param {FilterExpression} filterExpression
+         * @param {object} arrayValue
+         * @returns {FilterExpression.Tag}
+         */
+        FilterExpression.prototype.Tag = function (filterExpression, arrayValue) {
+            if (filterExpression === undefined || filterExpression === null) {
+                console.error('The filterExpression property of a FilterTag cannot be null!');
+                throw 'The filterExpression property of a FilterTag cannot be null!';
+            }
+
+            this.origin = filterExpression;
+            this.type = this.origin.parameter;
+            this.name = this.origin.isMultiple() ? arrayValue : this.origin.getDisplayValue(this.origin.value);
+            this.arrayValue = arrayValue;
+
+            FilterExpression.prototype.Tag.prototype.remove = function () {
+                if (this.origin.isMultiple()) {
+                    this.origin.value.splice(this.origin.value.indexOf(this.arrayValue), 1);
+                } else {
+                    this.origin.value = null;
+                }
+            };
+
+            FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
+                if (this.origin.isMultiple()) {
+                    console.log(this.type + ':"' + this.arrayValue + '"');
+                    return this.type + ':"' + this.arrayValue + '"';
+                }
+
+                return this.origin.getFilterExpressionString();
+            };
         };
 
         // define constants
@@ -1390,7 +1493,7 @@ angular.module(
         FilterExpression.FILTER__GEO_INTERSECTS = 'geo-intersects';
         FilterExpression.FILTER__GEO_BUFFER = 'geo-buffer';
         FilterExpression.FILTER__KEYWORD = 'keyword';
-        FilterExpression.FILTER__KEYWORD_CUASHI = 'keyword-cuashi';
+        FilterExpression.FILTER__KEYWORD_CUAHSI = 'keyword-cuahsi';
         FilterExpression.FILTER__TOPIC = 'topic';
         FilterExpression.FILTER__CATEGORY = 'category';
         FilterExpression.FILTER__DATE_START = 'fromDate';
@@ -1403,7 +1506,7 @@ angular.module(
             FilterExpression.FILTER__GEO_INTERSECTS,
             FilterExpression.FILTER__GEO_BUFFER,
             FilterExpression.FILTER__KEYWORD,
-            FilterExpression.FILTER__KEYWORD_CUASHI,
+            FilterExpression.FILTER__KEYWORD_CUAHSI,
             FilterExpression.FILTER__TOPIC,
             FilterExpression.FILTER__CATEGORY,
             FilterExpression.FILTER__DATE_START,
@@ -1444,6 +1547,7 @@ angular.module(
 
             var filterExpressions = {};
             filterExpressions.list = [];
+            filterExpressions.enumeratedTags = [];
 
             Object.defineProperties(filterExpressions, {
                 'universalSearchString': {
@@ -1480,6 +1584,7 @@ angular.module(
                         theFilterExpression.clear();
                     }
                 }
+                filterExpressions.enumeratedTags = [];
             };
 
             filterExpressions.addFilterExpression = function (filterExpression) {
@@ -1713,14 +1818,14 @@ angular.module(
         function ($resource) {
             'use strict';
 
-            var searchService, cuashiKeywordsService, inspireKeywordsService,
+            var searchService, cuahsiKeywordsService, inspireKeywordsService,
                 inspireTopicsService, keywordsService, countriesEuropeService,
                 countriesWorldService, searchFunction, loadKeywordListFunction,
                 loadCountriesListFunction;
 
             searchService = $resource('data/resultSet.json', {});
 
-            cuashiKeywordsService = $resource('data/cuashiKeywords.json', {}, {
+            cuahsiKeywordsService = $resource('data/cuahsiKeywords.json', {}, {
                 query: {
                     method: 'GET',
                     params: {
@@ -1782,8 +1887,8 @@ angular.module(
             loadKeywordListFunction =
                 function (keywordGroup) {
                     switch (keywordGroup) {
-                    case 'cuashi_keyword':
-                        return cuashiKeywordsService.query();
+                    case 'cuahsi_keyword':
+                        return cuahsiKeywordsService.query();
                     case 'inspire_keyword':
                         return inspireKeywordsService.query();
                     case 'inspire_topic':
@@ -1819,8 +1924,8 @@ angular.module(
     'eu.water-switch-on.sip.services'
     ).factory('eu.water-switch-on.sip.services.SearchService',
     ['$resource', 'eu.water-switch-on.sip.services.Base64',
-        '$q', 'AppConfig',
-        function ($resource, Base64, $q, AppConfig) {
+        '$q', '$interval', 'AppConfig',
+        function ($resource, Base64, $q, $interval, AppConfig) {
             'use strict';
             //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
             var config, authdata, searchResource, searchFunction;
@@ -1850,7 +1955,7 @@ angular.module(
 
             searchFunction = function (universalSearchString, limit, offset, progressCallback) {
                 //TODO: hardcoded request url, domain
-                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess;
+                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess, timer, fakeProgress;
 
                 noop = angular.noop;
 
@@ -1862,6 +1967,12 @@ angular.module(
 
                 // current value, max value, type, max = -1 indicates indeterminate
                 (progressCallback || noop)(0, -1, 'success');
+
+                fakeProgress = 0;
+                timer = $interval (function () {
+                    (progressCallback || noop)(fakeProgress, -1, 'success');
+                    fakeProgress++;
+                }, 100, 100);
 
                 result = {
                     $promise: deferred.promise,
@@ -1883,7 +1994,7 @@ angular.module(
 
                     classesSuccess = function (data) {
                         var allError, allSuccess, classCache, classname, entityResource, i, objectId, objsQ,
-                            objPromise, singleProgressF, resolvedObjsCount;
+                            objPromise, singleProgressF, resolvedObjsCount, fakeProgressActive;
 
                         classCache = [];
                         for (i = 0; i < data.$collection.length; ++i) {
@@ -1909,9 +2020,23 @@ angular.module(
                         );
 
                         resolvedObjsCount = 0;
+
+                        // we stop fake progresss before 1st object has been resolved
+                        // to minimze delay between fake and real progress steps
+                        if (nodes.length > 0) {
+                            fakeProgressActive = true;
+                        } else {
+                            $interval.cancel(timer);
+                        }
+
+                        // real progress starts at 100 and this then scaled to 200 by callback
                         (progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
 
                         singleProgressF = function () {
+                            if (fakeProgressActive === true) {
+                                fakeProgressActive = !$interval.cancel(timer);
+                            }
+
                             (progressCallback || noop)(++resolvedObjsCount, nodes.length, 'success');
                         };
 
@@ -1952,7 +2077,7 @@ angular.module(
                             result.$resolved = true;
 
                             deferred.reject(result);
-
+                            $interval.cancel(timer);
                             (progressCallback || noop)(1, 1, 'error');
                         };
 
@@ -1965,7 +2090,7 @@ angular.module(
                         result.$resolved = true;
 
                         deferred.reject(result);
-
+                        $interval.cancel(timer);
                         (progressCallback || noop)(1, 1, 'error');
                     };
 
@@ -1994,7 +2119,7 @@ angular.module(
                     result.$response = data;
                     result.$resolved = true;
                     deferred.reject(result);
-
+                    $interval.cancel(timer);
                     (progressCallback || noop)(1, 1, 'error');
                 };
 
@@ -2158,13 +2283,14 @@ angular.module(
                 getCountryListFunction;
 
             tagResources = {
-                'keyword-cuashi': 'data/cuashiKeywords.json',
-                'keyword-cuashi-toplevel': 'data/cuashiToplevelKeywords.json',
+                'keyword-cuahsi': 'data/cuahsiKeywords.json',
+                'keyword-cuahsi-toplevel': 'data/cuahsiToplevelKeywords.json',
                 'keyword-inspire': 'data/inspireKeywords.json',
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
                 'country-world': 'data/countriesWorld.json',
-                'country-europe': 'data/countriesEurope.json'
+                'country-europe': 'data/countriesEurope.json',
+                'category-default': 'data/defaultCategories.json'
             };
 
             tagGroups = {};
