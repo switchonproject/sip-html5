@@ -24,16 +24,25 @@ angular.module(
             $scope.data.messageType = 'success';
             $scope.data.selectedObject = -1;
             // FIXME: move to categories directive -----------------------------
-            $scope.data.categories = TagGroupService.getKeywordList('keyword-cuahsi-toplevel');
+            $scope.data.categories = TagGroupService.getKeywordList('category-default');
             // FIXME: move to categories directive -----------------------------
             $scope.isResultShowing = false;
             $scope.state = $state;
 
             $scope.filterExpressions = FilterExpressions; // singleton instance
-            $scope.geoFilterExpression = new FilterExpression('geo');
+            $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
+                'templates/geo-editor-popup.html');
+            $scope.geoFilterExpression.getDisplayValue = function (value) {
+                if (value && value.indexOf('(') !== -1) {
+                    return value.substring(0, value.indexOf('('));
+                }
+
+                return 'undefined';
+            };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
+
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
+            $scope.categoriesFilterExpression = new FilterExpression('category');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 

@@ -12,20 +12,25 @@ angular.module(
 
             $scope.keywordsFilterExpression = new FilterExpression('keyword', [], true);
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
-//            $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
-//            $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
+
             $scope.topicFilterExpression = new FilterExpression('topic');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
+
             $scope.fromDateFilterExpression = new FilterExpression('fromDate');
             $scope.filterExpressions.addFilterExpression($scope.fromDateFilterExpression);
+
             $scope.toDateFilterExpression = new FilterExpression('toDate');
             $scope.filterExpressions.addFilterExpression($scope.toDateFilterExpression);
-            $scope.geoIntersectsFilterExpression = new FilterExpression('geo-intersects', 'false', false, true, 'test2');
+
+            $scope.geoIntersectsFilterExpression = new FilterExpression('geo-intersects', 'false');
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
-            $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', null, false, true, 'templates/geo-buffer-editor-popup.html');
+
+            $scope.geoBufferFilterExpression = new FilterExpression('geo-buffer', null, false, true,
+                'templates/geo-buffer-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
+
             $scope.limitFilterExpression = new FilterExpression('limit', 20, false, true,
-                'templates/search-filter-tag-directive-template.html');
+                'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
             $scope.topicFilterExpression.getDisplayValue = function (value) {
@@ -36,19 +41,20 @@ angular.module(
                 return value ? 'intersect' : 'enclose';
             };
 
-            $scope.geoBufferFilterExpression.getDisplayValue = function (value) {
-                return value ? (
-                    value < 1000 ? value + 'm' :
-                            value / 1000 + 'km'
-                ) : '0m';
-            };
-
             geoFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('geo');
             if (geoFilterExpressions && geoFilterExpressions.length > 0) {
                 $scope.geoFilterExpression = geoFilterExpressions[0];
             } else {
                 console.warn('geo filter expression not correctly initialized!');
-                $scope.geoFilterExpression = new FilterExpression('geo', [], true);
+                $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
+                    'templates/geo-editor-popup.html');
+                $scope.geoFilterExpression.getDisplayValue = function (value) {
+                    if (value && value.indexOf('(') !== -1) {
+                        return value.substring(0, value.indexOf('('));
+                    }
+
+                    return 'undefined';
+                };
                 $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
             }
 

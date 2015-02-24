@@ -101,7 +101,7 @@ angular.module(
                         fakeProgressActive = true;
 
                         // real progress starts at 100 and this then scaled to 200 by callback
-                        //(progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
+                        (progressCallback || noop)(resolvedObjsCount, nodes.length, 'success');
 
                         singleProgressF = function () {
                             if (fakeProgressActive === true) {

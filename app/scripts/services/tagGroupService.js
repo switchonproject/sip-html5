@@ -15,7 +15,8 @@ angular.module(
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
                 'country-world': 'data/countriesWorld.json',
-                'country-europe': 'data/countriesEurope.json'
+                'country-europe': 'data/countriesEurope.json',
+                'category-default': 'data/defaultCategories.json'
             };
 
             tagGroups = {};

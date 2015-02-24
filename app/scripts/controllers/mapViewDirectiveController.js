@@ -161,7 +161,11 @@ angular.module(
                             internalChange = true;
                             setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
                         } catch (e) {
-                            // ignore illegal wkt
+
+                            // clear on illigegal WKT
+                            searchGroup.removeLayer($scope.searchGeomLayer);
+                            $scope.searchGeomLayer = undefined;
+                            $scope.searchGeomWkt = null;
                         }
                     } else if (n === null) {
                         searchGroup.removeLayer($scope.searchGeomLayer);

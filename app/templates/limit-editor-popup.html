@@ -1,0 +1,17 @@
+<div class="popover switchon-ribbon-popover" id="limitEditor">
+    <div class="arrow"></div>
+    <div class="popover-content">
+        <form name="limitForm" id="limitForm" novalidate> 
+            <div class="form-group" ng-class="{'has-error': limitForm.limitField.$invalid}">
+                <input type="number" 
+                       class="form-control" 
+                       min="1" 
+                       max="50" 
+                       name="limitField" 
+                       id="geoBufferField" 
+                       placeholder="limit"
+                       ng-model="data.editorValue">
+            </div>
+        </form>
+    </div>
+</div>
