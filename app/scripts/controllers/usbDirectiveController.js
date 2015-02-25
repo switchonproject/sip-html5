@@ -11,7 +11,7 @@ angular.module(
             var textFilterExpressions, oldValue, newValue;
 
             $scope.textFilterExpression = null;
-            $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
+            $scope.pattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 
             textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
             if (textFilterExpressions && textFilterExpressions.length > 0) {
@@ -93,9 +93,9 @@ angular.module(
                                 message: 'Search filter "' + param + '" successfully applied with value "' + value + '".',
                                 type: 'success'
                             });
-                            // reset when expression successfully parsed 
-                            $scope.textFilterExpression.clear();
                         }
+                        // reset when expression successfully parsed 
+                        $scope.textFilterExpression.clear();
                     }
                 }
                 oldValue = $scope.textFilterExpression.value;
