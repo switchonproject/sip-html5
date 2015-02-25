@@ -28,6 +28,7 @@ angular.module(
                 throw 'The parameter property of a FilterExpression cannot be null!';
             }
             this.parameter = parameter;
+
             this.defaultValue = (defaultValue === undefined) ? null : defaultValue;
             // if default value is an object it has to be cloned!
             this.value = (defaultValue === undefined) ? null :
@@ -35,7 +36,11 @@ angular.module(
                             JSON.parse(JSON.stringify(this.defaultValue)) : this.defaultValue);
             this.displayValue = null;
             this.multiple = (multiple === undefined) ? false : multiple;
-            this.visible = (visible === undefined) ? true : visible;
+            this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
+            this.visible = (visible === undefined) ? !this.notFilter : visible;
+            if (this.notFilter === true && this.visible === true) {
+                throw 'A NOT Filter cannot be visible.';
+            }
             this.editor = (editor === undefined) ? null : editor;
         }
 
@@ -59,6 +64,10 @@ angular.module(
 
         FilterExpression.prototype.isVisible = function () {
             return (this.visible === true) ? true : false;
+        };
+
+        FilterExpression.prototype.isNotFilter = function () {
+            return (this.notFilter === true) ? true : false;
         };
 
         FilterExpression.prototype.getFilterExpressionString = function () {
