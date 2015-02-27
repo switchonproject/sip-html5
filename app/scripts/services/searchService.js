@@ -33,7 +33,8 @@ angular.module(
 
             searchFunction = function (universalSearchString, limit, offset, progressCallback) {
                 //TODO: hardcoded request url, domain
-                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess, timer, fakeProgress;
+                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess,
+                    timer, fakeProgress, filterTags, filterTagsSuccess, filterTagsError;
 
                 noop = angular.noop;
 
@@ -52,11 +53,13 @@ angular.module(
                     fakeProgress++;
                 }, 100, 100);
 
+                // result of this search operation
                 result = {
                     $promise: deferred.promise,
                     $resolved: false
                 };
 
+                // result of the remote search operation (promise)
                 searchResult = searchResource.search(
                     {
                         limit: limit,
@@ -68,6 +71,7 @@ angular.module(
                 searchSuccess = function (data) {
                     var classesError, classesSuccess, nodes;
 
+                    // searchResult.$collection
                     nodes = data.$collection;
 
                     classesSuccess = function (data) {
@@ -97,8 +101,11 @@ angular.module(
                             }
                         );
 
-                        resolvedObjsCount = 0;
+                        if (!filterTags.$resolved) {
+                            console.warn("filterTags not resolved");
+                        }
 
+                        resolvedObjsCount = 0;
                         // we stop fake progresss before 1st object has been resolved
                         // to minimze delay between fake and real progress steps
                         if (nodes.length > 0) {
@@ -134,6 +141,7 @@ angular.module(
                         allSuccess = function (objs) {
                             var key;
 
+                            // update nodes in search result
                             for (i = 0; i < nodes.length; ++i) {
                                 nodes[i].object = objs[i];
                             }
@@ -145,7 +153,7 @@ angular.module(
                                     result[key] = searchResult[key];
                                 }
                             }
-
+                            
                             deferred.resolve(result);
                         };
 
@@ -201,6 +209,42 @@ angular.module(
                     (progressCallback || noop)(1, 1, 'error');
                 };
 
+                filterTagsSuccess = function (data) {
+                    result.$tags = data;
+                };
+
+                filterTagsError = function (data) {
+                    result.$error = 'cannot lookup filter tags';
+                    result.$response = data;
+                    result.$resolved = true;
+
+                    deferred.reject(result);
+                    $interval.cancel(timer);
+                    (progressCallback || noop)(1, 1, 'error');
+                };
+
+                filterTags = $resource(
+                    config.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {},
+                    {
+                        exec: {
+                            method: 'POST',
+                            isArray: false,
+                            headers: {
+                                'Authorization': 'Basic ' + authdata
+                            }
+                        }
+                    }
+                );
+
+//                filterTags.exec(
+//                    {
+//                        'list': [{'key': 'Query', 'value': universalSearchString },
+//                            {'key': 'FilterTagGroup', 'value': 'keyword'}]
+//                    }
+//                );
+//
+//                filterTags.$promise.then(filterTagsSuccess, filterTagsError);
                 searchResult.$promise.then(searchSuccess, searchError);
 
                 return result;
