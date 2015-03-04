@@ -16,17 +16,19 @@ angular.module(
                         if (tagGroup && tagGroup.value && tagGroup.value.length > 0) {
                             tagGroup = filterTags[i];
                             param = '!' + tagGroup;
-                            filterExpression = $scope.filterExpressions.getFilterExpressionsByType(param);
+                            filterExpression = $scope.postSearchFilterExpressions.getFilterExpressionsByType(param);
                             if (!filterExpression || filterExpression.length === 0) {
                                 filterExpression = new FilterExpression('!' + tagGroup.key, null, true);
-                                $scope.filterExpressions.addFilterExpression(filterExpression);
+                                $scope.postSearchFilterExpressions.addFilterExpression(filterExpression);
                             }
 
                             for (j = 0; j < tagGroup.value.length; j++ ) {
                                 filterExpression.setArrayValue(tagGroup.value[j]);
+                                filterExpression.enumeratedTags = filterExpression.enumerateTags();
                             }
                         }
                     }
+                    $scope.postSearchFilterExpressions.enumerateTags(false, false, false, true);
                 }
             });
         }

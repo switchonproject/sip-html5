@@ -63,7 +63,7 @@ angular.module(
             if (keywordsCuashiFilterExpressions && keywordsCuashiFilterExpressions.length > 0) {
                 $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpressions[0];
             } else {
-                console.warn('keyword-cuahsi filter expression not correctly initialized!');
+                //console.warn('keyword-cuahsi filter expression not correctly initialized!');
                 $scope.keywordsCuashiFilterExpression = new FilterExpression('keyword-cuahsi', [], true);
                 $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             }

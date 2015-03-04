@@ -39,6 +39,7 @@ angular.module(
             this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
             this.visible = (visible === undefined) ? !this.notFilter : visible;
             this.editor = (editor === undefined) ? null : editor;
+            this.enumeratedTags = [];
         }
 
         // Define the common methods using the prototype
@@ -120,9 +121,11 @@ angular.module(
             }
 
             this.displayValue = null;
+            this.enumeratedTags = [];
         };
 
         FilterExpression.prototype.enumerateTags = function () {
+            console.debug("enumerating tags of filter expression '" + this.parameter + "'");
             var tags, i, arrayLength, tag;
             tags = [];
 

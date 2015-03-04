@@ -8,7 +8,7 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/post-search-filter-directive.html',
                 scope: {
-                    filterExpressions: '=',
+                    postSearchFilterExpressions: '=',
                     filterTags: '=',
                     performSearch: '&searchFunction',
                     notificationFunction: '&?'

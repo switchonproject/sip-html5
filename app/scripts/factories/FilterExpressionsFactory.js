@@ -15,11 +15,12 @@ angular.module(
         function (FilterExpression) {
             'use strict';
 
-            var filterExpressions = {};
-            filterExpressions.list = [];
-            filterExpressions.enumeratedTags = [];
+            function FilterExpressions() {
+                this.list = [];
+                this.enumeratedTags = [];
+            }
 
-            Object.defineProperties(filterExpressions, {
+            Object.defineProperties(FilterExpressions.prototype, {
                 'universalSearchString': {
                     'get': function () {
                         var keys, arrayLength, uss, i, theFilterExpression;
@@ -44,59 +45,60 @@ angular.module(
                 }
             });
 
-            filterExpressions.clear = function () {
+            FilterExpressions.prototype.clear = function () {
                 var keys, arrayLength, i, theFilterExpression;
-                keys = Object.keys(filterExpressions.list);
+                keys = Object.keys(this.list);
                 arrayLength = keys.length;
                 for (i = 0; i < arrayLength; i++) {
-                    theFilterExpression = filterExpressions.list[keys[i]];
+                    theFilterExpression = this.list[keys[i]];
                     if (theFilterExpression instanceof FilterExpression) {
                         theFilterExpression.clear();
                     }
                 }
-                filterExpressions.enumeratedTags = [];
+                this.enumeratedTags = [];
             };
 
-            filterExpressions.addFilterExpression = function (filterExpression) {
+            FilterExpressions.prototype.addFilterExpression = function (filterExpression) {
                 if (filterExpression instanceof FilterExpression) {
-                    filterExpressions.list.push(filterExpression);
+                    this.list.push(filterExpression);
                     return true;
                 }
                 return false;
             };
 
-            filterExpressions.removeFilterExpression = function (filterExpression) {
+            FilterExpressions.prototype.removeFilterExpression = function (filterExpression) {
                 var removed, i;
                 removed = false;
-                for (i = filterExpressions.list.length - 1; i >= 0; i--) {
-                    if (filterExpressions.list[i] === filterExpression) {
-                        filterExpressions.list.splice(i, 1);
+                for (i = this.list.length - 1; i >= 0; i--) {
+                    if (this.list[i] === filterExpression) {
+                        this.list.splice(i, 1);
                         removed = true;
                     }
                 }
                 return removed;
             };
 
-            filterExpressions.getFilterExpressionsByType = function (type, partialMatch) {
+            FilterExpressions.prototype.getFilterExpressionsByType = function (type, partialMatch) {
                 var i, arrayLength, filterExpressionList;
                 filterExpressionList = [];
-                arrayLength = filterExpressions.list.length;
+                arrayLength = this.list.length;
                 for (i = 0; i < arrayLength; i++) {
-                    if (partialMatch && filterExpressions.list[i].parameter.indexOf(type) !== -1) {
-                        filterExpressionList.push(filterExpressions.list[i]);
-                    } else if (filterExpressions.list[i].parameter === type) {
-                        filterExpressionList.push(filterExpressions.list[i]);
+                    if (partialMatch && this.list[i].parameter.indexOf(type) !== -1) {
+                        filterExpressionList.push(this.list[i]);
+                    } else if (this.list[i].parameter === type) {
+                        filterExpressionList.push(this.list[i]);
                     }
                 }
                 return filterExpressionList;
             };
 
-            filterExpressions.enumerateTags  = function (includeInvisible, includeInvalid, includeDefaultValue, includeNotFilter) {
+            FilterExpressions.prototype.enumerateTags = function (includeInvisible, includeInvalid, includeDefaultValue, includeNotFilter) {
+                console.debug("enumerating all tags");
                 var arrayLength, i, theFilterExpression, returnTags, theTags;
                 returnTags = [];
-                arrayLength = filterExpressions.list.length;
+                arrayLength = this.list.length;
                 for (i = 0; i < arrayLength; i++) {
-                    theFilterExpression = filterExpressions.list[i];
+                    theFilterExpression = this.list[i];
 
                     if ((!includeInvisible && theFilterExpression.isVisible() === true)
                             && (!includeInvalid && theFilterExpression.isValid() === true)
@@ -112,20 +114,7 @@ angular.module(
                 return returnTags;
             };
 
-            filterExpressions.getNotFilterExpressions  = function () {
-                var i, arrayLength, returnFilterExpressions, theFilterExpression;
-                returnFilterExpressions = [];
-                arrayLength = filterExpressions.list.length;
-                for (i = 0; i < arrayLength; i++) {
-                    theFilterExpression = filterExpressions.list[i];
-                    if (theFilterExpression.isNotFilter() === true) {
-                        returnFilterExpressions.concat(theFilterExpression);
-                    }
-                }
-                return returnFilterExpressions;
-            };
-
-            return filterExpressions;
+            return FilterExpressions;
         }]
     );
 

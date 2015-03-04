@@ -29,7 +29,7 @@ angular.module(
             $scope.isResultShowing = $scope.config.gui.dev;
             $scope.state = $state;
 
-            $scope.filterExpressions = FilterExpressions; // singleton instance
+            $scope.filterExpressions = new FilterExpressions();
             $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
                 'templates/geo-editor-popup.html');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
@@ -46,6 +46,8 @@ angular.module(
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
+            $scope.postSearchFilterExpressions = new FilterExpressions();
+            
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
             $scope.data.searchStatus = {

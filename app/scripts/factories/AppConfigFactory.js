@@ -38,7 +38,7 @@ angular.module(
         appConfig.gui.dev = true;
 
         appConfig.tagFilter = {};
-        appConfig.tagFilter.tagGroups = 'access-condition, function';
+        appConfig.tagFilter.tagGroups = 'access-condition, function, keyword';
 
         return appConfig;
     }]);
