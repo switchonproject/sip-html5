@@ -26,7 +26,7 @@ angular.module(
             // FIXME: move to categories directive -----------------------------
             $scope.data.categories = TagGroupService.getKeywordList('category-default');
             // FIXME: move to categories directive -----------------------------
-            $scope.isResultShowing = false;
+            $scope.isResultShowing = $scope.config.gui.dev;
             $scope.state = $state;
 
             $scope.filterExpressions = FilterExpressions; // singleton instance
@@ -93,13 +93,13 @@ angular.module(
                     }
 
                     $scope.data.resultObjects = objs;
-                    $scope.data.resultSet.$total = n.length;
                     $scope.data.selectedObject = -1;
                 }
             });
 
             $scope.performSearch = function () {
-                $scope.data.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, searchProcessCallback);
+                $scope.data.resultSet = SearchService.search($scope.filterExpressions.universalSearchString,
+                    $scope.config.tagFilter.tagGroups, 25, 0, searchProcessCallback);
                 $scope.showProgress($scope.data.searchStatus);
             };
 

@@ -1,0 +1,11 @@
+<div class="panel">
+    <accordion close-others="false">
+        <accordion-group ng-repeat="filterExpression in filterExpressions.list" is-open="filterExpression._status.open">
+            <accordion-heading>
+                {{filterExpression.param}} <i class="pull-right glyphicon" 
+                                    ng-class="{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}"></i>
+            </accordion-heading>
+            <span ng-repeat="tag in filterExpression.enumerateTags()">{{tag.getDisplayValue()}}</span>
+        </accordion-group>
+    </accordion>
+</div>

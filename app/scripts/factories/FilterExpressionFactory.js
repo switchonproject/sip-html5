@@ -38,9 +38,6 @@ angular.module(
             this.multiple = (multiple === undefined) ? false : multiple;
             this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
             this.visible = (visible === undefined) ? !this.notFilter : visible;
-            if (this.notFilter === true && this.visible === true) {
-                throw 'A NOT Filter cannot be visible.';
-            }
             this.editor = (editor === undefined) ? null : editor;
         }
 
@@ -129,17 +126,15 @@ angular.module(
             var tags, i, arrayLength, tag;
             tags = [];
 
-            if (this.isVisible() === true && this.isValid() === true && this.value !== this.defaultValue) {
-                if (this.isMultiple()) {
-                    arrayLength = this.value.length;
-                    for (i = 0; i < arrayLength; i++) {
-                        tag = new this.Tag(this, this.value[i]);
-                        tags.push(tag);
-                    }
-                } else {
-                    tag = new this.Tag(this);
+            if (this.isMultiple()) {
+                arrayLength = this.value.length;
+                for (i = 0; i < arrayLength; i++) {
+                    tag = new this.Tag(this, this.value[i]);
                     tags.push(tag);
                 }
+            } else {
+                tag = new this.Tag(this);
+                tags.push(tag);
             }
 
             return tags;
@@ -170,9 +165,12 @@ angular.module(
                 }
             };
 
+            /**
+             * Return the filter expression string of this single tag.
+             * @returns {FilterExpressionFactory_L14.FilterExpression.prototype.Tag.prototype@pro;origin@call;getFilterExpressionString|String}
+             */
             FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
                 if (this.origin.isMultiple()) {
-                    console.log(this.type + ':"' + this.arrayValue + '"');
                     return this.type + ':"' + this.arrayValue + '"';
                 }
 

@@ -79,6 +79,12 @@ body {
     left: 10%;
 }
 
+.switchon-result-list {
+    overflow-y: auto;
+    max-height: 60%;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+}
 
 .usb-form-control {
     min-width: 500px;
@@ -166,7 +172,6 @@ body {
     width: 0;
     height: 100%;
     margin-left: -250px;
-    overflow-y: auto;
     background: #f8f8f8;
     transition: all 0.5s ease;
 }

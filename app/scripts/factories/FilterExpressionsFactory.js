@@ -91,18 +91,38 @@ angular.module(
                 return filterExpressionList;
             };
 
-            filterExpressions.enumerateTags  = function () {
+            filterExpressions.enumerateTags  = function (includeInvisible, includeInvalid, includeDefaultValue, includeNotFilter) {
                 var arrayLength, i, theFilterExpression, returnTags, theTags;
                 returnTags = [];
                 arrayLength = filterExpressions.list.length;
                 for (i = 0; i < arrayLength; i++) {
                     theFilterExpression = filterExpressions.list[i];
-                    theTags = theFilterExpression.enumerateTags();
-                    if (theTags.length > 0) {
-                        returnTags = returnTags.concat(theTags);
+
+                    if ((!includeInvisible && theFilterExpression.isVisible() === true)
+                            && (!includeInvalid && theFilterExpression.isValid() === true)
+                            && (!includeDefaultValue && theFilterExpression.value !== theFilterExpression.defaultValue)
+                            && (!includeNotFilter && theFilterExpression.isNotFilter() === false)) {
+
+                        theTags = theFilterExpression.enumerateTags();
+                        if (theTags.length > 0) {
+                            returnTags = returnTags.concat(theTags);
+                        }
                     }
                 }
                 return returnTags;
+            };
+
+            filterExpressions.getNotFilterExpressions  = function () {
+                var i, arrayLength, returnFilterExpressions, theFilterExpression;
+                returnFilterExpressions = [];
+                arrayLength = filterExpressions.list.length;
+                for (i = 0; i < arrayLength; i++) {
+                    theFilterExpression = filterExpressions.list[i];
+                    if (theFilterExpression.isNotFilter() === true) {
+                        returnFilterExpressions.concat(theFilterExpression);
+                    }
+                }
+                return returnFilterExpressions;
             };
 
             return filterExpressions;
