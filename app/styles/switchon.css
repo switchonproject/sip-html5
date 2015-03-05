@@ -86,6 +86,37 @@ body {
     margin-bottom: 0px;
 }
 
+.switchon-result-list .pagination {
+    float:right;
+    margin: 2px;
+    clear:right; 
+}
+
+.switchon-result-list .list-group {
+    margin-bottom: 0px;
+    border:none;
+}
+
+.switchon-result-list .list-group-item {
+    border:none;
+    padding-top:5px;
+    padding-left: 10px;
+}
+
+
+#switchon-result-header {
+    float:left;
+    margin:6px;
+}
+
+postsearchfilter .panel-group {
+    overflow-x: hidden;
+}
+
+postsearchfilter .panel-heading {
+    padding:8px;
+}
+
 .usb-form-control {
     min-width: 500px;
     padding: 1px 2px;

@@ -1,12 +1,12 @@
-<div class="panel">
     <accordion close-others="false">
         <accordion-group ng-repeat="filterExpression in postSearchFilterExpressions.list | filter:{valid:true}" 
                          is-open="filterExpression._status.open">
             <accordion-heading>
-                {{filterExpression.parameter}} <i class="pull-right glyphicon" 
+                <strong>{{filterExpression.parameter}}<strong><i class="pull-right glyphicon" 
                                     ng-class="{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}"></i>
             </accordion-heading>
-            <span ng-repeat="tag in filterExpression.enumeratedTags" search-filter-tag tag="tag"></span>
+            <span style="float:left; padding-bottom: 0.5em;" ng-repeat="tag in filterExpression.enumeratedTags" search-filter-tag tag="tag"></span>
+            
+            
         </accordion-group>
     </accordion>
-</div>

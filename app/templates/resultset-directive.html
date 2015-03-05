@@ -1,18 +1,16 @@
-<div class="panel panel-default switchon-result-list">
-
-    <div class="container nowrap"> 
-        <strong>Resources</strong> ({{resultSet.$total}})
-<!--        <ul class="pagination pagination-sm">
-            <li ng-class="{disabled: !resultSet.$previous}"><a href="#" aria-label="Previous" ng-click="alert();"><span aria-hidden="true">&laquo;</span></a></li>
-            <li ng-class="{disabled: resultSet.$next}"><a href="#" aria-label="Next" ng-click="alert();"><span aria-hidden="true">&raquo;</span></a></li>
-        </ul>-->
-    </div>
-
+<div class="panel panel-default switchon-result-list">   
+    <span id="switchon-result-header"><strong>Resources</strong> ({{resultSet.$total}})</span>
+    <ul class="pagination pagination-sm">
+        <li ng-class="{disabled: !resultSet.$previous}"><a href="#" aria-label="Previous" ng-click="alert();"><span aria-hidden="true">&laquo;</span></a></li>
+        <li ng-class="{disabled: resultSet.$next}"><a href="#" aria-label="Next" ng-click="alert();"><span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+    
+    <div style="clear:both;">   
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="node in resultSet.$collection">  
             <span class="btn-link" ng-click="$parent.selectedObject = $index">{{node.name}}</span>
-            <p style="line-height: normal;"><small><small>{{node.object.description | txtLen:80:false:'...':true}}</small></small></p>
+            <p style="line-height: normal;"><small><small>{{node.object.description| txtLen:80:false:'...':true}}</small></small></p>
         </li>
     </ul>
-
+    </div>
 </div>
