@@ -8,10 +8,11 @@ angular.module(
                 restrict: 'EA',
                 templateUrl: 'templates/search-filter-tag-directive-template.html',
                 scope: {
-                    tag: '='
+                    tag: '=',
+                    performRemove: '&?removeFunction',
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
-                link: function (scope) {
+                link: function (scope, elem, attrs) {
                     if (scope.tag.origin.isEditable()) {
                         scope.$on('tooltip.hide', function () {
                             var phase;
@@ -26,6 +27,10 @@ angular.module(
                             }
                         });
                     }
+
+                    scope.hasRemoveFunction = function () {
+                        return angular.isDefined(attrs.removeFunction);
+                    };
                 }
             };
         }

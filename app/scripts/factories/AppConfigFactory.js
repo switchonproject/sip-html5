@@ -25,6 +25,7 @@ angular.module(
         appConfig.searchService.username = 'admin@SWITCHON';
         appConfig.searchService.password = 'cismet';
         appConfig.searchService.host = 'http://localhost:8890';
+        appConfig.searchService.defautLimit = 10;
         //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
 
         appConfig.mapView = {};

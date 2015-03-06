@@ -1,16 +1,18 @@
 angular.module(
     'eu.water-switch-on.sip.services'
-    ).factory('eu.water-switch-on.sip.services.SearchService',
+).factory('eu.water-switch-on.sip.services.SearchService',
     ['$resource', 'eu.water-switch-on.sip.services.Base64',
         '$q', '$interval', 'AppConfig',
         function ($resource, Base64, $q, $interval, AppConfig) {
             'use strict';
-            //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
             var config, authdata, searchResource, searchFunction;
 
             config = AppConfig.searchService;
             authdata = Base64.encode(config.username + ':' + config.password);
 
+            // remote legagy search core search
+            // FIXME: limit and offset not implemented in legacy search!
+            // currently, limit and offset are appended to the POST query parameter!
             searchResource = $resource(config.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
                 {
                     limit: 20,
@@ -47,7 +49,7 @@ angular.module(
                 (progressCallback || noop)(0, -1, 'success');
 
                 fakeProgress = 0;
-                timer = $interval (function () {
+                timer = $interval(function () {
                     (progressCallback || noop)(fakeProgress, -1, 'success');
                     fakeProgress++;
                 }, 100, 100);

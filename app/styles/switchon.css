@@ -117,6 +117,12 @@ postsearchfilter .panel-heading {
     padding:8px;
 }
 
+postsearchfilter .panel-collapse {
+   overflow-x: hidden;
+   overflow-y: auto;
+   max-height: 100px;
+}
+
 .usb-form-control {
     min-width: 500px;
     padding: 1px 2px;

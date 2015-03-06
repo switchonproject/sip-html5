@@ -11,9 +11,8 @@ angular.module(
             if ($scope.tag.origin.isEditable()) {
                 $scope.data = {};
                 $scope.data.editorValue = $scope.tag.origin.value;
-               
             }
-            
+
             // Styling of Search Filters.. into CSS but how?
             $scope.getTagIcon = function (type) {
                 switch (type) {

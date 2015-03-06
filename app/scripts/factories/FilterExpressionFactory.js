@@ -21,14 +21,15 @@ angular.module(
          * @param {boolean} multiple
          * @param {boolean} visible
          * @param {string} editor
+         * @param {string} name
+         * @param {string} description
          * @returns {FilterExpression}
          */
-        function FilterExpression(parameter, defaultValue, multiple, visible, editor) {
+        function FilterExpression(parameter, defaultValue, multiple, visible, editor, name, description) {
             if (parameter === undefined || parameter === null) {
                 throw 'The parameter property of a FilterExpression cannot be null!';
             }
             this.parameter = parameter;
-
             this.defaultValue = (defaultValue === undefined) ? null : defaultValue;
             // if default value is an object it has to be cloned!
             this.value = (defaultValue === undefined) ? null :
@@ -39,11 +40,29 @@ angular.module(
             this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
             this.visible = (visible === undefined) ? !this.notFilter : visible;
             this.editor = (editor === undefined) ? null : editor;
+            this.name = (name === parameter) ? null : editor;
+            this.description = (description === undefined) ? null : description;
             this.enumeratedTags = [];
         }
 
         // Define the common methods using the prototype
         // and standard prototypal inheritance.  
+
+        /**
+         * Returns a display value for a value for this type of filter expression.
+         * Commonly, the display value is used as name of the tag of this filter expression.
+         * Tags are shown in the Univeral Search Box or the Post Search Filter Box.
+         * E.g. getDisplayValue for a GEO Filter Expression whose value is a 
+         * WKT String may return the type  of the WKT String,(MULTIPOINT, POLYGON, etc.). 
+         * 
+         * By default, this method returns a predefined (fixed) display value
+         * (if available) or the value itself. Therfore this methos has to be overwritten
+         * by filter expressions that need to compute a display value from the actual value
+         * (e.g. the GEO Filter Expression).
+         * 
+         * @param {object} value
+         * @returns {string} the computed display value
+         */
         FilterExpression.prototype.getDisplayValue = function (value) {
             return this.displayValue || (value === undefined ? this.value : value);
         };
@@ -56,6 +75,12 @@ angular.module(
             return this.value ? true : false;
         };
 
+        /**
+         * If a Filter Expression is editable, a custom editor (property: editor) 
+         * is shown when the user clicks on the Tag of the Filter Expression.
+         * 
+         * @returns {Boolean} editable ot not
+         */
         FilterExpression.prototype.isEditable = function () {
             return this.editor ? true : false;
         };
@@ -68,6 +93,13 @@ angular.module(
             return (this.notFilter === true) ? true : false;
         };
 
+        /**
+         * Returns a string that can be used with universal search.
+         * If the value of the filter expression is an array, the filter expression
+         * string will contain multiple parameter:arraywalue expressions.
+         * 
+         * @returns {String} universal search string
+         */
         FilterExpression.prototype.getFilterExpressionString = function () {
             var filterExpressionString, arrayLength, i, concatFilter;
 
@@ -94,6 +126,13 @@ angular.module(
             return filterExpressionString;
         };
 
+        /**
+         * Adds a new entry to an array if the value of this filter expression 
+         * is an array.
+         * 
+         * @param {type} arrayValue
+         * @returns {Boolean}
+         */
         FilterExpression.prototype.setArrayValue = function (arrayValue) {
             if (this.isMultiple()) {
                 if (!this.value) {
@@ -109,6 +148,12 @@ angular.module(
             return false;
         };
 
+        /**
+         * Determines wheter multiple instances of this filter expression can
+         * be put into a FilterExpressions list.
+         * 
+         * @returns {Boolean}
+         */
         FilterExpression.prototype.isMultiple = function () {
             return this.multiple === true;
         };
@@ -120,12 +165,17 @@ angular.module(
                 this.value = this.defaultValue;
             }
 
-            this.displayValue = null;
+            //this.displayValue = null;
             this.enumeratedTags = [];
         };
 
+        /**
+         * Enumerates the tags of this filter expression. Returns an array > 1 
+         * If the filter expression value is an array
+         * @returns {Array} Array of tags
+         */
         FilterExpression.prototype.enumerateTags = function () {
-            console.debug("enumerating tags of filter expression '" + this.parameter + "'");
+            //console.debug("enumerating tags of filter expression '" + this.parameter + "'");
             var tags, i, arrayLength, tag;
             tags = [];
 
@@ -144,6 +194,8 @@ angular.module(
         };
 
         /**
+         * Tag class for visualising filter expressions as tags.
+         * 
          * @constructor
          * @param {FilterExpression} filterExpression
          * @param {object} arrayValue
@@ -160,6 +212,13 @@ angular.module(
             this.name = this.origin.isMultiple() ? arrayValue : this.origin.getDisplayValue(this.origin.value);
             this.arrayValue = arrayValue;
 
+            /**
+             * Removes the value represtend by this tga from the filter expression.
+             * If the value of the filter expression is an array, the entry represented
+             * by this tag is removed form the array.
+             * 
+             * @returns {undefined}
+             */
             FilterExpression.prototype.Tag.prototype.remove = function () {
                 if (this.origin.isMultiple()) {
                     this.origin.value.splice(this.origin.value.indexOf(this.arrayValue), 1);
@@ -170,7 +229,8 @@ angular.module(
 
             /**
              * Return the filter expression string of this single tag.
-             * @returns {FilterExpressionFactory_L14.FilterExpression.prototype.Tag.prototype@pro;origin@call;getFilterExpressionString|String}
+             * 
+             * @returns expression for universal search
              */
             FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
                 if (this.origin.isMultiple()) {
@@ -182,18 +242,17 @@ angular.module(
         };
 
         // define constants
-        FilterExpression.RENDERER__TO_STRING = 'renderer_tostring';
-
         FilterExpression.FILTER__GEO = 'geo';
         FilterExpression.FILTER__GEO_INTERSECTS = 'geo-intersects';
         FilterExpression.FILTER__GEO_BUFFER = 'geo-buffer';
         FilterExpression.FILTER__KEYWORD = 'keyword';
         FilterExpression.FILTER__KEYWORD_CUAHSI = 'keyword-cuahsi';
         FilterExpression.FILTER__TOPIC = 'topic';
-        FilterExpression.FILTER__CATEGORY = 'category';
+        FilterExpression.FILTER__COLLECTION = 'collection';
         FilterExpression.FILTER__DATE_START = 'fromDate';
         FilterExpression.FILTER__DATE_END = 'toDate';
         FilterExpression.FILTER__OPTION_LIMIT = 'limit';
+        FilterExpression.FILTER__OPTION_OFFSET = 'offset';
         FilterExpression.FILTER__TEXT = 'text';
 
         FilterExpression.FILTERS = [
@@ -203,11 +262,12 @@ angular.module(
             FilterExpression.FILTER__KEYWORD,
             FilterExpression.FILTER__KEYWORD_CUAHSI,
             FilterExpression.FILTER__TOPIC,
-            FilterExpression.FILTER__CATEGORY,
+            FilterExpression.FILTER__COLLECTION,
             FilterExpression.FILTER__DATE_START,
             FilterExpression.FILTER__DATE_END,
             FilterExpression.FILTER__OPTION_LIMIT,
             FilterExpression.FILTER__OPTION_LIMIT,
+            FilterExpression.FILTER__OPTION_OFFSET,
             FilterExpression.FILTER__TEXT
         ];
 

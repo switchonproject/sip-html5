@@ -29,6 +29,8 @@ angular.module(
             $scope.isResultShowing = $scope.config.gui.dev;
             $scope.state = $state;
 
+            // -----------------------------------------------------------------
+
             $scope.filterExpressions = new FilterExpressions();
             $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
                 'templates/geo-editor-popup.html');
@@ -41,13 +43,23 @@ angular.module(
             };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
 
+            $scope.limitFilterExpression = new FilterExpression('limit',
+                $scope.config.searchService.defautLimit, false, true,
+                'templates/limit-editor-popup.html');
+            $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+
+            $scope.offsetFilterExpression = new FilterExpression('offset', 0, false, false);
+            $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
+
             // FIXME: move to categories directive ? -----------------------------
             $scope.categoriesFilterExpression = new FilterExpression('category');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
+            // -----------------------------------------------------------------
+
             $scope.postSearchFilterExpressions = new FilterExpressions();
-            
+
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
             $scope.data.searchStatus = {
@@ -99,8 +111,13 @@ angular.module(
                 }
             });
 
-            $scope.performSearch = function () {
-                $scope.data.resultSet = SearchService.search($scope.filterExpressions.universalSearchString,
+            $scope.performSearch = function (postFilterSearchString) {
+                var universalSearchString;
+                universalSearchString = $scope.filterExpressions.universalSearchString;
+                if (postFilterSearchString && postFilterSearchString.length > 0) {
+                    universalSearchString += (' ' + postFilterSearchString);
+                }
+                $scope.data.resultSet = SearchService.search(universalSearchString,
                     $scope.config.tagFilter.tagGroups, 25, 0, searchProcessCallback);
                 $scope.showProgress($scope.data.searchStatus);
             };

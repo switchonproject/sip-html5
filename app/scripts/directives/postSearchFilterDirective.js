@@ -13,7 +13,8 @@ angular.module(
                     performSearch: '&searchFunction',
                     notificationFunction: '&?'
                 },
-                controller: 'eu.water-switch-on.sip.controllers.postSearchFilterDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.postSearchFilterDirectiveController',
+                controllerAs: 'postSearchFilterDirectiveController'
             };
         }
     ]);

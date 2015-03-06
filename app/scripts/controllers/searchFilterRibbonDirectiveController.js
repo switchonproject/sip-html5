@@ -8,7 +8,8 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
-            var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions;
+            var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions,
+                limitFilterExpressions, offsetFilterExpressions;
 
             $scope.keywordsFilterExpression = new FilterExpression('keyword', [], true);
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
@@ -29,9 +30,24 @@ angular.module(
                 'templates/geo-buffer-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
 
-            $scope.limitFilterExpression = new FilterExpression('limit', 20, false, true,
-                'templates/limit-editor-popup.html');
-            $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+            limitFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('limit');
+            if (limitFilterExpressions && limitFilterExpressions.length > 0) {
+                $scope.limitFilterExpression = limitFilterExpressions[0];
+            } else {
+                console.warn('limit filter expression not correctly initialized!');
+                $scope.limitFilterExpression = new FilterExpression('limit', 20, false, true,
+                    'templates/limit-editor-popup.html');
+                $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+            }
+
+            offsetFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('offset');
+            if (offsetFilterExpressions && offsetFilterExpressions.length > 0) {
+                $scope.offsetFilterExpression = offsetFilterExpressions[0];
+            } else {
+                console.warn('offset filter expression not correctly initialized!');
+                $scope.offsetFilterExpression = new FilterExpression('offset', 0, false, false);
+                $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
+            }
 
             $scope.topicFilterExpression.getDisplayValue = function (value) {
                 return (value && value.length > 0) ? value[0] : value;

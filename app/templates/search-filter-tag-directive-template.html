@@ -5,6 +5,7 @@
     <span ng-if="tag.origin.isEditable()" 
           bs-popover template="{{tag.origin.editor}}"
           placement="bottom"
-          auto-close="1">{{tag.origin.getDisplayValue(data.editorValue)}}</span>
-    <a><i ng-click="tag.remove()" class="glyphicon glyphicon-remove"></i></a>
+          auto-close="1">{{tag.origin.getDisplayValue(data.editorValue)}}</span> 
+    <a><i ng-click="hasRemoveFunction() ? performRemove(tag) : tag.remove()" 
+          class="glyphicon glyphicon-remove"></i></a>
 </span>
