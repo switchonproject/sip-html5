@@ -7,6 +7,18 @@ angular.module(
         'FilterExpression',
         function ($scope, FilterExpression) {
             'use strict';
+            var postSearchFiltersFilterExpressions;
+            
+            postSearchFiltersFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__POST_SEARCH_FILTERS);
+            if (postSearchFiltersFilterExpressions && postSearchFiltersFilterExpressions.length > 0) {
+                $scope.postSearchFiltersFilterExpression = postSearchFiltersFilterExpressions[0];
+            } else {
+                console.warn('post search filters filter expression not correctly initialized!');
+                $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
+                '', true, true,
+                'templates/post-search-filters-editor-popup.html');
+                $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
+            }
 
             /**
              * This is the function that is called ehen the user clisk on the
@@ -22,11 +34,8 @@ angular.module(
                 if (tag) {
                     var filterExpressionString;
                     filterExpressionString = tag.getFilterExpressionString();
-                    // YES, this is really required as the operation was passed
-                    // to the isolated scope with "&"! %o(
-                    $scope.performSearch({postFilterSearchString: filterExpressionString});
-                    // FIXME: avoid scope soup!
-                    // see http://www.technofattie.com/2014/03/21/five-guidelines-for-avoiding-scope-soup-in-angular.html
+                    $scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
+                    //$scope.performSearch();
                 }
             };
 

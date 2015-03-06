@@ -15,7 +15,11 @@ angular.module(
 
             // Styling of Search Filters.. into CSS but how?
             $scope.getTagIcon = function (type) {
-                switch (type) {
+                var plainType;
+                // negated filters!
+                plainType = type.substring(type.indexOf('!'));
+                
+                switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
                 case FilterExpression.FILTER__KEYWORD_CUAHSI:
@@ -38,6 +42,8 @@ angular.module(
                     return 'glyphicon glyphicon-indent-right';
                 case FilterExpression.FILTER__CATEGORY:
                     return 'glyphicon glyphicon-bookmark';
+                case FilterExpression.FILTER__POST_SEARCH_FILTERS:
+                    return 'glyphicon glyphicon-warning-sign';
                 default:
                     return 'glyphicon glyphicon-flash';
                 }
@@ -47,8 +53,14 @@ angular.module(
             // FIXME: function could be put into a service
             $scope.getTagStyle = function (type, forCloseIcon) {
                 var prefix;
+                // close icon style
                 prefix = (forCloseIcon === true) ? 'switchon-close-icon-' : '';
-
+                
+                // negated filter is RED
+                if(type.indexOf('!') === 1) {
+                    return prefix + 'label-danger';
+                }
+                 
                 switch (type) {
                 case FilterExpression.FILTER__KEYWORD:
                     return prefix + 'label-success';
@@ -72,6 +84,8 @@ angular.module(
                     return prefix + 'label-warning';
                 case FilterExpression.FILTER__CATEGORY:
                     return prefix + 'label-success';
+                case FilterExpression.FILTER__POST_SEARCH_FILTERS:
+                    return prefix + 'label-danger';
                 default:
                     return prefix + 'label-default';
                 }

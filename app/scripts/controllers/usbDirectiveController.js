@@ -53,7 +53,7 @@ angular.module(
                 //no user input in text box, recreate tags
                 if (newValue === oldValue) {
                     $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
-                } else if (newValue) {
+                } else if (newValue && newValue.length > 0) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
                     filterExpressionString = newValue.split($scope.pattern);
                     /** @type {string} */

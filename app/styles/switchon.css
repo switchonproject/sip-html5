@@ -262,7 +262,7 @@ postsearchfilter .panel-collapse {
     color: #fff;
     background: none;
 }
-label-default a i {
+.label-default a i {
     color:#474747;
 }
 .label-primary a i {

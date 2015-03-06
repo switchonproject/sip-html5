@@ -93,6 +93,17 @@ angular.module(
             return (this.notFilter === true) ? true : false;
         };
 
+        FilterExpression.prototype.concatFilter = function (p, v) {
+                // post search filters are an array of negated filter expressions
+                // e.g. !keyword:"water".
+                // therfore it is not necessary to prefix them with param!
+                if (p === FilterExpression.FILTER__POST_SEARCH_FILTERS) {
+                    return v;
+                }
+                var concatExpression = (p + ':' + '"' + v + '"');
+                return concatExpression;
+            };
+            
         /**
          * Returns a string that can be used with universal search.
          * If the value of the filter expression is an array, the filter expression
@@ -101,26 +112,21 @@ angular.module(
          * @returns {String} universal search string
          */
         FilterExpression.prototype.getFilterExpressionString = function () {
-            var filterExpressionString, arrayLength, i, concatFilter;
-
-            concatFilter = function (parameter, value) {
-                var concatExpression = (parameter + ':' + '"' + value + '"');
-                return concatExpression;
-            };
+            var filterExpressionString, arrayLength, i;
 
             if (this.isValid()) {
                 if (this.isMultiple()) {
                     arrayLength = this.value.length;
                     for (i = 0; i < arrayLength; i++) {
                         if (i === 0) {
-                            filterExpressionString = concatFilter(this.parameter, this.value[i]);
+                            filterExpressionString = this.concatFilter(this.parameter, this.value[i]);
                         } else {
                             filterExpressionString += ' ';
-                            filterExpressionString += concatFilter(this.parameter, this.value[i]);
+                            filterExpressionString += this.concatFilter(this.parameter, this.value[i]);
                         }
                     }
                 } else {
-                    filterExpressionString = concatFilter(this.parameter, this.value);
+                    filterExpressionString = this.concatFilter(this.parameter, this.value);
                 }
             }
             return filterExpressionString;
@@ -254,6 +260,7 @@ angular.module(
         FilterExpression.FILTER__OPTION_LIMIT = 'limit';
         FilterExpression.FILTER__OPTION_OFFSET = 'offset';
         FilterExpression.FILTER__TEXT = 'text';
+        FilterExpression.FILTER__POST_SEARCH_FILTERS = 'POST_SEARCH_FILTERS';
 
         FilterExpression.FILTERS = [
             FilterExpression.FILTER__GEO,
@@ -268,7 +275,8 @@ angular.module(
             FilterExpression.FILTER__OPTION_LIMIT,
             FilterExpression.FILTER__OPTION_LIMIT,
             FilterExpression.FILTER__OPTION_OFFSET,
-            FilterExpression.FILTER__TEXT
+            FilterExpression.FILTER__TEXT,
+            FilterExpression.FILTER__POST_SEARCH_FILTERS
         ];
 
         Object.defineProperties(FilterExpression.prototype, {

@@ -32,7 +32,7 @@ angular.module(
             // -----------------------------------------------------------------
 
             $scope.filterExpressions = new FilterExpressions();
-            $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
+            $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
                 'templates/geo-editor-popup.html');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
                 if (value && value.indexOf('(') !== -1) {
@@ -43,16 +43,21 @@ angular.module(
             };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
 
-            $scope.limitFilterExpression = new FilterExpression('limit',
+            $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
                 $scope.config.searchService.defautLimit, false, true,
                 'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+            
+            $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
+                ' ', true, true,
+                'templates/post-search-filters-editor-popup.html');
+            $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
 
-            $scope.offsetFilterExpression = new FilterExpression('offset', 0, false, false);
+            $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET, 0, false, false);
             $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
 
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression('category');
+            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION);
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
