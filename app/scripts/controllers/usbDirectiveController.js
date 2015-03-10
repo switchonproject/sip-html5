@@ -11,7 +11,7 @@ angular.module(
             var textFilterExpressions, oldValue, newValue;
 
             $scope.textFilterExpression = null;
-            $scope.pattern = /(^[A-Za-z_\-]+):"([\s\S]+)"$/;
+            $scope.pattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 
             textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
             if (textFilterExpressions && textFilterExpressions.length > 0) {
@@ -52,8 +52,9 @@ angular.module(
 
                 //no user input in text box, recreate tags
                 if (newValue === oldValue) {
-                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
-                } else if (newValue) {
+                    // enumerate tags including NOT filters!
+                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags(false, false, false, true);
+                } else if (newValue && newValue.length > 0) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
                     filterExpressionString = newValue.split($scope.pattern);
                     /** @type {string} */
@@ -62,7 +63,8 @@ angular.module(
                     // user entered a valid filter expression
                     if (param && value) {
                         param = param.toLowerCase();
-                        if (FilterExpression.FILTERS.indexOf(param) === -1) {
+                        if (FilterExpression.FILTERS.indexOf(param) === -1 || 
+                            FilterExpression.FILTERS.indexOf(('!'+param)) === -1) {
                             $scope.notificationFunction({
                                 message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
                                 type: 'info'
@@ -93,9 +95,9 @@ angular.module(
                                 message: 'Search filter "' + param + '" successfully applied with value "' + value + '".',
                                 type: 'success'
                             });
-                            // reset when expression successfully parsed 
-                            $scope.textFilterExpression.clear();
                         }
+                        // reset when expression successfully parsed 
+                        $scope.textFilterExpression.clear();
                     }
                 }
                 oldValue = $scope.textFilterExpression.value;

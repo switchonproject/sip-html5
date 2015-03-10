@@ -218,7 +218,7 @@ describe('Search Service Test Suite', function () {
                         AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
                 }
-                result = search('testquery', null, null, function(val, max, type) {
+                result = search('testquery', null, null, null, function(val, max, type) {
                     progress.push({val: val, max: max, type: type})
                 });
                 $httpBackend.flush();

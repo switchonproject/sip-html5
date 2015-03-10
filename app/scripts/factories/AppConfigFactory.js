@@ -24,7 +24,9 @@ angular.module(
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';
         appConfig.searchService.password = 'cismet';
-        appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        appConfig.searchService.host = 'http://localhost:8890';
+        appConfig.searchService.defautLimit = 10;
+        //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -35,6 +37,9 @@ angular.module(
 
         appConfig.gui = {};
         appConfig.gui.dev = true;
+
+        appConfig.tagFilter = {};
+        appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-cuahsi';
 
         return appConfig;
     }]);

@@ -26,12 +26,14 @@ angular.module(
             // FIXME: move to categories directive -----------------------------
             $scope.data.categories = TagGroupService.getKeywordList('category-default');
             // FIXME: move to categories directive -----------------------------
-            $scope.isResultShowing = false;
+            $scope.isResultShowing = $scope.config.gui.dev;
             $scope.state = $state;
 
-            $scope.filterExpressions = FilterExpressions; // singleton instance
-            $scope.geoFilterExpression = new FilterExpression('geo', null, false, true,
-                'templates/geo-editor-popup.html');
+            // -----------------------------------------------------------------
+
+            $scope.filterExpressions = new FilterExpressions();
+            $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
+                'templates/geo-editor-popup.html', 'Geography');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
                 if (value && value.indexOf('(') !== -1) {
                     return value.substring(0, value.indexOf('('));
@@ -41,11 +43,33 @@ angular.module(
             };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
 
+            $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
+                $scope.config.searchService.defautLimit, false, true,
+                'templates/limit-editor-popup.html');
+            $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+            
+            $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
+                [], true, true,
+                null, 'Post Filters');
+            $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
+                    this.displayValue = value;
+                    return '';
+                };
+            $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
+
+            $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET, 0, false, false);
+            $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
+
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression('category');
+            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION, 
+                null, false, true, null, 'Categories');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
+            // -----------------------------------------------------------------
+
+            $scope.postSearchFilterExpressions = new FilterExpressions();
+            
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
             $scope.data.searchStatus = {
@@ -93,13 +117,18 @@ angular.module(
                     }
 
                     $scope.data.resultObjects = objs;
-                    $scope.data.resultSet.$total = n.length;
                     $scope.data.selectedObject = -1;
                 }
             });
 
-            $scope.performSearch = function () {
-                $scope.data.resultSet = SearchService.search($scope.filterExpressions.universalSearchString, 25, 0, searchProcessCallback);
+            $scope.performSearch = function (postFilterSearchString) {
+                var universalSearchString;
+                universalSearchString = $scope.filterExpressions.universalSearchString;
+                if (postFilterSearchString && postFilterSearchString.length > 0) {
+                    universalSearchString += (' ' + postFilterSearchString);
+                }
+                $scope.data.resultSet = SearchService.search(universalSearchString,
+                    $scope.config.tagFilter.tagGroups, 25, 0, searchProcessCallback);
                 $scope.showProgress($scope.data.searchStatus);
             };
 

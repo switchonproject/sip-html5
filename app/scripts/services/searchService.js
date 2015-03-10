@@ -1,16 +1,18 @@
 angular.module(
     'eu.water-switch-on.sip.services'
-    ).factory('eu.water-switch-on.sip.services.SearchService',
+).factory('eu.water-switch-on.sip.services.SearchService',
     ['$resource', 'eu.water-switch-on.sip.services.Base64',
         '$q', '$interval', 'AppConfig',
         function ($resource, Base64, $q, $interval, AppConfig) {
             'use strict';
-            //var resultSet = $resource('http://crisma.cismet.de/icmm_api/CRISMA.worldstates/:action/', 
             var config, authdata, searchResource, searchFunction;
 
             config = AppConfig.searchService;
             authdata = Base64.encode(config.username + ':' + config.password);
 
+            // remote legagy search core search
+            // FIXME: limit and offset not implemented in legacy search!
+            // currently, limit and offset are appended to the POST query parameter!
             searchResource = $resource(config.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results',
                 {
                     limit: 20,
@@ -31,9 +33,9 @@ angular.module(
                     }
                 });
 
-            searchFunction = function (universalSearchString, limit, offset, progressCallback) {
-                //TODO: hardcoded request url, domain
-                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess, timer, fakeProgress;
+            searchFunction = function (universalSearchString, filterTagGroups, limit, offset, progressCallback) {
+                var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess,
+                    timer, fakeProgress, filterTags, deferredFilterTags;
 
                 noop = angular.noop;
 
@@ -47,16 +49,20 @@ angular.module(
                 (progressCallback || noop)(0, -1, 'success');
 
                 fakeProgress = 0;
-                timer = $interval (function () {
+                timer = $interval(function () {
                     (progressCallback || noop)(fakeProgress, -1, 'success');
                     fakeProgress++;
                 }, 100, 100);
 
+                // result of this search operation
+                // set a new promise 
                 result = {
                     $promise: deferred.promise,
                     $resolved: false
                 };
 
+                // result of the remote search operation (promise)
+                // starting the search!
                 searchResult = searchResource.search(
                     {
                         limit: limit,
@@ -65,10 +71,12 @@ angular.module(
                     queryObject
                 );
 
-                searchSuccess = function (data) {
+                // called when both search promises have been resolved
+                searchSuccess = function (searchResultData) {
                     var classesError, classesSuccess, nodes;
 
-                    nodes = data.$collection;
+                    // searchResult.$collection
+                    nodes = searchResultData[0].$collection;
 
                     classesSuccess = function (data) {
                         var allError, allSuccess, classCache, classname, entityResource, i, objectId, objsQ,
@@ -98,7 +106,6 @@ angular.module(
                         );
 
                         resolvedObjsCount = 0;
-
                         // we stop fake progresss before 1st object has been resolved
                         // to minimze delay between fake and real progress steps
                         if (nodes.length > 0) {
@@ -132,8 +139,10 @@ angular.module(
                         }
 
                         allSuccess = function (objs) {
+
                             var key;
 
+                            // update nodes in search result
                             for (i = 0; i < nodes.length; ++i) {
                                 nodes[i].object = objs[i];
                             }
@@ -145,6 +154,10 @@ angular.module(
                                     result[key] = searchResult[key];
                                 }
                             }
+
+                            result.$filterTags =  searchResultData[1].$collection;
+                            // FIXME: search should return total number of results!
+                            result.$total = nodes.length;
 
                             deferred.resolve(result);
                         };
@@ -159,6 +172,7 @@ angular.module(
                             (progressCallback || noop)(1, 1, 'error');
                         };
 
+                        // combine promises of all get objects calls
                         $q.all(objsQ).then(allSuccess, allError);
                     };
 
@@ -192,7 +206,6 @@ angular.module(
                 };
 
                 searchError = function (data) {
-
                     result.$error = 'cannot search for resources';
                     result.$response = data;
                     result.$resolved = true;
@@ -201,7 +214,39 @@ angular.module(
                     (progressCallback || noop)(1, 1, 'error');
                 };
 
-                searchResult.$promise.then(searchSuccess, searchError);
+                if (filterTagGroups && filterTagGroups.length > 0) {
+                    filterTags = $resource(
+                        config.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                        {},
+                        {
+                            exec: {
+                                method: 'POST',
+                                isArray: false,
+                                headers: {
+                                    'Authorization': 'Basic ' + authdata
+                                }
+                            }
+                        }
+                    );
+
+                    filterTags = filterTags.exec(
+                        {
+                            'list': [{'key': 'Query', 'value': universalSearchString },
+                                {'key': 'FilterTagGroups', 'value': filterTagGroups}]
+                        }
+                    );
+                } else {
+                    // if no filter tags are requested, just return an empty collection
+                    deferredFilterTags = $q.defer();
+                    filterTags = {};
+                    filterTags.$collection = [];
+                    filterTags.$promise = deferredFilterTags.promise;
+                    filterTags.$resolved = true;
+                    deferredFilterTags.resolve(filterTags);
+                }
+
+                // combine search and filter tags promises
+                $q.all([searchResult.$promise, filterTags.$promise]).then(searchSuccess, searchError);
 
                 return result;
             };

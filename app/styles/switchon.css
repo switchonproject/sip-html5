@@ -79,6 +79,49 @@ body {
     left: 10%;
 }
 
+.switchon-result-list {
+    overflow-y: auto;
+    max-height: 60%;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+}
+
+.switchon-result-list .pagination {
+    float:right;
+    margin: 2px;
+    clear:right; 
+}
+
+.switchon-result-list .list-group {
+    margin-bottom: 0px;
+    border:none;
+}
+
+.switchon-result-list .list-group-item {
+    border:none;
+    padding-top:5px;
+    padding-left: 10px;
+}
+
+
+#switchon-result-header {
+    float:left;
+    margin:6px;
+}
+
+postsearchfilter .panel-group {
+    overflow-x: hidden;
+}
+
+postsearchfilter .panel-heading {
+    padding:8px;
+}
+
+postsearchfilter .panel-collapse {
+   overflow-x: hidden;
+   overflow-y: auto;
+   max-height: 100px;
+}
 
 .usb-form-control {
     min-width: 500px;
@@ -166,7 +209,6 @@ body {
     width: 0;
     height: 100%;
     margin-left: -250px;
-    overflow-y: auto;
     background: #f8f8f8;
     transition: all 0.5s ease;
 }
@@ -220,7 +262,7 @@ body {
     color: #fff;
     background: none;
 }
-label-default a i {
+.label-default a i {
     color:#474747;
 }
 .label-primary a i {
