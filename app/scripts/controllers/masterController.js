@@ -33,7 +33,7 @@ angular.module(
 
             $scope.filterExpressions = new FilterExpressions();
             $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
-                'templates/geo-editor-popup.html');
+                'templates/geo-editor-popup.html', 'Geography');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
                 if (value && value.indexOf('(') !== -1) {
                     return value.substring(0, value.indexOf('('));
@@ -49,22 +49,27 @@ angular.module(
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
             
             $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
-                ' ', true, true,
-                'templates/post-search-filters-editor-popup.html');
+                [], true, true,
+                null, 'Post Filters');
+            $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
+                    this.displayValue = value;
+                    return '';
+                };
             $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
 
             $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET, 0, false, false);
             $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
 
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION);
+            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION, 
+                null, false, true, null, 'Categories');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
             // -----------------------------------------------------------------
 
             $scope.postSearchFilterExpressions = new FilterExpressions();
-
+            
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
             $scope.data.searchStatus = {

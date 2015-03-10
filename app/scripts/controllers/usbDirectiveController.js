@@ -52,7 +52,8 @@ angular.module(
 
                 //no user input in text box, recreate tags
                 if (newValue === oldValue) {
-                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags();
+                    // enumerate tags including NOT filters!
+                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags(false, false, false, true);
                 } else if (newValue && newValue.length > 0) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
                     filterExpressionString = newValue.split($scope.pattern);
@@ -62,7 +63,8 @@ angular.module(
                     // user entered a valid filter expression
                     if (param && value) {
                         param = param.toLowerCase();
-                        if (FilterExpression.FILTERS.indexOf(param) === -1) {
+                        if (FilterExpression.FILTERS.indexOf(param) === -1 || 
+                            FilterExpression.FILTERS.indexOf(('!'+param)) === -1) {
                             $scope.notificationFunction({
                                 message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
                                 type: 'info'

@@ -10,6 +10,7 @@ angular.module(
                 scope: {
                     tag: '=',
                     performRemove: '&?removeFunction',
+                    highlightNegated: '=?',
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
                 link: function (scope, elem, attrs) {

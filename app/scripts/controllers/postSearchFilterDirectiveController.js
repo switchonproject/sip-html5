@@ -7,18 +7,55 @@ angular.module(
         'FilterExpression',
         function ($scope, FilterExpression) {
             'use strict';
-            var postSearchFiltersFilterExpressions;
+            var tempFilterExpressions, tempFilterExpression;
             
-            postSearchFiltersFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__POST_SEARCH_FILTERS);
-            if (postSearchFiltersFilterExpressions && postSearchFiltersFilterExpressions.length > 0) {
-                $scope.postSearchFiltersFilterExpression = postSearchFiltersFilterExpressions[0];
+            // this is the USB filter expression that contains all post search filter expressions
+            // that have been selected by the user.
+            tempFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__POST_SEARCH_FILTERS);
+            if (tempFilterExpressions && tempFilterExpressions.length > 0) {
+                $scope.postSearchFiltersFilterExpression = tempFilterExpressions[0];
             } else {
                 console.warn('post search filters filter expression not correctly initialized!');
                 $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
-                '', true, true,
-                'templates/post-search-filters-editor-popup.html');
+                '', true, true, null);
+                $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
+                    this.displayValue = value;
+                    return '';
+                };
                 $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
             }
+            
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__ACCESS_CONDITION), 
+                [], true, true, null, 'Access Condition (Excluded)');
+            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+            
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__FUNCTION), 
+                [], true, true, null, 'Access Function (Excluded)');
+            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD_CUAHSI), 
+                [], true, true, null, 'CUAHSI Keyword (Excluded)');
+            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+            
+            // those are the actual search-result-dependent post filter expressions 
+            // that can be selected by the user. 
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__ACCESS_CONDITION), 
+                [], true, true, null, 'Access Conditions');
+            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+            
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__FUNCTION), 
+                [], true, true, null, 'Access Functions');
+            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD_CUAHSI), 
+                [], true, true, null, 'CUAHSI Keywords');
+            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+            
+//            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD), 
+//                [], true, true, null, 'Keywords');
+//            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+            
+           
 
             /**
              * This is the function that is called ehen the user clisk on the
@@ -32,10 +69,22 @@ angular.module(
              */
             this.performRemove = function (tag) {
                 if (tag) {
-                    var filterExpressionString;
+                    
+                    var filterExpressions, filterExpression, filterExpressionString;
                     filterExpressionString = tag.getFilterExpressionString();
-                    $scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
-                    //$scope.performSearch();
+                    //$scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
+                    
+                    
+                    filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.type);
+                    if (!filterExpressions || filterExpressions.length === 0) {
+                        filterExpression = new FilterExpression(tag.type, null, true);
+                        $scope.filterExpressions.addFilterExpression(filterExpression);
+                    } else {
+                        filterExpression = filterExpressions[0];
+                    }
+                    filterExpression.setArrayValue(tag.value);
+                    
+                    $scope.performSearch();
                 }
             };
 

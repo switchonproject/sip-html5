@@ -16,13 +16,13 @@ angular.module(
 
         /**
          * @constructor
-         * @param {string} parameter
-         * @param {object} defaultValue
-         * @param {boolean} multiple
-         * @param {boolean} visible
-         * @param {string} editor
-         * @param {string} name
-         * @param {string} description
+         * @param {string} parameter  mandatory
+         * @param {object} defaultValue  default: undefined
+         * @param {boolean} multiple  default: false
+         * @param {boolean} visible  default: true
+         * @param {string} editor  default: null
+         * @param {string} name  default: null
+         * @param {string} description default: null
          * @returns {FilterExpression}
          */
         function FilterExpression(parameter, defaultValue, multiple, visible, editor, name, description) {
@@ -38,9 +38,9 @@ angular.module(
             this.displayValue = null;
             this.multiple = (multiple === undefined) ? false : multiple;
             this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
-            this.visible = (visible === undefined) ? !this.notFilter : visible;
+            this.visible = (visible === undefined) ? true : visible;
             this.editor = (editor === undefined) ? null : editor;
-            this.name = (name === parameter) ? null : editor;
+            this.name = name;
             this.description = (description === undefined) ? null : description;
             this.enumeratedTags = [];
         }
@@ -65,6 +65,10 @@ angular.module(
          */
         FilterExpression.prototype.getDisplayValue = function (value) {
             return this.displayValue || (value === undefined ? this.value : value);
+        };
+        
+        FilterExpression.prototype.getName = function () {
+            return this.name ? this.name : this.parameter;
         };
 
         FilterExpression.prototype.isValid = function () {
@@ -192,7 +196,7 @@ angular.module(
                     tags.push(tag);
                 }
             } else {
-                tag = new this.Tag(this);
+                tag = new this.Tag(this, this.value);
                 tags.push(tag);
             }
 
@@ -204,10 +208,10 @@ angular.module(
          * 
          * @constructor
          * @param {FilterExpression} filterExpression
-         * @param {object} arrayValue
+         * @param {object} value
          * @returns {FilterExpression.Tag}
          */
-        FilterExpression.prototype.Tag = function (filterExpression, arrayValue) {
+        FilterExpression.prototype.Tag = function (filterExpression, value) {
             if (filterExpression === undefined || filterExpression === null) {
                 console.error('The filterExpression property of a FilterTag cannot be null!');
                 throw 'The filterExpression property of a FilterTag cannot be null!';
@@ -215,8 +219,9 @@ angular.module(
 
             this.origin = filterExpression;
             this.type = this.origin.parameter;
-            this.name = this.origin.isMultiple() ? arrayValue : this.origin.getDisplayValue(this.origin.value);
-            this.arrayValue = arrayValue;
+            this.name = this.origin.isMultiple() ? value : this.origin.getDisplayValue(this.origin.value);
+            this.value = value;
+            this.title = this.origin.name;
 
             /**
              * Removes the value represtend by this tga from the filter expression.
@@ -227,7 +232,7 @@ angular.module(
              */
             FilterExpression.prototype.Tag.prototype.remove = function () {
                 if (this.origin.isMultiple()) {
-                    this.origin.value.splice(this.origin.value.indexOf(this.arrayValue), 1);
+                    this.origin.value.splice(this.origin.value.indexOf(this.value), 1);
                 } else {
                     this.origin.value = null;
                 }
@@ -240,7 +245,7 @@ angular.module(
              */
             FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
                 if (this.origin.isMultiple()) {
-                    return this.type + ':"' + this.arrayValue + '"';
+                    return this.type + ':"' + this.value + '"';
                 }
 
                 return this.origin.getFilterExpressionString();
@@ -261,6 +266,8 @@ angular.module(
         FilterExpression.FILTER__OPTION_OFFSET = 'offset';
         FilterExpression.FILTER__TEXT = 'text';
         FilterExpression.FILTER__POST_SEARCH_FILTERS = 'POST_SEARCH_FILTERS';
+        FilterExpression.FILTER__ACCESS_CONDITION = 'access-condition';
+        FilterExpression.FILTER__FUNCTION = 'function';
 
         FilterExpression.FILTERS = [
             FilterExpression.FILTER__GEO,
@@ -276,7 +283,9 @@ angular.module(
             FilterExpression.FILTER__OPTION_LIMIT,
             FilterExpression.FILTER__OPTION_OFFSET,
             FilterExpression.FILTER__TEXT,
-            FilterExpression.FILTER__POST_SEARCH_FILTERS
+            FilterExpression.FILTER__POST_SEARCH_FILTERS,
+            FilterExpression.FILTER__ACCESS_CONDITION,
+            FilterExpression.FILTER__FUNCTION
         ];
 
         Object.defineProperties(FilterExpression.prototype, {

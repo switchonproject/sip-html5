@@ -92,7 +92,8 @@ angular.module(
                 return filterExpressionList;
             };
 
-            FilterExpressions.prototype.enumerateTags = function (includeInvisible, includeInvalid, includeDefaultValue, includeNotFilter) {
+            FilterExpressions.prototype.enumerateTags = function (includeInvisible, 
+                includeInvalid, includeDefaultValue, includeNotFilter) {
                 //console.debug("enumerating all tags");
                 var arrayLength, i, theFilterExpression, returnTags, theTags;
                 returnTags = [];
@@ -100,10 +101,10 @@ angular.module(
                 for (i = 0; i < arrayLength; i++) {
                     theFilterExpression = this.list[i];
 
-                    if ((!includeInvisible && theFilterExpression.isVisible() === true) &&
-                            (!includeInvalid && theFilterExpression.isValid() === true) &&
-                            (!includeDefaultValue && theFilterExpression.value !== theFilterExpression.defaultValue) &&
-                            (!includeNotFilter && theFilterExpression.isNotFilter() === false)) {
+                    if ((theFilterExpression.isVisible() || includeInvisible) &&
+                            (theFilterExpression.isValid() || includeInvalid) &&
+                            ((theFilterExpression.value !== theFilterExpression.defaultValue) || includeDefaultValue) &&
+                            (!theFilterExpression.isNotFilter() || includeNotFilter)) {
 
                         theTags = theFilterExpression.enumerateTags();
                         if (theTags.length > 0) {
