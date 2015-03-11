@@ -20,15 +20,15 @@
         </td>
         
         <td data-title="'Tools'" class="tools">
-            <span bs-tooltip
+            <a bs-tooltip
                   data-placement="left"
                   data-trigger="hover"
                   data-delay="{show: 400, hide: 100}"
                   data-title="Info"
                   class="btn-invisible btn-icon"
-                  ng-click="showInfo(node.object)">
+                  href="#/resource/{{node.object.id}}">
                 <i class="glyphicon glyphicon-info-sign"></i>
-            </span>
+            </a>
             <span ng-repeat="representation in node.object.representation | filter:{function:'download'}"
                   class="btn-invisible">
                     <a href="{{representation.contentlocation}}" download 

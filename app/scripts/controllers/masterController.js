@@ -12,7 +12,18 @@ angular.module(
         'FilterExpression',
         'eu.water-switch-on.sip.services.TagGroupService',
         'AppConfig',
-        function ($scope, $rootScope, $modal, SearchService, $state, FilterExpressions, FilterExpression, TagGroupService, AppConfig) {
+        'eu.water-switch-on.sip.services.shareService',
+        function (
+                $scope, 
+                $rootScope, 
+                $modal, 
+                SearchService, 
+                $state, 
+                FilterExpressions, 
+                FilterExpression, 
+                TagGroupService,
+                AppConfig,
+                shareService) {
             'use strict';
 
             var searchProcessCallback;
@@ -118,6 +129,8 @@ angular.module(
 
                     $scope.data.resultObjects = objs;
                     $scope.data.selectedObject = -1;
+                    
+                    shareService.setResourceObjects(objs);
                 }
             });
 
