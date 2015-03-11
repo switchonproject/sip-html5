@@ -32,6 +32,10 @@ angular.module(
             tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__FUNCTION), 
                 [], true, true, null, 'Access Function (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+            
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__PROTOCOL), 
+                [], true, true, null, 'Access Protocol (Excluded)');
+            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 
             tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD_CUAHSI), 
                 [], true, true, null, 'CUAHSI Keyword (Excluded)');
@@ -45,6 +49,10 @@ angular.module(
             
             tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__FUNCTION), 
                 [], true, true, null, 'Access Functions');
+            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+            
+            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__PROTOCOL), 
+                [], true, true, null, 'Access Protocols');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
             tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD_CUAHSI), 
