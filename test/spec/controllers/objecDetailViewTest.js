@@ -302,5 +302,22 @@ describe('Object Detail View Test Suite', function () {
             expect(elem.find('div label').text()).toEqual('License:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual('unknown');
         });
+        
+        
+        
+        it('object detail - proper representation title', function () {
+            var elem, i, rootelem, scope;
+            
+            for(i = 0; i < fullObjs.length; ++i) {
+                scope = $rootScope.$new(true);
+                scope.object = fullObjs[i];
+
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
+                scope.$digest();
+                elem = rootelem.find("h3");
+                expect(elem).toBeDefined();
+                expect(elem.text()).toEqual('Representations');
+            }
+        });
     });
 });

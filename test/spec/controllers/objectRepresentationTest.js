@@ -1,7 +1,8 @@
-describe('Object Download Modal Test Suite', function () {
+describe('Object Representation Test Suite', function () {
     'use strict';
     
-    describe('Object Download Modal Controller Tests', function () {
+    // the controller is really the object detail controller, maybe we should join the files to avoid confusion
+    describe('Object Representation Controller Tests', function () {
         var $controller, $rootScope;
         
         beforeEach(function () {
@@ -23,18 +24,17 @@ describe('Object Download Modal Test Suite', function () {
         it('ensure only first item is opened on init', function () {
             var mockdata, scope;
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ1_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ1_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ1_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ1_;
             });
             
             scope = $rootScope.$new(true);
-            scope.object = mockdata;
             
             $controller(
-                'eu.water-switch-on.sip.controllers.objectDownloadModalController',
+                'eu.water-switch-on.sip.controllers.objectDetailController',
                 {
                     $scope: scope,
-                    $modalInstance: null
+                    resource: mockdata
                 }
             );
     
@@ -44,18 +44,17 @@ describe('Object Download Modal Test Suite', function () {
             expect(scope.reps[0]._status.open).toBeDefined();
             expect(scope.reps[0]._status.open).toEqual(true);
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_4REPS_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_4REPS_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_4REPS_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_4REPS_;
             });
             
             scope = $rootScope.$new(true);
-            scope.object = mockdata;
             
             $controller(
-                'eu.water-switch-on.sip.controllers.objectDownloadModalController',
+                'eu.water-switch-on.sip.controllers.objectDetailController',
                 {
                     $scope: scope,
-                    $modalInstance: null
+                    resource: mockdata
                 }
             );
     
@@ -74,18 +73,17 @@ describe('Object Download Modal Test Suite', function () {
             expect(scope.reps[3]._status.open).toBeDefined();
             expect(scope.reps[3]._status.open).toEqual(false);
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOREPS_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOREPS_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOREPS_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOREPS_;
             });
             
             scope = $rootScope.$new(true);
-            scope.object = mockdata;
             
             $controller(
-                'eu.water-switch-on.sip.controllers.objectDownloadModalController',
+                'eu.water-switch-on.sip.controllers.objectDetailController',
                 {
                     $scope: scope,
-                    $modalInstance: null
+                    resource: mockdata
                 }
             );
     
@@ -95,7 +93,7 @@ describe('Object Download Modal Test Suite', function () {
     });
     
     describe('Object Download Modal Template Tests', function () {
-        var $compile, $modal, $rootScope, $templateCache, fullObjs;
+        var $compile, $rootScope, $templateCache, fullObjs;
         
         beforeEach(function () {
             module('eu.water-switch-on.sip.controllers');
@@ -108,12 +106,10 @@ describe('Object Download Modal Test Suite', function () {
         
         beforeEach(inject(
             [
-                '$modal',
                 '$rootScope',
                 '$compile',
                 '$templateCache',
-                function (modal, rootscope, compile, templateCache) {
-                    $modal = modal;
+                function (rootscope, compile, templateCache) {
                     $rootScope = rootscope;
                     $compile = compile;
                     $templateCache = templateCache;
@@ -127,39 +123,23 @@ describe('Object Download Modal Test Suite', function () {
             fullObjs = [];
             
             i = 0;
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ1_) {
-                fullObjs[i++] = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ1_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ1_) {
+                fullObjs[i++] = _OBJECT_REPRESENTATION_TEST_DATA_OBJ1_;
             });
 
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ2_) {
-                fullObjs[i++] = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ2_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ2_) {
+                fullObjs[i++] = _OBJECT_REPRESENTATION_TEST_DATA_OBJ2_;
             });
 
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ3_) {
-                fullObjs[i++] = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ3_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ3_) {
+                fullObjs[i++] = _OBJECT_REPRESENTATION_TEST_DATA_OBJ3_;
             });
 
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ4_) {
-                fullObjs[i++] = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ4_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ4_) {
+                fullObjs[i++] = _OBJECT_REPRESENTATION_TEST_DATA_OBJ4_;
             });
         });
-        
-        it('object download - proper title', function () {
-            var elem, i, rootelem, scope;
-            
-            for(i = 0; i < fullObjs.length; ++i) {
-                scope = $rootScope.$new(true);
-                scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
-                scope.$digest();
-                elem = rootelem.children("div > h3");
-                expect(elem).toBeDefined();
-                expect(elem.hasClass('modal-title')).toBeTruthy();
-                expect(elem.text()).toEqual('Downloads of ' + fullObjs[i].name);
-            }
-        });
-        
         it('object download - proper accordion heading', function () {
             var elem, i, rootelem, scope;
             
@@ -168,7 +148,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
                 scope.reps = fullObjs[i].representation;
                 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 // this is the generated accordion heading html
                 elem = rootelem.find('*[accordion-transclude="heading"]');
@@ -185,7 +165,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
                 scope.reps = scope.object.representation;
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 elem = rootelem.find('.row:eq(0)');
                 expect(elem).toBeDefined();
@@ -193,15 +173,15 @@ describe('Object Download Modal Test Suite', function () {
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].representation[0].temporalresolution);
             }
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOTEMPORALRESOLUTION_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOTEMPORALRESOLUTION_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOTEMPORALRESOLUTION_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOTEMPORALRESOLUTION_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
             scope.reps = scope.object.representation;
 
-            rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
             scope.$digest();
             elem = rootelem.find('.row:eq(0)');
             expect(elem).toBeDefined();
@@ -217,7 +197,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
                 scope.reps = scope.object.representation;
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 elem = rootelem.find('.row:eq(1)');
                 expect(elem).toBeDefined();
@@ -225,15 +205,15 @@ describe('Object Download Modal Test Suite', function () {
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].representation[0].spatialresolution);
             }
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOSPATIALRESOLUTION_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOSPATIALRESOLUTION_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOSPATIALRESOLUTION_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOSPATIALRESOLUTION_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
             scope.reps = scope.object.representation;
 
-            rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
             scope.$digest();
             elem = rootelem.find('.row:eq(1)');
             expect(elem).toBeDefined();
@@ -249,7 +229,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
             scope.reps = scope.object.representation;
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 elem = rootelem.find('.row:eq(2)');
                 expect(elem).toBeDefined();
@@ -257,15 +237,15 @@ describe('Object Download Modal Test Suite', function () {
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].representation[0].spatialscale);
             }
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOSPATIALSCALE_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOSPATIALSCALE_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOSPATIALSCALE_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOSPATIALSCALE_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
             scope.reps = scope.object.representation;
 
-            rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
             scope.$digest();
             elem = rootelem.find('.row:eq(2)');
             expect(elem).toBeDefined();
@@ -281,7 +261,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
                 scope.reps = scope.object.representation;
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 elem = rootelem.find('.row:eq(3)');
                 expect(elem).toBeDefined();
@@ -289,15 +269,15 @@ describe('Object Download Modal Test Suite', function () {
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].representation[0].contenttype.name);
             }
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOMIMETYPE_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NOMIMETYPE_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOMIMETYPE_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NOMIMETYPE_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
             scope.reps = scope.object.representation;
 
-            rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
             scope.$digest();
             elem = rootelem.find('.row:eq(3)');
             expect(elem).toBeDefined();
@@ -313,7 +293,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
                 scope.reps = scope.object.representation;
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 elem = rootelem.find('.row:eq(4)');
                 expect(elem).toBeDefined();
@@ -321,15 +301,15 @@ describe('Object Download Modal Test Suite', function () {
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].representation[0].function.name);
             }
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NODATAACCESSFUNCTION_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NODATAACCESSFUNCTION_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NODATAACCESSFUNCTION_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NODATAACCESSFUNCTION_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
             scope.reps = scope.object.representation;
 
-            rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
             scope.$digest();
             elem = rootelem.find('.row:eq(4)');
             expect(elem).toBeDefined();
@@ -345,7 +325,7 @@ describe('Object Download Modal Test Suite', function () {
                 scope.object = fullObjs[i];
                 scope.reps = scope.object.representation;
 
-                rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
                 scope.$digest();
                 elem = rootelem.find('.row:eq(5)');
                 expect(elem).toBeDefined();
@@ -354,15 +334,15 @@ describe('Object Download Modal Test Suite', function () {
                 expect(elem.find('div:nth-child(2) a').attr('href').trim()).toEqual(fullObjs[i].representation[0].contentlocation);
             }
             
-            inject(function (_OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NODATAACCESSLINK_) {
-                mockdata = _OBJECT_DOWNLOAD_MODAL_TEST_DATA_OBJ_NODATAACCESSLINK_;
+            inject(function (_OBJECT_REPRESENTATION_TEST_DATA_OBJ_NODATAACCESSLINK_) {
+                mockdata = _OBJECT_REPRESENTATION_TEST_DATA_OBJ_NODATAACCESSLINK_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
             scope.reps = scope.object.representation;
 
-            rootelem = $compile($templateCache.get('app/templates/object-download-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/templates/object-representation-template.html'))(scope);
             scope.$digest();
             elem = rootelem.find('.row:eq(5)');
             expect(elem).toBeDefined();

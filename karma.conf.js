@@ -97,7 +97,7 @@ module.exports = function(config) {
         'app/views/profileView.html',
         'app/views/thumbnailView.html',
         'test/spec/controllers/objecDetailViewTest.js',
-        'test/spec/controllers/objectDownloadModalTest.js',
+        'test/spec/controllers/objectRepresentationTest.js',
         'test/spec/directives/mapViewDirectiveControllerTest.js',
         'test/spec/filters/textLengthFilterTest.js',
         'test/spec/services/searchServiceTest.js',
