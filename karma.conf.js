@@ -81,7 +81,7 @@ module.exports = function(config) {
         'app/templates/map-view-directive.html',
         'app/templates/my-profile-directive.html',
         'app/templates/my-workspace-directive.html',
-        'app/templates/object-download-modal-template.html',
+        'app/templates/object-representation-template.html',
         'app/templates/post-search-filter-directive.html',
         'app/templates/resultset-directive.html',
         'app/templates/search-filter-ribbon-directive.html',
