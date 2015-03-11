@@ -5,7 +5,7 @@ angular.module(
         '$q', '$interval', 'AppConfig',
         function ($resource, Base64, $q, $interval, AppConfig) {
             'use strict';
-            var config, authdata, searchResource, searchFunction;
+            var config, authdata, entityResource, searchResource, searchFunction;
 
             config = AppConfig.searchService;
             authdata = Base64.encode(config.username + ':' + config.password);
@@ -32,6 +32,24 @@ angular.module(
                         }
                     }
                 });
+                
+            // TODO: the deduplicate setting should be true by default
+            entityResource = $resource(
+                config.host + '/SWITCHON.:classname/:objId',
+                {
+                    omitNullValues: true,
+                    deduplicate: false
+                },
+                {
+                    get: {
+                        method: 'GET',
+                        isArray: false,
+                        headers: {
+                            'Authorization': 'Basic ' + authdata
+                        }
+                    }
+                }
+            );
 
             searchFunction = function (universalSearchString, filterTagGroups, limit, offset, progressCallback) {
                 var deferred, noop, queryObject, result, searchError, searchResult, searchSuccess,
@@ -79,7 +97,7 @@ angular.module(
                     nodes = searchResultData[0].$collection;
 
                     classesSuccess = function (data) {
-                        var allError, allSuccess, classCache, classname, entityResource, i, objectId, objsQ,
+                        var allError, allSuccess, classCache, classname, i, objectId, objsQ,
                             objPromise, singleProgressF, resolvedObjsCount, fakeProgressActive;
 
                         classCache = [];
@@ -88,22 +106,6 @@ angular.module(
                         }
 
                         objsQ = [];
-                        entityResource = $resource(
-                            config.host + '/SWITCHON.:classname/:objId',
-                            {
-                                omitNullValues: true,
-                                deduplicate: false
-                            },
-                            {
-                                get: {
-                                    method: 'GET',
-                                    isArray: false,
-                                    headers: {
-                                        'Authorization': 'Basic ' + authdata
-                                    }
-                                }
-                            }
-                        );
 
                         resolvedObjsCount = 0;
                         // we stop fake progresss before 1st object has been resolved
@@ -252,7 +254,8 @@ angular.module(
             };
 
             return {
-                search: searchFunction
+                search: searchFunction,
+                entityResource: entityResource
             };
         }
         ])

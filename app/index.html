@@ -120,7 +120,13 @@
     <!-- content -->
 
     <!-- result set and tag filters -->
-    <div id="wrapper" class="toggled" ng-class="{toggled: !isResultShowing || !(state.current.name === 'list' || state.current.name === 'th' || state.current.name === 'map')}">
+    <div id="wrapper" 
+         class="toggled" 
+         ng-class="{toggled: !isResultShowing || 
+                     !(state.current.name === 'list' || 
+                       state.current.name === 'th' || 
+                       state.current.name === 'map' || 
+                       state.current.name === 'resourceDetail')}">
         <div id="sidebar-wrapper">
             <resultSet result-set="data.resultSet" selected-object="data.selectedObject"></resultSet>
             <postsearchfilter filter-expressions="filterExpressions" 
@@ -176,7 +182,7 @@
     <script src="scripts/controllers/keywordFilterDirectiveController.js" type="text/javascript"></script>
     <script src="scripts/controllers/countriesFilterDirectiveController.js" type="text/javascript"></script>
     <script src="scripts/controllers/listViewDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/objectInfoModalController.js" type="text/javascript"></script>
+    <script src="scripts/controllers/objectDetailController.js" type="text/javascript"></script>
     <script src="scripts/controllers/objectDownloadModalController.js" type="text/javascript"></script>
     <script src="scripts/controllers/searchFilterTagDirectiveController.js" type="text/javascript"></script>
     <script src="scripts/controllers/postSearchFilterDirectiveController.js" type="text/javascript"></script>
@@ -196,6 +202,7 @@
     <script src="scripts/directives/postSearchFilterDirective.js" type="text/javascript"></script>
     <script src="scripts/services/_module.js"></script>
     <script src="scripts/services/mockService.js" type="text/javascript"></script>
+    <script src="scripts/services/shareService.js" type="text/javascript"></script>
     <script src="scripts/services/searchService.js" type="text/javascript"></script>
     <script src="scripts/services/sessionService.js" type="text/javascript"></script>
     <script src="scripts/services/tagGroupService.js" type="text/javascript"></script>
