@@ -90,8 +90,14 @@ module.exports = function(config) {
         'app/templates/search-options-directive.html',
         'app/templates/search-progress-modal-template.html',
         'app/templates/usb-directive.html',
+        'app/views/listView.html',
+        'app/views/loginView.html',
+        'app/views/mapView.html',
+        'app/views/object-detail-view.html',
+        'app/views/profileView.html',
+        'app/views/thumbnailView.html',
+        'test/spec/controllers/objecDetailViewTest.js',
         'test/spec/controllers/objectDownloadModalTest.js',
-        'test/spec/controllers/objectInfoModalTest.js',
         'test/spec/directives/mapViewDirectiveControllerTest.js',
         'test/spec/filters/textLengthFilterTest.js',
         'test/spec/services/searchServiceTest.js',
@@ -130,7 +136,8 @@ module.exports = function(config) {
     
     preprocessors: {
         '**/*.json': ['gb-json2js'],
-        '**/templates/**/*.html': ['ng-html2js']
+        '**/templates/**/*.html': ['ng-html2js'],
+        '**/views/**/*.html': ['ng-html2js']
     },
     
     ngHtml2JsPreprocessor: {

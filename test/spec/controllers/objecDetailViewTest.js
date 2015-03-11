@@ -1,32 +1,37 @@
-describe('Object Info Modal Test Suite', function () {
+describe('Object Detail View Test Suite', function () {
     'use strict';
     
-    describe('Object Info Modal Tests', function () {
-        var $compile, $filter, $modal, $rootScope, $templateCache, fullObjs;
+    describe('Object Detail View Tests', function () {
+        var $compile, $filter, $httpBackend, $rootScope, $templateCache, fullObjs;
         
         beforeEach(function () {
             module('eu.water-switch-on.sip.controllers');
-            module('ui.bootstrap.modal');
             module('mocks');
             module('templates');
         });
         
         beforeEach(inject(
             [
-                '$modal',
                 '$rootScope',
                 '$compile',
                 '$templateCache',
                 '$filter',
-                function (modal, rootscope, compile, templateCache, filter) {
-                    $modal = modal;
+                '$httpBackend',
+                function (rootscope, compile, templateCache, filter, httpBackend) {
                     $rootScope = rootscope;
                     $compile = compile;
                     $templateCache = templateCache;
                     $filter = filter;
+                    $httpBackend = httpBackend;
                 }
             ]
         ));
+
+        beforeEach(function () {
+            $httpBackend.whenGET('templates/object-representation-template.html').respond(
+                200,
+                $templateCache.get('app/templates/object-representation-template.html'));
+        });
 
         beforeEach(function () {
             var i;
@@ -34,185 +39,184 @@ describe('Object Info Modal Test Suite', function () {
             fullObjs = [];
             
             i = 0;
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ1_) {
-                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ1_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ1_) {
+                fullObjs[i++] = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ1_;
             });
 
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ2_) {
-                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ2_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ2_) {
+                fullObjs[i++] = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ2_;
             });
 
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ3_) {
-                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ3_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ3_) {
+                fullObjs[i++] = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ3_;
             });
 
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ4_) {
-                fullObjs[i++] = _OBJECT_INFO_MODAL_TEST_DATA_OBJ4_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ4_) {
+                fullObjs[i++] = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ4_;
             });
         });
         
-        it('object info - proper title', function () {
+        it('object detail - proper title', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
-
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.children("div > h3");
+                elem = rootelem.find('h2');
                 expect(elem).toBeDefined();
-                expect(elem.hasClass('modal-title')).toBeTruthy();
-                expect(elem.text()).toEqual('Object info of ' + fullObjs[i].name);
+                expect(elem.text()).toEqual('Object details of ' + fullObjs[i].name);
             }
         });
         
-        it('object info - proper name', function () {
+        it('object detail - proper name', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(1)");
+                elem = rootelem.find(".row:nth-child(2)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Name:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].name);
             }
         });
         
-        it('object info - proper description', function () {
+        it('object detail - proper description', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(2)");
+                elem = rootelem.find(".row:nth-child(3)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Description:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].description);
             }
         });
         
-        it('object info - proper keywords', function () {
+        it('object detail - proper keywords', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(3)");
+                elem = rootelem.find(".row:nth-child(4)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Keywords:');
                 expect(elem.find('div:nth-child(2) span.label.label-primary').length).toEqual(fullObjs[i].tags.length);
             }
         });
         
-        it('object info - proper topic', function () {
+        it('object detail - proper topic', function () {
             var elem, i, mockdata, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(4)");
+                elem = rootelem.find(".row:nth-child(5)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Topic:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].topiccategory.name);
             }
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOTOPIC_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOTOPIC_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOTOPIC_) {
+                mockdata = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOTOPIC_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
 
-            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
             scope.$digest();
-            elem = rootelem.find(".row:nth-child(4)");
+            elem = rootelem.find(".row:nth-child(5)");
             expect(elem).toBeDefined();
             expect(elem.find('div label').text()).toEqual('Topic:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual("[none]");
         });
         
-        it('object info - proper point of contact', function () {
+        it('object detail - proper point of contact', function () {
             var elem, i, mockdata, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(5)");
+                elem = rootelem.find(".row:nth-child(6)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Point of Contact:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].contact.name + ' (' + fullObjs[i].contact.organisation + ')');
             }
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOCONTACTNAME_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOCONTACTNAME_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOCONTACTNAME_) {
+                mockdata = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOCONTACTNAME_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
 
-            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
             scope.$digest();
-            elem = rootelem.find(".row:nth-child(5)");
+            elem = rootelem.find(".row:nth-child(6)");
             expect(elem).toBeDefined();
             expect(elem.find('div label').text()).toEqual('Point of Contact:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual("[none]" + ' (' + mockdata.contact.organisation + ')');
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOORG_) {
+                mockdata = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOORG_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
 
-            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
             scope.$digest();
-            elem = rootelem.find(".row:nth-child(5)");
+            elem = rootelem.find(".row:nth-child(6)");
             expect(elem).toBeDefined();
             expect(elem.find('div label').text()).toEqual('Point of Contact:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual(mockdata.contact.name + ' (no organisation)');
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_NOCONTACTNAME_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOORG_NOCONTACTNAME_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOORG_NOCONTACTNAME_) {
+                mockdata = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOORG_NOCONTACTNAME_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
 
-            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
             scope.$digest();
-            elem = rootelem.find(".row:nth-child(5)");
+            elem = rootelem.find(".row:nth-child(6)");
             expect(elem).toBeDefined();
             expect(elem.find('div label').text()).toEqual('Point of Contact:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual('[none] (no organisation)');
         });
         
-        it('object info - proper time range', function () {
+        it('object detail - proper time range', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(6)");
+                elem = rootelem.find(".row:nth-child(7)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Time Range:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(
@@ -222,16 +226,16 @@ describe('Object Info Modal Test Suite', function () {
             }
         });
         
-        it('object info - proper last modification', function () {
+        it('object detail - proper last modification', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(7)");
+                elem = rootelem.find(".row:nth-child(8)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Last modification:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(
@@ -239,61 +243,61 @@ describe('Object Info Modal Test Suite', function () {
             }
         });
         
-        it('object info - proper access limitation', function () {
+        it('object detail - proper access limitation', function () {
             var elem, i, mockdata, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(8)");
+                elem = rootelem.find(".row:nth-child(9)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Access limitations:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].accesslimitations.name);
             }
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOACCESSLIMITATIONS_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOACCESSLIMITATIONS_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOACCESSLIMITATIONS_) {
+                mockdata = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOACCESSLIMITATIONS_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
 
-            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
             scope.$digest();
-            elem = rootelem.find(".row:nth-child(8)");
+            elem = rootelem.find(".row:nth-child(9)");
             expect(elem).toBeDefined();
             expect(elem.find('div label').text()).toEqual('Access limitations:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual('unknown');
         });
         
-        it('object info - proper license', function () {
+        it('object detail - proper license', function () {
             var elem, i, mockdata, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
                 scope = $rootScope.$new(true);
                 scope.object = fullObjs[i];
 
-                rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+                rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(9)");
+                elem = rootelem.find(".row:nth-child(10)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('License:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].licensestatement);
             }
             
-            inject(function (_OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOLICENSE_) {
-                mockdata = _OBJECT_INFO_MODAL_TEST_DATA_OBJ_NOLICENSE_;
+            inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOLICENSE_) {
+                mockdata = _OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOLICENSE_;
             });
             
             scope = $rootScope.$new(true);
             scope.object = mockdata;
 
-            rootelem = $compile($templateCache.get('app/templates/object-info-modal-template.html'))(scope);
+            rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
             scope.$digest();
-            elem = rootelem.find(".row:nth-child(9)");
+            elem = rootelem.find(".row:nth-child(10)");
             expect(elem).toBeDefined();
             expect(elem.find('div label').text()).toEqual('License:');
             expect(elem.find('div:nth-child(2)').text().trim()).toEqual('unknown');
