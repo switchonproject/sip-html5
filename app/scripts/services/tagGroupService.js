@@ -61,7 +61,7 @@ angular.module(
 
             getCategoryListFunction =
                 function (categoryGroup) {
-                    return lazyLoadTagLists(categoryGroup, false);
+                    return lazyLoadTagLists(categoryGroup, true);
                 };
 
             return {
