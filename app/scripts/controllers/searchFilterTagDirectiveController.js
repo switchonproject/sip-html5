@@ -53,6 +53,8 @@ angular.module(
                     return 'glyphicon glyphicon-euro';
                 case FilterExpression.FILTER__FUNCTION:
                     return 'glyphicon glyphicon-floppy-save';
+                case FilterExpression.FILTER__COLLECTION:
+                    return 'glyphicon glyphicon-bookmark';
                 default:
                     return 'glyphicon glyphicon-flash';
                 }
