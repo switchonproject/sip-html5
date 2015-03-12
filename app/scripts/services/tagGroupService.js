@@ -6,7 +6,7 @@ angular.module(
             'use strict';
 
             var tagResources, tagGroups, lazyLoadTagLists, getKeywordListFunction,
-                getCountryListFunction;
+                getCountryListFunction, getCategoryListFunction;
 
             tagResources = {
                 'keyword-cuahsi': 'data/cuahsiKeywords.json',
@@ -14,9 +14,11 @@ angular.module(
                 'keyword-inspire': 'data/inspireKeywords.json',
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
+                'keyword-all': 'data/allKeywords.json',
                 'country-world': 'data/countriesWorld.json',
                 'country-europe': 'data/countriesEurope.json',
-                'category-default': 'data/defaultCategories.json'
+                'category-default': 'data/defaultCategories.json',
+                'category-collection': 'data/collectionCategories.json'
             };
 
             tagGroups = {};
@@ -42,7 +44,7 @@ angular.module(
                     return tagGroups[tagGroup];
                 }
 
-                console.warn('unknown  tag group:' + tagGroup);
+                console.warn('unknown tag group:' + tagGroup);
                 //return array ? [] : {};
                 return null;
             };
@@ -57,9 +59,15 @@ angular.module(
                     return lazyLoadTagLists(countryGroup, false);
                 };
 
+            getCategoryListFunction =
+                function (categoryGroup) {
+                    return lazyLoadTagLists(categoryGroup, false);
+                };
+
             return {
                 getKeywordList: getKeywordListFunction,
-                getCountryList: getCountryListFunction
+                getCountryList: getCountryListFunction,
+                getCategoryList: getCategoryListFunction
             };
         }]
     );
