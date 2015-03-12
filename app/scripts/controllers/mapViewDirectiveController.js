@@ -187,7 +187,9 @@ angular.module(
                 objGroup.clearLayers();
                 for (i = 0; i < objs.length; ++i) {
                     renderer = rendererService.getFeatureRenderer(objs[i]);
-                    objGroup.addLayer(renderer);
+                    if(renderer) {
+                        objGroup.addLayer(renderer);
+                    }
                 }
  
                 if ($scope.centerObjects && objGroup.getLayers().length > 0) {
@@ -215,17 +217,19 @@ angular.module(
             // </editor-fold>
 
             $scope.$watch('selectedObject', function (n) {
-                if (n !== -1 && $scope.centerObjects && objGroup.getLayers().length > n) {
+                if (n !== -1 && objGroup.getLayers().length > n) {
                     leafletData.getMap('mainmap').then(function (map) {
                         // FIXME: probably use with layer ids?
                         // see https://github.com/Leaflet/Leaflet/issues/1805
+                        
+                        objGroup.setStyle({color: '#000000', fill: false, weight: 1});
                         var layer = objGroup.getLayers()[n];
                         layer.setStyle({fillOpacity: 0.4, fill: true, fillColor: '#1589FF'});
                         map.fitBounds(layer.getBounds(), {
                             animate: true,
                             pan: {animate: true, duration: 0.6},
                             zoom: {animate: true},
-                            maxZoom: $scope.preserveZoomOnCenter ? map.getZoom() : null
+                            maxZoom: null
                         });
                     });
                 }
