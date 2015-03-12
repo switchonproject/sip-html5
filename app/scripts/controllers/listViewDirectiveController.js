@@ -62,16 +62,12 @@ angular.module(
 
             $scope.tableParams = new NgTableParams({
                 page: 1,
-                count: 2,
-                sorting: initialSorting
+                count: 2
             }, {
                 counts: [],
                 total: 1,
-                getData: function ($defer, params) {
-                    var ordered;
-
-                    ordered = params.sorting() ? $filter('orderBy')($scope.tableData, params.orderBy()) : $scope.tableData;
-                    $defer.resolve(ordered);
+                getData: function ($defer) {
+                    $defer.resolve($scope.tableData);
                 }
             });
 
