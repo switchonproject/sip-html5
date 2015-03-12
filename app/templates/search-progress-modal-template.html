@@ -7,7 +7,6 @@
                  value="status.current" 
                  type="{{status.type}}">
     </progressbar>
-    <span ng-show="status.current < 100"><i>Searching for Resources in the Meta-Data Repository.</i></span>
-    <span ng-show="status.current > 100"><i>Collecting meta-data of resource #{{status.objects}} of {{status.max}}</i></span>
-</div>
-<div class="modal-footer"></div>
+    <span><i>{{status.message}}</i></span>
+ </div>
+<div class="modal-footer"><!-- empty --></div>
