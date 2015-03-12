@@ -14,16 +14,17 @@ angular.module(
         'AppConfig',
         'eu.water-switch-on.sip.services.shareService',
         function (
-                $scope, 
-                $rootScope, 
-                $modal, 
-                SearchService, 
-                $state, 
-                FilterExpressions, 
-                FilterExpression, 
-                TagGroupService,
-                AppConfig,
-                shareService) {
+            $scope,
+            $rootScope,
+            $modal,
+            SearchService,
+            $state,
+            FilterExpressions,
+            FilterExpression,
+            TagGroupService,
+            AppConfig,
+            shareService
+        ) {
             'use strict';
 
             var searchProcessCallback;
@@ -58,35 +59,37 @@ angular.module(
                 $scope.config.searchService.defautLimit, false, true,
                 'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
-            
+
             $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
                 [], true, true,
                 null, 'Post Filters');
             $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
-                    this.displayValue = value;
-                    return '';
-                };
+                this.displayValue = value;
+                return '';
+            };
             $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
 
             $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET, 0, false, false);
             $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
 
             // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION, 
-                null, false, true, null, 'Categories');
+            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION,
+                    null, false, true, null, 'Categories');
             $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
             // FIXME: move to categories directive ? -----------------------------
 
             // -----------------------------------------------------------------
 
             $scope.postSearchFilterExpressions = new FilterExpressions();
-            
+
             $scope.data.resultSet = null;
             $scope.data.resultObjects = [];
             $scope.data.searchStatus = {
                 current: 0,
                 max: 0,
-                type: null
+                objects: 0,
+                type: null,
+                message: null
             };
 
             $scope.activateView = function (state) {
@@ -129,7 +132,7 @@ angular.module(
 
                     $scope.data.resultObjects = objs;
                     $scope.data.selectedObject = -1;
-                    
+
                     shareService.setResourceObjects(objs);
                 }
             });
@@ -168,53 +171,69 @@ angular.module(
             searchProcessCallback = function (current, max, type) {
                 // the maximum object count
                 $scope.data.searchStatus.max = max;
-                // the real object count
-                $scope.data.searchStatus.objects = current;
                 // the scaled progress: 0 <fake progress> 100 <real progress> 200
+                // $scope.data.searchStatus.current = ...
+                // the type of the status
                 $scope.data.searchStatus.type = type;
 
                 // start of search (indeterminate)
                 if (max === -1 && type === 'success') {
-                    if ($scope.showMessage) {
-                        $scope.showMessage('Search for resources is in progress.', 'info');
-                    }
-
                     // count up fake progress to 100
                     $scope.data.searchStatus.current = current;
 
+                    if (current < 100) {
+                        $scope.data.message = 'Search for resources is in progress';
+                        $scope.data.messageType = 'success';
+                        $scope.data.searchStatus.message = $scope.data.message;
+                    } else {
+                        $scope.data.message = 'Search takes longer than 10 seconds, please wait.';
+                        $scope.data.messageType = 'warning';
+                        $scope.data.searchStatus.message = $scope.data.message;
+                        $scope.data.searchStatus.type = 'warning';
+                    }
+
                     // search completed
                 } else if (current > 0 && current < max && type === 'success') {
-
-                    //normalise to 100% and count up to 200
+                     // the real object count
+                    $scope.data.searchStatus.objects = current;
+                    //normalise object count to 100% and count up to 200
                     $scope.data.searchStatus.current = 100 + (current / max * 100);
-
+                    $scope.data.message = 'Collecting meta-data of resource #' + current + ' of ' + max;
+                    $scope.data.messageType = 'info';
+                    $scope.data.searchStatus.message = $scope.data.message;
                 } else if (current === max && type === 'success') {
                     if (current > 0) {
                         $scope.data.searchStatus.current = 200;
-                        if ($scope.showMessage) {
-                            $scope.showMessage('Search completed, ' + current +
-                                    (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository',
-                                    'success');
-                        }
+                        $scope.data.message = 'Search completed, ' + current +
+                                    (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository';
+                        $scope.data.messageType = 'success';
+                        $scope.data.searchStatus.message = $scope.data.message;
                     } else {
-                        $scope.data.searchStatus.current = 0;
-                        if ($scope.showMessage) {
-                            $scope.showMessage('Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository',
-                                'warning');
-                        }
+                        // feature request #59
+                        $scope.data.searchStatus.current = 200;
+                        $scope.data.message = 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository';
+                        $scope.data.messageType = 'warning';
+                        $scope.data.searchStatus.message = $scope.data.message;
                     }
 
                     if ($scope.progressModal) {
-                        $scope.progressModal.close();
+                        // wait 1/2 sec before closing to allow the progressbar
+                        // to advance to 100% (see #59)
+                        setTimeout(function () {
+                            $scope.progressModal.close();
+                        }, 500);
                     }
-                    // search error   
+                    // search error ...
                 } else if (type === 'error') {
-                    if ($scope.showMessage) {
-                        $scope.showMessage('Search could not be perfomed: ' + $scope.data.resultSet.$error, 'danger');
-                    }
+                    $scope.data.searchStatus.current = 200;
+                    $scope.data.message = 'Search could not be perfomed: ' + $scope.data.resultSet.$error;
+                    $scope.data.messageType = 'danger';
+                    $scope.data.searchStatus.message = $scope.data.message;
 
                     if ($scope.progressModal) {
-                        $scope.progressModal.close();
+                        setTimeout(function () {
+                            $scope.progressModal.close();
+                        }, 500);
                     }
                 }
             };

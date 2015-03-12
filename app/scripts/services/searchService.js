@@ -66,7 +66,7 @@ angular.module(
                 // current value, max value, type, max = -1 indicates indeterminate
                 (progressCallback || noop)(0, -1, 'success');
 
-                fakeProgress = 0;
+                fakeProgress = 1;
                 timer = $interval(function () {
                     (progressCallback || noop)(fakeProgress, -1, 'success');
                     fakeProgress++;
