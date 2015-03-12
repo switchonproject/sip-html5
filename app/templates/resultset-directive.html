@@ -6,7 +6,7 @@
     </ul>
     
     <div style="clear:both;">   
-    <ul class="list-group">
+    <ul class="list-group" ng-show="state.current.name === 'map'">
         <li class="list-group-item" ng-repeat="node in resultSet.$collection">  
             <span class="btn-link" ng-click="$parent.selectedObject = $index">{{node.name}}</span>
             <p style="line-height: normal;"><small><small>{{node.object.description| txtLen:80:false:'...':true}}</small></small></p>
