@@ -2,6 +2,10 @@ body {
     min-width:1024px;
 }
 
+.switchon-categories-dropdown {
+    z-index: 2000;
+}
+
 .switchon-viewbutton {
     margin-top: 8px;
     margin-bottom: 3px;

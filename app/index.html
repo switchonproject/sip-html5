@@ -50,7 +50,7 @@
                             ng-disabled="config.gui.dev !== true" dropdown-toggle>
                         All categories <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu switchon-categories-dropdown" role="menu">
                         <li ng-repeat="category in data.categories">
                             <a ng-click="$parent.categoriesFilterExpression.setArrayValue(category)">{{category}}</a>
                         </li>
