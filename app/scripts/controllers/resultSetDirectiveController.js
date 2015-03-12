@@ -4,12 +4,11 @@ angular.module(
     'eu.water-switch-on.sip.controllers.resultSetDirectiveController',
     [
         '$scope',
-        function ($scope) {
+        '$state',
+        function ($scope, $state) {
             'use strict';
 
-            $scope.$watch('selectedObject', function (n) {
-                console.log(n);
-            });
+            $scope.state = $state;
         }
     ]
-    );
+);
