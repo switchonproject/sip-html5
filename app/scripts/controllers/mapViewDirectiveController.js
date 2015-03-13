@@ -221,16 +221,23 @@ angular.module(
                     leafletData.getMap('mainmap').then(function (map) {
                         // FIXME: probably use with layer ids?
                         // see https://github.com/Leaflet/Leaflet/issues/1805
-                        
+
                         objGroup.setStyle({color: '#000000', fill: false, weight: 1});
                         var layer = objGroup.getLayers()[n];
-                        layer.setStyle({fillOpacity: 0.4, fill: true, fillColor: '#1589FF'});
-                        map.fitBounds(layer.getBounds(), {
-                            animate: true,
-                            pan: {animate: true, duration: 0.6},
-                            zoom: {animate: true},
-                            maxZoom: null
-                        });
+
+                        // check if function exists (not available in WMS Layers)
+                        if (typeof layer.setStyle === 'function') {
+                            layer.setStyle({fillOpacity: 0.4, fill: true, fillColor: '#1589FF'});
+                        }
+
+                        if (typeof layer.getBounds === 'function' && layer.getBounds()) {
+                            map.fitBounds(layer.getBounds(), {
+                                animate: true,
+                                pan: {animate: true, duration: 0.6},
+                                zoom: {animate: true},
+                                maxZoom: null
+                            });
+                        }
                     });
                 }
              });

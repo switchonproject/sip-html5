@@ -13,7 +13,8 @@ angular.module(
                     filterExpressions: '=',
                     performSearch: '&searchFunction'
                 },
-                controller: 'eu.water-switch-on.sip.controllers.categoriesDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.categoriesDirectiveController',
+                controllerAs: 'categoriesDirectiveController'
             };
         }
     ]

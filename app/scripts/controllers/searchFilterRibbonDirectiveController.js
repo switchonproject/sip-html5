@@ -11,7 +11,7 @@ angular.module(
             var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions,
                 limitFilterExpressions, offsetFilterExpressions;
 
-            $scope.keywordsFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD, 
+            $scope.keywordsFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD,
                 [], true, true, null, 'Keyword');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
 
@@ -27,11 +27,11 @@ angular.module(
                 null, false, true, null, 'End Date');
             $scope.filterExpressions.addFilterExpression($scope.toDateFilterExpression);
 
-            $scope.geoIntersectsFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_INTERSECTS, 
+            $scope.geoIntersectsFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_INTERSECTS,
                 'false', false, true, null, 'Geo Intersection');
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
 
-            $scope.geoBufferFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_BUFFER, 
+            $scope.geoBufferFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_BUFFER,
             null, false, true, 'templates/geo-buffer-editor-popup.html', 'Geo Buffer');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
 
@@ -39,8 +39,8 @@ angular.module(
             if (limitFilterExpressions && limitFilterExpressions.length > 0) {
                 $scope.limitFilterExpression = limitFilterExpressions[0];
             } else {
-                console.warn('limit filter expression not correctly initialized!');
-                $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT, 
+                //console.warn('limit filter expression not correctly initialized!');
+                $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
                     20, false, true, 'templates/limit-editor-popup.html', 'Results Limit');
                 $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
             }
@@ -49,8 +49,8 @@ angular.module(
             if (offsetFilterExpressions && offsetFilterExpressions.length > 0) {
                 $scope.offsetFilterExpression = offsetFilterExpressions[0];
             } else {
-                console.warn('offset filter expression not correctly initialized!');
-                $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET, 
+                //console.warn('offset filter expression not correctly initialized!');
+                $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
                     0, false, false, null, 'Results Offset');
                 $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
             }
@@ -67,7 +67,7 @@ angular.module(
             if (geoFilterExpressions && geoFilterExpressions.length > 0) {
                 $scope.geoFilterExpression = geoFilterExpressions[0];
             } else {
-                console.warn('geo filter expression not correctly initialized!');
+                //console.warn('geo filter expression not correctly initialized!');
                 $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
                     'templates/geo-editor-popup.html');
                 $scope.geoFilterExpression.getDisplayValue = function (value) {

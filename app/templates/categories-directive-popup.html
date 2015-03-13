@@ -1,0 +1,50 @@
+<div ng-class="{expanded:categoriesDirectiveController.expanded}" 
+     class="popover switchon-categories-popover" 
+     id="categories-popover" 
+     ng-mouseleave="
+         categoriesDirectiveController.expanded = false; 
+         categoriesDirectiveController.selectedCategory=null;">
+    <div class="popover-content">
+        <div class="switchon-categories-list">
+            <div class="switchon-categories-list">
+                <ul class="list-group">
+                    <li class="list-group-item">  
+                        <span ng-style="{'font-weight': 
+                                categoriesDirectiveController.selectedCategory === 'category-collection' ? 
+                               'bold' : 'plain'}">Data Collections</span>               
+                        <i class="glyphicon glyphicon-chevron-right" 
+                           ng-mouseenter="categoriesDirectiveController.expanded = true;
+                                   categoriesDirectiveController.selectedCategory = 'category-collection'">
+                        </i>
+                        <p>
+                            <small><small>Browse open hydrological data by popular data collections.</small></small>
+                        </p>
+                    </li>
+                    <li class="list-group-item">  
+                        <span ng-style="{'font-weight': 
+                                categoriesDirectiveController.selectedCategory === 'topic-inspire' ? 
+                            'bold' : 'plain'}">Topic Categories</span>               
+                        <i class="glyphicon glyphicon-chevron-right" 
+                           ng-mouseenter="categoriesDirectiveController.expanded = true;
+                                   categoriesDirectiveController.selectedCategory = 'topic-inspire'">
+                        </i>
+                        <p>
+                            <small><small>Browse open hydrological data by INSPIRE Topic Categories.</small></small>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-if="categoriesDirectiveController.expanded && 
+                    categoriesDirectiveController.selectedCategory !== null" class="switchon-categories-list switchon-sub-categories-list">
+            <ul class="list-group">
+                <li class="list-group-item" 
+                    ng-repeat="category in categoriesDirectiveController.getCategories(categoriesDirectiveController.selectedCategory)">  
+                    <a ng-click="$hide(); categoriesDirectiveController.performCategoriesSearch(categoriesDirectiveController.selectedCategory, category);">
+                        {{category}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
