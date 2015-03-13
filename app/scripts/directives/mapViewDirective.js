@@ -16,7 +16,10 @@ angular.module(
                     preserveZoomOnCenter: '=',
                     objects: '=',
                     centerObjects: '=',
-                    selectedObject: '='
+                    selectedObject: '=',
+                    toolbarShowing: '=',
+                    toolbarWidth: '=',
+                    navbarHeight: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.mapViewDirectiveController'
             };

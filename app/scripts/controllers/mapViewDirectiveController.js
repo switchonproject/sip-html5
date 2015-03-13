@@ -29,20 +29,19 @@ angular.module(
                 }
             });
 
-            // ---- resize START ----
+            // <editor-fold defaultstate="collapsed" desc=" window resize " >
             fireResize = function (animate) {
-                $scope.currentHeight = $window.innerHeight - 100;
-                $scope.currentWidth = $window.innerWidth - ($scope.isResultShowing ? 250 : 0);
+                $scope.currentHeight = $window.innerHeight - $scope.navbarHeight;
+                $scope.currentWidth = $window.innerWidth - ($scope.toolbarShowing ? $scope.toolbarWidth : 0);
                 leafletData.getMap('mainmap').then(function (map) {
                     map.invalidateSize(animate);
                 });
             };
 
-            // we assume that the nav and button bars are actuall 100 px high
-            $scope.currentHeight = $window.innerHeight - 100;
-            $scope.currentWidth = $window.innerWidth - ($scope.isResultShowing ? 250 : 0);
+            $scope.currentHeight = $window.innerHeight - $scope.navbarHeight;
+            $scope.currentWidth = $window.innerWidth - ($scope.isResultShowing ? $scope.toolbarWidth : 0);
 
-            $scope.$watch('isResultShowing', function () {
+            $scope.$watch('toolbarShowing', function () {
                 $timeout(function () {
                     fireResize(true);
                 }, 500);
