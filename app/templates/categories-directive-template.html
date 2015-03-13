@@ -1,4 +1,17 @@
-<div class="nav navbar-nav btn-group" dropdown>
+<div class="nav navbar-nav btn-group">
+    <button type="button" 
+        
+        class="btn btn-link navbar-btn navbar-left" 
+        template="templates/categories-directive-popup.html"
+        placement="bottom-left"
+        auto-close="1"
+        bs-popover="true"
+        id="categories-button">
+    All categories <span class="caret"></span>
+    </button>
+</div>
+
+<!--<div class="nav navbar-nav btn-group" dropdown>
     <button type="button" 
             class="btn btn-link navbar-btn navbar-left dropdown-toggle" 
             dropdown-toggle>
@@ -12,4 +25,4 @@
                     performSearch();">{{category}}</a>
         </li>
     </ul>
-</div>
+</div>-->

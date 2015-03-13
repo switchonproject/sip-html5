@@ -66,7 +66,7 @@ angular.module(
            
 
             /**
-             * This is the function that is called ehen the user clisk on the
+             * This is the function that is called when the user clicks on the
              * X icon of the tag. In contrast to ordinary search filter tags which
              * are simply removved from thier parent filter expression by alling 
              * the tag.remove() function, the custom performRemove that is applied
