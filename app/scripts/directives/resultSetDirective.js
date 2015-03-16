@@ -10,9 +10,13 @@ angular.module(
                 templateUrl: 'templates/resultset-directive.html',
                 scope: {
                     resultSet: '=',
-                    selectedObject: '='
+                    selectedObject: '=',
+                    filterExpressions: '=',
+                    performSearch: '&searchFunction',
+                    notificationFunction: '&?'
                 },
-                controller: 'eu.water-switch-on.sip.controllers.resultSetDirectiveController'
+                controller: 'eu.water-switch-on.sip.controllers.resultSetDirectiveController',
+                controllerAs: 'resultSetDirectiveController'
             };
         }
     ]);

@@ -8,7 +8,7 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
             var tempFilterExpressions, tempFilterExpression;
-            
+
             // this is the USB filter expression that contains all post search filter expressions
             // that have been selected by the user.
             tempFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__POST_SEARCH_FILTERS);
@@ -17,53 +17,51 @@ angular.module(
             } else {
                 console.warn('post search filters filter expression not correctly initialized!');
                 $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
-                '', true, true, null);
+                    '', true, true, null);
                 $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
                     this.displayValue = value;
                     return '';
                 };
                 $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
             }
-            
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__ACCESS_CONDITION), 
+
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Condition (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
-            
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__FUNCTION), 
+
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__FUNCTION),
                 [], true, true, null, 'Access Function (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
-            
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__PROTOCOL), 
+
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
                 [], true, true, null, 'Access Protocol (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD_CUAHSI), 
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
                 [], true, true, null, 'CUAHSI Keyword (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
-            
+
             // those are the actual search-result-dependent post filter expressions 
             // that can be selected by the user. 
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__ACCESS_CONDITION), 
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Conditions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-            
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__FUNCTION), 
+
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__FUNCTION),
                 [], true, true, null, 'Access Functions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-            
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__PROTOCOL), 
+
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
                 [], true, true, null, 'Access Protocols');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
-            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD_CUAHSI), 
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
                 [], true, true, null, 'CUAHSI Keywords');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-            
+
 //            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD), 
 //                [], true, true, null, 'Keywords');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-            
-           
 
             /**
              * This is the function that is called when the user clicks on the
@@ -77,12 +75,11 @@ angular.module(
              */
             this.performRemove = function (tag) {
                 if (tag) {
-                    
-                    var filterExpressions, filterExpression, filterExpressionString;
+                    var filterExpressions, filterExpression, filterExpressionString,
+                        offsetFilterExpressions, offsetFilterExpression;
                     filterExpressionString = tag.getFilterExpressionString();
                     //$scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
-                    
-                    
+
                     filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.type);
                     if (!filterExpressions || filterExpressions.length === 0) {
                         filterExpression = new FilterExpression(tag.type, null, true);
@@ -91,7 +88,14 @@ angular.module(
                         filterExpression = filterExpressions[0];
                     }
                     filterExpression.setArrayValue(tag.value);
-                    
+
+                    // reset offset!
+                    offsetFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_OFFSET);
+                    if (offsetFilterExpressions && offsetFilterExpressions.length > 0) {
+                        offsetFilterExpression = offsetFilterExpressions[0];
+                        offsetFilterExpression.value = 0;
+                    }
+
                     $scope.performSearch();
                 }
             };

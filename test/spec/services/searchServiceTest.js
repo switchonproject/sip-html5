@@ -50,31 +50,38 @@ describe('Search Service Test Suite', function () {
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         });
-        
+
 
         it('SearchService - no search string - proper reject', function () {
             var result;
-    
+
             runs(function () {
                 $httpBackend.expectPOST(
                     AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                     {'list':[{'key':'Query', 'value':null}]}
                 ).respond(500, 'illegal query');
+
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': null },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(500, 'illegal query');
+
                 result = search(null);
                 $httpBackend.flush();
             });
-            
+
             waitsFor(function () {
                 return result.$resolved;
             }, 'not properly updated $resolved', 500);
-            
+
             runs(function () {
                 expect(result.$error).toBe('cannot search for resources');
                 expect(result.$response.data).toBe('illegal query');
                 expect(result.$response.status).toBe(500);
             });
         });
-        
+
         it('SearchService - proper search string', function () {
             var result;
     
@@ -83,6 +90,14 @@ describe('Search Service Test Suite', function () {
                     AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                     {'list':[{'key':'Query', 'value':'testquery'}]}
                 ).respond(500);
+            
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': 'testquery' },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(500, 'illegal query');
+            
+            
                 result = search('testquery');
                 $httpBackend.flush();
             });
@@ -95,9 +110,14 @@ describe('Search Service Test Suite', function () {
                 AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
             ).respond(200, {$collection: []});
+
             
-    
             runs(function () {
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': 'testquery' },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(200, null);
                 $httpBackend.expectPOST(
                     AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                     {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
@@ -130,6 +150,13 @@ describe('Search Service Test Suite', function () {
             ).respond(200, {$collection: [{key: 1, value: 'testclass'}]});
     
             runs(function () {
+
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': 'testquery' },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(200, null);
+            
                 $httpBackend.expectGET(
                     AppConfig.searchService.host+'/SWITCHON.testclass/1?deduplicate=false&omitNullValues=true'
                 ).respond(500, 'no obj');
@@ -166,6 +193,12 @@ describe('Search Service Test Suite', function () {
     
             runs(function () {
                 var i, objId;
+                
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': 'testquery' },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(200, null);
                 
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
@@ -212,6 +245,12 @@ describe('Search Service Test Suite', function () {
             runs(function () {
                 var i, objId;
                 
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': 'testquery' },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(200, null);
+                
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;
                     $httpBackend.expectGET(
@@ -257,6 +296,12 @@ describe('Search Service Test Suite', function () {
     
             runs(function () {
                 var i, objId;
+                
+                $httpBackend.expectPOST(
+                    AppConfig.searchService.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.PostFilterTagsSearch/results',
+                    {'list': [{'key': 'Query', 'value': 'testquery' },
+                                {'key': 'FilterTagGroups', 'value': '$total'}]}
+                ).respond(200, null);
                 
                 for(i = 0; i < resultSet.$collection.length; ++i) {
                     objId = resultSet.$collection[i].objectId;

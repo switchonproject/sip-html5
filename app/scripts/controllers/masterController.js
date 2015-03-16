@@ -44,6 +44,9 @@ angular.module(
             // -----------------------------------------------------------------
 
             $scope.filterExpressions = new FilterExpressions();
+
+            // define shared filter expressions that are used in several directives
+            // GEO Filter
             $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
                 'templates/geo-editor-popup.html', 'Geography');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
@@ -55,11 +58,18 @@ angular.module(
             };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
 
+            // LIMIT Filter
             $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
                 $scope.config.searchService.defautLimit, false, true,
                 'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
+            // OFFSET Filter (not visible)
+            $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
+                0, false, false);
+            $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
+
+            // combined POST Search Filters
             $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
                 [], true, true,
                 null, 'Post Filters');
@@ -68,9 +78,6 @@ angular.module(
                 return '';
             };
             $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
-
-            $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET, 0, false, false);
-            $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
 
             // FIXME: move to categories directive ? -----------------------------
             $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION,
@@ -121,9 +128,9 @@ angular.module(
             });
 
             $scope.$watch('data.resultSet.$collection', function (n, o) {
-                var i, objs;
+                var i, objs, message, pages, pageNumber;
 
-                if (n && n !== o) {
+                if (n && n !== o && n.length > 0) {
                     objs = [];
 
                     for (i = 0; i < n.length; ++i) {
@@ -134,17 +141,51 @@ angular.module(
                     $scope.data.selectedObject = -1;
 
                     shareService.setResourceObjects(objs);
+
+                    // now that we know $total number of resources, we can provide
+                    // a detailed status message:
+                    message = 'Showing ' + $scope.data.resultSet.$length + ' of ' + $scope.data.resultSet.$total + ' resources';
+                    if ($scope.data.resultSet.$length < $scope.data.resultSet.$total) {
+                        pages = Math.floor($scope.data.resultSet.$total / $scope.data.resultSet.$limit);
+                        pages += ($scope.data.resultSet.$total % $scope.data.resultSet.$limit !== 0) ? 1 : 0;
+                        pageNumber = $scope.data.resultSet.$offset / $scope.data.resultSet.$limit;
+                        message += ' (page ' + (pageNumber + 1) + ' of ' + pages + ')';
+                    }
+
+                    $scope.data.message = message;
+                    $scope.data.messageType = 'success';
                 }
             });
 
-            $scope.performSearch = function (postFilterSearchString) {
-                var universalSearchString;
+            $scope.performSearch = function (postFilterSearchString, offset) {
+                var universalSearchString, limit;
+
+                limit = $scope.limitFilterExpression.value || $scope.config.searchService.defautLimit;
+
+                // applying an offset is only valid in paged results previous and next search
+                // therfore only resultSetDirectiveController provided the offset parameter
+                // for any other search, the offset has to be (re)set to 0
+                if (!offset || offset < 0) {
+                    offset = 0;
+                    $scope.offsetFilterExpression.value = 0;
+                } else {
+                    $scope.offsetFilterExpression.value = offset;
+                }
+
+                // limit changed while in paged result: hard reset offset!
+                if (offset > 0 && limit > 0 && offset % limit !== 0) {
+                    offset = 0;
+                    $scope.offsetFilterExpression.value = 0;
+                }
+
                 universalSearchString = $scope.filterExpressions.universalSearchString;
+
                 if (postFilterSearchString && postFilterSearchString.length > 0) {
                     universalSearchString += (' ' + postFilterSearchString);
                 }
+
                 $scope.data.resultSet = SearchService.search(universalSearchString,
-                    $scope.config.tagFilter.tagGroups, 25, 0, searchProcessCallback);
+                    $scope.config.tagFilter.tagGroups, limit, offset, searchProcessCallback);
                 $scope.showProgress($scope.data.searchStatus);
             };
 
@@ -182,11 +223,11 @@ angular.module(
                     $scope.data.searchStatus.current = current;
 
                     if (current < 100) {
-                        $scope.data.message = 'Search for resources is in progress';
+                        $scope.data.message = 'Search for resource Meta-Data is in progress, please wait.';
                         $scope.data.messageType = 'success';
                         $scope.data.searchStatus.message = $scope.data.message;
                     } else {
-                        $scope.data.message = 'Search takes longer than 10 seconds, please wait.';
+                        $scope.data.message = 'The SWITCH-ON Meta-Data Repository is under heavy load, please wait for the search to continue.';
                         $scope.data.messageType = 'warning';
                         $scope.data.searchStatus.message = $scope.data.message;
                         $scope.data.searchStatus.type = 'warning';
@@ -204,14 +245,14 @@ angular.module(
                 } else if (current === max && type === 'success') {
                     if (current > 0) {
                         $scope.data.searchStatus.current = 200;
-                        $scope.data.message = 'Search completed, ' + current +
-                                    (current > 1 ? ' resources' : ' resource') + ' found in the SWITCH-ON Meta-Data Repository';
+                        $scope.data.message = 'Search completed, Meta-Data of ' + current +
+                                    (current > 1 ? ' resources' : ' resource') + ' retrieved from the SWITCH-ON Meta-Data Repository.';
                         $scope.data.messageType = 'success';
                         $scope.data.searchStatus.message = $scope.data.message;
                     } else {
                         // feature request #59
                         $scope.data.searchStatus.current = 200;
-                        $scope.data.message = 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository';
+                        $scope.data.message = 'Search completed, but no matching resources found in the SWITCH-ON Meta-Data Repository.';
                         $scope.data.messageType = 'warning';
                         $scope.data.searchStatus.message = $scope.data.message;
                     }
