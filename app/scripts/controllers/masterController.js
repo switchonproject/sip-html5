@@ -13,6 +13,7 @@ angular.module(
         'eu.water-switch-on.sip.services.TagGroupService',
         'AppConfig',
         'eu.water-switch-on.sip.services.shareService',
+        'eu.water-switch-on.sip.services.masterToolbarService',
         function (
             $scope,
             $rootScope,
@@ -23,7 +24,8 @@ angular.module(
             FilterExpression,
             TagGroupService,
             AppConfig,
-            shareService
+            shareService,
+            masterToolbarService
         ) {
             'use strict';
 
@@ -38,8 +40,8 @@ angular.module(
             // FIXME: move to categories directive -----------------------------
             $scope.data.categories = TagGroupService.getKeywordList('category-default');
             // FIXME: move to categories directive -----------------------------
-            $scope.isResultShowing = $scope.config.gui.dev;
             $scope.state = $state;
+            $scope.masterToolbarService = masterToolbarService;
 
             // -----------------------------------------------------------------
 
@@ -102,10 +104,6 @@ angular.module(
             $scope.activateView = function (state) {
                 //$scope.showMessage(state + ' view showing', 'success');
                 $state.go(state, {});
-            };
-
-            $scope.toggleResultView = function () {
-                $scope.isResultShowing = !$scope.isResultShowing;
             };
 
             $scope.doCloseMessage = function () {
@@ -278,6 +276,8 @@ angular.module(
                     }
                 }
             };
+            
+            masterToolbarService.toggleVisibility($scope.config.gui.dev);
         }
     ]
 );

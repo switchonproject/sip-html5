@@ -1,0 +1,11 @@
+<div class="switchon-master-toolbar" 
+     ng-class="{isToggled: masterToolbarService.getCanShow() && masterToolbarService.isShowing()}">
+    <result-pager></result-pager>
+    <resultSet result-set="data.resultSet" selected-object="data.selectedObject"></resultSet>
+    <postsearchfilter filter-expressions="filterExpressions" 
+                      post-search-filter-expressions="postSearchFilterExpressions" 
+                      filter-tags="data.resultSet.$filterTags" 
+                      search-function="performSearch(postFilterSearchString)" 
+                      notification-function="showMessage(message, type)">     
+    </postsearchfilter>
+</div>

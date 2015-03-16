@@ -1,0 +1,17 @@
+.switchon-result-pager {
+    background-color: #ffffff;
+    border-color: #000000;
+    border-bottom: 3px;
+    height: 34px;
+    display: table;
+}
+
+.switchon-result-pager .pagination {
+    margin: 2px;
+}
+
+.switchon-result-pager-title {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+}

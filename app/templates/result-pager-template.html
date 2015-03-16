@@ -1,0 +1,7 @@
+<div class="switchon-toolbar-component switchon-result-pager" ng-show="isVisible">   
+    <span class="switchon-result-pager-title"><strong>Resources</strong>&nbsp;({{resultSet.$total || 'n/a'}})</span>
+    <ul class="pagination pagination-sm pull-right">
+        <li ng-class="{disabled: !resultSet.$previous}"><a aria-label="Previous" ng-click="previous()"><span aria-hidden="true">&laquo;</span></a></li>
+        <li ng-class="{disabled: !resultSet.$next}"><a aria-label="Next" ng-click="next()"><span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+</div>
