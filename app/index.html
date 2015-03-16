@@ -120,7 +120,7 @@
                        state.current.name === 'resourceDetail')}">
         <div id="sidebar-wrapper">
             <resultSet filter-expressions="filterExpressions" 
-                       search-function="performSearch(postFilterSearchString)" 
+                       search-function="performSearch(postFilterSearchString, offset)" 
                        notification-function="showMessage(message, type)"
                        result-set="data.resultSet" 
                        selected-object="data.selectedObject">
@@ -128,7 +128,7 @@
             <postsearchfilter filter-expressions="filterExpressions" 
                               post-search-filter-expressions="postSearchFilterExpressions" 
                               filter-tags="data.resultSet.$filterTags" 
-                              search-function="performSearch(postFilterSearchString)" 
+                              search-function="performSearch(postFilterSearchString, offset)" 
                               notification-function="showMessage(message, type)">     
             </postsearchfilter>
         </div>

@@ -1,14 +1,19 @@
 <div class="panel panel-default switchon-result-list">   
-    <span id="switchon-result-header"><strong>Resources</strong>
-        <span ng-show="resultSet.$length && resultSet.$length > 0"> ({{resultSet.$length}}/{{resultSet.$total}})</span>
+    <span id="switchon-result-header"><strong>Resources </strong>
+        <span title="Showing {{resultSet.$length}} of {{resultSet.$total}} resources" ng-show="resultSet && resultSet.$length && resultSet.$length > 0">({{resultSet.$total}})</span>
     </span>
     
     <ul class="pagination pagination-sm">
-        <li ng-class="{disabled: !resultSet.$previous}">
-            <a href="#" aria-label="Previous" ng-click="alert();"><span aria-hidden="true">&laquo;</span></a>
+        <li ng-class="{disabled: !resultSet || resultSet.$offset === 0}">
+            <a href="#" title="Show previous {{resultSet.$limit}} resources" aria-label="Previous" ng-click="resultSetDirectiveController.previous();">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
         </li>
-        <li ng-class="{disabled: resultSet.$next}">
-            <a href="#" aria-label="Next" ng-click="alert();"><span aria-hidden="true">&raquo;</span></a>
+        <li ng-class="{disabled: (!resultSet || resultSet.$length === resultSet.$total || 
+                resultSet.$offset > (resultSet.$total - resultSet.$limit))}">
+            <a href="#" title="Show next {{resultSet.$limit}} resources" aria-label="Next" ng-click="resultSetDirectiveController.next();">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
         </li>
     </ul>
     

@@ -82,12 +82,17 @@ angular.module(
                     fakeProgress++;
                 }, 100, 100);
 
+                if (offset && limit && limit > 0 && offset > 0 && (offset %  limit !== 0)) {
+                    offset = 0;
+                }
+
                 // result of this search operation
                 // set a new promise 
                 result = {
                     $promise: deferred.promise,
                     $resolved: false,
                     $offset: offset,
+                    $limit: limit,
                     $length: 0
                 };
 

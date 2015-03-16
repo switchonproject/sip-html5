@@ -9,18 +9,58 @@ angular.module(
         function ($scope, $state, FilterExpression) {
             'use strict';
 
-            var offsetFilterExpressions;
+            var limitFilterExpressions, limitFilterExpression,
+                limit, offset;
 
+            offset = 0;
             $scope.state = $state;
 
-            offsetFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
-            if (offsetFilterExpressions && offsetFilterExpressions.length > 0) {
-                $scope.textFilterExpression = offsetFilterExpressions[0];
+            limitFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_LIMIT);
+            if (limitFilterExpressions && limitFilterExpressions.length > 0) {
+                limitFilterExpression = limitFilterExpressions[0];
             } else {
-                $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
-                    0, false, false);
-                $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+                limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
+                    10, true, false);
+                $scope.filterExpressions.addFilterExpression(limitFilterExpression);
             }
+
+            this.next = function () {
+                if ($scope.resultSet && $scope.resultSet.$resolved === true) {
+                    // limit changed! offset invalid. need to start at 0!
+                    limit = $scope.resultSet.$limit;
+                    if (limit !== limitFilterExpression.value) {
+                        console.warn('limit changed from ' + limit +
+                            'to' + limitFilterExpression.value + ', ignoring offset ' +
+                            $scope.resultSet.$offset);
+                        offset = 0;
+                    } else {
+                        offset = $scope.resultSet.$offset + limit;
+                        offset = offset < $scope.resultSet.$total ? offset : $scope.resultSet.$offset;
+                    }
+                }
+
+                // angular wrapped function!
+                $scope.performSearch({postFilterSearchString: null, offset: offset});
+            };
+
+            this.previous = function () {
+                if ($scope.resultSet && $scope.resultSet.$resolved === true) {
+                    // limit changed! offset invalid. need to start at 0!
+                    limit = $scope.resultSet.$limit;
+                    if (limit !== limitFilterExpression.value) {
+                        console.warn('limit changed from ' + limit +
+                            'to' + limitFilterExpression.value + ', ignoring offset ' +
+                            $scope.resultSet.$offset);
+                        offset = 0;
+                    } else {
+                        offset = $scope.resultSet.$offset - limit;
+                        offset = offset < ($scope.resultSet.$total - limit) ? offset : $scope.resultSet.$offset;
+                        offset = offset >= 0 ? offset : 0;
+                    }
+                }
+                // angular wrapped function!
+                $scope.performSearch({postFilterSearchString: null, offset: offset});
+            };
         }
     ]
 );
