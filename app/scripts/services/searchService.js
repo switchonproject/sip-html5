@@ -32,7 +32,7 @@ angular.module(
                         }
                     }
                 });
-                
+
             // TODO: the deduplicate setting should be true by default
             entityResource = $resource(
                 config.host + '/SWITCHON.:classname/:objId',
@@ -63,6 +63,16 @@ angular.module(
                     'list': [{'key': 'Query', 'value': universalSearchString}]
                 };
 
+                // ensure that the mandatory $total group is requested
+                // FIXME: workaround till legacy search core returns $total
+                if (filterTagGroups && filterTagGroups.length > 0) {
+                    if (filterTagGroups.indexOf('$total') === -1) {
+                        filterTagGroups += ',$total';
+                    }
+                } else {
+                    filterTagGroups = '$total';
+                }
+
                 // current value, max value, type, max = -1 indicates indeterminate
                 (progressCallback || noop)(0, -1, 'success');
 
@@ -76,11 +86,16 @@ angular.module(
                 // set a new promise 
                 result = {
                     $promise: deferred.promise,
-                    $resolved: false
+                    $resolved: false,
+                    $offset: offset,
+                    $length: 0
                 };
 
                 // result of the remote search operation (promise)
                 // starting the search!
+                // FIXME:   limit an offset GET parameters currently not evaluated 
+                //          by the leagcy service. There we have to add them also
+                //          to the queryObject.
                 searchResult = searchResource.search(
                     {
                         limit: limit,
@@ -96,6 +111,7 @@ angular.module(
                     // searchResult.$collection
                     nodes = searchResultData[0].$collection;
 
+                    // classes resolved
                     classesSuccess = function (data) {
                         var allError, allSuccess, classCache, classname, i, objectId, objsQ,
                             objPromise, singleProgressF, resolvedObjsCount, fakeProgressActive;
@@ -140,9 +156,10 @@ angular.module(
                             objsQ[i] = objPromise;
                         }
 
+                        // objects resolved
                         allSuccess = function (objs) {
 
-                            var key;
+                            var key, tagGroup, resultFilterTags;
 
                             // update nodes in search result
                             for (i = 0; i < nodes.length; ++i) {
@@ -157,10 +174,28 @@ angular.module(
                                 }
                             }
 
-                            result.$filterTags =  searchResultData[1].$collection;
-                            // FIXME: search should return total number of results!
-                            result.$total = nodes.length;
+                            // FIXME: Currently the post filter search is used
+                            // to return the total number of search results as
+                            // a workaround till $total is set by the leagy core
+                            resultFilterTags = searchResultData[1].$collection;
+                            if (resultFilterTags && resultFilterTags.length > 0) {
+                                for (i = 0; i < resultFilterTags.length; i++) {
+                                    tagGroup = resultFilterTags[i];
+                                    if (tagGroup.key === '$total' && tagGroup.value && tagGroup.value.length === 1) {
+                                        result.$total = tagGroup.value[0];
+                                        // $total is not valid filter tag. remove it.
+                                        resultFilterTags.splice(i, 1);
+                                        break;
+                                    }
+                                }
+                            }
 
+                            result.$length = nodes.length;
+                            if (!result.$total || result.$total === 0) {
+                                result.$total = nodes.length;
+                            }
+
+                            result.$filterTags =  searchResultData[1].$collection;
                             deferred.resolve(result);
                         };
 

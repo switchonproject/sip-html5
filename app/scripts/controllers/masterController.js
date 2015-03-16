@@ -44,6 +44,9 @@ angular.module(
             // -----------------------------------------------------------------
 
             $scope.filterExpressions = new FilterExpressions();
+
+            // define shared filter expressions that are used in several directives
+            // GEO Filter
             $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
                 'templates/geo-editor-popup.html', 'Geography');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
@@ -55,11 +58,18 @@ angular.module(
             };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
 
+            // LIMIT Filter
             $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
                 $scope.config.searchService.defautLimit, false, true,
                 'templates/limit-editor-popup.html');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
+            // OFFSET Filter (not visible)
+            $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
+                0, false, false);
+            $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+
+            // combined POST Search Filters
             $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
                 [], true, true,
                 null, 'Post Filters');
@@ -138,13 +148,17 @@ angular.module(
             });
 
             $scope.performSearch = function (postFilterSearchString) {
-                var universalSearchString;
+                var universalSearchString, limit, offset;
                 universalSearchString = $scope.filterExpressions.universalSearchString;
+                limit = $scope.limitFilterExpression.value || $scope.config.searchService.defautLimit;
+                offset = $scope.offsetFilterExpression.value || 0;
+
                 if (postFilterSearchString && postFilterSearchString.length > 0) {
                     universalSearchString += (' ' + postFilterSearchString);
                 }
+
                 $scope.data.resultSet = SearchService.search(universalSearchString,
-                    $scope.config.tagFilter.tagGroups, 25, 0, searchProcessCallback);
+                    $scope.config.tagFilter.tagGroups, limit, offset, searchProcessCallback);
                 $scope.showProgress($scope.data.searchStatus);
             };
 
