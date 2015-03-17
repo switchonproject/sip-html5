@@ -9,7 +9,13 @@ angular.module(
             var controller, scope;
             
             scope = {
-                resultSet: '='
+                resultSet: '=',
+                selectedObject: '=',
+                filterExpressions: '=',
+                postSearchFilterExpressions: '=',
+                filterTags: '=',
+                performSearch: '&searchFunction',
+                notificationFunction: '&?'
             };
             
             controller = [

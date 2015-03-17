@@ -117,7 +117,13 @@
          class="toggled" 
          ng-class="{toggled: !(masterToolbarService.getCanShow() && masterToolbarService.isShowing())}">
         <div id="sidebar-wrapper">
-            <master-toolbar result-set="data.resultSet"></master-toolbar>
+            <master-toolbar result-set="data.resultSet"
+                            selected-object="data.selectedObject"
+                            filter-expressions="filterExpressions" 
+                            post-search-filter-expressions="postSearchFilterExpressions" 
+                            filter-tags="data.resultSet.$filterTags" 
+                            search-function="performSearch(postFilterSearchString)" 
+                            notification-function="showMessage(message, type)"></master-toolbar>
         </div>
 
         <div id="page-content-wrapper">
