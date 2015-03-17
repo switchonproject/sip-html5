@@ -100,6 +100,7 @@ angular.module(
                 }
             };
 
+            // create the tag list
             $scope.$watch('filterTags', function (filterTags, o) {
                 if (filterTags && filterTags !== o && filterTags.length > 0) {
                     $scope.postSearchFilterExpressions.clear();
@@ -117,8 +118,10 @@ angular.module(
                                 filterExpression = filterExpressions[0];
                             }
 
-                            for (j = 0; j < tagGroup.value.length; j++ ) {
-                                filterExpression.setArrayValue(tagGroup.value[j]);
+                            // tagGroup.value is an object: 
+                            // key = name of the tag, value = # of resources associated with that tag
+                            for (j = 0; j < tagGroup.value.length; j++) {
+                                filterExpression.setArrayValue(tagGroup.value[j].key);
                                 filterExpression.enumeratedTags = filterExpression.enumerateTags();
                             }
                         }
