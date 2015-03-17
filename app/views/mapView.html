@@ -6,7 +6,7 @@
               objects="data.resultObjects"
               center-objects="false"
               selected-object="data.selectedObject"
-              toolbar-showing="isResultShowing"
+              toolbar-showing="masterToolbarService.getCanShow() && masterToolbarService.isShowing()"
               toolbar-width="250"
               navbar-height="100">    
     </map-view>
