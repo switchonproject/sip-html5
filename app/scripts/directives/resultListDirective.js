@@ -1,30 +1,31 @@
 angular.module(
     'eu.water-switch-on.sip.directives'
-).directive('resultList',
+).directive(
+    'resultList',
     [
         '$state',
         function ($state) {
             'use strict';
-            
+
             var link, scope;
-            
-            scope= {
+
+            scope = {
                 resultSet: '=',
                 selectedObject: '='
             };
-            
+
             link = function (scope, element, attr, toolbarCtrl) {
                 var toggleVisibility;
-                
-                toggleVisibility = function(state) {
+
+                toggleVisibility = function (state) {
                     scope.isVisible = (state === 'map');
                     toolbarCtrl.toggleVisibility('resultList', scope.isVisible);
                 };
-                
-                scope.$on('$stateChangeSuccess', function(event, toState) {
+
+                scope.$on('$stateChangeSuccess', function (event, toState) {
                     toggleVisibility(toState.name);
                 });
-                
+
                 toggleVisibility($state.current.name);
             };
 
@@ -36,4 +37,5 @@ angular.module(
                 link: link
             };
         }
-    ]);
+    ]
+);
