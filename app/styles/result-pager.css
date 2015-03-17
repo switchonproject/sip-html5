@@ -1,7 +1,6 @@
 .switchon-result-pager {
     background-color: #ffffff;
-    border-color: #000000;
-    border-bottom: 3px;
+    border-bottom: 1px solid black;
     height: 34px;
     display: table;
 }
