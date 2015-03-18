@@ -1,0 +1,13 @@
+.switchon-toolbar-component .panel {
+    border-radius: 0px;
+    border: none;
+}
+
+.switchon-toolbar-component .panel-heading {
+    background-color: white;
+}
+
+.switchon-toolbar-component .panel-group .panel + .panel {
+    margin-top: 0px;
+    border-top: 1px solid #ddd;
+}

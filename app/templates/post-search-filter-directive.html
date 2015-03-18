@@ -1,4 +1,4 @@
-<accordion close-others="true">
+<accordion class="switchon-toolbar-component" close-others="true" ng-show="isVisible">
     <accordion-group ng-repeat="filterExpression in postSearchFilterExpressions.list | filter:{valid:true}" 
                      is-open="filterExpression._status.open">
         <accordion-heading>
