@@ -31,16 +31,22 @@ angular.module(
             }
             this.parameter = parameter;
             this.defaultValue = (defaultValue === undefined) ? null : defaultValue;
+            this.multiple = (multiple === true) ? true : false;
+
+            // if this multiple, create an empty array
             // if default value is an object it has to be cloned!
-            this.value = (defaultValue === undefined) ? null :
+            this.value = (defaultValue === undefined) ? (this.multiple ? [] : null) :
                     ((this.defaultValue !== null && typeof this.defaultValue === 'object') ?
                             JSON.parse(JSON.stringify(this.defaultValue)) : this.defaultValue);
-            this.displayValue = null;
-            this.multiple = (multiple === undefined) ? false : multiple;
+            this.name = (name === undefined) ? null : name;
+
+            if (!this.name && this.multiple) {
+                throw 'For the array-type filter expression "' + parameter + '", the name parameter is mandatory!';
+            }
+
             this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
             this.visible = (visible === undefined) ? true : visible;
             this.editor = (editor === undefined) ? null : editor;
-            this.name = name;
             this.description = (description === undefined) ? null : description;
             this.enumeratedTags = [];
         }
@@ -55,20 +61,26 @@ angular.module(
          * E.g. getDisplayValue for a GEO Filter Expression whose value is a 
          * WKT String may return the type  of the WKT String,(MULTIPOINT, POLYGON, etc.). 
          * 
-         * By default, this method returns a predefined (fixed) display value
-         * (if available) or the value itself. Therfore this methos has to be overwritten
-         * by filter expressions that need to compute a display value from the actual value
-         * (e.g. the GEO Filter Expression).
+         * By default, this method returns value parameter (if not null od undefined) 
+         * or a predefined (fixed) display value (if available) or as last fallback 
+         * the value of the filter expression (which might be an array!). 
+         * Therefore this method has to be overwritten by filter expressions that 
+         * need to compute a display value from the actual value
+         * (e.g. the GEO Filter Expression) or from an array value.
+         * 
+         * A collection tag, that is a tag that represents a whole array-type filter expression,
+         * sets the pratemrter value to null. Therfore, the property name is mandatory
+         * for such a filter expression.
          * 
          * @param {object} value
          * @returns {string} the computed display value
          */
         FilterExpression.prototype.getDisplayValue = function (value) {
-            return this.displayValue || (value === undefined ? this.value : value);
+            return value || (this.getName() || this.value);
         };
-        
+
         FilterExpression.prototype.getName = function () {
-            return this.name ? this.name : this.parameter;
+            return this.name || this.parameter;
         };
 
         FilterExpression.prototype.isValid = function () {
@@ -97,21 +109,33 @@ angular.module(
             return (this.notFilter === true) ? true : false;
         };
 
-        FilterExpression.prototype.concatFilter = function (p, v) {
-                // post search filters are an array of negated filter expressions
-                // e.g. !keyword:"water".
-                // therfore it is not necessary to prefix them with param!
-                if (p === FilterExpression.FILTER__POST_SEARCH_FILTERS) {
-                    return v;
-                }
-                var concatExpression = (p + ':' + '"' + v + '"');
-                return concatExpression;
-            };
-            
         /**
-         * Returns a string that can be used with universal search.
+         * This is a helper method that implements special treatment for post 
+         * search filters expressions. For non post search filters expressions 
+         * it returns a filter expression string formatted as parameter:value, 
+         * for post search filters expressions is just return the ()array value 
+         * of the post search filters expression that is itself a (negated)
+         * filter expression (e.g. !keyword:"water")!
+         * 
+         * @param {type} parameter
+         * @param {type} value
+         * @returns {String}
+         */
+        FilterExpression.prototype.concatFilter = function (parameter, value) {
+            // post search filters are an array of negated filter expressions
+            // e.g. !keyword:"water".
+            // therfore it is not necessary to prefix them with param!
+            if (parameter === FilterExpression.FILTER__POST_SEARCH_FILTERS) {
+                return value;
+            }
+            var concatExpression = (parameter + ':' + '"' + value + '"');
+            return concatExpression;
+        };
+
+        /**
+         * Returns a filter expression string that can be used with universal search.
          * If the value of the filter expression is an array, the filter expression
-         * string will contain multiple parameter:arraywalue expressions.
+         * string will contain multiple parameter:array-value expressions.
          * 
          * @returns {String} universal search string
          */
@@ -123,10 +147,10 @@ angular.module(
                     arrayLength = this.value.length;
                     for (i = 0; i < arrayLength; i++) {
                         if (i === 0) {
-                            filterExpressionString = this.concatFilter(this.parameter, this.value[i]);
+                            filterExpressionString = this.concatFilter(this.parameter, this.getArrayValue(i));
                         } else {
                             filterExpressionString += ' ';
-                            filterExpressionString += this.concatFilter(this.parameter, this.value[i]);
+                            filterExpressionString += this.concatFilter(this.parameter, this.getArrayValue(i));
                         }
                     }
                 } else {
@@ -138,7 +162,7 @@ angular.module(
 
         /**
          * Adds a new entry to an array if the value of this filter expression 
-         * is an array.
+         * is an array. If the value already exists, it is not added.
          * 
          * @param {type} arrayValue
          * @returns {Boolean}
@@ -159,8 +183,55 @@ angular.module(
         };
 
         /**
-         * Determines wheter multiple instances of this filter expression can
-         * be put into a FilterExpressions list.
+         * Returns the entry at the specified index if the value of this
+         * filter expression is an array. Array values of filter expressions
+         * should be strings! This method can be overwitten in case the array value
+         * of the expression is an object. It should then return a string representation
+         * of the object that can serve as input for e.g. the getFilterExpressionString()
+         * method.
+         * 
+         * @param {int} index
+         * @returns {string}
+         */
+        FilterExpression.prototype.getArrayValue = function (index) {
+            if (this.isMultiple()) {
+                if (!this.value || index >= this.value.length) {
+                    return null;
+                }
+
+                return this.value[index];
+            }
+
+            return this.value;
+        };
+
+        /**
+         * Determines the cardinality of a specific tag. This method is used
+         * to display the number of tags of a collection tag or the number of
+         * objects associated with a post search filter tag. In the later case, 
+         * this operation has to be overwritten.
+         * 
+         * @param {type} index
+         * @returns {Array|window.JSON.parse.j|JSON.parse.j|Object|object}
+         */
+        FilterExpression.prototype.getCardinality = function (index) {
+            var cardinality;
+
+            if (index === -1) {
+                // no array item OR collection tag
+                cardinality = (this.value && this.isMultiple()) ? this.value.length : 0;
+            } else {
+                // index is ignored in the default implementation.
+                // if cardinality of a single array item matters, 
+                // this operation has to be overwritten!
+                cardinality = 0;
+            }
+
+            return cardinality;
+        };
+
+        /**
+         * Determines wheter the value of this filter expression is an array
          * 
          * @returns {Boolean}
          */
@@ -175,13 +246,15 @@ angular.module(
                 this.value = this.defaultValue;
             }
 
-            //this.displayValue = null;
             this.enumeratedTags = [];
         };
 
         /**
          * Enumerates the tags of this filter expression. Returns an array > 1 
-         * If the filter expression value is an array
+         * if the filter expression value is an array, otherwise behaves exactly as getTag().
+         * 
+         * Attention, this method does not check tags for validity!
+         * 
          * @returns {Array} Array of tags
          */
         FilterExpression.prototype.enumerateTags = function () {
@@ -192,11 +265,11 @@ angular.module(
             if (this.isMultiple()) {
                 arrayLength = this.value.length;
                 for (i = 0; i < arrayLength; i++) {
-                    tag = new this.Tag(this, this.value[i]);
+                    tag = new this.Tag(this, this.getArrayValue(i), this.getCardinality(i), false);
                     tags.push(tag);
                 }
             } else {
-                tag = new this.Tag(this, this.value);
+                tag = new this.Tag(this, this.value, this.getCardinality(-1), false);
                 tags.push(tag);
             }
 
@@ -204,14 +277,36 @@ angular.module(
         };
 
         /**
+         * Returns excactly one tag that represents this filter expression whether  
+         * it is an array-type (isMultiple = true) filter expression or not. 
+         * 
+         * Attention, this method does not check tags for validity!
+         * 
+         * @returns {this.Tag}
+         */
+        FilterExpression.prototype.getTag = function () {
+            var tag, cardinality;
+            cardinality = this.getCardinality(-1);
+            tag = new this.Tag(this, this.value, cardinality, true);
+            return tag;
+        };
+
+        /**
          * Tag class for visualising filter expressions as tags.
+         * 
+         * Cardinality and value of an array-type tags cannot be determined by the
+         * index of the tag in the filter expression value array, since the tag's remove
+         * function can change the array length and thus the index. Therefore,
+         * the values have to be provided when the tag is constructed!
          * 
          * @constructor
          * @param {FilterExpression} filterExpression
          * @param {object} value
+         * @param {int} cardinality
+         * @param {boolean} collectionTag
          * @returns {FilterExpression.Tag}
          */
-        FilterExpression.prototype.Tag = function (filterExpression, value) {
+        FilterExpression.prototype.Tag = function (filterExpression, value, cardinality, collectionTag) {
             if (filterExpression === undefined || filterExpression === null) {
                 console.error('The filterExpression property of a FilterTag cannot be null!');
                 throw 'The filterExpression property of a FilterTag cannot be null!';
@@ -219,19 +314,54 @@ angular.module(
 
             this.origin = filterExpression;
             this.type = this.origin.parameter;
-            this.name = this.origin.isMultiple() ? value : this.origin.getDisplayValue(this.origin.value);
-            this.value = value;
-            this.title = this.origin.name;
+            this.cardinality = cardinality || 0;
 
             /**
-             * Removes the value represtend by this tga from the filter expression.
+             * Determines wheter this tag is the representative of the value of the filter
+             * expression or just a single entry in an array value. In this case, value must be an array.
+             */
+            this.collectionTag = collectionTag === true ? true : false;
+
+                        /**
+             * The value is needed in case the Tag is created from an array
+             */
+            this.value = value;
+
+            FilterExpression.prototype.Tag.prototype.getName = function () {
+                return this.origin.getName();
+            };
+
+            FilterExpression.prototype.Tag.prototype.isEditable = function () {
+                return this.origin.isEditable();
+            };
+
+            FilterExpression.prototype.Tag.prototype.getValue = function () {
+                return this.value;
+            };
+
+            /**
+             * If the tag is a collection tag (it represnts the whole filter expression
+             * whose value is an array), the displayed tag name shall be determined by 
+             * the name property of the filter expression (default implementation
+             * of getDisplayValue). Otherwise, the tag name is determined on basis of
+             * the (array)value of the filter expression, e.g. by a cumstom implementation
+             * of the getDisplayValue operation.
+             */
+            FilterExpression.prototype.Tag.prototype.getDisplayValue = function (value) {
+                return collectionTag ? this.name :
+                        (value ? this.origin.getDisplayValue(value) : this.origin.getDisplayValue(this.value));
+            };
+
+            /**
+             * Removes the value represented by this tag from the filter expression.
              * If the value of the filter expression is an array, the entry represented
-             * by this tag is removed form the array.
+             * by this tag is removed from the array unless this tag is explicitely
+             * marked as collection tag that represents the entire filter expression.
              * 
              * @returns {undefined}
              */
             FilterExpression.prototype.Tag.prototype.remove = function () {
-                if (this.origin.isMultiple()) {
+                if (!this.collectionTag && this.origin.isMultiple()) {
                     this.origin.value.splice(this.origin.value.indexOf(this.value), 1);
                 } else {
                     this.origin.value = null;
@@ -239,12 +369,15 @@ angular.module(
             };
 
             /**
-             * Return the filter expression string of this single tag.
+             * Returns the filter expression string of a single array value or 
+             * the entire filter expression if the filter expression is either not
+             * an array type or this tag represents the collectionn tag of the 
+             * filter expression.
              * 
              * @returns expression for universal search
              */
             FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
-                if (this.origin.isMultiple()) {
+                if (!this.collectionTag && this.origin.isMultiple()) {
                     return this.type + ':"' + this.value + '"';
                 }
 

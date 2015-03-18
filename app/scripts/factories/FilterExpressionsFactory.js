@@ -92,7 +92,17 @@ angular.module(
                 return filterExpressionList;
             };
 
-            FilterExpressions.prototype.enumerateTags = function (includeInvisible, 
+            /**
+             * Enumerates all tags of all filter expressions, thus creating 
+             * single tags for each array entry of arrray type filöter expressions.
+             * 
+             * @param {type} includeInvisible
+             * @param {type} includeInvalid
+             * @param {type} includeDefaultValue
+             * @param {type} includeNotFilter
+             * @returns {Array}
+             */
+            FilterExpressions.prototype.enumerateTags = function (includeInvisible,
                 includeInvalid, includeDefaultValue, includeNotFilter) {
                 //console.debug("enumerating all tags");
                 var arrayLength, i, theFilterExpression, returnTags, theTags;
@@ -109,6 +119,39 @@ angular.module(
                         theTags = theFilterExpression.enumerateTags();
                         if (theTags.length > 0) {
                             returnTags = returnTags.concat(theTags);
+                        }
+                    }
+                }
+                return returnTags;
+            };
+
+            /**
+             * In contrast to the enumerateTags method, this method returns excatly one
+             * tag for each filter expression, thus ignoring array itmes of a array-type
+             * filter expression.
+             * 
+             * @param {type} includeInvisible
+             * @param {type} includeInvalid
+             * @param {type} includeDefaultValue
+             * @param {type} includeNotFilter
+             * @returns {undefined}
+             */
+            FilterExpressions.prototype.getTags = function (includeInvisible,
+                includeInvalid, includeDefaultValue, includeNotFilter) {
+                var arrayLength, i, theFilterExpression, returnTags, theTag;
+                returnTags = [];
+                arrayLength = this.list.length;
+                for (i = 0; i < arrayLength; i++) {
+                    theFilterExpression = this.list[i];
+
+                    if ((theFilterExpression.isVisible() || includeInvisible) &&
+                            (theFilterExpression.isValid() || includeInvalid) &&
+                            ((theFilterExpression.value !== theFilterExpression.defaultValue) || includeDefaultValue) &&
+                            (!theFilterExpression.isNotFilter() || includeNotFilter)) {
+
+                        theTag = theFilterExpression.getTag();
+                        if (theTag) {
+                            returnTags.push(theTag);
                         }
                     }
                 }

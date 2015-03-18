@@ -17,7 +17,7 @@ angular.module(
             } else {
                 console.warn('post search filters filter expression not correctly initialized!');
                 $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
-                    '', true, true, null);
+                    [], true, true, null, 'POST FILTERS', 'POST FILTERS', 'POST FILTERS');
                 $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
                     this.displayValue = value;
                     return '';
@@ -78,7 +78,7 @@ angular.module(
                     var filterExpressions, filterExpression, filterExpressionString,
                         offsetFilterExpressions, offsetFilterExpression;
                     filterExpressionString = tag.getFilterExpressionString();
-                    //$scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
+                    $scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
 
                     filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.type);
                     if (!filterExpressions || filterExpressions.length === 0) {
@@ -96,6 +96,7 @@ angular.module(
                         offsetFilterExpression.value = 0;
                     }
 
+                    tag.remove();
                     $scope.getPerformSearch()();
                 }
             };
@@ -126,7 +127,6 @@ angular.module(
                             }
                         }
                     }
-                    $scope.postSearchFilterExpressions.enumerateTags(false, false, false, true);
                 }
             });
         }

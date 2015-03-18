@@ -12,27 +12,27 @@ angular.module(
                 limitFilterExpressions, offsetFilterExpressions;
 
             $scope.keywordsFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD,
-                [], true, true, null, 'Keyword');
+                [], true, true, null, 'Keyword', 'Keyword');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
 
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
-                null, false, true, null, 'Topic Category');
+                null, false, true, null, 'Topic Category', 'Topic Category');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
 
             $scope.fromDateFilterExpression = new FilterExpression(FilterExpression.FILTER__DATE_START,
-                null, false, true, null, 'Start Date');
+                null, false, true, null, 'Start Date', 'Start Date');
             $scope.filterExpressions.addFilterExpression($scope.fromDateFilterExpression);
 
             $scope.toDateFilterExpression = new FilterExpression(FilterExpression.FILTER__DATE_END,
-                null, false, true, null, 'End Date');
+                null, false, true, null, 'End Date', 'End Date');
             $scope.filterExpressions.addFilterExpression($scope.toDateFilterExpression);
 
             $scope.geoIntersectsFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_INTERSECTS,
-                'false', false, true, null, 'Geo Intersection');
+                'false', false, true, null, 'Geo Intersection', 'Geo Intersection');
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
 
             $scope.geoBufferFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_BUFFER,
-            null, false, true, 'templates/geo-buffer-editor-popup.html', 'Geo Buffer');
+            null, false, true, 'templates/geo-buffer-editor-popup.html', 'Geo Buffer', 'Geo Buffer');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
 
             limitFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_LIMIT);
@@ -41,7 +41,7 @@ angular.module(
             } else {
                 //console.warn('limit filter expression not correctly initialized!');
                 $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
-                    20, false, true, 'templates/limit-editor-popup.html', 'Results Limit');
+                    20, false, true, 'templates/limit-editor-popup.html', 'Results Limit', 'Results Limit');
                 $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
             }
 
@@ -51,7 +51,7 @@ angular.module(
             } else {
                 //console.warn('offset filter expression not correctly initialized!');
                 $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
-                    0, false, false, null, 'Results Offset');
+                    0, false, false, null, 'Results Offset', 'Results Offset');
                 $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
             }
 
@@ -69,7 +69,7 @@ angular.module(
             } else {
                 //console.warn('geo filter expression not correctly initialized!');
                 $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
-                    'templates/geo-editor-popup.html');
+                    'templates/geo-editor-popup.html', 'Geospatial Extent', 'Geospatial Extent');
                 $scope.geoFilterExpression.getDisplayValue = function (value) {
                     if (value && value.indexOf('(') !== -1) {
                         return value.substring(0, value.indexOf('('));
@@ -87,7 +87,7 @@ angular.module(
             } else {
                 //console.warn('keyword-cuahsi filter expression not correctly initialized!');
                 $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI, 
-                    [], true, true, null, 'CUAHSI Keyword');
+                    [], true, true, null, 'CUAHSI Keyword', 'CUAHSI Keyword');
                 $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             }
             // FIXME: move to categories directive -----------------------------
@@ -97,8 +97,8 @@ angular.module(
                 $scope.textFilterExpression = textFilterExpressions[0];
             } else {
                 //console.warn('text filter expression not correctly initialized!');
-                $scope.textFilterExpression = new FilterExpression( FilterExpression.FILTER__TEXT, 
-                    null, false, false, null, 'Fulltext');
+                $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT, 
+                    null, false, false, null, 'Fulltext', 'Fulltext');
                 $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
             }
 

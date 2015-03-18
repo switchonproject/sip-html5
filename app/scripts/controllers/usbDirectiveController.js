@@ -63,8 +63,8 @@ angular.module(
                     // user entered a valid filter expression
                     if (param && value) {
                         param = param.toLowerCase();
-                        if (FilterExpression.FILTERS.indexOf(param) === -1 || 
-                            FilterExpression.FILTERS.indexOf(('!'+param)) === -1) {
+                        if (FilterExpression.FILTERS.indexOf(param) === -1 ||
+                                FilterExpression.FILTERS.indexOf(('!' + param)) === -1) {
                             $scope.notificationFunction({
                                 message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
                                 type: 'info'

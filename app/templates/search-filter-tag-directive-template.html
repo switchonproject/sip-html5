@@ -1,11 +1,13 @@
 <span class="tag label" 
       ng-class="getTagStyle(tag.type, false, highlightNegated)">
-    <span ng-class="getTagIcon(tag.type)" title="{{tag.title}}"></span>
-    <span ng-if="!tag.origin.isEditable()">{{tag.name}}</span>
+    <span ng-class="getTagIcon(tag.type)" title="{{tag.name}}"></span>
+    <span ng-if="!tag.origin.isEditable()">{{tag.getDisplayValue()}}</span>
     <span ng-if="tag.origin.isEditable()" 
           bs-popover template="{{tag.origin.editor}}"
           placement="bottom"
-          auto-close="1">{{tag.origin.getDisplayValue(data.editorValue)}}</span> 
+          auto-close="1">{{tag.getDisplayValue(data.editorValue)}}
+    </span> 
+    <span ng-if="tag.cardinality > 0"><small><em>({{tag.cardinality}})</em></small></span>
     <a title="delete"><i ng-click="hasRemoveFunction() ? performRemove(tag) : tag.remove()" 
           class="glyphicon glyphicon-remove"></i></a>
 </span>
