@@ -14,7 +14,7 @@ angular.module(
                 filterExpressions: '=',
                 postSearchFilterExpressions: '=',
                 filterTags: '=',
-                performSearch: '&searchFunction',
+                performSearch: '&',
                 notificationFunction: '&?'
             };
             

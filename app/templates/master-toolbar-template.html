@@ -1,11 +1,15 @@
 <div class="switchon-master-toolbar" 
      ng-class="{'switchon-master-toolbar-toggled': masterToolbarService.getCanShow() && masterToolbarService.isShowing()}">
-    <result-pager result-set="resultSet"></result-pager>
+    <result-pager result-set="resultSet"
+                  search-function="performSearch()" 
+                  filter-expressions="filterExpressions"></result-pager>
     <result-list result-set="resultSet" selected-object="selectedObject"></result-list>
     <postsearchfilter filter-expressions="filterExpressions" 
                       post-search-filter-expressions="postSearchFilterExpressions" 
                       filter-tags="filterTags" 
-                      search-function="performSearch(postFilterSearchString)" 
-                      notification-function="notificationFunction(message, type)">     
+                      search-function="performSearch()" 
+                      notification-function="notificationFunction()">     
     </postsearchfilter>
+    <!-- the functions that are only passed through to the lower level are invoked as we want to pass the reference
+         to the real function not the reference to the getter function -->
 </div>

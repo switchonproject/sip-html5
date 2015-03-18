@@ -1,7 +1,20 @@
 <div class="switchon-toolbar-component switchon-result-pager" ng-show="isVisible">   
-    <span class="switchon-result-pager-title"><strong>Resources</strong>&nbsp;({{resultSet.$total || 'n/a'}})</span>
+    <span class="switchon-result-pager-title">
+        <strong>Resources</strong>
+        <span title="Showing {{resultSet.$length}} of {{resultSet.$total}} resources" ng-show="resultSet && resultSet.$length && resultSet.$length > 0">({{resultSet.$total}})</span>
+    </span>
     <ul class="pagination pagination-sm pull-right">
-        <li ng-class="{disabled: !resultSet.$previous}"><a aria-label="Previous" ng-click="previous()"><span aria-hidden="true">&laquo;</span></a></li>
-        <li ng-class="{disabled: !resultSet.$next}"><a aria-label="Next" ng-click="next()"><span aria-hidden="true">&raquo;</span></a></li>
+        <li ng-class="{disabled: !resultSet || resultSet.$offset === 0}">
+            <a title="Show previous {{resultSet.$limit}} resources" aria-label="Previous" ng-click="previous()">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li ng-class="{disabled: (!resultSet || 
+                                   resultSet.$length === resultSet.$total || 
+                                   resultSet.$offset > (resultSet.$total - resultSet.$limit))}">
+            <a title="Show next {{resultSet.$limit}} resources" aria-label="Next" ng-click="next()">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
     </ul>
 </div>

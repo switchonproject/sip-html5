@@ -96,7 +96,7 @@ angular.module(
                         offsetFilterExpression.value = 0;
                     }
 
-                    $scope.performSearch();
+                    $scope.getPerformSearch()();
                 }
             };
 

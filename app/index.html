@@ -123,8 +123,10 @@
                             filter-expressions="filterExpressions" 
                             post-search-filter-expressions="postSearchFilterExpressions" 
                             filter-tags="data.resultSet.$filterTags" 
-                            search-function="performSearch(postFilterSearchString)" 
-                            notification-function="showMessage(message, type)"></master-toolbar>
+                            perform-search="performSearch" 
+                            notification-function="showMessage">
+                            <!-- the functions a passed as function reference -->
+            </master-toolbar>
         </div>
 
         <div id="page-content-wrapper">
