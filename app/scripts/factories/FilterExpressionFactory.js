@@ -530,6 +530,7 @@ angular.module(
          * is the case if the tag is the last tag in the current category (origin filter expressions
          * value array) or if there is only one resource associated with the current tag (cardinality = 1).
          * 
+         * @param {Number} threshold
          * @returns {boolean} true if removeable
          */
         FilterExpression.prototype.PostFilterTag.prototype.isRemoveable = function (threshold) {
