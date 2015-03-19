@@ -25,6 +25,7 @@ angular.module(
                 $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
             }
 
+            // create default negated filter expressions that can be populated by post filter expressions
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Condition (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
@@ -66,7 +67,7 @@ angular.module(
             /**
              * This is the function that is called when the user clicks on the
              * X icon of the tag. In contrast to ordinary search filter tags which
-             * are simply removved from thier parent filter expression by alling 
+             * are simply removved from thier parent filter expression by calling 
              * the tag.remove() function, the custom performRemove that is applied
              * to post search filter tags initiates a new search wherby the removed
              * post search filter tag is excluded from the search result by adding it
@@ -78,16 +79,16 @@ angular.module(
                     var filterExpressions, filterExpression, filterExpressionString,
                         offsetFilterExpressions, offsetFilterExpression;
                     filterExpressionString = tag.getFilterExpressionString();
-                    $scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
+                    //$scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
 
-                    filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.type);
+                    filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.getType());
                     if (!filterExpressions || filterExpressions.length === 0) {
-                        filterExpression = new FilterExpression(tag.type, null, true);
+                        filterExpression = new FilterExpression(tag.getType(), null, true);
                         $scope.filterExpressions.addFilterExpression(filterExpression);
                     } else {
                         filterExpression = filterExpressions[0];
                     }
-                    filterExpression.setArrayValue(tag.value);
+                    filterExpression.setArrayValue(tag.getValue());
 
                     // reset offset!
                     offsetFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_OFFSET);
@@ -97,6 +98,8 @@ angular.module(
                     }
 
                     tag.remove();
+                    // manually update the tag list
+                    tag.origin.enumeratedTags = tag.origin.enumerateTags(true);
                     $scope.getPerformSearch()();
                 }
             };
@@ -105,7 +108,7 @@ angular.module(
             $scope.$watch('filterTags', function (filterTags, o) {
                 if (filterTags && filterTags !== o && filterTags.length > 0) {
                     $scope.postSearchFilterExpressions.clear();
-                    var i, j, filterExpression, filterExpressions, tagGroup, param;
+                    var i, filterExpression, filterExpressions, tagGroup, param;
                     for (i = 0; i < filterTags.length; i++) {
                         tagGroup = filterTags[i];
                         if (tagGroup && tagGroup.value && tagGroup.value.length > 0) {
@@ -119,12 +122,9 @@ angular.module(
                                 filterExpression = filterExpressions[0];
                             }
 
-                            // tagGroup.value is an object: 
-                            // key = name of the tag, value = # of resources associated with that tag
-                            for (j = 0; j < tagGroup.value.length; j++) {
-                                filterExpression.setArrayValue(tagGroup.value[j].key);
-                                filterExpression.enumeratedTags = filterExpression.enumerateTags();
-                            }
+                            filterExpression.value = tagGroup.value;
+                            // enumerate tags as post filter tags explicitely!
+                            filterExpression.enumeratedTags = filterExpression.enumerateTags(true);
                         }
                     }
                 }

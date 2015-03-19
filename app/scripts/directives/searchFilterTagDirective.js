@@ -11,10 +11,12 @@ angular.module(
                     tag: '=',
                     performRemove: '&?removeFunction',
                     highlightNegated: '=?',
+                    removeThreshold: '=',
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
                 link: function (scope, elem, attrs) {
-                    if (scope.tag.origin.isEditable()) {
+                    if (scope.tag.isEditable()) {
+                        // the value is saved when the popup is closed
                         scope.$on('tooltip.hide', function () {
                             var phase;
                             //synchronise filter expression value with editor and displayed tag value

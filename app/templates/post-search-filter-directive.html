@@ -9,7 +9,8 @@
               ng-repeat="tag in filterExpression.enumeratedTags" 
               search-filter-tag 
               tag="tag" 
-              remove-function="postSearchFilterDirectiveController.performRemove(tag)">  
+              remove-function="postSearchFilterDirectiveController.performRemove(tag)"
+              remove-threshold="removeThreshold">  
         </span>
     </accordion-group>
 </accordion>

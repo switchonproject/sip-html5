@@ -91,16 +91,6 @@ angular.module(
             return this.value ? true : false;
         };
 
-        /**
-         * If a Filter Expression is editable, a custom editor (property: editor) 
-         * is shown when the user clicks on the Tag of the Filter Expression.
-         * 
-         * @returns {Boolean} editable ot not
-         */
-        FilterExpression.prototype.isEditable = function () {
-            return this.editor ? true : false;
-        };
-
         FilterExpression.prototype.isVisible = function () {
             return (this.visible === true) ? true : false;
         };
@@ -124,7 +114,7 @@ angular.module(
         FilterExpression.prototype.concatFilter = function (parameter, value) {
             // post search filters are an array of negated filter expressions
             // e.g. !keyword:"water".
-            // therfore it is not necessary to prefix them with param!
+            // therefore it is not necessary to prefix them with param!
             if (parameter === FilterExpression.FILTER__POST_SEARCH_FILTERS) {
                 return value;
             }
@@ -186,9 +176,7 @@ angular.module(
          * Returns the entry at the specified index if the value of this
          * filter expression is an array. Array values of filter expressions
          * should be strings! This method can be overwitten in case the array value
-         * of the expression is an object. It should then return a string representation
-         * of the object that can serve as input for e.g. the getFilterExpressionString()
-         * method.
+         * of the expression is an object.
          * 
          * @param {int} index
          * @returns {string}
@@ -206,31 +194,6 @@ angular.module(
         };
 
         /**
-         * Determines the cardinality of a specific tag. This method is used
-         * to display the number of tags of a collection tag or the number of
-         * objects associated with a post search filter tag. In the later case, 
-         * this operation has to be overwritten.
-         * 
-         * @param {type} index
-         * @returns {Array|window.JSON.parse.j|JSON.parse.j|Object|object}
-         */
-        FilterExpression.prototype.getCardinality = function (index) {
-            var cardinality;
-
-            if (index === -1) {
-                // no array item OR collection tag
-                cardinality = (this.value && this.isMultiple()) ? this.value.length : 0;
-            } else {
-                // index is ignored in the default implementation.
-                // if cardinality of a single array item matters, 
-                // this operation has to be overwritten!
-                cardinality = 0;
-            }
-
-            return cardinality;
-        };
-
-        /**
          * Determines wheter the value of this filter expression is an array
          * 
          * @returns {Boolean}
@@ -239,6 +202,11 @@ angular.module(
             return this.multiple === true;
         };
 
+        /**
+         * Resets the value of this filter expression to a default value (or null);
+         * 
+         * @returns {undefined}
+         */
         FilterExpression.prototype.clear = function () {
             if (this.defaultValue !== null && typeof this.defaultValue === 'object') {
                 this.value = JSON.parse(JSON.stringify(this.defaultValue));
@@ -255,21 +223,33 @@ angular.module(
          * 
          * Attention, this method does not check tags for validity!
          * 
+         * @param {boolean} postFilterTags
          * @returns {Array} Array of tags
          */
-        FilterExpression.prototype.enumerateTags = function () {
-            //console.debug("enumerating tags of filter expression '" + this.parameter + "'");
+
+        FilterExpression.prototype.enumerateTags = function (postFilterTags) {
             var tags, i, arrayLength, tag;
             tags = [];
 
+            // create a new tag for each item in the array
             if (this.isMultiple()) {
                 arrayLength = this.value.length;
                 for (i = 0; i < arrayLength; i++) {
-                    tag = new this.Tag(this, this.getArrayValue(i), this.getCardinality(i), false);
+                    if (postFilterTags === true) {
+                        tag = new this.PostFilterTag(this, this.getArrayValue(i));
+                    } else {
+                        tag = new this.Tag(this, this.getArrayValue(i));
+                    }
+
                     tags.push(tag);
                 }
             } else {
-                tag = new this.Tag(this, this.value, this.getCardinality(-1), false);
+                if (postFilterTags === true) {
+                    throw 'error enumerating post filter tags for filter expression "' + this.parameter +
+                        '", Post Filter Tags can only be enumerated for array-type filter expressions!';
+                }
+
+                tag = new this.Tag(this, this.value);
                 tags.push(tag);
             }
 
@@ -282,19 +262,24 @@ angular.module(
          * 
          * Attention, this method does not check tags for validity!
          * 
-         * @returns {this.Tag}
+         * @returns {FilterExpression.Tag}
          */
         FilterExpression.prototype.getTag = function () {
-            var tag, cardinality;
-            cardinality = this.getCardinality(-1);
-            tag = new this.Tag(this, this.value, cardinality, true);
+            var tag;
+
+            if (this.isMultiple()) {
+                tag = new this.CollectionTag(this, this.value);
+            } else {
+                tag = new this.Tag(this, this.value);
+            }
+
             return tag;
         };
 
         /**
-         * Tag class for visualising filter expressions as tags.
+         * Tag base class for visualising filter expressions as tags.
          * 
-         * Cardinality and value of an array-type tags cannot be determined by the
+         * The value of array-type tags cannot be determined by the
          * index of the tag in the filter expression value array, since the tag's remove
          * function can change the array length and thus the index. Therefore,
          * the values have to be provided when the tag is constructed!
@@ -302,87 +287,274 @@ angular.module(
          * @constructor
          * @param {FilterExpression} filterExpression
          * @param {object} value
-         * @param {int} cardinality
-         * @param {boolean} collectionTag
          * @returns {FilterExpression.Tag}
          */
-        FilterExpression.prototype.Tag = function (filterExpression, value, cardinality, collectionTag) {
+        FilterExpression.prototype.Tag = function (filterExpression, value) {
             if (filterExpression === undefined || filterExpression === null) {
                 console.error('The filterExpression property of a FilterTag cannot be null!');
                 throw 'The filterExpression property of a FilterTag cannot be null!';
             }
 
+            /**
+             * The origin filter expression of this tag.
+             */
             this.origin = filterExpression;
-            this.type = this.origin.parameter;
-            this.cardinality = cardinality || 0;
 
             /**
-             * Determines wheter this tag is the representative of the value of the filter
-             * expression or just a single entry in an array value. In this case, value must be an array.
-             */
-            this.collectionTag = collectionTag === true ? true : false;
-
-                        /**
              * The value is needed in case the Tag is created from an array
              */
             this.value = value;
+        };
 
-            FilterExpression.prototype.Tag.prototype.getName = function () {
-                return this.origin.getName();
-            };
+        FilterExpression.prototype.Tag.constructor = FilterExpression.prototype.Tag;
 
-            FilterExpression.prototype.Tag.prototype.isEditable = function () {
-                return this.origin.isEditable();
-            };
+        /**
+         * Returns the title of the tag, commonly for showing tooltips.
+         * 
+         * @returns {string} title of the tag
+         */
+        FilterExpression.prototype.Tag.prototype.getTitle = function () {
+            return this.origin.getName();
+        };
 
-            FilterExpression.prototype.Tag.prototype.getValue = function () {
-                return this.value;
-            };
+        /**
+         * Return the type of the tag and its origin filter expression, respectively.
+         * 
+         * @returns {string} type of the tag
+         */
+        FilterExpression.prototype.Tag.prototype.getType = function () {
+            return this.origin.parameter;
+        };
 
-            /**
-             * If the tag is a collection tag (it represnts the whole filter expression
-             * whose value is an array), the displayed tag name shall be determined by 
-             * the name property of the filter expression (default implementation
-             * of getDisplayValue). Otherwise, the tag name is determined on basis of
-             * the (array)value of the filter expression, e.g. by a cumstom implementation
-             * of the getDisplayValue operation.
-             */
-            FilterExpression.prototype.Tag.prototype.getDisplayValue = function (value) {
-                return collectionTag ? this.name :
-                        (value ? this.origin.getDisplayValue(value) : this.origin.getDisplayValue(this.value));
-            };
+        /**
+         * If a Filter Expression is editable, a custom editor (property: editor) 
+         * is shown when the user clicks on the Tag of the Filter Expression. 
+         * Array-type filter expression are only edtiable as a whole, therefore
+         * this method returns flase by default.
+         * 
+         * @returns {Boolean} editable ot not
+         */
+        FilterExpression.prototype.Tag.prototype.isEditable = function () {
+            return this.origin.isMultiple() ? false : (this.origin.editor ? true : false);
+        };
 
-            /**
-             * Removes the value represented by this tag from the filter expression.
-             * If the value of the filter expression is an array, the entry represented
-             * by this tag is removed from the array unless this tag is explicitely
-             * marked as collection tag that represents the entire filter expression.
-             * 
-             * @returns {undefined}
-             */
-            FilterExpression.prototype.Tag.prototype.remove = function () {
-                if (!this.collectionTag && this.origin.isMultiple()) {
-                    this.origin.value.splice(this.origin.value.indexOf(this.value), 1);
-                } else {
-                    this.origin.value = null;
-                }
-            };
+        /**
+         * Returns the editor template url for editing this tag.
+         * 
+         * @returns {string} editor template
+         */
+        FilterExpression.prototype.Tag.prototype.getEditor = function () {
+            return this.origin.editor;
+        };
 
-            /**
-             * Returns the filter expression string of a single array value or 
-             * the entire filter expression if the filter expression is either not
-             * an array type or this tag represents the collectionn tag of the 
-             * filter expression.
-             * 
-             * @returns expression for universal search
-             */
-            FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
-                if (!this.collectionTag && this.origin.isMultiple()) {
-                    return this.type + ':"' + this.value + '"';
-                }
+        /**
+         * Determines wheter this tag  is removeable or not. This is mainly
+         * relevant for post search filter expressions where for example
+         * negated filter expressions that don't yield any result shall not be removeable.
+         * Likewise, this method is overwritten by post search filter tags.
+         * 
+         * @returns {boolean} removeable or not (default: true)
+         */
+        FilterExpression.prototype.Tag.prototype.isRemoveable = function () {
+            return true;
+        };
 
-                return this.origin.getFilterExpressionString();
-            };
+        /**
+         * Returns the value associated with this tag. 
+         * If the origin filter expression is multiple, the value is an array element
+         * of the filter expression's value. However, if the tag is a collection tag,
+         * the value is the origin filter expression's original  value 
+         * (thus, it might be an array).
+         * 
+         * @returns {object} value associated with the tag
+         */
+        FilterExpression.prototype.Tag.prototype.getValue = function () {
+            return this.value;
+        };
+
+        /**
+         * If the tag is a collection tag (it represents the whole filter expression
+         * whose value is an array), the displayed tag name shall be determined by 
+         * the name property of the filter expression (default implementation
+         * of getDisplayValue). Otherwise, the tag name is determined on basis of
+         * the (array)value of the filter expression, e.g. by a custom implementation
+         * of the getDisplayValue operation.
+         * 
+         * This operation is delegated to the origon filter expressions  getDisplayValue
+         * operation in order to support a per-filter-expression type methods for
+         * generate display values.
+         * 
+         * The optional value parameter can be used to display a value that is different 
+         * from the actual value stored in the tag and the filter expression, respectively.
+         * This is mainly useful for editors that do not want to change actual value 
+         * before the user confirms the change.
+         * 
+         * @param {string} value that is displayed
+         * @returns {string}
+         */
+        FilterExpression.prototype.Tag.prototype.getDisplayValue = function (value) {
+            return (value ? this.origin.getDisplayValue(value) : this.origin.getDisplayValue(this.getValue()));
+        };
+
+        /**
+         * Determines the cardinality of a specific tag. This method is used
+         * to display the number of tags of a collection tag or the number of
+         * objects associated with a post search filter tag. In the later cases, 
+         * this operation has to be overwritten. Returns 0 by default. 
+         * 
+         * @returns {int} cardinality of the tag
+         */
+        FilterExpression.prototype.Tag.prototype.getCardinality = function () {
+            return 0;
+        };
+
+
+        /**
+         * Removes the value represented by this tag from the filter expression.
+         * If the value of the filter expression is an array, the entry represented
+         * by this tag is removed from the array unless this tag is explicitely
+         * marked as collection tag that represents the entire filter expression.
+         * 
+         * @returns {undefined}
+         */
+        FilterExpression.prototype.Tag.prototype.remove = function () {
+            if (this.origin.isMultiple()) {
+                this.origin.value.splice(this.origin.value.indexOf(this.value), 1);
+            } else {
+                this.origin.value = null;
+            }
+        };
+
+        /**
+         * Returns the filter expression string of a single array value or 
+         * the entire filter expression if the filter expression is either not
+         * an array type or this tag represents the collectionn tag of the 
+         * filter expression.
+         * 
+         * @returns expression for universal search
+         */
+        FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
+            if (this.origin.isMultiple()) {
+                return this.type + ':"' + this.value + '"';
+            }
+
+            return this.origin.getFilterExpressionString();
+        };
+
+
+        /**
+         * Collection Tag for visualising (array-tipe) filter expressions as 
+         * one single tag.
+         * 
+         * Determines wheter this tag is the representative of the value of the filter
+         * expression or just a single entry in an array value. In this case, value must be an array.
+         * 
+         * @constructor
+         * @param {FilterExpression} filterExpression
+         * @param {object} value
+         * @returns {FilterExpression.CollectionTag}
+         */
+        FilterExpression.prototype.CollectionTag = function (filterExpression, value) {
+            FilterExpression.prototype.Tag.call(this, filterExpression, value);
+        };
+
+        FilterExpression.prototype.CollectionTag.prototype = Object.create(FilterExpression.prototype.Tag.prototype);
+        FilterExpression.prototype.CollectionTag.constructor = FilterExpression.prototype.CollectionTag;
+
+
+        /**
+         * Return the display value of a collection tag which 
+         * is always the name of the filter expression.
+         * 
+         * @param {object} value
+         * @returns {string} name of the filter expression (display value)
+         */
+        FilterExpression.prototype.CollectionTag.prototype.getDisplayValue = function (value) {
+            return value || this.origin.name;
+        };
+
+        /**
+         * If a Filter Expression is editable, a custom editor (property: editor) 
+         * is shown when the user clicks on the Tag of the Filter Expression. 
+         * 
+         * @returns {Boolean} editable ot not
+         */
+        FilterExpression.prototype.CollectionTag.prototype.isEditable = function () {
+            return this.origin.editor ? true : false;
+        };
+
+        /**
+         * Determines the cardinality of a a collection tag. That is the number of 
+         * of arry values (or tags) of the origin filter expression. 
+         * 
+         * @returns {int} cardinality of the collection tag
+         */
+        FilterExpression.prototype.CollectionTag.prototype.getCardinality = function () {
+            return (this.origin.value && this.origin.isMultiple()) ? this.value.origin.length : 0;
+        };
+
+        /**
+         * Removes the value represented by this tag from the filter expression.
+         * Since a collection tag represents the whole array of an array-type filter 
+         * expression, this method removes the filter expression value as a whole,
+         * not just a single array element.
+         * 
+         * @returns {undefined}
+         */
+        FilterExpression.prototype.CollectionTag.prototype.remove = function () {
+            this.origin.value = null;
+        };
+
+        /**
+         * Creates an new instace of a post filter tag. 
+         * 
+         * @constructor
+         * @param {type} filterExpression
+         * @param {type} value
+         * @returns {FilterExpression.PostFilterTag}
+         */
+        FilterExpression.prototype.PostFilterTag = function (filterExpression, value) {
+            if (!value && !value.hasOwnProperty('key') && !value.hasOwnProperty('value')) {
+                throw 'The value of the PostFilterTag for the filter expression "' + filterExpression + '" is not valid! {key:..., value:...} object expected!';
+            }
+
+            FilterExpression.prototype.Tag.call(this, filterExpression, value);
+        };
+
+        FilterExpression.prototype.PostFilterTag.prototype = Object.create(FilterExpression.prototype.Tag.prototype);
+        FilterExpression.prototype.PostFilterTag.constructor = FilterExpression.prototype.PostFilterTag;
+
+        /**
+         * Determines wheter is post filter tag is removeable or not. A post filter tag 
+         * is not removeable if it's removal would lead  to an empty search result. This
+         * is the case if the tag is the last tag in the current category (origin filter expressions
+         * value array) or if there is only one resource associated with the current tag (cardinality = 1).
+         * 
+         * @returns {boolean} true if removeable
+         */
+        FilterExpression.prototype.PostFilterTag.prototype.isRemoveable = function (threshold) {
+            return (this.origin.value.length > 1 &&
+                (threshold ? this.getCardinality() < threshold : true));
+        };
+
+        /**
+         * Returns the cardinality of a post filter tag. The cardinality is stored in
+         * the tag's value object in the value property.
+         * @returns {Number} cardinality of the tag (number of resources assocated with the tag)
+         */
+
+        FilterExpression.prototype.PostFilterTag.prototype.getCardinality = function () {
+            return (this.value && this.value.hasOwnProperty('value')) ? this.value.value : 0;
+        };
+
+        /**
+         * Returns the "real" value of the post filter tag, thus omitting the
+         * cardinality information which is also stored together with the tag.
+         * 
+         * @returns {object} tag value of the 
+         */
+        FilterExpression.prototype.PostFilterTag.prototype.getValue = function () {
+            return (this.value && this.value.hasOwnProperty('key')) ? this.value.key : this.value;
         };
 
         // define constants
@@ -431,6 +603,7 @@ angular.module(
             }
         });
 
+        FilterExpression.prototype.constructor = FilterExpression;
         return FilterExpression;
     }]);
 
