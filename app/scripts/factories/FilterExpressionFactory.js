@@ -45,8 +45,10 @@ angular.module(
             }
 
             this.notFilter = (this.parameter.indexOf('!') === 0) ? true : false;
+            // visible defaults to true!
             this.visible = (visible === undefined) ? true : visible;
-            this.editor = (editor === undefined) ? null : editor;
+            // set a default editor for array-type filter expression only if no editor is provided.
+            this.editor = editor || this.multiple === true ? 'templates/filter-expression-editor-popup.html' : null;
             this.description = (description === undefined) ? null : description;
             this.enumeratedTags = [];
         }
@@ -269,7 +271,7 @@ angular.module(
 
             // return collection tags if there is more than 1 value in the collection!
             if (this.isMultiple()) {
-                if(this.value && this.value.length === 1) {
+                if (this.value && this.value.length === 1) {
                     tag = new this.Tag(this, this.value[0]);
                 } else {
                     tag = new this.CollectionTag(this, this.value);
@@ -469,13 +471,13 @@ angular.module(
 
         /**
          * Return the display value of a collection tag which 
-         * is always the name of the filter expression.
+         * is always the name (title) of the filter expression!
          * 
          * @param {object} value
          * @returns {string} name of the filter expression (display value)
          */
-        FilterExpression.prototype.CollectionTag.prototype.getDisplayValue = function (value) {
-            return value || this.origin.name;
+        FilterExpression.prototype.CollectionTag.prototype.getDisplayValue = function () {
+            return this.getTitle();
         };
 
         /**
@@ -495,7 +497,7 @@ angular.module(
          * @returns {int} cardinality of the collection tag
          */
         FilterExpression.prototype.CollectionTag.prototype.getCardinality = function () {
-            return (this.origin.value && this.origin.isMultiple()) ? this.value.origin.length : 0;
+            return (this.origin.value && this.origin.isMultiple()) ? this.origin.value.length : 0;
         };
 
         /**

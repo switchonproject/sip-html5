@@ -2,7 +2,8 @@ angular.module(
     'eu.water-switch-on.sip.directives'
 ).directive('searchFilterTag',
     [
-        function () {
+        'FilterExpression',
+        function (FilterExpression) {
             'use strict';
             return {
                 restrict: 'EA',
@@ -15,7 +16,7 @@ angular.module(
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
                 link: function (scope, elem, attrs) {
-                    if (scope.tag.isEditable()) {
+                    if (scope.tag.isEditable() && !(scope.tag instanceof FilterExpression.prototype.CollectionTag)) {
                         // the value is saved when the popup is closed
                         scope.$on('tooltip.hide', function () {
                             var phase;

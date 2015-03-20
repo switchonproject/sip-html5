@@ -24,7 +24,7 @@ angular.module(
                     toolbarCtrl.toggleVisibility('resultPager', scope.isVisible);
                 };
 
-                scope.$on('$stateChangeSuccess', function(event, toState) {
+                scope.$on('$stateChangeSuccess', function (event, toState) {
                     toggleVisibility(toState.name);
                 });
 
@@ -52,7 +52,7 @@ angular.module(
                         }
                     }
                     // angular wrapped function, which is actually a getter for the real function
-                    scope.performSearch(offset, false);
+                    scope.getPerformSearch()(offset, false);
                 };
 
                 scope.next = function () {
@@ -67,7 +67,7 @@ angular.module(
                         }
                     }
                     // angular wrapped function, which is actually a getter for the real function
-                    scope.performSearch(offset, false);
+                    scope.getPerformSearch()(offset, false);
                 };
             };
 

@@ -37,13 +37,13 @@ angular.module(
                 [], true, true, null, 'Access Function (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 
-            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
-                [], true, true, null, 'Access Protocol (Excluded)');
-            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
-
-            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
-                [], true, true, null, 'CUAHSI Keyword (Excluded)');
-            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
+//                [], true, true, null, 'Access Protocol (Excluded)');
+//            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+//
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
+//                [], true, true, null, 'CUAHSI Keyword (Excluded)');
+//            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 
             // those are the actual search-result-dependent post filter expressions 
             // that can be selected by the user. 
@@ -55,13 +55,13 @@ angular.module(
                 [], true, true, null, 'Access Functions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
-            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
-                [], true, true, null, 'Access Protocols');
-            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-
-            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
-                [], true, true, null, 'CUAHSI Keywords');
-            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
+//                [], true, true, null, 'Access Protocols');
+//            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+//
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
+//                [], true, true, null, 'CUAHSI Keywords');
+//            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
 //            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD), 
 //                [], true, true, null, 'Keywords');

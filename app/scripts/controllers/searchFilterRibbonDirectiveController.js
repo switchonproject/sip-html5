@@ -90,7 +90,7 @@ angular.module(
             } else {
                 //console.warn('keyword-cuahsi filter expression not correctly initialized!');
                 $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI, 
-                    [], true, true, null, 'CUAHSI Keyword', 'CUAHSI Keyword');
+                    [], true, true, 'templates/filter-expression-editor-popup.html', 'CUAHSI Keyword', 'CUAHSI Keyword');
                 $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             }
             // FIXME: move to categories directive -----------------------------

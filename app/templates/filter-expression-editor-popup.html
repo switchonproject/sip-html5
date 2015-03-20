@@ -1,0 +1,10 @@
+<div class="popover switchon-ribbon-popover" id="filterExpressionEditor">
+    <div class="arrow"></div>
+    <div class="popover-content" ng-init="enumeratedTags = tag.origin.enumerateTags()">
+        <span style="float:left; padding-bottom: 0.5em;" 
+              ng-repeat="subtag in enumeratedTags" 
+              search-filter-tag
+              tag="subtag">  
+        </span>
+    </div>
+</div>
