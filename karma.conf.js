@@ -77,6 +77,7 @@ module.exports = function(config) {
         'app/templates/categories-directive-template.html',
         'app/templates/countries-filter-directive.html',
         'app/templates/datefilter-directive.html',
+        'app/templates/filter-expression-editor-popup.html',
         'app/templates/geo-buffer-editor-popup.html',
         'app/templates/geo-editor-popup.html',
         'app/templates/keyword-filter-directive.html',

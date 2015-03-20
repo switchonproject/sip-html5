@@ -5,24 +5,27 @@ angular.module(
     [
         '$scope',
         'FilterExpression',
-        function ($scope, FilterExpression) {
+        'AppConfig',
+        function ($scope, FilterExpression, AppConfig) {
             'use strict';
 
-            var textFilterExpressions, oldValue, newValue;
+            var textFilterExpressions, oldTextValue, newTextValue;
 
+            $scope.config = AppConfig.search;
             $scope.textFilterExpression = null;
             $scope.pattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 
-            textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType('text');
+            textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__TEXT);
             if (textFilterExpressions && textFilterExpressions.length > 0) {
                 $scope.textFilterExpression = textFilterExpressions[0];
             } else {
                 //console.warn('text filter expression not correctly initialized!');
-                $scope.textFilterExpression = new FilterExpression('text', null, false, false, null);
+                $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT,
+                    null, false, false, null, 'Fulltext', 'Title and Description Search');
                 $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
             }
 
-            oldValue = $scope.textFilterExpression.value;
+            oldTextValue = $scope.textFilterExpression.value;
 
             // Show info message when input box ist empty and no filters have been defined. 
             $scope.$watch('universalSearchBox.filterExpressionInput.$error.required', function (newValue, oldValue) {
@@ -48,23 +51,28 @@ angular.module(
 //            });
 
             $scope.$watch('filterExpressions.list', function () {
-                newValue = $scope.textFilterExpression.value;
+                newTextValue = $scope.textFilterExpression.value;
 
                 //no user input in text box, recreate tags
-                if (newValue === oldValue) {
-                    // enumerate tags including NOT filters!
-                    $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags(false, false, false, true);
-                } else if (newValue && newValue.length > 0) {
+                if (newTextValue === oldTextValue) {
+                    if ($scope.config.combineMultileFilterExpressions === true) {
+                        // get combined tags including NOT filters!
+                        $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.getTags(false, false, false, true);
+                    } else {
+                        // enumerate tags including NOT filters!
+                        $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags(false, false, false, true);
+                    }
+                } else if (newTextValue && newTextValue.length > 0) {
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
-                    filterExpressionString = newValue.split($scope.pattern);
+                    filterExpressionString = newTextValue.split($scope.pattern);
                     /** @type {string} */
                     param = filterExpressionString[1];
                     value = filterExpressionString[2];
                     // user entered a valid filter expression
                     if (param && value) {
                         param = param.toLowerCase();
-                        if (FilterExpression.FILTERS.indexOf(param) === -1 || 
-                            FilterExpression.FILTERS.indexOf(('!'+param)) === -1) {
+                        if (FilterExpression.FILTERS.indexOf(param) === -1 ||
+                                FilterExpression.FILTERS.indexOf(('!' + param)) === -1) {
                             $scope.notificationFunction({
                                 message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
                                 type: 'info'
@@ -100,7 +108,7 @@ angular.module(
                         $scope.textFilterExpression.clear();
                     }
                 }
-                oldValue = $scope.textFilterExpression.value;
+                oldTextValue = $scope.textFilterExpression.value;
             }, true); // FIXME comparing with angular.equals on filter expressions might be slow
         }
     ]

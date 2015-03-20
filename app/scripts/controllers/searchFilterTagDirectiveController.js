@@ -8,9 +8,9 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
-            if ($scope.tag.origin.isEditable()) {
+            if ($scope.tag.isEditable()) {
                 $scope.data = {};
-                $scope.data.editorValue = $scope.tag.origin.value;
+                $scope.data.editorValue = $scope.tag.getValue();
             }
 
             // Styling of Search Filters.. into CSS but how?
@@ -23,7 +23,7 @@ angular.module(
             $scope.getTagIcon = function (type) {
                 var plainType;
                 // negated filters!
-                plainType = type.substr(type.indexOf('!')+1);
+                plainType = type.substr(type.indexOf('!') + 1);
                 switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
@@ -62,8 +62,7 @@ angular.module(
 
             // get the Filter Icon
             // FIXME: function could be put into a service
-            
-            
+
             /**
              * Returns the style (label color) associated with a specific
              * filter expression indetified by the parameter (or tag type) of the
@@ -79,14 +78,14 @@ angular.module(
                 var prefix, plainType;
                 // close icon style
                 prefix = (isForCloseIcon === true) ? 'switchon-close-icon-' : '';
-               
+
                 // negated filter is RED
-                if(type.indexOf('!') === 0 && isHighlightNegated === true) {
+                if (type.indexOf('!') === 0 && isHighlightNegated === true) {
                     return prefix + 'label-danger';
                 }
-                
-                plainType = type.substr(type.indexOf('!')+1);
-                
+
+                plainType = type.substr(type.indexOf('!') + 1);
+
                 switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return prefix + 'label-success';

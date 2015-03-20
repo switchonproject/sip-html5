@@ -5,33 +5,33 @@ angular.module(
         '$state',
         function ($state) {
             'use strict';
-            
+
             var link, scope;
-            
+
             scope = {
                 filterExpressions: '=',
                 postSearchFilterExpressions: '=',
                 filterTags: '=',
-                getPerformSearch: '&searchFunction',
-                notificationFunction: '&?'
+                performSearch: '&searchFunction',
+                notificationFunction: '&?',
+                removeThreshold: '='
             };
-            
+
             link = function (scope, element, attr, toolbarCtrl) {
                 var toggleVisibility;
-                
-                toggleVisibility = function(state) {
+
+                toggleVisibility = function (state) {
                     scope.isVisible = (state === 'map' || state === 'list' || state === 'th');
                     toolbarCtrl.toggleVisibility('resultList', scope.isVisible);
                 };
-                
-                scope.$on('$stateChangeSuccess', function(event, toState) {
+
+                scope.$on('$stateChangeSuccess', function (event, toState) {
                     toggleVisibility(toState.name);
                 });
-                
+
                 toggleVisibility($state.current.name);
             };
-            
-            
+
             return {
                 restrict: 'E',
                 require: '^masterToolbar',

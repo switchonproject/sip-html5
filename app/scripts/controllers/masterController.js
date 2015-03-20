@@ -63,7 +63,7 @@ angular.module(
             // LIMIT Filter
             $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
                 $scope.config.searchService.defautLimit, false, true,
-                'templates/limit-editor-popup.html');
+                'templates/limit-editor-popup.html', 'Results Limit');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
             // OFFSET Filter (not visible)
@@ -73,11 +73,13 @@ angular.module(
 
             // combined POST Search Filters
             $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
-                [], true, true,
-                null, 'Post Filters');
+                [], true, true, null, 'Exclusions');
             $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
-                this.displayValue = value;
-                return '';
+                if (value && value.indexOf(':') !== -1 && value.length > 3) {
+                    return value.substring(value.indexOf(':') + 2, value.length - 1);
+                }
+
+                return value;
             };
             $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
 
@@ -155,7 +157,14 @@ angular.module(
                 }
             });
 
-            $scope.performSearch = function (postFilterSearchString, offset) {
+            /**
+             * Performs a search under consideration of limit an offset.
+             * 
+             * @param {number} offset
+             * @param {boolean} clearPostSearchFilters
+             * @returns {undefined}
+             */
+            $scope.performSearch = function (offset, clearPostSearchFilters) {
                 var universalSearchString, limit;
 
                 limit = $scope.limitFilterExpression.value || $scope.config.searchService.defautLimit;
@@ -176,11 +185,11 @@ angular.module(
                     $scope.offsetFilterExpression.value = 0;
                 }
 
-                universalSearchString = $scope.filterExpressions.universalSearchString;
-
-                if (postFilterSearchString && postFilterSearchString.length > 0) {
-                    universalSearchString += (' ' + postFilterSearchString);
+                if (clearPostSearchFilters === true && $scope.postSearchFiltersFilterExpression.isValid()) {
+                    $scope.postSearchFiltersFilterExpression.clear();
                 }
+
+                universalSearchString = $scope.filterExpressions.universalSearchString;
 
                 $scope.data.resultSet = SearchService.search(universalSearchString,
                     $scope.config.tagFilter.tagGroups, limit, offset, searchProcessCallback);
@@ -276,7 +285,7 @@ angular.module(
                     }
                 }
             };
-            
+
             masterToolbarService.toggleVisibility($scope.config.gui.dev);
         }
     ]

@@ -25,7 +25,7 @@
                         required/>
                 </div>
             </div>
-            <button ng-click="performSearch()" 
+            <button ng-click="performSearch()(0, config.clearPostSearchFilters)" 
                     ng-disabled="((filterExpressions.enumeratedTags.length === 0) 
                         && (!textFilterExpression.value || textFilterExpression.value.length < 3))" 
                     class="btn btn-primary">

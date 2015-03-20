@@ -188,7 +188,7 @@ angular.module(
                                     tagGroup = resultFilterTags[i];
                                     if (tagGroup.key === '$total' && tagGroup.value && tagGroup.value.length === 1) {
                                         // 
-                                        result.$total = tagGroup.value[0].value;
+                                        result.$total = parseInt(tagGroup.value[0].value, 10);
                                         // $total is not valid filter tag. remove it.
                                         resultFilterTags.splice(i, 1);
                                         break;
