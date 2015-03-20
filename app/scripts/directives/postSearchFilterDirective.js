@@ -12,7 +12,7 @@ angular.module(
                 filterExpressions: '=',
                 postSearchFilterExpressions: '=',
                 filterTags: '=',
-                getPerformSearch: '&searchFunction',
+                performSearch: '&searchFunction',
                 notificationFunction: '&?',
                 removeThreshold: '='
             };

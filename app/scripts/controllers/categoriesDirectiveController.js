@@ -51,7 +51,7 @@ angular.module(
                     return;
                 }
 
-                $scope.performSearch();
+                $scope.performSearch(0, false);
                 this.expanded = false;
                 this.selectedCategory = null;
             };

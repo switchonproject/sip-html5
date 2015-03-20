@@ -5,12 +5,15 @@ angular.module(
     [
         '$scope',
         'FilterExpression',
-        function ($scope, FilterExpression) {
+        'AppConfig',
+        function ($scope, FilterExpression, AppConfig) {
             'use strict';
 
             var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions,
                 limitFilterExpressions, offsetFilterExpressions;
 
+            $scope.config = AppConfig.search;
+            
             $scope.keywordsFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD,
                 [], true, true, null, 'Keyword', 'Keyword');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);

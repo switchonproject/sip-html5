@@ -267,8 +267,13 @@ angular.module(
         FilterExpression.prototype.getTag = function () {
             var tag;
 
+            // return collection tags if there is more than 1 value in the collection!
             if (this.isMultiple()) {
-                tag = new this.CollectionTag(this, this.value);
+                if(this.value && this.value.length === 1) {
+                    tag = new this.Tag(this, this.value[0]);
+                } else {
+                    tag = new this.CollectionTag(this, this.value);
+                }
             } else {
                 tag = new this.Tag(this, this.value);
             }
@@ -435,7 +440,7 @@ angular.module(
          */
         FilterExpression.prototype.Tag.prototype.getFilterExpressionString = function () {
             if (this.origin.isMultiple()) {
-                return this.type + ':"' + this.value + '"';
+                return this.getType() + ':"' + this.getValue() + '"';
             }
 
             return this.origin.getFilterExpressionString();

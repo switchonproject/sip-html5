@@ -155,7 +155,14 @@ angular.module(
                 }
             });
 
-            $scope.performSearch = function (postFilterSearchString, offset) {
+            /**
+             * Performs a search under consideration of limit an offset.
+             * 
+             * @param {number} offset
+             * @param {boolean} clearPostSearchFilters
+             * @returns {undefined}
+             */
+            $scope.performSearch = function (offset, clearPostSearchFilters) {
                 var universalSearchString, limit;
 
                 limit = $scope.limitFilterExpression.value || $scope.config.searchService.defautLimit;
@@ -176,11 +183,11 @@ angular.module(
                     $scope.offsetFilterExpression.value = 0;
                 }
 
-                universalSearchString = $scope.filterExpressions.universalSearchString;
-
-                if (postFilterSearchString && postFilterSearchString.length > 0) {
-                    universalSearchString += (' ' + postFilterSearchString);
+                if (clearPostSearchFilters === true && $scope.postSearchFiltersFilterExpression.isValid()) {
+                    $scope.postSearchFiltersFilterExpression.clear();
                 }
+
+                universalSearchString = $scope.filterExpressions.universalSearchString;
 
                 $scope.data.resultSet = SearchService.search(universalSearchString,
                     $scope.config.tagFilter.tagGroups, limit, offset, searchProcessCallback);
@@ -276,7 +283,7 @@ angular.module(
                     }
                 }
             };
-            
+
             masterToolbarService.toggleVisibility($scope.config.gui.dev);
         }
     ]

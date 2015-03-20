@@ -5,9 +5,12 @@ angular.module(
     [
         '$scope',
         'FilterExpression',
-        function ($scope, FilterExpression) {
+        'AppConfig',
+        function ($scope, FilterExpression, AppConfig) {
             'use strict';
             var tempFilterExpressions, tempFilterExpression;
+
+            $scope.config = AppConfig.postSearchFilter;
 
             // this is the USB filter expression that contains all post search filter expressions
             // that have been selected by the user.
@@ -73,22 +76,27 @@ angular.module(
              * post search filter tag is excluded from the search result by adding it
              * as negated search parameter to the universal search string.
              * 
+             * @param {FilterExpression.Tag} tag
+             * 
              */
             this.performRemove = function (tag) {
                 if (tag) {
                     var filterExpressions, filterExpression, filterExpressionString,
                         offsetFilterExpressions, offsetFilterExpression;
-                    filterExpressionString = tag.getFilterExpressionString();
-                    //$scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
 
-                    filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.getType());
-                    if (!filterExpressions || filterExpressions.length === 0) {
-                        filterExpression = new FilterExpression(tag.getType(), null, true);
-                        $scope.filterExpressions.addFilterExpression(filterExpression);
+                    if ($scope.config.groupPostSearchFilters === true) {
+                        filterExpressionString = tag.getFilterExpressionString();
+                        $scope.postSearchFiltersFilterExpression.setArrayValue(filterExpressionString);
                     } else {
-                        filterExpression = filterExpressions[0];
+                        filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(tag.getType());
+                        if (!filterExpressions || filterExpressions.length === 0) {
+                            filterExpression = new FilterExpression(tag.getType(), null, true);
+                            $scope.filterExpressions.addFilterExpression(filterExpression);
+                        } else {
+                            filterExpression = filterExpressions[0];
+                        }
+                        filterExpression.setArrayValue(tag.getValue());
                     }
-                    filterExpression.setArrayValue(tag.getValue());
 
                     // reset offset!
                     offsetFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_OFFSET);
@@ -100,7 +108,11 @@ angular.module(
                     tag.remove();
                     // manually update the tag list
                     tag.origin.enumeratedTags = tag.origin.enumerateTags(true);
-                    $scope.getPerformSearch()();
+
+                    if ($scope.config.performImplicitSearch === true) {
+                        // angular wrapped function, which is actually a getter for the real function
+                        $scope.performSearch()(0, false);
+                    }
                 }
             };
 
