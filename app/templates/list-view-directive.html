@@ -4,36 +4,36 @@
         
         <td data-title="'Description'">
             <span>{{node.object.description | txtLen:160:false:'':true}}</span>
-            <span ng-hide="node.object.description.length < 160"><a ng-click="showInfo(node.object)">...</a></span>
-        </td>
-        
-        <td data-title="'Temporal Extent'" class="date">
-            {{node.object.fromdate| date: "dd.MM.yyyy"}} - 
-            {{node.object.todate| date: "dd.MM.yyyy"}}
-        </td>
-        
-        <td data-title="'Keywords'" class="tags">
-            <span ng-repeat="tag in node.object.tags | orderBy:'name'">
-                <span ng-hide="config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)" 
-                      class="label" ng-class="isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'">{{tag.name}}</span>
+            <span ng-hide="node.object.description.length < 160">
+                <a href="#/resource/{{node.object.id}}" title="Show the complete Description"><strong>...</strong></a>
             </span>
         </td>
         
+        <td data-title="'Temporal Extent'" class="date">
+            {{node.object.fromdate | date: "dd.MM.yyyy"}} - 
+            {{node.object.todate | date: "dd.MM.yyyy"}}
+        </td>
+        
+        <td data-title="'Keywords'" class="tags">
+            <span ng-repeat="tag in tags = (node.object.tags | orderBy:'name' | limitTo:config.keywordsLimit)">
+                <span ng-hide="config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)" 
+                      class="label" ng-class="isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'">{{tag.name}}</span>
+            </span>
+            <span ng-if="tags.length < node.object.tags.length"><a href="#/resource/{{node.object.id}}" title="Show all Keywords"><strong>...</strong></a></span>
+
+        </td>
+        
         <td data-title="'Tools'" class="tools">
-            <a bs-tooltip
-                  data-placement="left"
-                  data-trigger="hover"
-                  data-delay="{show: 400, hide: 100}"
-                  data-title="Info"
-                  class="btn-invisible btn-icon"
-                  href="#/resource/{{node.object.id}}">
+            <a class="btn-invisible btn-icon"
+               href="#/resource/{{node.object.id}}"
+               title="Show detailed Information">
                 <i class="glyphicon glyphicon-info-sign"></i>
             </a>
-            <span ng-repeat="representation in node.object.representation | filter:{function:'download'}"
+            <span ng-repeat="representation in node.object.representation | filter:{function:'download', type:'original data'}"
                   class="btn-invisible">
                     <a href="{{representation.contentlocation}}" download 
                        rel="nofollow"
-                       title="{{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}}"
+                       title="{{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}} ({{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}})"
                        type="{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}">
                        <i class="glyphicon glyphicon-download"></i>
                     </a>

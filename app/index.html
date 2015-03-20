@@ -47,13 +47,15 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <categories filter-expressions="filterExpressions" 
-                    search-function="performSearch" >          
+                    search-function="performSearch"
+                    title="Browse Resource Categories">          
                 </categories>
                 
                 <!-- search filter ribbon -->
                 <search-filter-ribbon filter-expressions="filterExpressions" 
                                       search-function="performSearch" 
-                                      notification-function="showMessage(message, type)">
+                                      notification-function="showMessage(message, type)"
+                                      title="Configure Search Filters"> 
                 </search-filter-ribbon>   
 
                 <!-- search directive -->
@@ -61,7 +63,10 @@
                      search-function="performSearch" 
                      notification-function="showMessage(message, type)">
                 </usb> 
-                <my-workspace workspace-name="SWITCH-ON" ng-disabled="config.gui.dev !== true"></my-workspace>
+                <my-workspace workspace-name="SWITCH-ON" 
+                              ng-disabled="config.gui.dev !== true"
+                              title="Visit your personal Workspace">     
+                </my-workspace>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -77,7 +82,8 @@
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="masterToolbarService.toggleVisibility()"
                             ng-class="{active: masterToolbarService.isShowing()}"
-                            ng-disabled="!masterToolbarService.getCanShow()">
+                            ng-disabled="!masterToolbarService.getCanShow()"
+                            title="Toolbar and Functions">
                         <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -90,20 +96,23 @@
                     <button type="button"
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="activateView('list')"
-                            ng-class="{active: state.current.name === 'list'}">
+                            ng-class="{active: state.current.name === 'list'}"
+                            title="Resources List View">
                         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                     </button>
                     <button type="button" 
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="activateView('th')"
                             ng-class="{active: state.current.name === 'th'}"
-                            ng-show="config.gui.dev === true">
+                            ng-show="config.gui.dev === true"
+                            title="Resources Thumbnail View">
                         <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                     </button>
                     <button type="button"
                             class="btn btn-default switchon-viewbutton" 
                             ng-click="activateView('map')"
-                            ng-class="{active: state.current.name === 'map'}">
+                            ng-class="{active: state.current.name === 'map'}"
+                            title="Resources Map View">
                         <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
                     </button>
                 </div>
