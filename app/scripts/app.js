@@ -18,7 +18,7 @@ angular.module(
         '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             'use strict';
-            
+
 //            $urlRouterProvider.when();
             $urlRouterProvider.otherwise('/list');
 
@@ -42,7 +42,7 @@ angular.module(
                 url: '/login',
                 templateUrl: 'views/loginView.html'
             });
-            
+
             $stateProvider.state('resourceDetail', {
                 url: '/resource/:resId',
                 templateUrl: 'views/object-detail-view.html',
@@ -55,37 +55,36 @@ angular.module(
                         'eu.water-switch-on.sip.services.shareService',
                         function ($stateParams, $q, searchService, shareService) {
                             var deferred, obj, objs;
-                            
+
                             deferred = $q.defer();
-                            
+
                             objs = shareService.getResourceObjects();
                             obj = null;
-                            if(objs && angular.isArray(objs)) {
-                                objs.some(function(resource) {
-                                    if(resource.id === $stateParams.resId) {
+                            if (objs && angular.isArray(objs)) {
+                                objs.some(function (resource) {
+                                    if (resource.id === $stateParams.resId) {
                                         obj = resource;
                                     }
-                                    
                                     return obj !== null;
                                 });
                             }
-                            
-                            if(obj) {
+
+                            if (obj) {
                                 deferred.resolve(obj);
                             } else {
                                 searchService.entityResource.get({
                                     classname: 'resource',
                                     objId: $stateParams.resId
                                 }).$promise.then(
-                                    function(obj) {
+                                    function (obj) {
                                         deferred.resolve(obj);
                                     },
-                                    function() {
-                                        deferred.reject('No resource wiht id found: ' + $stateParams.resId);
+                                    function () {
+                                        deferred.reject('No resource with id found: ' + $stateParams.resId);
                                     }
                                 );
                             }
-                            
+
                             return deferred.promise;
                         }
                     ]

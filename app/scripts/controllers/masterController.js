@@ -256,6 +256,11 @@ angular.module(
                                     (current > 1 ? ' resources' : ' resource') + ' retrieved from the SWITCH-ON Meta-Data Repository.';
                         $scope.data.messageType = 'success';
                         $scope.data.searchStatus.message = $scope.data.message;
+
+                        if ($scope.config.search.showListView === true) {
+                            $scope.activateView('list');
+                        }
+
                     } else {
                         // feature request #59
                         $scope.data.searchStatus.current = 200;

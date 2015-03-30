@@ -46,10 +46,11 @@ angular.module(
 
         appConfig.search = {};
         // clear any postSearchFilter before perfoming a new search with regular search filters
-        // NOTE: this option is not yet implemented!
         appConfig.search.clearPostSearchFilters = true;
         // combines array-type filter expressions in one tag 
         appConfig.search.combineMultileFilterExpressions = true;
+        // switch to list view after successfull search
+        appConfig.search.showListView = true;
 
         appConfig.postSearchFilter = {};
         // group post search filters when adding to USB
@@ -61,5 +62,13 @@ angular.module(
         // the change to apply additional post search filter
         // NOTE: this option is not yet implemented!
         appConfig.postSearchFilter.implicitSearchDelay = 1000;
+
+        appConfig.objectInfo = {};
+        appConfig.objectInfo.resourceJsonUrl = 'http://' +
+                appConfig.searchService.username + ':' +
+                appConfig.searchService.password + '@' +
+                appConfig.searchService.host.replace(/.*?:\/\//g, '');
+        appConfig.objectInfo.resourceXmlUrl = 'http://tl-ap001.xtr.deltares.nl/demo_csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
+
         return appConfig;
     }]);
