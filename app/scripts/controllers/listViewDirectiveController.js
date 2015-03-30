@@ -15,25 +15,33 @@ angular.module(
 
             var initialSorting, keywordLookupLists, generateKeywordList, generateQueryKeywordList;
 
-            $scope.$watch('tableData', function () {
-                // this is the list that contains the keyywords of the current query
-                generateQueryKeywordList();
-                $scope.tableParams.reload();
+            $scope.config = AppConfig.listView;
+            $scope.tableParams = new NgTableParams({
+                page: 1,
+                count: 2
+            }, {
+                counts: [],
+                total: 1,
+                getData: function ($defer) {
+                    $defer.resolve($scope.tableData);
+                }
             });
-
+            
             initialSorting = {};
             initialSorting['object.name'] = 'asc';
             keywordLookupLists = {};
             generateKeywordList = function (keywordGroup) {
-                var keywordList = TagGroupService.getKeywordList(keywordGroup);
-                if (keywordList && !keywordList.$resolved) {
-                    //console.log('keyword list not yet resolved');
-                    keywordList.$promise.then(function () {
-                        //console.log('keyword list generated');
-                        keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
-                    });
-                } else if (keywordList) {
-                    keywordLookupLists[keywordGroup] =  keywordList.join('|').toLowerCase().split('|');
+                if (keywordGroup && keywordGroup !== 'query-keyword') {
+                    var keywordList = TagGroupService.getKeywordList(keywordGroup);
+                    if (keywordList && !keywordList.$resolved) {
+                        //console.log('keyword list not yet resolved');
+                        keywordList.$promise.then(function () {
+                            //console.log('keyword list generated');
+                            keywordLookupLists[keywordGroup] = keywordList.join('|').toLowerCase().split('|');
+                        });
+                    } else if (keywordList) {
+                        keywordLookupLists[keywordGroup] =  keywordList.join('|').toLowerCase().split('|');
+                    }
                 }
             };
 
@@ -56,20 +64,7 @@ angular.module(
             };
 
             // generate a list with all-lowercase keywords
-            generateKeywordList('keyword-cuahsi');
-
-            $scope.config = AppConfig.listView;
-
-            $scope.tableParams = new NgTableParams({
-                page: 1,
-                count: 2
-            }, {
-                counts: [],
-                total: 1,
-                getData: function ($defer) {
-                    $defer.resolve($scope.tableData);
-                }
-            });
+            generateKeywordList($scope.config.highlightKeyword);
 
             $scope.showInfo = function (object) {
                 var modalInstance, scope;
@@ -102,13 +97,19 @@ angular.module(
             };
 
             $scope.isHighlightKeyword = function (keywordGroup, keyword) {
-                if (keyword !== undefined) {
+                if (keyword) {
                     if (keywordLookupLists.hasOwnProperty(keywordGroup)) {
                         return keywordLookupLists[keywordGroup].indexOf(keyword.toLowerCase()) > -1;
                     }
                 }
                 return false;
             };
+
+            $scope.$watch('tableData', function () {
+                // this is the list that contains the keyywords of the current query
+                generateQueryKeywordList();
+                $scope.tableParams.reload();
+            });
         }
     ]
 );
