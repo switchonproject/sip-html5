@@ -8,19 +8,30 @@
                     <button type="button" 
                             class="btn btn-default dropdown-toggle" 
                             dropdown-toggle 
-                            ng-init="keywordFilters.keywordGroup = 'CUAHSI Keywords'"
+                            ng-init="keywordFilters.keywordGroup = 'Keywords'"
                             style="width:100%">
                         {{keywordFilters.keywordGroup}}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li>
+                            <label class="btn" 
+                                ng-model="keywordFilters.keywordGroup" 
+                                btn-radio="'Keywords'" 
+                                ng-click="keywordFilters.isopen = !keywordFilters.isopen"
+                                title="All Keywords available in the SWITCH-ON Meta-Data Repository">
+                                Keywords
+                            </label>
+                        </li>
+                        <li>
                             <label class="btn" ng-model="keywordFilters.keywordGroup" 
                                    btn-radio="'TOPIC Categories'" 
-                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen"
+                                   title="INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository">
                                 TOPIC Categories
                             </label>
                         </li>
+                        <!--
                         <li>
                             <label class="btn" 
                                    ng-model="keywordFilters.keywordGroup" 
@@ -44,14 +55,21 @@
                                 Free Keywords
                             </label>
                         </li>
+                        -->
                     </ul>
                 </div>
 
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Keywords'" 
+                                class="ng-hide"
+                                filter-expression="keywordsFilterExpression" 
+                                keyword-group="keyword-all">    
+                </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" 
                                 class="ng-hide"
                                 filter-expression="topicFilterExpression" 
                                 keyword-group="topic-inspire">
                 </keyword-filter>
+                <!--
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUAHSI Keywords'" 
                                 class="ng-hide"
                                 filter-expression="keywordsCuashiFilterExpression" 
@@ -66,7 +84,7 @@
                                 class="ng-hide"
                                 filter-expression="keywordsFilterExpression" 
                                 keyword-group="keyword-free">        
-                </keyword-filter>
+                -->
             </div>
 
             <!-- FIXME: Date Filter Directive does not work properly in latest versions of 

@@ -13,13 +13,13 @@ angular.module(
                 limitFilterExpressions, offsetFilterExpressions;
 
             $scope.config = AppConfig.search;
-            
+
             $scope.keywordsFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD,
-                [], true, true, null, 'Keyword', 'Keyword');
+                [], true, true, null, 'Keywords', 'Free Keywords');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
 
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
-                null, false, true, null, 'Topic Category', 'Topic Category');
+                null, false, true, null, 'Topic Categories', 'INSPIRE Topic Categories');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
 
             $scope.fromDateFilterExpression = new FilterExpression(FilterExpression.FILTER__DATE_START,
@@ -35,7 +35,7 @@ angular.module(
             $scope.filterExpressions.addFilterExpression($scope.geoIntersectsFilterExpression);
 
             $scope.geoBufferFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO_BUFFER,
-            null, false, true, 'templates/geo-buffer-editor-popup.html', 'Geo Buffer', 'Geo Buffer');
+                null, false, true, 'templates/geo-buffer-editor-popup.html', 'Geo Buffer', 'Geo Buffer');
             $scope.filterExpressions.addFilterExpression($scope.geoBufferFilterExpression);
 
             limitFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_LIMIT);
@@ -89,7 +89,7 @@ angular.module(
                 $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpressions[0];
             } else {
                 //console.warn('keyword-cuahsi filter expression not correctly initialized!');
-                $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI, 
+                $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI,
                     [], true, true, 'templates/filter-expression-editor-popup.html', 'CUAHSI Keyword', 'CUAHSI Keyword');
                 $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
             }
@@ -100,7 +100,7 @@ angular.module(
                 $scope.textFilterExpression = textFilterExpressions[0];
             } else {
                 //console.warn('text filter expression not correctly initialized!');
-                $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT, 
+                $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT,
                     null, false, false, null, 'Fulltext', 'Fulltext');
                 $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
             }
