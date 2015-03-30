@@ -1,11 +1,11 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Filter Options</div>
+    <div class="panel-heading">Options</div>
     <div class="panel-body">
         <form name="optionsForm" id="optionsForm" novalidate> 
             <div class="form-group ">
                 <label for="geoIntersectsOption">Geospatial Search</label>
                 <div class="form-inline">
-                    <div class="radio">
+                    <div class="radio" title="Find resources that intersect with the geospatial search area">
                         <label>
                             <input name="geoIntersectsOption" 
                                    id="geoIntersectsOption" 
@@ -14,7 +14,7 @@
                                    value="true"> Intersects
                         </label>
                     </div>
-                    <div class="radio">
+                    <div class="radio" title="Find resources that are enclosed in the geospatial search area">
                         <label>
                             <input name="geoEnclosesOption" 
                                    id="geoEnclosesOption" 
@@ -25,6 +25,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="form-group" ng-class="{'has-error': optionsForm.geoBufferField.$invalid}">
                  <input type="number" class="form-control" 
                    min="0" 
@@ -35,16 +36,18 @@
                    placeholder="buffer in meters"
                    ng-model="geoBufferFilterExpression.value">
             </div>
+            -->
             <div class="form-group" ng-class="{'has-error': optionsForm.limitField.$invalid}">
-                <label for="limitField">Limit Search Results</label>                    
-                <input type="number" class="form-control" 
-                       min="0" 
-                       max="50" 
-                       ngMinlength="1"
-                       name="limitField" 
-                       id="limitField" 
-                       placeholder="# of results"
-                       ng-model="limitFilterExpression.value">
+                <div class="form-inline" title="Maximum number of search results that are shown at once">
+                    <label for="limitField">Max. Search Results</label>                    
+                    <input type="number" class="form-control" 
+                           min="0" 
+                           max="50" 
+                           ngMinlength="1"
+                           name="limitField" 
+                           id="limitField" 
+                           ng-model="limitFilterExpression.value">
+                </div>
             </div>
         </form>
     </div>
