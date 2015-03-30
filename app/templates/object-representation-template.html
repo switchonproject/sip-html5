@@ -1,54 +1,77 @@
 <accordion close-others="false">
-    <accordion-group ng-repeat="rep in reps" is-open="rep._status.open">
+    <accordion-group ng-repeat="rep in reps" is-open="rep._status.open"
+                     ng-init="filename = rep.contentlocation.substr(rep.contentlocation.lastIndexOf('/')+1)">
         <accordion-heading>
             {{rep.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}"></i> 
         </accordion-heading>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Description -->
+        <!--
+        <div class="row" ng-if="rep.description">
+            <div class="col-lg-3" title="Description of the data, e.g. information on data formats, download possibilities, etc.">
+                <label>Description:</label>
+            </div>
+            <div class="col-lg-9">
+                {{rep.description}}
+            </div>
+        </div>
+        -->
+        <!-- Temporal resolution -->
+        <div class="row" ng-if="rep.temporalresolution">
+            <div class="col-lg-3" title="Temporal resolution of the data, e.g. daily">
                 <label>Temporal resolution:</label>
             </div>
             <div class="col-lg-9">
                 {{rep.temporalresolution || 'n/a'}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Spatial resolution -->
+        <div class="row" ng-if="rep.spatialresolution">
+            <div class="col-lg-3" title="Spatial resolution of the data, e.g. meters or arc degrees.">
                 <label>Spatial resolution:</label>
             </div>
             <div class="col-lg-9">
                 {{rep.spatialresolution || 'n/a'}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Spatial scale -->
+        <div class="row" ng-if="rep.spatialscale">
+            <div class="col-lg-3" title="Spatial scale of the data, e.g. 1:2000 or  1:10000">
                 <label>Spatial scale:</label>
             </div>
             <div class="col-lg-9">
                 {{rep.spatialscale || 'n/a'}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Content Type -->
+        <div class="row" ng-if="rep.contenttype">
+            <div class="col-lg-3" title="MIME Type of the resource representation">
                 <label>Mime type:</label>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9" title="{{rep.contenttype.description || 'n/a'}}">
                 {{rep.contenttype.name || 'n/a'}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Data access function -->
+        <div class="row" ng-if="rep.function">
+            <div class="col-lg-3" title="Function that can be performed following the link to the resource representation">
                 <label>Data access function:</label>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9" title="{{rep.function.description || 'n/a'}}">
                 {{rep.function.name || 'n/a'}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Data access Link -->
+        <div class="row" ng-if="rep.contentlocation">
+            <div class="col-lg-3" title="Link to the data or website where the data can be obtained">
                 <label>Data access link:</label>
             </div>
             <div class="col-lg-9">
-                <a href="{{rep.contentlocation}}" ng-disabled="!rep.contentlocation">{{rep.contentlocation || 'n/a'}}</a>
+                <a href="{{rep.contentlocation}}" 
+                    target="_blank" 
+                    rel="nofollow"
+                    title="Download {{filename || rep.name}}"
+                    type="{{(rep.contenttype) ? rep.contenttype.name : 'application/octet-stream'}}"
+                    ng-disabled="!rep.contentlocation">{{(filename && filename.indexOf('.') !== -1) ? filename : rep.name}}</a>
             </div>
         </div>
     </accordion-group>
