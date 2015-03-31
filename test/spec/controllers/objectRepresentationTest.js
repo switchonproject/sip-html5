@@ -3,10 +3,11 @@ describe('Object Representation Test Suite', function () {
     
     // the controller is really the object detail controller, maybe we should join the files to avoid confusion
     describe('Object Representation Controller Tests', function () {
-        var $controller, $rootScope;
+        var $controller, $rootScope, AppConfig;
         
         beforeEach(function () {
             module('eu.water-switch-on.sip.controllers');
+            module('eu.water-switch-on.sip.factories');
             module('mocks');
         });
         
