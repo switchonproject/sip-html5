@@ -6,11 +6,13 @@ angular.module(
         '$scope',
         // the router resolves this resource object
         'resource',
-        function ($scope, resource) {
+        'AppConfig',
+        function ($scope, resource, AppConfig) {
             'use strict';
 
             var i;
 
+            $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
             $scope.reps = $scope.object.representation || [];
 

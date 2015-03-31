@@ -2,9 +2,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="">Object details of {{object.name}}</h2>
+                <h2 class="">Details of "{{object.name}}"</h2>
             </div>
         </div>
+        <!-- Name -->
+        <!--
         <div class="row">
             <div class="col-lg-3">
                 <label>Name:</label>
@@ -13,7 +15,9 @@
                 {{object.name}}
             </div>
         </div>
-        <div class="row">
+        -->
+        <!-- Description -->
+        <div class="row" ng-if="object.description">
             <div class="col-lg-3">
                 <label>Description:</label>
             </div>
@@ -21,68 +25,137 @@
                 {{object.description}}
             </div>
         </div>
-        <div class="row">
+        <!-- Keywords -->
+        <div class="row" ng-if="object.tags">
             <div class="col-lg-3">
                 <label>Keywords:</label>
             </div>
             <div class="col-lg-9">
                 <span ng-repeat="tag in object.tags">
-                    <span class="label label-primary">{{tag.name}}</span>
+                    <span class="label label-primary" 
+                          title="{{tag.description || ''}}" 
+                          ng-if="tag.taggroup.name.indexOf('keyword') === 0">{{tag.name}}</span>
                 </span>
             </div>
         </div>
+        <!-- Topic Category -->
         <div class="row">
-            <div class="col-lg-3">
-                <label>Topic:</label>
+            <div class="col-lg-3" title="High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search">
+                <label>Topic Category:</label>
             </div>
-            <div class="col-lg-9">
-                {{object.topiccategory.name ? object.topiccategory.name : '[none]'}}
+            <div class="col-lg-9" title="{{object.topiccategory.description || ''}}">
+                <span class="label label-default" title="{{object.topiccategory.description || ''}}">{{object.topiccategory.name ? object.topiccategory.name : '[none]'}}</span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- Point of Contact: -->
+        <div class="row" ng-if="object.contact">
+            <div class="col-lg-3" title="Name of contact person of the responsible party (optional) for providing the data or meta-data.">
                 <label>Point of Contact:</label>
             </div>
             <div class="col-lg-9">
-                {{object.contact.name ? object.contact.name : '[none]'}} ({{object.contact.organisation ? object.contact.organisation : 'no organisation'}})
+                <span ng-if="object.contact.name">{{object.contact.name}} </span>
+                <span ng-if="object.contact.email">
+                    &lt;
+                    <a ng-if="object.contact.email.indexOf(' ') === -1" href="mailto:{{object.contact.email}}">{{object.contact.email}}</a>
+                    <span ng-if="object.contact.email.indexOf(' ') !== -1">{{object.contact.email}}</span>
+                    &gt; 
+                </span>
+                                <span ng-if="object.contact.organisation && !object.contact.url"> ({{object.contact.organisation}})</span>
+                <span ng-if="object.contact.organisation && object.contact.url"> 
+                    (<a href="{{object.contact.url}}" target="_blank" rel="nofollow">{{object.contact.organisation}}</a>)
+                </span>
             </div>
         </div>
-        <div class="row">
+        <!-- Temporal extent: -->
+        <div class="row" ng-if="object.fromdate || object.todate">
             <div class="col-lg-3">
-                <label>Time Range:</label>
+                <label>Temporal extent:</label>
             </div>
             <div class="col-lg-9">
                 {{object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}} - {{object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <label>Last modification:</label>
+        <!-- Creation date -->
+        <div class="row" ng-if="object.creationdate">
+            <div class="col-lg-3" title="Date of creation of the resource">
+                <label>Created:</label>
+            </div>
+            <div class="col-lg-9">
+                {{object.creationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+            </div>
+        </div>
+        <!-- Last modification date -->
+        <div class="row" ng-if="object.lastmodificationdate">
+            <div class="col-lg-3" title="Date of last revision of the resource">
+                <label>Last modified:</label>
             </div>
             <div class="col-lg-9">
                 {{object.lastmodificationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <label>Access limitations:</label>
+        <!-- Publication date -->
+        <div class="row" ng-if="object.publicationdate">
+            <div class="col-lg-3" title="Date of publication of the resource at the origin website, catalogue, etc.">
+                <label>Published:</label>
             </div>
             <div class="col-lg-9">
+                {{object.publicationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+            </div>
+        </div>
+        <!-- Access limitations -->
+        <div class="row" ng-if="object.accesslimitations">
+            <div class="col-lg-3" title="License which applies to the usage of the data.">
+                <label>Access limitations:</label>
+            </div>
+            <div class="col-lg-9" title="{{object.accesslimitations.description || ''}}">
                 {{object.accesslimitations.name ? object.accesslimitations.name : 'unknown'}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
+        <!-- License statement -->
+        <div class="row" ng-if="object.licensestatement">
+            <div class="col-lg-3" title="Statement which applies to the usage of the data">
                 <label>License:</label>
             </div>
             <div class="col-lg-9">
                 {{object.licensestatement ? object.licensestatement : 'unknown'}}
             </div>
         </div>
-        <hr>
+        <!-- Lineage -->
+        <div class="row" ng-repeat="metadata in object.metadata | filter:{type:'lineage meta-data'}">
+            <div class="col-lg-3" title="Information on how the data was created.">
+                <label>Lineage:</label>
+            </div>
+            <div class="col-lg-9">
+                <span ng-if="metadata.description">{{metadata.description}}</span>
+            </div>
+        </div>
+        <!-- Meta-Data Documents-->
         <div class="row">
+            <div class="col-lg-3" title="Information on how the data was created.">
+                <label>Meta-Data documents:</label>
+            </div>
+            <div class="col-lg-9">
+                <span>
+                   <a href="{{config.resourceJsonUrl}}{{object.$self}}"
+                    target="_blank" 
+                    rel="nofollow"
+                    type="application/json"
+                    title="{{object.name}} Meta-Data in SWITCH-ON JSON format">SWITCH-ON Meta-Data Record</a>
+                </span>
+                <span ng-if="object.uuid">, 
+                   <a href="{{config.resourceXmlUrl}}{{object.uuid}}"
+                    target="_blank" 
+                    rel="nofollow"
+                    type="application/xml"
+                    title="{{object.name}} Meta-Data in ISO 19115 XML format">ISO 19115 Meta-Data Record</a> 
+                </span>
+            </div>
+        </div>
+        <hr>
+        <!-- Representations -->
+        <div class="row" ng-if="reps">
             <div class="col-lg-12">
-                <h3>Representations</h3>
+                <h3>Representations (Data)</h3>
             </div>
         </div>
         <div class="row">
