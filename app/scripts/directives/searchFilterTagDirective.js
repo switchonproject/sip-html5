@@ -10,7 +10,6 @@ angular.module(
                 templateUrl: 'templates/search-filter-tag-directive-template.html',
                 scope: {
                     tag: '=',
-                    performRemove: '&?removeFunction',
                     highlightNegated: '=?',
                     removeThreshold: '=',
                 },
@@ -31,10 +30,6 @@ angular.module(
                             }
                         });
                     }
-
-                    scope.hasRemoveFunction = function () {
-                        return angular.isDefined(attrs.removeFunction);
-                    };
                 }
             };
         }

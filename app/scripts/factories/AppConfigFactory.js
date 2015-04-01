@@ -57,7 +57,7 @@ angular.module(
         // if false, each post search filter will be added as distinct negated filter
         appConfig.postSearchFilter.groupPostSearchFilters = true;
         // immediately start the search after applying a post search filter
-        appConfig.postSearchFilter.performImplicitSearch = true;
+        appConfig.postSearchFilter.performImplicitSearch = false;
         // wait X ms before perfoming an implict search, thus ginving the user
         // the change to apply additional post search filter
         // NOTE: this option is not yet implemented!

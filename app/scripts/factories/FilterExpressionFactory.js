@@ -430,6 +430,11 @@ angular.module(
             } else {
                 this.origin.value = null;
             }
+
+            // invoke the callback function
+            if (this.origin.removeCallBack) {
+                this.origin.removeCallBack(this);
+            }
         };
 
         /**
@@ -510,6 +515,11 @@ angular.module(
          */
         FilterExpression.prototype.CollectionTag.prototype.remove = function () {
             this.origin.value = null;
+
+            // invoke the callback function
+            if (this.origin.removeCallBack) {
+                this.origin.removeCallBack(this);
+            }
         };
 
         /**

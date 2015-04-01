@@ -8,7 +8,8 @@ angular.module(
         'AppConfig',
         function ($scope, FilterExpression, AppConfig) {
             'use strict';
-            var tempFilterExpressions, tempFilterExpression;
+            var tempFilterExpressions, tempFilterExpression, removePostFilterTagFunction, 
+                removePostSearchFiltersFilterTag, setPostSearchFilterTags;
 
             $scope.config = AppConfig.postSearchFilter;
 
@@ -67,6 +68,61 @@ angular.module(
 //                [], true, true, null, 'Keywords');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
+            setPostSearchFilterTags = function (filterTags) {
+                $scope.postSearchFilterExpressions.clear();
+                var i, filterExpression, filterExpressions, tagGroup, param, j;
+                for (i = 0; i < filterTags.length; i++) {
+                    tagGroup = filterTags[i];
+                    if (tagGroup && tagGroup.value && tagGroup.value.length > 0) {
+                        tagGroup = filterTags[i];
+                        param = '!' + tagGroup.key;
+                        filterExpressions = $scope.postSearchFilterExpressions.getFilterExpressionsByType(param);
+                        if (!filterExpressions || filterExpressions.length === 0) {
+                            filterExpression = new FilterExpression(param, null, true);
+                            $scope.postSearchFilterExpressions.addFilterExpression(filterExpression);
+                        } else {
+                            filterExpression = filterExpressions[0];
+                        }
+
+                        // make a copy of the array in order to be able to restore the values!
+                        filterExpression.value = [];
+                        for (j = 0; j < tagGroup.value.length; ++j) {
+                            filterExpression.value.push(tagGroup.value[j]);
+                        }
+
+                        if (!filterExpression.removeCallBack) {
+                            filterExpression.removeCallBack = removePostFilterTagFunction;
+                        }
+
+                        // enumerate tags as post filter tags explicitely!
+                        filterExpression.enumeratedTags = filterExpression.enumerateTags(true);
+                    }
+                }
+            };
+ 
+            /**
+             * This is the remove callback function that is called after the grouped
+             * USB filter expression that contains all post search filter expressions
+             * that have been selected by the user is removed. (this makes only sense when
+             * performImplicitSearch is false). The post search filter that is removed from
+             * the USB is re-added to the list of post search filters!
+             * 
+             * 
+             * @param {FilterExpression.Tag} tag
+             * @returns {undefined}
+             */
+            removePostSearchFiltersFilterTag = function (tag) {
+                // the postSearchFiltersFilterExpression was removed.
+                // rebuild the complete list of post search filter tags!
+                if (tag instanceof FilterExpression.prototype.CollectionTag) {
+                    setPostSearchFilterTags($scope.filterTags);
+                }
+            };
+
+            if (!$scope.postSearchFiltersFilterExpression.removeCallBack) {
+                $scope.postSearchFiltersFilterExpression.removeCallBack = removePostSearchFiltersFilterTag;
+            }
+
             /**
              * This is the function that is called when the user clicks on the
              * X icon of the tag. In contrast to ordinary search filter tags which
@@ -79,7 +135,7 @@ angular.module(
              * @param {FilterExpression.Tag} tag
              * 
              */
-            this.performRemove = function (tag) {
+            removePostFilterTagFunction = function (tag) {
                 if (tag) {
                     var filterExpressions, filterExpression, filterExpressionString,
                         offsetFilterExpressions, offsetFilterExpression;
@@ -105,7 +161,6 @@ angular.module(
                         offsetFilterExpression.value = 0;
                     }
 
-                    tag.remove();
                     // manually update the tag list
                     tag.origin.enumeratedTags = tag.origin.enumerateTags(true);
 
@@ -119,26 +174,7 @@ angular.module(
             // create the tag list
             $scope.$watch('filterTags', function (filterTags, o) {
                 if (filterTags && filterTags !== o && filterTags.length > 0) {
-                    $scope.postSearchFilterExpressions.clear();
-                    var i, filterExpression, filterExpressions, tagGroup, param;
-                    for (i = 0; i < filterTags.length; i++) {
-                        tagGroup = filterTags[i];
-                        if (tagGroup && tagGroup.value && tagGroup.value.length > 0) {
-                            tagGroup = filterTags[i];
-                            param = '!' + tagGroup.key;
-                            filterExpressions = $scope.postSearchFilterExpressions.getFilterExpressionsByType(param);
-                            if (!filterExpressions || filterExpressions.length === 0) {
-                                filterExpression = new FilterExpression(param, null, true);
-                                $scope.postSearchFilterExpressions.addFilterExpression(filterExpression);
-                            } else {
-                                filterExpression = filterExpressions[0];
-                            }
-
-                            filterExpression.value = tagGroup.value;
-                            // enumerate tags as post filter tags explicitely!
-                            filterExpression.enumeratedTags = filterExpression.enumerateTags(true);
-                        }
-                    }
+                    setPostSearchFilterTags(filterTags);
                 }
             });
         }
