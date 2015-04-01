@@ -1,7 +1,9 @@
 <div class="switchon-toolbar-component switchon-result-list" ng-show="isVisible">   
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="node in resultSet.$collection">  
-            <span class="btn-link" ng-click="$parent.selectedObject = $index">{{node.name}}</span>
+            <span class="btn-link" 
+                  ng-style="{'font-weight': $parent.selectedObject === $index ? 'bold' : 'plain'}"
+                  ng-click="$parent.selectedObject = $index">{{node.name}}</span>
             <p><small><small>{{node.object.description| txtLen:80:false:'...':true}}</small></small></p>
         </li>
     </ul>

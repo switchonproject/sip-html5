@@ -15,6 +15,7 @@ angular.module(
                     centerSearchGeometry: '=',
                     preserveZoomOnCenter: '=',
                     objects: '=',
+                    object: '=',
                     centerObjects: '=',
                     selectedObject: '=',
                     toolbarShowing: '=',

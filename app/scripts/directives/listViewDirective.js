@@ -11,7 +11,8 @@ angular.module(
                 templateUrl: 'templates/list-view-directive.html',
                 scope: {
                     filterExpressions: '=',
-                    tableData: '='
+                    tableData: '=',
+                    selectedObject: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.listViewDirectiveController'
             };

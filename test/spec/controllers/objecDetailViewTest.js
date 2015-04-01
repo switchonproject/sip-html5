@@ -214,7 +214,7 @@ describe('Object Detail View Test Suite', function () {
 //            //expect(elem.find('div:nth-child(2)').text().trim()).toEqual('[none] (no organisation)');
         });
         
-        it('object detail - proper time range', function () {
+        it('object detail - proper temporal extent', function () {
             var elem, i, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
@@ -242,7 +242,7 @@ describe('Object Detail View Test Suite', function () {
 
                 rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(8)");
+                elem = rootelem.find(".row:nth-child(9)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Last modified:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(
@@ -259,7 +259,7 @@ describe('Object Detail View Test Suite', function () {
 
                 rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(10)");
+                elem = rootelem.find(".row:nth-child(11)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('Access limitations:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].accesslimitations.name);
@@ -289,7 +289,7 @@ describe('Object Detail View Test Suite', function () {
 
                 rootelem = $compile($templateCache.get('app/views/object-detail-view.html'))(scope);
                 scope.$digest();
-                elem = rootelem.find(".row:nth-child(11)");
+                elem = rootelem.find(".row:nth-child(12)");
                 expect(elem).toBeDefined();
                 expect(elem.find('div label').text()).toEqual('License:');
                 expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].licensestatement);
