@@ -7,9 +7,12 @@ angular.module(
         function () {
             'use strict';
 
-            var getFeatureRenderer, wicket;
+            var getFeatureRenderer, wicket, defaultStyle, highlightStyle;
 
             wicket = new Wkt.Wkt();
+
+            defaultStyle = {color: '#0000FF', fill: false, weight: 2};
+            highlightStyle = {fillOpacity: 0.4, fill: true, fillColor: '#1589FF'};
 
             getFeatureRenderer = function (obj) {
                 // this is only an indirection to hide the conrete implementation
@@ -61,7 +64,7 @@ angular.module(
                     if (!renderer && obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
                         ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
                         wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
-                        renderer = wicket.toObject({color: '#000000', fill: false, weight: 1});
+                        renderer = wicket.toObject(defaultStyle);
                     }
                 }
 
@@ -69,7 +72,9 @@ angular.module(
             };
 
             return {
-                getFeatureRenderer: getFeatureRenderer
+                getFeatureRenderer: getFeatureRenderer,
+                defaultStyle: defaultStyle,
+                highlightStyle: highlightStyle
             };
         }
     ]

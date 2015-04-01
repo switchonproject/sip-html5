@@ -75,6 +75,17 @@
                 {{object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}} - {{object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
+        <!-- Spatial extent: -->
+        <div class="row" ng-if="object.spatialcoverage">
+            <div class="col-lg-3">
+                <label>Spatial extent:</label>
+            </div>
+            <div class="col-lg-9">
+                <a href="#/map/object/{{object.id}}"
+                   title="Show resource on the on the map">{{object.spatialcoverage.geo_field.substring(0, object.spatialcoverage.geo_field.indexOf('('))}}</a> 
+            </div>
+        </div>        
+        
         <!-- Creation date -->
         <div class="row" ng-if="object.creationdate">
             <div class="col-lg-3" title="Date of creation of the resource">

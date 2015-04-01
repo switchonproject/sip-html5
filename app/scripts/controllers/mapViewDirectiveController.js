@@ -13,7 +13,7 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket, config;
+                setSearchGeom, wicket, config, highlightObjectLayer, setObject;
 
             config = AppConfig.mapView;
 
@@ -186,11 +186,11 @@ angular.module(
                 objGroup.clearLayers();
                 for (i = 0; i < objs.length; ++i) {
                     renderer = rendererService.getFeatureRenderer(objs[i]);
-                    if(renderer) {
+                    if (renderer) {
                         objGroup.addLayer(renderer);
                     }
                 }
- 
+
                 if ($scope.centerObjects && objGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(objGroup.getBounds(), {
@@ -203,43 +203,94 @@ angular.module(
                 }
             };
 
+            highlightObjectLayer = function (layer) {
+                leafletData.getMap('mainmap').then(function (map) {
+                    // FIXME: probably use with layer ids?
+                    // see https://github.com/Leaflet/Leaflet/issues/1805
+
+                    objGroup.setStyle(rendererService.defaultStyle);
+                    // check if function exists (not available in WMS Layers)
+                    if (typeof layer.setStyle === 'function') {
+                        layer.setStyle(rendererService.highlightStyle);
+                    }
+
+                    if (typeof layer.getBounds === 'function' && layer.getBounds()) {
+                        map.fitBounds(layer.getBounds(), {
+                            animate: true,
+                            pan: {animate: true, duration: 0.6},
+                            zoom: {animate: true},
+                            maxZoom: null
+                        });
+                    }
+                });
+            };
+
+            /**
+             * This operation is called when a an object id is provided as part of the route.
+             * The object is either loaded from the server of from the cahced object 
+             * (search results sored in the share service).
+             * 
+             * Therfore the functionlaity to showe a single object ion the map is independet 
+             * from the functionlaity to show the objects returned from search.
+             * 
+             * 
+             * @param {type} object
+             * @returns {undefined}
+             */
+            setObject = function (object) {
+                if (object) {
+                    var i, length, layer;
+
+                    // check if the object is already in the list of (search results) objects rendered on the map
+                    if ($scope.objects && $scope.objects > 0) {
+                        length = $scope.objects.length;
+ 
+                        for (i = 0; i < length; ++i) {
+                            if ($scope.objects[i].id === object.id) {
+                                if (objGroup.getLayers().length > i) {
+                                    highlightObjectLayer(objGroup.getLayers()[i]);
+                                }
+                                return;
+                            }
+                        }
+                    }
+
+                    // if the object is not cached, add a new layer
+                    layer = rendererService.getFeatureRenderer(object);
+                    if (layer) {
+                        objGroup.addLayer(layer);
+                        highlightObjectLayer(layer);
+                    }
+                }
+            };
+
             $scope.$watch('objects', function (n, o) {
                 if (n && n !== o) {
                     setObjects(n);
                 }
             });
 
-            if ($scope.objects) {
+            if ($scope.objects && !$scope.object) {
                 setObjects($scope.objects);
+            }
+
+            $scope.$watch('object', function (n, o) {
+                if (n && n !== o && !$scope.object) {
+                    setObject(n);
+                }
+            });
+
+            if ($scope.object) {
+                setObject($scope.object);
             }
 
             // </editor-fold>
 
             $scope.$watch('selectedObject', function (n) {
                 if (n !== -1 && objGroup.getLayers().length > n) {
-                    leafletData.getMap('mainmap').then(function (map) {
-                        // FIXME: probably use with layer ids?
-                        // see https://github.com/Leaflet/Leaflet/issues/1805
-
-                        objGroup.setStyle({color: '#000000', fill: false, weight: 1});
-                        var layer = objGroup.getLayers()[n];
-
-                        // check if function exists (not available in WMS Layers)
-                        if (typeof layer.setStyle === 'function') {
-                            layer.setStyle({fillOpacity: 0.4, fill: true, fillColor: '#1589FF'});
-                        }
-
-                        if (typeof layer.getBounds === 'function' && layer.getBounds()) {
-                            map.fitBounds(layer.getBounds(), {
-                                animate: true,
-                                pan: {animate: true, duration: 0.6},
-                                zoom: {animate: true},
-                                maxZoom: null
-                            });
-                        }
-                    });
+                    highlightObjectLayer(objGroup.getLayers()[n]);
                 }
-             });
+            });
         }
     ]
 );
