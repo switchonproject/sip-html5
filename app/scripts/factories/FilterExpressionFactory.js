@@ -222,6 +222,7 @@ angular.module(
         /**
          * Enumerates the tags of this filter expression. Returns an array > 1 
          * if the filter expression value is an array, otherwise behaves exactly as getTag().
+         * If postFilterTags is true, instances of PostFilterTag are created.  
          * 
          * Attention, this method does not check tags for validity!
          * 
@@ -304,6 +305,7 @@ angular.module(
 
             /**
              * The origin filter expression of this tag.
+             * @type FilterExpression
              */
             this.origin = filterExpression;
 
@@ -440,7 +442,7 @@ angular.module(
         /**
          * Returns the filter expression string of a single array value or 
          * the entire filter expression if the filter expression is either not
-         * an array type or this tag represents the collectionn tag of the 
+         * an array type or this tag represents the collection tag of the 
          * filter expression.
          * 
          * @returns expression for universal search
@@ -514,12 +516,24 @@ angular.module(
          * @returns {undefined}
          */
         FilterExpression.prototype.CollectionTag.prototype.remove = function () {
+            // this empties the origin array, but the local copy (CollectionTag.value)
+            // is still available for postprocessing in the callback function!
             this.origin.value = null;
 
             // invoke the callback function
             if (this.origin.removeCallBack) {
                 this.origin.removeCallBack(this);
             }
+        };
+
+        /**
+         * Returns the filter expression string of collection tag which is
+         * eqaul to the filter expression of the origin filter expression
+         * 
+         * @returns expression for universal search
+         */
+        FilterExpression.prototype.CollectionTag.prototype.getFilterExpressionString = function () {
+            return this.origin.getFilterExpressionString();
         };
 
         /**

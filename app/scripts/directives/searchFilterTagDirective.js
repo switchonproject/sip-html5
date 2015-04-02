@@ -11,10 +11,10 @@ angular.module(
                 scope: {
                     tag: '=',
                     highlightNegated: '=?',
-                    removeThreshold: '=',
+                    removeThreshold: '='
                 },
                 controller: 'eu.water-switch-on.sip.controllers.searchFilterTagDirectiveController',
-                link: function (scope, elem, attrs) {
+                link: function (scope) {
                     if (scope.tag.isEditable() && !(scope.tag instanceof FilterExpression.prototype.CollectionTag)) {
                         // the value is saved when the popup is closed
                         scope.$on('tooltip.hide', function () {
