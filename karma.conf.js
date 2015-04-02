@@ -42,6 +42,7 @@ module.exports = function(config) {
         'target/dist/scripts/controllers/searchFilterTagDirectiveController.js',
         'target/dist/scripts/controllers/postSearchFilterDirectiveController.js',
         'target/dist/scripts/controllers/categoriesDirectiveController.js',
+        'target/dist/scripts/controllers/mapViewController.js',
         'target/dist/scripts/directives/_module.js',
         'target/dist/scripts/directives/mapViewDirective.js',
         'target/dist/scripts/directives/usbDirective.js',

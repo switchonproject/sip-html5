@@ -50,7 +50,7 @@ angular.module(
             // define shared filter expressions that are used in several directives
             // GEO Filter
             $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
-                'templates/geo-editor-popup.html', 'Geography');
+                'templates/geo-editor-popup.html', 'Geography', 'Spatial Extent');
             $scope.geoFilterExpression.getDisplayValue = function (value) {
                 if (value && value.indexOf('(') !== -1) {
                     return value.substring(0, value.indexOf('('));
@@ -256,6 +256,11 @@ angular.module(
                                     (current > 1 ? ' resources' : ' resource') + ' retrieved from the SWITCH-ON Meta-Data Repository.';
                         $scope.data.messageType = 'success';
                         $scope.data.searchStatus.message = $scope.data.message;
+
+                        if ($scope.config.search.showListView === true) {
+                            $scope.activateView('list');
+                        }
+
                     } else {
                         // feature request #59
                         $scope.data.searchStatus.current = 200;

@@ -26,8 +26,14 @@
         <td data-title="'Tools'" class="tools">
             <a class="btn-invisible btn-icon"
                href="#/resource/{{node.object.id}}"
-               title="Show detailed Information">
+               title="Show detailed resource information">
                 <i class="glyphicon glyphicon-info-sign"></i>
+            </a>
+            <a class="btn-invisible btn-icon"
+               title="Show resource on the on the map"
+               ng-click="$parent.$parent.selectedObject = $index"
+               href="#/map">
+                <i class="glyphicon glyphicon-globe"></i>
             </a>
             <span ng-repeat="representation in node.object.representation | filter:{function:'download', type:'original data'}"
                   class="btn-invisible">
