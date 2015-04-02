@@ -185,7 +185,10 @@ angular.module(
                     $scope.offsetFilterExpression.value = 0;
                 }
 
-                if (clearPostSearchFilters === true && $scope.postSearchFiltersFilterExpression.isValid()) {
+                // post search filter are only cleared when implicit search is disabled!
+                if (clearPostSearchFilters === true &&
+                        $scope.config.postSearchFilter.performImplicitSearch === true &&
+                        $scope.postSearchFiltersFilterExpression.isValid()) {
                     $scope.postSearchFiltersFilterExpression.clear();
                 }
 
