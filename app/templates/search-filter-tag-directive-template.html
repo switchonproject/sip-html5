@@ -8,7 +8,7 @@
           auto-close="1">{{tag.getDisplayValue(data.editorValue)}}
     </span> 
     <span ng-if="tag.getCardinality() > 0"><small><em>({{tag.getCardinality()}})</em></small></span>
-    <a ng-if="tag.isRemoveable(removeThreshold)" title="delete"><i ng-click="hasRemoveFunction() ? performRemove(tag) : tag.remove()" 
+    <a ng-if="tag.isRemoveable(removeThreshold)" title="delete"><i ng-click="tag.remove()" 
           class="glyphicon glyphicon-remove"></i>
     </a>
 </span>
