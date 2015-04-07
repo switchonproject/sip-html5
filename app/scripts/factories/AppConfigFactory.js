@@ -62,6 +62,9 @@ angular.module(
         // the change to apply additional post search filter
         // NOTE: this option is not yet implemented!
         appConfig.postSearchFilter.implicitSearchDelay = 1000;
+        // if all search result are loaded into the client,
+        // filtering can be perfomred on the local search result
+        appConfig.postSearchFilter.applyFilterLocally = true;
 
         appConfig.objectInfo = {};
         appConfig.objectInfo.resourceJsonUrl = 'http://' +
@@ -69,6 +72,8 @@ angular.module(
                 appConfig.searchService.password + '@' +
                 appConfig.searchService.host.replace(/.*?:\/\//g, '');
         appConfig.objectInfo.resourceXmlUrl = 'http://tl-ap001.xtr.deltares.nl/demo_csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
+
+        appConfig.filterExpressionPattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 
         return appConfig;
     }]);

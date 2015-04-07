@@ -606,6 +606,7 @@ angular.module(
         FilterExpression.FILTER__ACCESS_CONDITION = 'access-condition';
         FilterExpression.FILTER__FUNCTION = 'function';
         FilterExpression.FILTER__PROTOCOL = 'protocol';
+        FilterExpression.FILTER__RESOURE_TYPE = 'resource-type';
 
         FilterExpression.FILTERS = [
             FilterExpression.FILTER__GEO,
@@ -624,7 +625,8 @@ angular.module(
             FilterExpression.FILTER__POST_SEARCH_FILTERS,
             FilterExpression.FILTER__ACCESS_CONDITION,
             FilterExpression.FILTER__FUNCTION,
-            FilterExpression.FILTER__PROTOCOL
+            FilterExpression.FILTER__PROTOCOL,
+            FilterExpression.FILTER__RESOURE_TYPE
         ];
 
         Object.defineProperties(FilterExpression.prototype, {

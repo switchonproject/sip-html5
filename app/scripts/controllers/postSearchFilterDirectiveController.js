@@ -6,14 +6,15 @@ angular.module(
         '$scope',
         'FilterExpression',
         'AppConfig',
-        function ($scope, FilterExpression, AppConfig) {
+        'eu.water-switch-on.sip.services.filterService',
+        function ($scope, FilterExpression, AppConfig, filterService) {
             'use strict';
             var tempFilterExpressions, tempFilterExpression, removePostFilterTagFunction,
                 removePostSearchFiltersFilterTag, setPostSearchFilterTags, pattern,
                 setPostSearchFilterTagValue, removeNegatedSearchFilterTag;
 
             $scope.config = AppConfig.postSearchFilter;
-            pattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
+            pattern = AppConfig.filterExpressionPattern;
 
             // this is the USB filter expression that contains all post search filter expressions
             // that have been selected by the user.
@@ -171,8 +172,8 @@ angular.module(
              * negated filter expression. This method is called when only one tag of 
              * the postSearchFiltersFilterExpression collection was removed from USB. 
              * If the whole postSearchFiltersFilterExpression is removed, the 
-             * list of visual list of post search filter tags can be safely 
-             * rebuilded completely.
+             * list of visual of post search filter tags can be safely 
+             * rebuilt completely. (CollectionTag)
              * 
              * @param {String} negatedFilterExpression negated tag from USB
              * @returns {undefined}
@@ -266,12 +267,36 @@ angular.module(
                     // manually update the tag list
                     tag.origin.enumeratedTags = tag.origin.enumerateTags(true);
 
-                    if ($scope.config.performImplicitSearch === true) {
+                    // apply implict search onyl if it is enabled in config,
+                    // and if the filters cannot be applied locally
+                    if ($scope.config.performImplicitSearch === true &&
+                            (filterService.isCompleteResult() === false ||
+                            $scope.config.applyFilterLocally === false)) {
                         // angular wrapped function, which is actually a getter for the real function
                         $scope.performSearch()(0, false);
                     }
                 }
             };
+
+            $scope.$watch('postSearchFiltersFilterExpression.value', function (o, n) {
+                if ($scope.config.applyFilterLocally === true &&
+                        filterService.isCompleteResult() === true && o !== n) {
+                    filterService.filterResultSet($scope.postSearchFiltersFilterExpression);
+
+                    if ($scope.notificationFunction) {
+
+                        if (filterService.getFilteredResourcesNumber() > 0) {
+                            $scope.notificationFunction()(filterService.getFilteredResourcesNumber() + ' of ' +
+                                        filterService.getLoadedResourcesNumber() +
+                                        ' resources hidded by filter.', 'warning');
+                        } else {
+                            $scope.notificationFunction()('Showing ' + filterService.getLoadedResourcesNumber() +
+                                    ' of ' + filterService.getTotalResourcesNumber() +
+                                    ' resources', 'success');
+                        }
+                    }
+                }
+            }, true);
 
             // create the tag list
             $scope.$watch('filterTags', function (filterTags, o) {
