@@ -39,8 +39,12 @@ angular.module(
                     scope.filterExpressions.addFilterExpression(limitFilterExpression);
                 }
 
+                scope.hasPrevious = function () {
+                    return (scope.resultSet && scope.resultSet.$offset > 0);
+                };
+
                 scope.previous = function () {
-                    if (scope.resultSet && scope.resultSet.$resolved === true) {
+                    if (scope.resultSet.$resolved === true && scope.hasPrevious()) {
                         limit = scope.resultSet.$limit;
                         if (limit !== limitFilterExpression.value) {
                             // limit changed! offset invalid. need to start at 0!
@@ -50,13 +54,20 @@ angular.module(
                             offset = offset < (scope.resultSet.$total - limit) ? offset : scope.resultSet.$offset;
                             offset = offset >= 0 ? offset : 0;
                         }
+
+                        // angular wrapped function, which is actually a getter for the real function
+                        scope.getPerformSearch()(offset, false);
                     }
-                    // angular wrapped function, which is actually a getter for the real function
-                    scope.getPerformSearch()(offset, false);
+                };
+
+                scope.hasNext = function () {
+                    return (scope.resultSet &&
+                                   scope.resultSet.$length < scope.resultSet.$total &&
+                                   scope.resultSet.$offset <= (scope.resultSet.$total - scope.resultSet.$limit));
                 };
 
                 scope.next = function () {
-                    if (scope.resultSet && scope.resultSet.$resolved === true) {
+                    if (scope.resultSet.$resolved === true && scope.hasNext() === true) {
                         limit = scope.resultSet.$limit;
                         if (limit !== limitFilterExpression.value) {
                             // limit changed! offset invalid. need to start at 0!
@@ -65,9 +76,10 @@ angular.module(
                             offset = scope.resultSet.$offset + limit;
                             offset = offset < scope.resultSet.$total ? offset : scope.resultSet.$offset;
                         }
+                        
+                        // angular wrapped function, which is actually a getter for the real function
+                        scope.getPerformSearch()(offset, false);
                     }
-                    // angular wrapped function, which is actually a getter for the real function
-                    scope.getPerformSearch()(offset, false);
                 };
             };
 
