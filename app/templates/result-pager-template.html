@@ -4,15 +4,15 @@
         <span title="Showing {{resultSet.$length}} of {{resultSet.$total}} resources" ng-show="resultSet && resultSet.$length && resultSet.$length > 0">({{resultSet.$total}})</span>
     </span>
     <ul class="pagination pagination-sm pull-right">
-        <li ng-class="{disabled: !resultSet || resultSet.$offset === 0}">
-            <a title="Show previous {{resultSet.$limit}} resources" aria-label="Previous" ng-click="previous()">
+        <li ng-class="{disabled: !hasPrevious()}">
+            <a title="Show previous {{resultSet.$limit}} resources" aria-label="Previous" 
+               ng-show="hasPrevious()" ng-click="previous()">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li ng-class="{disabled: (!resultSet || 
-                                   resultSet.$length === resultSet.$total || 
-                                   resultSet.$offset > (resultSet.$total - resultSet.$limit))}">
-            <a title="Show next {{resultSet.$limit}} resources" aria-label="Next" ng-click="next()">
+        <li ng-class="{disabled: !hasNext()}">
+            <a title="Show next {{resultSet.$limit}} resources" aria-label="Next" 
+               ng-show="hasNext()" ng-click="next()">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
