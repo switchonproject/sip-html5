@@ -64,8 +64,8 @@ angular.module(
 
             // LIMIT Filter
             $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
-                $scope.config.searchService.defautLimit, false, true,
-                'templates/limit-editor-popup.html', 'Results Limit');
+                $scope.config.search.defautLimit, false, true,
+                'templates/limit-editor-popup.html', 'Results Limit', 'Results Limit');
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
             // OFFSET Filter (not visible)

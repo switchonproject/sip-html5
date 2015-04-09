@@ -48,7 +48,7 @@ angular.module(
             // visible defaults to true!
             this.visible = (visible === undefined) ? true : visible;
             // set a default editor for array-type filter expression only if no editor is provided.
-            this.editor = editor || this.multiple === true ? 'templates/filter-expression-editor-popup.html' : null;
+            this.editor = editor || (this.multiple === true ? 'templates/filter-expression-editor-popup.html' : null);
             this.description = (description === undefined) ? null : description;
             this.enumeratedTags = [];
         }
@@ -338,8 +338,8 @@ angular.module(
         /**
          * If a Filter Expression is editable, a custom editor (property: editor) 
          * is shown when the user clicks on the Tag of the Filter Expression. 
-         * Array-type filter expression are only edtiable as a whole, therefore
-         * this method returns flase by default.
+         * Array-type filter expression are only editable as a whole, therefore
+         * this method returns false by default.
          * 
          * @returns {Boolean} editable ot not
          */
