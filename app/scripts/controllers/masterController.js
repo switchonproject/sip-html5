@@ -172,7 +172,8 @@ angular.module(
             $scope.performSearch = function (offset, clearPostSearchFilters) {
                 var universalSearchString, limit;
 
-                limit = $scope.limitFilterExpression.value || $scope.config.searchService.defautLimit;
+                $scope.limitFilterExpression.value = $scope.limitFilterExpression.value || $scope.config.searchService.defautLimit;
+                limit = $scope.limitFilterExpression.value;
 
                 // applying an offset is only valid in paged results previous and next search
                 // therfore only resultSetDirectiveController provided the offset parameter
