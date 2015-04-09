@@ -6,10 +6,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SWITCH-ON SIP -= !DEVELOPMENT SNAPSHOT! =-</title>
-        <meta name="description" content="SWITCH-ON SIP v0.3">
+        <title>SWITCH-ON Spatial Information Platform Client</title>
+        <meta name="description" content="The SIP HTML5 GUI is a web-based internet application that provides easy access to water-related open-data, and is the main entry points for external users to the SIP. Standard web technologies like HTML5 and JavaScript are used for its implementation so users only need a web browser to access this GUI.">
+        <meta name="content-language" content="en-GB">     
+        <meta name="author" content="cismet GmbH, http://www.cismet.de">	
+	<meta name="date" content="2015-04-07T00:00:00+02:00">
+	<meta http-equiv="imagetoolbar" content="no">     
+	<meta http-equiv="window-target" content="_top">  
         <meta name="viewport" content="width=1024">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+        <link rel="icon" type="image/vnd.microsoft.icon" href="images/favicon.ico"/>
+        
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/ng-table/dist/ng-table.css" rel="stylesheet" type="text/css"/>
@@ -63,7 +71,7 @@
                      notification-function="showMessage(message, type)">
                 </usb> 
                 <my-workspace workspace-name="SWITCH-ON" 
-                              ng-disabled="config.gui.dev !== true"
+                              ng-if="config.gui.dev"
                               title="Visit your personal Workspace">     
                 </my-workspace>
             </div><!-- /.navbar-collapse -->
@@ -210,6 +218,7 @@
     <script src="scripts/services/tagGroupService.js" type="text/javascript"></script>
     <script src="scripts/services/featureRendererService.js" type="text/javascript"></script>
     <script src="scripts/services/masterToolbarService.js" type="text/javascript"></script>
+    <script src="scripts/services/filterService.js" type="text/javascript"></script>
     <script src="scripts/filters/_module.js" type="text/javascript"></script>
     <script src="scripts/filters/textLengthFilter.js" type="text/javascript"></script>
     <script src="scripts/factories/_module.js" type="text/javascript"></script>

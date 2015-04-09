@@ -58,8 +58,11 @@ angular.module(
                 $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
             }
 
+            // topic categories selected from the categories dropdown or the
+            // filter expression don't have cardinality information. Therfore 
+            // the check for isArray is needed.
             $scope.topicFilterExpression.getDisplayValue = function (value) {
-                return (value && value.length > 0) ? value[0] : value;
+                return (value && angular.isArray(value) && value.length === 2) ? value[0] : value;
             };
 
             $scope.geoIntersectsFilterExpression.getDisplayValue = function (value) {

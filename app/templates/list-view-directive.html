@@ -26,23 +26,17 @@
         <td data-title="'Tools'" class="tools">
             <a class="btn-invisible btn-icon"
                href="#/resource/{{node.object.id}}"
-               title="Show detailed resource information">
-                <i class="glyphicon glyphicon-info-sign"></i>
-            </a>
+               title="Show detailed resource information"><i class="glyphicon glyphicon-info-sign"></i></a>
             <a class="btn-invisible btn-icon"
                title="Show resource on the on the map"
                ng-click="$parent.$parent.selectedObject = $index"
-               href="#/map">
-                <i class="glyphicon glyphicon-globe"></i>
-            </a>
+               href="#/map"><i class="glyphicon glyphicon-globe"></i></a>
             <span ng-repeat="representation in node.object.representation | filter:{function:'download', type:'original data'}"
                   class="btn-invisible">
                     <a href="{{representation.contentlocation}}" download 
                        rel="nofollow"
-                       title="{{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}} ({{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}})"
-                       type="{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}">
-                       <i class="glyphicon glyphicon-download"></i>
-                    </a>
+                       title="Download {{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}} ({{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}})"
+                       type="{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}"><i class="glyphicon glyphicon-download"></i></a>
             </span>
  <!--           <span bs-tooltip
                   data-placement="left"

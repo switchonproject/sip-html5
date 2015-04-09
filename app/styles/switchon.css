@@ -83,6 +83,16 @@ body {
     left: 10%;
 }
 
+.switchon-categories-button {
+    background-color: transparent;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.switchon-categories-button:hover {
+    border-color: #ccc
+}
+
 .switchon-categories-popover
 {
     max-width: 500px;

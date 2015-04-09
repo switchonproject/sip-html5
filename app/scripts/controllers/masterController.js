@@ -14,6 +14,7 @@ angular.module(
         'AppConfig',
         'eu.water-switch-on.sip.services.shareService',
         'eu.water-switch-on.sip.services.masterToolbarService',
+        'eu.water-switch-on.sip.services.filterService',
         function (
             $scope,
             $rootScope,
@@ -25,7 +26,8 @@ angular.module(
             TagGroupService,
             AppConfig,
             shareService,
-            masterToolbarService
+            masterToolbarService,
+            filterService
         ) {
             'use strict';
 
@@ -141,6 +143,9 @@ angular.module(
                     $scope.data.selectedObject = -1;
 
                     shareService.setResourceObjects(objs);
+
+                    // service that filters local data.resultSet.$collection
+                    filterService.setResultSet($scope.data.resultSet);
 
                     // now that we know $total number of resources, we can provide
                     // a detailed status message:
