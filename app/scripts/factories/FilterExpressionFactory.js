@@ -285,6 +285,25 @@ angular.module(
         };
 
         /**
+         * Sets the value of a filter expression from a string. This method
+         * is commonly called when a universal search string is parsed
+         * in the universal search box. It has to be overriden by individual 
+         * filter expression to perorma additional parsing of value string,
+         * e.g. converting to numbers.
+         * 
+         * 
+         * @param {string} newValue
+         * @returns {undefined}
+         */
+        FilterExpression.prototype.setStringValue = function (newValue) {
+            if (this.isMultiple()) {
+                this.setArrayValue(newValue);
+            } else {
+                this.value = newValue;
+            }
+        };
+
+        /**
          * Tag base class for visualising filter expressions as tags.
          * 
          * The value of array-type tags cannot be determined by the

@@ -16,21 +16,15 @@ angular.module(
             this.selectedCategory = null;
 
             collectionFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__COLLECTION);
-            if (collectionFilterExpressions && collectionFilterExpressions.length > 0) {
-                this.collectionFilterExpression = collectionFilterExpressions[0];
-            } else {
-                this.collectionFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION,
-                    [], true, true, null, 'Data Collection');
-                $scope.filterExpressions.addFilterExpression(this.collectionFilterExpression);
+            if (!collectionFilterExpressions || collectionFilterExpressions.length === 0) {
+                console.warn('collection Filter Expressions not correctly initilaized');
+                $scope.filterExpressions.addFilterExpression($scope.collectionFilterExpression);
             }
 
             topicFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__TOPIC);
-            if (topicFilterExpressions && topicFilterExpressions.length > 0) {
-                this.topicFilterExpression = topicFilterExpressions[0];
-            } else {
-                this.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
-                    null, false, true, null, 'Topic Category');
-                $scope.filterExpressions.addFilterExpression(this.topicFilterExpression);
+            if (!topicFilterExpressions && topicFilterExpressions.length === 0) {
+                console.warn('topic Filter Expressions not correctly initilaized');
+                $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
             }
 
             this.getCategories = function (category) {
@@ -42,10 +36,10 @@ angular.module(
 
                 switch (selectedCategory) {
                 case 'topic-inspire':
-                    this.topicFilterExpression.value = categoryValue;
+                    $scope.topicFilterExpression.setStringValue(categoryValue);
                     break;
                 case 'category-collection':
-                    this.collectionFilterExpression.value = categoryValue;
+                    $scope.collectionFilterExpression.setStringValue(categoryValue);
                     break;
                 default:
                     return;

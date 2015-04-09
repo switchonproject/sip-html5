@@ -47,6 +47,7 @@ angular.module(
 
             // -----------------------------------------------------------------
 
+            // initialize some shared filter expressions
             $scope.filterExpressions = new FilterExpressions();
 
             // define shared filter expressions that are used in several directives
@@ -58,7 +59,19 @@ angular.module(
                     return value.substring(0, value.indexOf('('));
                 }
 
-                return 'undefined';
+                return 'invalid';
+            };
+            $scope.geoFilterExpression.setStringValue = function (newValue) {
+                var wkt;
+                if (newValue) {
+                    wkt = new Wkt.Wkt();
+                    try {
+                        wkt.read(newValue);
+                        this.value = newValue;
+                    } catch (e) {
+                        console.warn('could not parse WKT string "' + newValue + '"');
+                    }
+                }
             };
             $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
 
@@ -66,12 +79,39 @@ angular.module(
             $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
                 $scope.config.search.defautLimit, false, true,
                 'templates/limit-editor-popup.html', 'Results Limit', 'Results Limit');
+            $scope.limitFilterExpression.setStringValue = function (newValue) {
+                if (newValue) {
+                    this.value = parseInt(newValue, 10);
+                }
+
+                if (isNaN(this.value)) {
+                    this.value = this.defaultValue;
+                }
+
+                if (this.value > $scope.config.searchService.maxLimit) {
+                    this.value = $scope.config.searchService.maxLimit;
+                }
+            };
             $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
 
             // OFFSET Filter (not visible)
             $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
                 0, false, false);
+            $scope.offsetFilterExpression.setStringValue = function (newValue) {
+                if (newValue) {
+                    this.value = parseInt(newValue, 10);
+                }
+
+                if (isNaN(this.value)) {
+                    this.value = 0;
+                }
+            };
             $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
+
+            // TEXT Search Filter
+            $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT,
+                    null, false, false, null, 'Fulltext', 'Title and Description Search');
+            $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
 
             // combined POST Search Filters
             $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
@@ -85,11 +125,21 @@ angular.module(
             };
             $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
 
-            // FIXME: move to categories directive ? -----------------------------
-            $scope.categoriesFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION,
-                    null, false, true, null, 'Categories');
-            $scope.filterExpressions.addFilterExpression($scope.categoriesFilterExpression);
-            // FIXME: move to categories directive ? -----------------------------
+            // COLLECTION FILTERS (for categories)
+            $scope.collectionFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION,
+                    null, false, true, null, 'Data Collection', 'Data Collections');
+            $scope.filterExpressions.addFilterExpression($scope.collectionFilterExpression);
+            
+            // TOPIC Categories Filters
+            $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
+                null, false, true, null, 'Topic Categories', 'INSPIRE Topic Categories');
+            // topic categories selected from the categories dropdown or the
+            // filter expression don't have cardinality information. Therfore 
+            // the check for isArray is needed.
+            $scope.topicFilterExpression.getDisplayValue = function (value) {
+                return (value && angular.isArray(value) && value.length === 2) ? value[0] : value;
+            };
+            $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
 
             // -----------------------------------------------------------------
 

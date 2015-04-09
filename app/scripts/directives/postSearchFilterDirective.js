@@ -11,6 +11,7 @@ angular.module(
             scope = {
                 filterExpressions: '=',
                 postSearchFilterExpressions: '=',
+                postSearchFiltersFilterExpression: '=',
                 filterTags: '=',
                 performSearch: '&searchFunction',
                 notificationFunction: '&?',

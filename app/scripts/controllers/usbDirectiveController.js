@@ -12,16 +12,11 @@ angular.module(
             var textFilterExpressions, oldTextValue, newTextValue;
 
             $scope.config = AppConfig.search;
-            $scope.textFilterExpression = null;
-            $scope.pattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
+            $scope.pattern = AppConfig.filterExpressionPattern;
 
             textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__TEXT);
-            if (textFilterExpressions && textFilterExpressions.length > 0) {
-                $scope.textFilterExpression = textFilterExpressions[0];
-            } else {
-                //console.warn('text filter expression not correctly initialized!');
-                $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT,
-                    null, false, false, null, 'Fulltext', 'Title and Description Search');
+            if (!textFilterExpressions || textFilterExpressions.length === 0) {
+                console.warn('text filter expression not correctly initialized');
                 $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
             }
 
@@ -91,13 +86,7 @@ angular.module(
                             // we pick the 1st array element.
                             // FIXME: what if there are multiple FE with the same param?
                             filterExpression = filterExpressions[0];
-                            if (filterExpression.isMultiple()) {
-                                filterExpression.setArrayValue(value);
-                                // no display value for arrays!
-                            } else {
-                                filterExpression.value = value;
-                                filterExpression.displayValue = value;
-                            }
+                            filterExpression.setStringValue(value);
 
                             $scope.notificationFunction({
                                 message: 'Search filter "' + param + '" successfully applied with value "' + value + '".',

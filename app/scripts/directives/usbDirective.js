@@ -9,6 +9,7 @@ angular.module(
                 restrict: 'E',
                 templateUrl: 'templates/usb-directive.html',
                 scope: {
+                    textFilterExpression: '=',
                     filterExpressions: '=',
                     performSearch: '&searchFunction',
                     notificationFunction: '&?'

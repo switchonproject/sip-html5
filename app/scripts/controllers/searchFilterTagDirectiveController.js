@@ -8,9 +8,15 @@ angular.module(
         function ($scope, FilterExpression) {
             'use strict';
 
+            // create a copy of the editor value in order to be able
+            // to undo the changes made in the editor.
             if ($scope.tag.isEditable()) {
                 $scope.data = {};
                 $scope.data.editorValue = $scope.tag.getValue();
+
+                // apply the changes when the editor popup is closed.
+                // this option has to be set in the respective editor template!
+                // $scope.data.applyChangesOnClose = false;
             }
 
             // Styling of Search Filters.. into CSS but how?

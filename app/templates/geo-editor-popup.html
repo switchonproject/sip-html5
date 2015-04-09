@@ -1,7 +1,7 @@
 <div class="popover switchon-ribbon-popover" id="geoEditor">
     <div class="arrow"></div>
     <div class="popover-content">
-        <form name="geoBufferForm" id="geoForm" novalidate> 
+        <form name="geoForm" id="geoForm" novalidate> 
             <div class="form-group" ng-class="{'has-error': geoForm.geoBufferField.$invalid}">
                 <input type="text" 
                        class="form-control" 
@@ -10,6 +10,23 @@
                        id="geoField" 
                        placeholder="WKT String"
                        ng-model="data.editorValue">
+                <span title="Cancel"
+                      aria-label="Cancel"
+                      name="cancelButton"
+                      id="cancelButton"
+                      class="btn btn-default"
+                      ng-click="$hide()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </span>
+                <span title="Apply"
+                      aria-label="Apply"
+                      name="applyButton"
+                      id="clearButton"
+                      class="btn btn-default"
+                      ng-click="tag.origin.setStringValue(data.editorValue); $hide()"
+                      ng-disabled="geoForm.geoField.$invalid">
+                    <span class="glyphicon glyphicon-ok"></span>    
+                </span>
             </div>
         </form>
     </div>

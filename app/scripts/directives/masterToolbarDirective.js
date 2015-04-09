@@ -5,53 +5,54 @@ angular.module(
     [
         function () {
             'use strict';
-            
+
             var controller, scope;
-            
+
             scope = {
                 resultSet: '=',
                 selectedObject: '=',
                 filterExpressions: '=',
                 postSearchFilterExpressions: '=',
+                postSearchFiltersFilterExpression: '=',
                 filterTags: '=',
                 performSearch: '&',
                 notificationFunction: '&?'
             };
-            
+
             controller = [
                 '$scope',
                 '$state',
                 'eu.water-switch-on.sip.services.masterToolbarService',
-                function ($scope, 
+                function ($scope,
                         $state,
                         masterToolbarService) {
                     var canShow, visibleComponents;
-                    
+
                     $scope.shouldShow = false;
                     $scope.masterToolbarService = masterToolbarService;
-                    
+
                     visibleComponents = {};
                     this.toggleVisibility = function (componentName, isVisible) {
                         var prop, visible;
-                        if(componentName) {
+                        if (componentName) {
                             visibleComponents[componentName] = isVisible;
-                            
+
                             visible = false;
-                            for(prop in visibleComponents) {
-                                if(visibleComponents.hasOwnProperty(prop)) {
+                            for (prop in visibleComponents) {
+                                if (visibleComponents.hasOwnProperty(prop)) {
                                     visible = visible || visibleComponents[prop];
                                 }
                             }
-                            
+
                             $scope.shouldShow = visible;
-                            
+
                             // at least one registered component wants to display itself
                             if ($scope.shouldShow) {
                                 canShow();
                             }
                         }
                     };
-                    
+
                     canShow = function () {
                         masterToolbarService.setCanShow($scope.shouldShow &&
                                 $scope.resultSet &&
@@ -63,14 +64,14 @@ angular.module(
                                     $state.current.name === 'map' ||
                                     $state.current.name === 'resourceDetails'
                                 ));
-                        
+
                         return masterToolbarService.getCanShow();
                     };
-                    
+
                     $scope.$watchCollection('resultSet.$collection', function() {
                         canShow();
                     });
-                    
+
                     $scope.$on('$stateChangeSuccess', function() {
                         canShow();
                     });
