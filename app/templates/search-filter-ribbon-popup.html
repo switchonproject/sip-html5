@@ -129,15 +129,17 @@
                     <span class="glyphicon glyphicon-remove"></span>
                 </span>
                 <span title="Clear all Search Filters"
+                      aria-label="Clear"
                       name="clearButton"
                       id="clearButton"
                       class="btn btn-default"
-                      ng-disabled="filterExpressions.enumeratedTags.length < 1"
+                      ng-disabled="((filterExpressions.enumeratedTags.length < 1)
+                      && (!textFilterExpression.value || textFilterExpression.value.length < 3))"
                       ng-click="clear()">
                     <span class="glyphicon glyphicon-trash"></span>
                 </span>
                 <span title="Search for resources"
-                      aria-label="Clear"
+                      aria-label="Search"
                       name="searchButton"
                       id="searchButton"
                       class="btn btn-primary"

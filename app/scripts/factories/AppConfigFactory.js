@@ -51,6 +51,8 @@ angular.module(
         appConfig.search.combineMultileFilterExpressions = true;
         // switch to list view after successfull search
         appConfig.search.showListView = true;
+        // default limit for search results
+        appConfig.search.defautLimit = appConfig.searchService.defautLimit;
 
         appConfig.postSearchFilter = {};
         // group post search filters when adding to USB

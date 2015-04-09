@@ -42,9 +42,10 @@ angular.module(
             if (limitFilterExpressions && limitFilterExpressions.length > 0) {
                 $scope.limitFilterExpression = limitFilterExpressions[0];
             } else {
-                //console.warn('limit filter expression not correctly initialized!');
+                console.warn('limit filter expression not correctly initialized!');
                 $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
-                    20, false, true, 'templates/limit-editor-popup.html', 'Results Limit', 'Results Limit');
+                    $scope.config.search.defautLimit, false, true, 
+                    'templates/limit-editor-popup.html', 'Results Limit', 'Results Limit');
                 $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
             }
 
