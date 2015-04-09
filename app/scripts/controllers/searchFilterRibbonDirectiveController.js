@@ -9,7 +9,7 @@ angular.module(
         function ($scope, FilterExpression, AppConfig) {
             'use strict';
 
-            var geoFilterExpressions, keywordsCuashiFilterExpressions, textFilterExpressions,
+            var geoFilterExpressions, textFilterExpressions, topicFilterExpressions,
                 limitFilterExpressions, offsetFilterExpressions;
 
             $scope.config = AppConfig.search;
@@ -17,6 +17,10 @@ angular.module(
             $scope.keywordsFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD,
                 [], true, true, null, 'Keywords', 'Free Keywords');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
+
+            $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI,
+                    [], true, true, 'templates/filter-expression-editor-popup.html', 'CUAHSI Keyword', 'CUAHSI Keyword');
+            $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
 
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
                 null, false, true, null, 'Topic Categories', 'INSPIRE Topic Categories');
@@ -42,72 +46,45 @@ angular.module(
             if (limitFilterExpressions && limitFilterExpressions.length > 0) {
                 $scope.limitFilterExpression = limitFilterExpressions[0];
             } else {
-                console.warn('limit filter expression not correctly initialized!');
-                $scope.limitFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_LIMIT,
-                    $scope.config.search.defautLimit, false, true, 
-                    'templates/limit-editor-popup.html', 'Results Limit', 'Results Limit');
-                $scope.filterExpressions.addFilterExpression($scope.limitFilterExpression);
+                // must be initialized in master controller
+                throw 'limit filter expression not correctly initialized!';
             }
 
             offsetFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__OPTION_OFFSET);
             if (offsetFilterExpressions && offsetFilterExpressions.length > 0) {
                 $scope.offsetFilterExpression = offsetFilterExpressions[0];
             } else {
-                //console.warn('offset filter expression not correctly initialized!');
-                $scope.offsetFilterExpression = new FilterExpression(FilterExpression.FILTER__OPTION_OFFSET,
-                    0, false, false, null, 'Results Offset', 'Results Offset');
-                $scope.filterExpressions.addFilterExpression($scope.offsetFilterExpression);
+                // must be initialized in master controller
+                throw 'offset filter expression not correctly initialized!';
             }
-
-            // topic categories selected from the categories dropdown or the
-            // filter expression don't have cardinality information. Therfore 
-            // the check for isArray is needed.
-            $scope.topicFilterExpression.getDisplayValue = function (value) {
-                return (value && angular.isArray(value) && value.length === 2) ? value[0] : value;
-            };
-
-            $scope.geoIntersectsFilterExpression.getDisplayValue = function (value) {
-                return value ? 'intersect' : 'enclose';
-            };
 
             geoFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__GEO);
             if (geoFilterExpressions && geoFilterExpressions.length > 0) {
                 $scope.geoFilterExpression = geoFilterExpressions[0];
             } else {
-                //console.warn('geo filter expression not correctly initialized!');
-                $scope.geoFilterExpression = new FilterExpression(FilterExpression.FILTER__GEO, null, false, true,
-                    'templates/geo-editor-popup.html', 'Geospatial Extent', 'Geospatial Extent');
-                $scope.geoFilterExpression.getDisplayValue = function (value) {
-                    if (value && value.indexOf('(') !== -1) {
-                        return value.substring(0, value.indexOf('('));
-                    }
-
-                    return 'undefined';
-                };
-                $scope.filterExpressions.addFilterExpression($scope.geoFilterExpression);
+                // must be initialized in master controller
+                throw 'geo filter expression not correctly initialized!';
             }
-
-            // FIXME: move to categories directive -----------------------------
-            keywordsCuashiFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__KEYWORD_CUAHSI);
-            if (keywordsCuashiFilterExpressions && keywordsCuashiFilterExpressions.length > 0) {
-                $scope.keywordsCuashiFilterExpression = keywordsCuashiFilterExpressions[0];
-            } else {
-                //console.warn('keyword-cuahsi filter expression not correctly initialized!');
-                $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI,
-                    [], true, true, 'templates/filter-expression-editor-popup.html', 'CUAHSI Keyword', 'CUAHSI Keyword');
-                $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
-            }
-            // FIXME: move to categories directive -----------------------------
 
             textFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__TEXT);
             if (textFilterExpressions && textFilterExpressions.length > 0) {
                 $scope.textFilterExpression = textFilterExpressions[0];
             } else {
-                //console.warn('text filter expression not correctly initialized!');
-                $scope.textFilterExpression = new FilterExpression(FilterExpression.FILTER__TEXT,
-                    null, false, false, null, 'Fulltext', 'Fulltext');
-                $scope.filterExpressions.addFilterExpression($scope.textFilterExpression);
+                // must be initialized in master controller
+                throw 'text filter expression not correctly initialized!';
             }
+
+            topicFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__TOPIC);
+            if (topicFilterExpressions && topicFilterExpressions.length > 0) {
+                $scope.topicFilterExpression = topicFilterExpressions[0];
+            } else {
+                // must be initialized in master controller
+                throw 'topic category filter expression not correctly initialized!';
+            }
+
+            $scope.geoIntersectsFilterExpression.getDisplayValue = function (value) {
+                return value ? 'intersect' : 'enclose';
+            };
 
             $scope.clear = function () {
                 $scope.filterExpressions.clear();

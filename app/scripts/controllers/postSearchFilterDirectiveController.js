@@ -19,16 +19,8 @@ angular.module(
             // this is the USB filter expression that contains all post search filter expressions
             // that have been selected by the user.
             tempFilterExpressions = $scope.filterExpressions.getFilterExpressionsByType(FilterExpression.FILTER__POST_SEARCH_FILTERS);
-            if (tempFilterExpressions && tempFilterExpressions.length > 0) {
-                $scope.postSearchFiltersFilterExpression = tempFilterExpressions[0];
-            } else {
-                //console.warn('post search filters filter expression not correctly initialized!');
-                $scope.postSearchFiltersFilterExpression = new FilterExpression(FilterExpression.FILTER__POST_SEARCH_FILTERS,
-                    [], true, true, null, 'POST FILTERS', 'POST FILTERS', 'POST FILTERS');
-                $scope.postSearchFiltersFilterExpression.getDisplayValue = function (value) {
-                    this.displayValue = value;
-                    return '';
-                };
+            if (!tempFilterExpressions && tempFilterExpressions.length === 0) {
+                console.warn('post search filters filter expression not correctly initialized!');
                 $scope.filterExpressions.addFilterExpression($scope.postSearchFiltersFilterExpression);
             }
 
@@ -81,6 +73,11 @@ angular.module(
             setPostSearchFilterTags = function (filterTags) {
                 $scope.postSearchFilterExpressions.clear();
                 var i, filterExpression, filterExpressions, tagGroup, param, j;
+
+                if (!filterTags || filterTags.length === 0) {
+                    return;
+                }
+
                 for (i = 0; i < filterTags.length; ++i) {
                     tagGroup = filterTags[i];
                     if (tagGroup && tagGroup.value && tagGroup.value.length > 0) {

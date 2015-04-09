@@ -55,6 +55,8 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <categories filter-expressions="filterExpressions" 
+                    collection-filter-expression = "collectionFilterExpression"
+                    topic-filter-expression = "topicFilterExpression"
                     search-function="performSearch"
                     title="Browse Resource Categories">          
                 </categories>
@@ -66,7 +68,8 @@
                 </search-filter-ribbon>   
 
                 <!-- search directive -->
-                <usb filter-expressions="filterExpressions" 
+                <usb text-filter-expression="textFilterExpression"
+                     filter-expressions="filterExpressions" 
                      search-function="performSearch" 
                      notification-function="showMessage(message, type)">
                 </usb> 
@@ -138,6 +141,7 @@
                             selected-object="data.selectedObject"
                             filter-expressions="filterExpressions" 
                             post-search-filter-expressions="postSearchFilterExpressions" 
+                            post-search-filters-filter-expression="postSearchFiltersFilterExpression" 
                             filter-tags="data.resultSet.$filterTags" 
                             perform-search="performSearch" 
                             notification-function="showMessage">

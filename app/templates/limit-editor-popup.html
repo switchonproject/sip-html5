@@ -8,9 +8,27 @@
                        min="1" 
                        max="50" 
                        name="limitField" 
-                       id="geoBufferField" 
+                       id="limitField" 
                        placeholder="limit"
-                       ng-model="data.editorValue">
+                       ng-model="data.editorValue"
+                       ng-init="data.applyChangesOnClose = false">
+                <span title="Cancel"
+                      aria-label="Cancel"
+                      name="cancelButton"
+                      id="cancelButton"
+                      class="btn btn-default"
+                      ng-click="$hide()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </span>
+                <span title="Apply"
+                      aria-label="Apply"
+                      name="applyButton"
+                      id="clearButton"
+                      class="btn btn-default"
+                      ng-click="tag.origin.value = data.editorValue; $hide()"
+                      ng-disabled="limitForm.limitField.$invalid">
+                    <span class="glyphicon glyphicon-ok"></span>    
+                </span>
             </div>
         </form>
     </div>

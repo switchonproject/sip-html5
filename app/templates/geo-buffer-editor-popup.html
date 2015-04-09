@@ -11,6 +11,23 @@
                        id="geoBufferField" 
                        placeholder="buffer"
                        ng-model="data.editorValue">
+                <span title="Cancel"
+                      aria-label="Cancel"
+                      name="cancelButton"
+                      id="cancelButton"
+                      class="btn btn-default"
+                      ng-click="$hide()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </span>
+                <span title="Apply"
+                      aria-label="Apply"
+                      name="applyButton"
+                      id="clearButton"
+                      class="btn btn-default"
+                      ng-click="tag.origin.value = data.editorValue; $hide()"
+                      ng-disabled="geoBufferForm.geoBufferField.$invalid">
+                    <span class="glyphicon glyphicon-ok"></span>    
+                </span>
             </div>
         </form>
     </div>

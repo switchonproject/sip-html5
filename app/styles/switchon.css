@@ -250,19 +250,19 @@ postsearchfilter .panel-collapse {
     margin: 0 .2em;
     font-style: normal;
 }
-.tag a {
+.tag > a {
      cursor: pointer;
      opacity: 0.5;
 }
-.tag a:hover {
+.tag > a:hover {
     opacity: 1.0;
 }
 
-.tag a {
+.tag > a {
     margin: 0 0 0 .3em;
 }
 
-.tag span {
+.tag > span {
     margin-right: .4em;
 }
 

@@ -28,6 +28,7 @@ angular.module(
         appConfig.searchService.password = 'cismet';
         //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.defautLimit = 10;
+        appConfig.searchService.maxLimit = 50;
         appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
 
         appConfig.mapView = {};
