@@ -48,8 +48,9 @@ angular.module(
             $scope.$watch('filterExpressions.list', function () {
                 newTextValue = $scope.textFilterExpression.value;
 
-                //no user input in text box, recreate tags
-                if (newTextValue === oldTextValue) {
+                //no user input in text box or text box cleared
+                //-> recreate tags
+                if (!newTextValue || newTextValue === oldTextValue) {
                     if ($scope.config.combineMultileFilterExpressions === true) {
                         // get combined tags including NOT filters!
                         $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.getTags(false, false, false, true);
