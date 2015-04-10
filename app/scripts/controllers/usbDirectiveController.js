@@ -48,9 +48,9 @@ angular.module(
             $scope.$watch('filterExpressions.list', function () {
                 newTextValue = $scope.textFilterExpression.value;
 
-                //no user input in text box or text box cleared
-                //-> recreate tags
                 if (!newTextValue || newTextValue === oldTextValue) {
+                    //no user input in text box or text box cleared
+                    //-> recreate tags
                     if ($scope.config.combineMultileFilterExpressions === true) {
                         // get combined tags including NOT filters!
                         $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.getTags(false, false, false, true);
@@ -59,6 +59,7 @@ angular.module(
                         $scope.filterExpressions.enumeratedTags = $scope.filterExpressions.enumerateTags(false, false, false, true);
                     }
                 } else if (newTextValue && newTextValue.length > 0) {
+                    // text entered in box. try to parse it as filter expression
                     var filterExpressionString, param, value, filterExpression, filterExpressions;
                     filterExpressionString = newTextValue.split($scope.pattern);
                     /** @type {string} */

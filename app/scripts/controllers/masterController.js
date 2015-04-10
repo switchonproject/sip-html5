@@ -129,16 +129,10 @@ angular.module(
             $scope.collectionFilterExpression = new FilterExpression(FilterExpression.FILTER__COLLECTION,
                     null, false, true, null, 'Data Collection', 'Data Collections');
             $scope.filterExpressions.addFilterExpression($scope.collectionFilterExpression);
-            
+
             // TOPIC Categories Filters
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
                 null, false, true, null, 'Topic Categories', 'INSPIRE Topic Categories');
-            // topic categories selected from the categories dropdown or the
-            // filter expression don't have cardinality information. Therfore 
-            // the check for isArray is needed.
-            $scope.topicFilterExpression.getDisplayValue = function (value) {
-                return (value && angular.isArray(value) && value.length === 2) ? value[0] : value;
-            };
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
 
             // -----------------------------------------------------------------

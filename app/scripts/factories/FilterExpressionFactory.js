@@ -568,7 +568,9 @@ angular.module(
                 throw 'The value of the PostFilterTag for the filter expression "' + filterExpression + '" is not valid! {key:..., value:...} object expected!';
             }
 
-            FilterExpression.prototype.Tag.call(this, filterExpression, value);
+            FilterExpression.prototype.Tag.call(this, filterExpression, value.key);
+            this.cardinality = (value && value.hasOwnProperty('value')) ? parseInt(value.value, 10) : 0;
+            this.cardinality = isNaN(this.cardinality) ? 0 : this.cardinality;
         };
 
         FilterExpression.prototype.PostFilterTag.prototype = Object.create(FilterExpression.prototype.Tag.prototype);
@@ -595,17 +597,7 @@ angular.module(
          */
 
         FilterExpression.prototype.PostFilterTag.prototype.getCardinality = function () {
-            return (this.value && this.value.hasOwnProperty('value')) ? this.value.value : 0;
-        };
-
-        /**
-         * Returns the "real" value of the post filter tag, thus omitting the
-         * cardinality information which is also stored together with the tag.
-         * 
-         * @returns {object} tag value of the 
-         */
-        FilterExpression.prototype.PostFilterTag.prototype.getValue = function () {
-            return (this.value && this.value.hasOwnProperty('key')) ? this.value.key : this.value;
+            return this.cardinality;
         };
 
         // define constants

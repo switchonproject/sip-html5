@@ -4,8 +4,16 @@
                typeahead="keyword for keyword in keywordList | filter:$viewValue | limitTo:8" 
                typeahead-editable="false"
                class="form-control">-->
-        <select name="{{keywordGroup}}" id="{{keywordGroup}}" 
+        <select ng-if="multiple === 'true'"
+                name="{{keywordGroup}}" id="{{keywordGroup}}" 
                 ng-model="filterExpression.value" ng-options="keyword for keyword in keywordList" 
-                class="form-control" size="11" multiple ></select>
+            class="form-control" size="11" multiple> 
+        </select>
+        <select ng-if="multiple !== 'true'"
+                name="{{keywordGroup}}" id="{{keywordGroup}}" 
+                ng-model="filterExpression.value" ng-options="keyword for keyword in keywordList" 
+            class="form-control" size="11">   
+            <option value="">none</option>
+        </select>
 <!--    </div>
 </div>-->
