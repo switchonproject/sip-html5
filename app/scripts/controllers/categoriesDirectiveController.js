@@ -32,6 +32,7 @@ angular.module(
             };
 
             this.performCategoriesSearch = function (selectedCategory, categoryValue) {
+                // clear all search filters for category search
                 $scope.filterExpressions.clear();
 
                 switch (selectedCategory) {
@@ -45,7 +46,8 @@ angular.module(
                     return;
                 }
 
-                $scope.performSearch()(0, false);
+                // search with offset 0 and clear any post search filters
+                $scope.performSearch()(0, true);
                 this.expanded = false;
                 this.selectedCategory = null;
             };

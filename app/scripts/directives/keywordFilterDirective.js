@@ -10,7 +10,8 @@ angular.module(
                 templateUrl: 'templates/keyword-filter-directive.html',
                 scope: {
                     filterExpression: '=',
-                    keywordGroup: '@'
+                    keywordGroup: '@',
+                    multiple: '@'
                 },
                 controller: 'eu.water-switch-on.sip.controllers.keywordFilterDirectiveController'
             };
