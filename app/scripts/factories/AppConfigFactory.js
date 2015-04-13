@@ -39,7 +39,7 @@ angular.module(
         appConfig.mapView.home.zoom = 4;
 
         appConfig.gui = {};
-        appConfig.gui.dev = true;
+        appConfig.gui.dev = false;
 
         appConfig.tagFilter = {};
         //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-cuahsi, protocol';
