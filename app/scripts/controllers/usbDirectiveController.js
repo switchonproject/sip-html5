@@ -60,43 +60,35 @@ angular.module(
                     }
                 } else if (newTextValue && newTextValue.length > 0) {
                     // text entered in box. try to parse it as filter expression
-                    var filterExpressionString, param, value, filterExpression, filterExpressions;
-                    filterExpressionString = newTextValue.split($scope.pattern);
-                    /** @type {string} */
-                    param = filterExpressionString[1];
-                    value = filterExpressionString[2];
-                    // user entered a valid filter expression
-                    if (param && value) {
-                        param = param.toLowerCase();
-                        if (FilterExpression.FILTERS.indexOf(param) === -1 ||
-                                FilterExpression.FILTERS.indexOf(('!' + param)) === -1) {
-                            $scope.notificationFunction({
-                                message: 'The search filter "' + param + '" is unknown. The search may deliver unexpected results.',
-                                type: 'info'
-                            });
+                    /**
+                     * @type FilterExpression
+                     */
+                    if (FilterExpression.FILTER_EXPRESSION_PATTERNS.test(newTextValue)) {
+
+                        var filterExpression, i, filterExpressionString,
+                            filterExpressions, parsedTextValue;
+
+                        parsedTextValue = newTextValue;
+                        filterExpressions = newTextValue.split(FilterExpression.FILTER_EXPRESSION_PATTERNS);
+                        for (i = 0; i < filterExpressions.length; ++i) {
+                            filterExpressionString = filterExpressions[i];
+                            filterExpression = $scope.filterExpressions.fromUniversalSearchString(filterExpressionString);
+                            if (filterExpression) {
+                                parsedTextValue =  parsedTextValue.replace(filterExpressionString, '');
+                                parsedTextValue = parsedTextValue.trim();
+
+                                $scope.notificationFunction({
+                                    message: 'Search filter "' + filterExpression.getName() + '" successfully applied',
+                                    type: 'success'
+                                });
+                            }
                         }
 
-                        filterExpressions = $scope.filterExpressions.getFilterExpressionsByType(param);
-                        if (!filterExpressions || filterExpressions.length < 1) {
-                            filterExpression = new FilterExpression(param);
-                            filterExpression.value = value;
-                            filterExpression.displayValue = value;
-                            // triggers update
-                            $scope.filterExpressions.addFilterExpression(filterExpression);
+                        if (parsedTextValue.length > 0) {
+                            $scope.textFilterExpression.setStringValue(parsedTextValue);
                         } else {
-                            // should trigger update when comparing with angular.equals
-                            // we pick the 1st array element.
-                            // FIXME: what if there are multiple FE with the same param?
-                            filterExpression = filterExpressions[0];
-                            filterExpression.setStringValue(value);
-
-                            $scope.notificationFunction({
-                                message: 'Search filter "' + param + '" successfully applied with value "' + value + '".',
-                                type: 'success'
-                            });
+                            $scope.textFilterExpression.clear();
                         }
-                        // reset when expression successfully parsed 
-                        $scope.textFilterExpression.clear();
                     }
                 }
                 oldTextValue = $scope.textFilterExpression.value;
