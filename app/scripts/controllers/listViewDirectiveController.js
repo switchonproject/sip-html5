@@ -9,24 +9,33 @@ angular.module(
         '$rootScope',
         'ngTableParams',
         'eu.water-switch-on.sip.services.TagGroupService',
+        'eu.water-switch-on.sip.services.filterService',
         'AppConfig',
-        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService, AppConfig) {
+        function ($scope, $filter, $modal, $rootScope, NgTableParams, TagGroupService,
+            FilterService, AppConfig) {
             'use strict';
 
             var initialSorting, keywordLookupLists, generateKeywordList, generateQueryKeywordList;
 
+            $scope.filterService = FilterService;
             $scope.config = AppConfig.listView;
             $scope.tableParams = new NgTableParams({
                 page: 1,
+                sorting: initialSorting,
                 count: 2
             }, {
                 counts: [],
                 total: 1,
-                getData: function ($defer) {
-                    $defer.resolve($scope.tableData);
+                getData: function ($defer, params) {
+                    var ordered;
+                    ordered = (params.sorting() && $scope.filterService.isCompleteResult() && $scope.filterService.getLoadedResourcesNumber() > 1) ?
+                            $filter('orderBy')($scope.tableData, params.orderBy()) :
+                                $scope.tableData;
+
+                    $defer.resolve(ordered);
                 }
             });
-            
+
             initialSorting = {};
             initialSorting['object.name'] = 'asc';
             keywordLookupLists = {};

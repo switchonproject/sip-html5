@@ -1,6 +1,7 @@
 <table ng-table="tableParams" class="table table-striped table-bordered table-hover">
     <tr ng-repeat="node in $data">
-        <td data-title="'Name'" class="name">{{node.object.name}}</td>
+        <td data-title="'Name'" class="name" 
+            sortable="(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null">{{node.object.name}}</td>
         
         <td data-title="'Description'">
             <span>{{node.object.description | txtLen:160:false:'':true}}</span>
@@ -9,7 +10,8 @@
             </span>
         </td>
         
-        <td data-title="'Temporal Extent'" class="date">
+        <td data-title="'Temporal Extent'" class="date"
+            sortable="(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null">
             {{node.object.fromdate | date: "dd.MM.yyyy"}} - 
             {{node.object.todate | date: "dd.MM.yyyy"}}
         </td>
