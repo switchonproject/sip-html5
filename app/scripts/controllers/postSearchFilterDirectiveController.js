@@ -185,7 +185,7 @@ angular.module(
                 value = filterExpressionString[2];
 
                 if (param && value) {
-                    // the negated filter tag that was added to USB (an was removed now) 
+                    // the negated filter tag that was added to USB (and was removed now) 
                     // looses the information on cardinality. Therfore we have to 
                     // find the original value in the list of tags retrieved from the server
                     for (i = 0; i < $scope.filterTags.length; ++i) {

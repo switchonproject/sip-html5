@@ -304,6 +304,15 @@ angular.module(
         };
 
         /**
+         * Returns th ename of the filter expression.
+         * 
+         * @returns {String} name
+         */
+        FilterExpression.prototype.getName = function () {
+            return this.name || this.parameter;
+        };
+
+        /**
          * Tag base class for visualising filter expressions as tags.
          * 
          * The value of array-type tags cannot be determined by the
@@ -601,6 +610,10 @@ angular.module(
         };
 
         // define constants
+
+        FilterExpression.FILTER_EXPRESSION_PATTERNS = /(!?[A-Za-z_\-]+?:"[\s\S]+?["]{1})+/g;
+        FilterExpression.FILTER_EXPRESSION_PATTERN = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
+
         FilterExpression.FILTER__GEO = 'geo';
         FilterExpression.FILTER__GEO_INTERSECTS = 'geo-intersects';
         FilterExpression.FILTER__GEO_BUFFER = 'geo-buffer';

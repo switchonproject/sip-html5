@@ -158,6 +158,37 @@ angular.module(
                 return returnTags;
             };
 
+            FilterExpressions.prototype.fromUniversalSearchString = function (uss) {
+                var filterExpressionString, param, value, filterExpression, filterExpressions;
+
+                if (uss && uss.length > 0) {
+
+                    filterExpressionString = uss.split(FilterExpression.FILTER_EXPRESSION_PATTERN);
+
+                    /** @type {string} */
+                    param = filterExpressionString[1];
+                    value = filterExpressionString[2];
+                    // user entered a valid filter expression
+                    if (param && value) {
+                        param = param.toLowerCase();
+
+                        filterExpressions = this.getFilterExpressionsByType(param);
+                        if (!filterExpressions || filterExpressions.length < 1) {
+                            filterExpression = new FilterExpression(param);
+                            filterExpression.value = value;
+                            filterExpression.displayValue = value;
+                            console.warn('The search filter "' + param + '" is unknown. The search may deliver unexpected results.');
+                            this.addFilterExpression(filterExpression);
+                        } else {
+                            filterExpression = filterExpressions[0];
+                            filterExpression.setStringValue(value);
+                        }
+                    }
+                }
+
+                return filterExpression;
+            };
+
             return FilterExpressions;
         }]
     );
