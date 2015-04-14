@@ -37,6 +37,10 @@ angular.module(
         appConfig.mapView.home.lat = 49.245166;
         appConfig.mapView.home.lng = 6.936809;
         appConfig.mapView.home.zoom = 4;
+        appConfig.mapView.maxBounds = {};
+        appConfig.mapView.maxBounds.southWest = [90, -180]; // top left corner of map
+        appConfig.mapView.maxBounds.northEast = [-90, 180];  // bottom right corner  
+        appConfig.mapView.minZoom = 2;
 
         appConfig.gui = {};
         appConfig.gui.dev = true;

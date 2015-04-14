@@ -13,14 +13,16 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket, config, highlightObjectLayer, setObject;
+                setSearchGeom, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
 
             config = AppConfig.mapView;
 
             angular.extend($scope, {
                 defaults: {
                     tileLayer: config.backgroundLayer,
+                    //tileLayerOptions: {noWrap: true},
                     //maxZoom: 14,
+                    minZoom: config.minZoom,
                     path: {
                         weight: 10,
                         color: '#800000',
@@ -48,6 +50,18 @@ angular.module(
             });
 
             $scope.center = config.home;
+
+            // set the max bounds of the map
+            southWest = (config.maxBounds && angular.isArray(config.maxBounds.southWest)) ?
+                            L.latLng(config.maxBounds.southWest[0], config.maxBounds.southWest[1]) :
+                            L.latLng(90, -180);
+            northEast = (config.maxBounds && angular.isArray(config.maxBounds.northEast)) ?
+                            L.latLng(config.maxBounds.northEast[0], config.maxBounds.northEast[1]) :
+                            L.latLng(-90, 180);
+            $scope.maxBounds = L.latLngBounds(southWest, northEast);
+            leafletData.getMap('mainmap').then(function (map) {
+                map.setMaxBounds($scope.maxBounds);
+            });
 
             angular.element($window).bind('resize', function () {
                 fireResize(false);
