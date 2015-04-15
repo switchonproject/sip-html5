@@ -250,7 +250,7 @@ describe('Object Detail View Test Suite', function () {
             }
         });
         
-        it('object detail - proper access limitation', function () {
+        it('object detail - proper access conditions', function () {
             var elem, i, mockdata, rootelem, scope;
             
             for(i = 0; i < fullObjs.length; ++i) {
@@ -261,8 +261,8 @@ describe('Object Detail View Test Suite', function () {
                 scope.$digest();
                 elem = rootelem.find(".row:nth-child(11)");
                 expect(elem).toBeDefined();
-                expect(elem.find('div label').text()).toEqual('Access limitations:');
-                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].accesslimitations.name);
+                expect(elem.find('div label').text()).toEqual('Access conditions:');
+                expect(elem.find('div:nth-child(2)').text().trim()).toEqual(fullObjs[i].accessconditions.name);
             }
             
             inject(function (_OBJECT_DETAIL_VIEW_TEST_DATA_OBJ_NOACCESSLIMITATIONS_) {
