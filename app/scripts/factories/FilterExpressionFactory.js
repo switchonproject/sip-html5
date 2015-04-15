@@ -508,7 +508,6 @@ angular.module(
          * Return the display value of a collection tag which 
          * is always the name (title) of the filter expression!
          * 
-         * @param {object} value
          * @returns {string} name of the filter expression (display value)
          */
         FilterExpression.prototype.CollectionTag.prototype.getDisplayValue = function () {
@@ -595,7 +594,7 @@ angular.module(
          * @returns {boolean} true if removeable
          */
         FilterExpression.prototype.PostFilterTag.prototype.isRemoveable = function (threshold) {
-            return (this.origin.value.length > 1 &&
+            return (this.origin.value.length > 1 && this.getCardinality() > 0 &&
                 (threshold ? this.getCardinality() < threshold : true));
         };
 

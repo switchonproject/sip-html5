@@ -113,18 +113,18 @@
                 {{object.publicationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
-        <!-- Access limitations -->
-        <div class="row" ng-if="object.accesslimitations">
-            <div class="col-lg-3" title="License which applies to the usage of the data.">
-                <label>Access limitations:</label>
+        <!-- Access conditions -->
+        <div class="row" ng-if="object.accessconditions">
+            <div class="col-lg-3" title="General license which applies to the usage of the data.">
+                <label>Access conditions:</label>
             </div>
-            <div class="col-lg-9" title="{{object.accesslimitations.description || ''}}">
-                {{object.accesslimitations.name ? object.accesslimitations.name : 'unknown'}}
+            <div class="col-lg-9" title="{{object.accessconditions.description || ''}}">
+                {{object.accessconditions.name ? object.accessconditions.name : 'unknown'}}
             </div>
         </div>
         <!-- License statement -->
         <div class="row" ng-if="object.licensestatement">
-            <div class="col-lg-3" title="Statement which applies to the usage of the data">
+            <div class="col-lg-3" title="Detailed license conditions which apply to the usage of the data">
                 <label>License:</label>
             </div>
             <div class="col-lg-9">

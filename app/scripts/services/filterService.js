@@ -10,10 +10,13 @@ angular.module(
             var nodeCollection, nodeCollectionCopy,
                 setResultSetFunction, filterResultSetFunction, containsTag,
                 filterNodeCollection, totalResources, pattern, parameterToTaggroup,
-                taggroups;
+                taggroups, filterTags, filterTagsCopy, updateFilterTags;
 
             pattern = AppConfig.filterExpressionPattern;
 
+            // TODO: those are the default taggroups used for filtering search results
+            // they should be put to a separate Value Provider to allow 
+            // per-application configuration of post search filters
             taggroups = {};
             taggroups[FilterExpression.FILTER__ACCESS_CONDITION] = 'access conditions';
             taggroups[FilterExpression.FILTER__KEYWORD_CUAHSI] = 'keywords - cuahsi';
@@ -40,16 +43,24 @@ angular.module(
                     nodeCollectionCopy = [];
                     totalResources = 0;
                 }
+
+                if (resultSet && resultSet.$filterTags) {
+                    filterTags = resultSet.$filterTags;
+                    filterTagsCopy = filterTags.slice();
+                } else {
+                    filterTags = [];
+                    filterTagsCopy = [];
+                }
             };
 
             /**
              * Filters a result set by the FilterExpression. Accepts either a
              * negated filter expression or a post search filters filter expression
-             * wherby the post search filters filter expression consits of an array 
+             * wherby the post search filters filter expression consists of an array 
              * of negated filter expressions.
              * 
              * The filter is directly applied on the shared resultSet$collection
-             * that is injected into the the $scope of this service and other 
+             * that is injected into the $scope of this service and other 
              * directives, e.g. the listViewDirective.
              * 
              * @param {FilterExpression} filterExpression FilterExpression used for filtering
@@ -137,6 +148,49 @@ angular.module(
                                 //console.log('removing tag "' + tagname + '" of taggroup "' + taggroup + '" from nodeCollection[' + nodeCollection.length + '] (total nodes:' + nodeCollectionCopy.length + ') at position ' + j);
                                 nodeCollection.splice(j, 1);
                             }
+                        }
+                    }
+                    //
+                    //FIXME: TEMP DISABLED, method not tested
+                    //updateFilterTags();
+                }
+            };
+
+            /**
+             * Locally updates the array of post search filters and sets the cardinality
+             * of the individual tags based on the locally filtered result set.
+             * 
+             * FIXME: This method is not tested nor currently used!
+             * 
+             * @returns {undefined}
+             */
+            updateFilterTags = function () {
+                var i, j, k, filterGroup, tagGroupName, tagGroupTags,
+                    node, tagName, cardinality;
+
+                // restore
+                filterTags = filterTagsCopy.slice();
+
+                for (i = 0; i < filterTags.length; ++i) {
+                    filterGroup = filterTags[i];
+                    if (filterGroup && filterGroup.value && filterGroup.value.length > 0) {
+                        // e.g. download or access-conditions
+                        tagGroupName = filterGroup.key;
+                        // tags belonging to the group, including their cardinality
+                        tagGroupTags = filterGroup.value;
+
+                        for (j = 0; j < tagGroupTags.length; j++) {
+                            tagName = tagGroupTags[j].key;
+                            cardinality = 0;
+
+                            for (k = 0; k < nodeCollection.length; k++) {
+                                node = nodeCollection[k];
+                                if (containsTag(null, node.object, tagGroupName, tagName)) {
+                                    cardinality++;
+                                }
+                            }
+
+                            tagGroupTags[j].value = cardinality;
                         }
                     }
                 }
