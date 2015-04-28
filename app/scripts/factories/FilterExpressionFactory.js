@@ -456,7 +456,11 @@ angular.module(
          */
         FilterExpression.prototype.Tag.prototype.remove = function () {
             if (this.origin.isMultiple()) {
-                this.origin.value.splice(this.origin.value.indexOf(this.value), 1);
+                var index;
+                index = this.origin.value.indexOf(this.value);
+                if (index !== -1) {
+                    this.origin.value.splice(index, 1);
+                }
             } else {
                 this.origin.value = null;
             }
@@ -576,7 +580,7 @@ angular.module(
                 throw 'The value of the PostFilterTag for the filter expression "' + filterExpression + '" is not valid! {key:..., value:...} object expected!';
             }
 
-            FilterExpression.prototype.Tag.call(this, filterExpression, value.key);
+            FilterExpression.prototype.Tag.call(this, filterExpression, value);
             this.cardinality = (value && value.hasOwnProperty('value')) ? parseInt(value.value, 10) : 0;
             this.cardinality = isNaN(this.cardinality) ? 0 : this.cardinality;
         };
@@ -603,9 +607,18 @@ angular.module(
          * the tag's value object in the value property.
          * @returns {Number} cardinality of the tag (number of resources assocated with the tag)
          */
-
         FilterExpression.prototype.PostFilterTag.prototype.getCardinality = function () {
             return this.cardinality;
+        };
+
+        /**
+         * Returs the value of the post filter tag which is the key of the 
+         * value/cardinality object.
+         * 
+         * @returns {String}
+         */
+        FilterExpression.prototype.PostFilterTag.prototype.getValue = function () {
+            return this.value.key;
         };
 
         // define constants
