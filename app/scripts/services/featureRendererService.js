@@ -11,14 +11,14 @@ angular.module(
 
             wicket = new Wkt.Wkt();
 
-            defaultStyle = {color: '#0000FF', fill: false, weight: 2};
-            highlightStyle = {fillOpacity: 0.4, fill: true, fillColor: '#1589FF'};
+            defaultStyle = {color: '#0000FF', fill: false, weight: 2, riseOnHover: true, clickable: false};
+            highlightStyle = {fillOpacity: 0.4, fill: true, fillColor: '#1589FF', riseOnHover: true, clickable: false};
 
             getFeatureRenderer = function (obj) {
                 // this is only an indirection to hide the conrete implementation
                 // however, as not specified yet, we hardcode this for now
 
-                var ewkt, renderer;
+                var ewkt, renderer, objectStyle;
 
                 renderer = null;
                 if (obj &&
@@ -64,7 +64,11 @@ angular.module(
                     if (!renderer && obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
                         ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
                         wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
-                        renderer = wicket.toObject(defaultStyle);
+                        objectStyle = Object.create(defaultStyle);
+                        if (obj.name) {
+                            objectStyle.title = obj.name;
+                        }
+                        renderer = wicket.toObject(objectStyle);
                     }
                 }
 
