@@ -227,6 +227,9 @@ angular.module(
                     if (typeof layer.setStyle === 'function') {
                         layer.setStyle(rendererService.highlightStyle);
                     }
+//                    else if (typeof layer.setIcon === 'function') {
+//                        layer.setIcon(...);
+//                    }
 
                     if (typeof layer.getBounds === 'function' && layer.getBounds()) {
                         map.fitBounds(layer.getBounds(), {
@@ -234,6 +237,12 @@ angular.module(
                             pan: {animate: true, duration: 0.6},
                             zoom: {animate: true},
                             maxZoom: null
+                        });
+                    } else if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
+                        map.setView(layer.getLatLng(), 10, {
+                            animate: true,
+                            pan: {animate: true, duration: 0.6},
+                            zoom: {animate: true}
                         });
                     }
                 });
