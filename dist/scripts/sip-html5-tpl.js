@@ -1,386 +1,1620 @@
 angular.module('').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('templates/datefilter-directive.html',
-    "<div class=\"panel panel-default\">\n" +
-    "    <div class=\"panel-heading\">Date Filter</div>\n" +
-    "    <div class=\"panel-body\">\n" +
-    "        <form  class=\"form\" \n" +
-    "               name=\"dateFilterBox\" \n" +
-    "               role=\"form\"  \n" +
-    "               novalidate>\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <label for=\"fromDateField\">Start Date: </label>\n" +
-    "                <input class=\"form-control\" name=\"fromDateField\" id=\"fromDateField\" type=\"date\" \n" +
-    "                       ng-model=\"filterExpressions.fromDate\"\n" +
-    "                       />\n" +
-    "            </div>\n" +
+  $templateCache.put('templates/categories-directive-popup.html',
+    "<div ng-class=\"{expanded:categoriesDirectiveController.expanded}\" \r" +
     "\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <label for=\"toDateField\">End Date: </label>\n" +
-    "                <input class=\"form-control\" name=\"toDateField\" id=\"toDateField\" type=\"date\" \n" +
-    "                       placeholder=\"yyyy-MM-dd\" ng-model=\"filterExpressions.toDate\"/>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "</div>\n"
+    "     class=\"popover switchon-categories-popover\" \r" +
+    "\n" +
+    "     id=\"categories-popover\" \r" +
+    "\n" +
+    "     ng-mouseleave=\"\r" +
+    "\n" +
+    "         categoriesDirectiveController.expanded = false; \r" +
+    "\n" +
+    "         categoriesDirectiveController.selectedCategory=null;\">\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <div class=\"switchon-categories-list\">\r" +
+    "\n" +
+    "            <div class=\"switchon-categories-list\">\r" +
+    "\n" +
+    "                <ul class=\"list-group\">\r" +
+    "\n" +
+    "                    <li class=\"list-group-item\">  \r" +
+    "\n" +
+    "                        <span ng-style=\"{'font-weight': \r" +
+    "\n" +
+    "                                categoriesDirectiveController.selectedCategory === 'category-collection' ? \r" +
+    "\n" +
+    "                               'bold' : 'plain'}\">Data Collections</span>               \r" +
+    "\n" +
+    "                        <i class=\"glyphicon glyphicon-chevron-right\" \r" +
+    "\n" +
+    "                           ng-mouseenter=\"categoriesDirectiveController.expanded = true;\r" +
+    "\n" +
+    "                                   categoriesDirectiveController.selectedCategory = 'category-collection'\">\r" +
+    "\n" +
+    "                        </i>\r" +
+    "\n" +
+    "                        <p>\r" +
+    "\n" +
+    "                            <small><small>Browse open hydrological data by popular data collections.</small></small>\r" +
+    "\n" +
+    "                        </p>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"list-group-item\">  \r" +
+    "\n" +
+    "                        <span ng-style=\"{'font-weight': \r" +
+    "\n" +
+    "                                categoriesDirectiveController.selectedCategory === 'topic-inspire' ? \r" +
+    "\n" +
+    "                            'bold' : 'plain'}\">Topic Categories</span>               \r" +
+    "\n" +
+    "                        <i class=\"glyphicon glyphicon-chevron-right\" \r" +
+    "\n" +
+    "                           ng-mouseenter=\"categoriesDirectiveController.expanded = true;\r" +
+    "\n" +
+    "                                   categoriesDirectiveController.selectedCategory = 'topic-inspire'\">\r" +
+    "\n" +
+    "                        </i>\r" +
+    "\n" +
+    "                        <p>\r" +
+    "\n" +
+    "                            <small><small>Browse open hydrological data by INSPIRE Topic Categories.</small></small>\r" +
+    "\n" +
+    "                        </p>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div ng-if=\"categoriesDirectiveController.expanded && \r" +
+    "\n" +
+    "                    categoriesDirectiveController.selectedCategory !== null\" class=\"switchon-categories-list switchon-sub-categories-list\">\r" +
+    "\n" +
+    "            <ul class=\"list-group\">\r" +
+    "\n" +
+    "                <li class=\"list-group-item\" \r" +
+    "\n" +
+    "                    ng-repeat=\"category in categoriesDirectiveController.getCategories(categoriesDirectiveController.selectedCategory)\">  \r" +
+    "\n" +
+    "                    <a ng-click=\"$hide(); categoriesDirectiveController.performCategoriesSearch(categoriesDirectiveController.selectedCategory, category);\">\r" +
+    "\n" +
+    "                        {{category}}\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </li>\r" +
+    "\n" +
+    "            </ul>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/categories-directive-template.html',
+    "<div class=\"nav navbar-nav btn-group\">\r" +
+    "\n" +
+    "    <button type=\"button\" \r" +
+    "\n" +
+    "        class=\"btn navbar-btn switchon-categories-button navbar-left\" \r" +
+    "\n" +
+    "        template=\"templates/categories-directive-popup.html\"\r" +
+    "\n" +
+    "        placement=\"bottom-left\"\r" +
+    "\n" +
+    "        auto-close=\"1\"\r" +
+    "\n" +
+    "        bs-popover=\"true\"\r" +
+    "\n" +
+    "        id=\"categories-button\">\r" +
+    "\n" +
+    "        <strong>All categories</strong> <span class=\"caret\"></span>\r" +
+    "\n" +
+    "    </button>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/countries-filter-directive.html',
+    "<div class=\"panel panel-default\">\r" +
+    "\n" +
+    "    <div class=\"panel-body\">\r" +
+    "\n" +
+    "        <!--<input type=\"text\" ng-model=\"keyword\" \r" +
+    "\n" +
+    "               typeahead=\"keyword for keyword in keywordList | filter:$viewValue | limitTo:8\" \r" +
+    "\n" +
+    "               typeahead-editable=\"false\"\r" +
+    "\n" +
+    "               class=\"form-control\">-->\r" +
+    "\n" +
+    "        <select name=\"{{countryGroup}}\" id=\"{{countryGroup}}\" \r" +
+    "\n" +
+    "                ng-model=\"filterExpression.selectedCountry\" ng-options=\"country as country for (country, geom) in countryList\" \r" +
+    "\n" +
+    "                class=\"form-control\" size=\"8\" multiple ></select>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/datefilter-directive.html',
+    "<div class=\"panel panel-default\">\r" +
+    "\n" +
+    "    <div class=\"panel-heading\">Date Filter</div>\r" +
+    "\n" +
+    "    <div class=\"panel-body\">\r" +
+    "\n" +
+    "        <form  class=\"form\" \r" +
+    "\n" +
+    "               name=\"dateFilterBox\" \r" +
+    "\n" +
+    "               role=\"form\"  \r" +
+    "\n" +
+    "               novalidate>\r" +
+    "\n" +
+    "            <div class=\"form-group\">\r" +
+    "\n" +
+    "                <label for=\"fromDateField\">Start Date: </label>\r" +
+    "\n" +
+    "                <input class=\"form-control\" name=\"fromDateField\" id=\"fromDateField\" type=\"date\" \r" +
+    "\n" +
+    "                       placeholder=\"yyyy-MM-dd\" ng-model=\"fromDateFilterExpression.value\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"form-group\">\r" +
+    "\n" +
+    "                <label for=\"toDateField\">End Date: </label>\r" +
+    "\n" +
+    "                <input class=\"form-control\" name=\"toDateField\" id=\"toDateField\" type=\"date\" \r" +
+    "\n" +
+    "                       placeholder=\"yyyy-MM-dd\" ng-model=\"toDateFilterExpression.value\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
+  );
+
+
+  $templateCache.put('templates/filter-expression-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"filterExpressionEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\" ng-init=\"enumeratedTags = tag.origin.enumerateTags()\">\r" +
+    "\n" +
+    "        <span style=\"float:left; padding-bottom: 0.5em;\" \r" +
+    "\n" +
+    "              ng-repeat=\"subtag in enumeratedTags\" \r" +
+    "\n" +
+    "              search-filter-tag\r" +
+    "\n" +
+    "              tag=\"subtag\">  \r" +
+    "\n" +
+    "        </span>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/geo-buffer-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"geoBufferEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <form name=\"geoBufferForm\" id=\"geoBufferForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': geoBufferForm.geoBufferField.$invalid}\">\r" +
+    "\n" +
+    "                <input type=\"number\" \r" +
+    "\n" +
+    "                       class=\"form-control\" \r" +
+    "\n" +
+    "                       min=\"0\" \r" +
+    "\n" +
+    "                       max=\"99999\" \r" +
+    "\n" +
+    "                       name=\"geoBufferField\" \r" +
+    "\n" +
+    "                       id=\"geoBufferField\" \r" +
+    "\n" +
+    "                       placeholder=\"buffer\"\r" +
+    "\n" +
+    "                       ng-model=\"data.editorValue\">\r" +
+    "\n" +
+    "                <span title=\"Cancel\"\r" +
+    "\n" +
+    "                      aria-label=\"Cancel\"\r" +
+    "\n" +
+    "                      name=\"cancelButton\"\r" +
+    "\n" +
+    "                      id=\"cancelButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-remove\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "                <span title=\"Apply\"\r" +
+    "\n" +
+    "                      aria-label=\"Apply\"\r" +
+    "\n" +
+    "                      name=\"applyButton\"\r" +
+    "\n" +
+    "                      id=\"clearButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"tag.origin.value = data.editorValue; $hide()\"\r" +
+    "\n" +
+    "                      ng-disabled=\"geoBufferForm.geoBufferField.$invalid\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-ok\"></span>    \r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/geo-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"geoEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <form name=\"geoForm\" id=\"geoForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': geoForm.geoBufferField.$invalid}\">\r" +
+    "\n" +
+    "                <input type=\"text\" \r" +
+    "\n" +
+    "                       class=\"form-control\" \r" +
+    "\n" +
+    "                       size=\"30\"\r" +
+    "\n" +
+    "                       name=\"geoField\" \r" +
+    "\n" +
+    "                       id=\"geoField\" \r" +
+    "\n" +
+    "                       placeholder=\"WKT String\"\r" +
+    "\n" +
+    "                       ng-model=\"data.editorValue\">\r" +
+    "\n" +
+    "                <span title=\"Cancel\"\r" +
+    "\n" +
+    "                      aria-label=\"Cancel\"\r" +
+    "\n" +
+    "                      name=\"cancelButton\"\r" +
+    "\n" +
+    "                      id=\"cancelButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-remove\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "                <span title=\"Apply\"\r" +
+    "\n" +
+    "                      aria-label=\"Apply\"\r" +
+    "\n" +
+    "                      name=\"applyButton\"\r" +
+    "\n" +
+    "                      id=\"clearButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"tag.origin.setStringValue(data.editorValue); $hide()\"\r" +
+    "\n" +
+    "                      ng-disabled=\"geoForm.geoField.$invalid\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-ok\"></span>    \r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
   );
 
 
   $templateCache.put('templates/keyword-filter-directive.html',
-    "<div class=\"panel panel-default\">\n" +
-    "    <div class=\"panel-body\">\n" +
-    "        <!--<input type=\"text\" ng-model=\"keyword\" \n" +
-    "               typeahead=\"keyword for keyword in keywordList | filter:$viewValue | limitTo:8\" \n" +
-    "               typeahead-editable=\"false\"\n" +
-    "               class=\"form-control\">-->\n" +
-    "        <select name=\"{{keywordGroup}}\" id=\"{{keywordGroup}}\" \n" +
-    "                ng-model=\"keyword\" ng-options=\"keyword for keyword in keywordList\" \n" +
-    "                class=\"form-control\" size=\"8\" multiple ></select>\n" +
-    "    </div>\n" +
+    "<!--<div class=\"panel panel-default\">\r" +
+    "\n" +
+    "    <div class=\"panel-body\">-->\r" +
+    "\n" +
+    "        <!--<input type=\"text\" ng-model=\"keyword\" \r" +
+    "\n" +
+    "               typeahead=\"keyword for keyword in keywordList | filter:$viewValue | limitTo:8\" \r" +
+    "\n" +
+    "               typeahead-editable=\"false\"\r" +
+    "\n" +
+    "               class=\"form-control\">-->\r" +
+    "\n" +
+    "        <select ng-if=\"multiple === 'true'\"\r" +
+    "\n" +
+    "                name=\"{{keywordGroup}}\" id=\"{{keywordGroup}}\" \r" +
+    "\n" +
+    "                ng-model=\"filterExpression.value\" ng-options=\"keyword for keyword in keywordList\" \r" +
+    "\n" +
+    "            class=\"form-control\" size=\"11\" multiple> \r" +
+    "\n" +
+    "        </select>\r" +
+    "\n" +
+    "        <select ng-if=\"multiple !== 'true'\"\r" +
+    "\n" +
+    "                name=\"{{keywordGroup}}\" id=\"{{keywordGroup}}\" \r" +
+    "\n" +
+    "                ng-model=\"filterExpression.value\" ng-options=\"keyword for keyword in keywordList\" \r" +
+    "\n" +
+    "            class=\"form-control\" size=\"11\">   \r" +
+    "\n" +
+    "            <option value=\"\">none</option>\r" +
+    "\n" +
+    "        </select>\r" +
+    "\n" +
+    "<!--    </div>\r" +
+    "\n" +
+    "</div>-->"
+  );
+
+
+  $templateCache.put('templates/limit-editor-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\" id=\"limitEditor\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <form name=\"limitForm\" id=\"limitForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': limitForm.limitField.$invalid}\">\r" +
+    "\n" +
+    "                <input type=\"number\" \r" +
+    "\n" +
+    "                       class=\"form-control\" \r" +
+    "\n" +
+    "                       min=\"1\" \r" +
+    "\n" +
+    "                       max=\"50\" \r" +
+    "\n" +
+    "                       name=\"limitField\" \r" +
+    "\n" +
+    "                       id=\"limitField\" \r" +
+    "\n" +
+    "                       placeholder=\"limit\"\r" +
+    "\n" +
+    "                       ng-model=\"data.editorValue\"\r" +
+    "\n" +
+    "                       ng-init=\"data.applyChangesOnClose = false\">\r" +
+    "\n" +
+    "                <span title=\"Cancel\"\r" +
+    "\n" +
+    "                      aria-label=\"Cancel\"\r" +
+    "\n" +
+    "                      name=\"cancelButton\"\r" +
+    "\n" +
+    "                      id=\"cancelButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-remove\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "                <span title=\"Apply\"\r" +
+    "\n" +
+    "                      aria-label=\"Apply\"\r" +
+    "\n" +
+    "                      name=\"applyButton\"\r" +
+    "\n" +
+    "                      id=\"clearButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"tag.origin.value = data.editorValue; $hide()\"\r" +
+    "\n" +
+    "                      ng-disabled=\"limitForm.limitField.$invalid\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-ok\"></span>    \r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('templates/list-view-directive.html',
-    "<table ng-table=\"tableParams\" class=\"table table-striped table-bordered table-hover\">\n" +
-    "    <tr ng-repeat=\"node in $data\">\n" +
-    "        <td data-title=\"'Name'\" sortable=\"'object.name'\" class=\"name\">{{node.object.name}}</td>\n" +
-    "        <td data-title=\"'Description'\" sortable=\"'object.description'\">{{node.object.description | txtLen:80:false:null:true}}</td>\n" +
-    "        <td data-title=\"'Start date'\" sortable=\"'object.fromdate'\" class=\"date\">{{node.object.fromdate | date: \"dd.MM.yyyy HH:mm:ss 'GMT'Z\"}}</td>\n" +
-    "        <td data-title=\"'End date'\" sortable=\"'object.todate'\" class=\"date\">{{node.object.todate | date: \"dd.MM.yyyy HH:mm:ss 'GMT'Z\"}}</td>\n" +
-    "        <td data-title=\"'Tools'\" class=\"tools\">\n" +
-    "            <span popover=\"Info\"\n" +
-    "                  popover-trigger=\"mouseenter\"\n" +
-    "                  popover-placement=\"left\"\n" +
-    "                  class=\"btn-invisible btn-icon\"\n" +
-    "                  ng-click=\"showInfo(node.object)\" >\n" +
-    "                <i class=\"glyphicon glyphicon-info-sign\"></i>\n" +
-    "            </span>\n" +
-    "            <span popover=\"Download\" \n" +
-    "                  popover-trigger=\"mouseenter\"\n" +
-    "                  popover-placement=\"left\"\n" +
-    "                  class=\"btn-invisible\"\n" +
-    "                  ng-click=\"showDownload(node.object)\">\n" +
-    "                <i class=\"glyphicon glyphicon-download\"></i>\n" +
-    "            </span>\n" +
-    "            <span popover=\"Bookmark\" \n" +
-    "                  popover-trigger=\"mouseenter\"\n" +
-    "                  popover-placement=\"left\"\n" +
-    "                  class=\"btn-invisible btn-icon disabled\"\n" +
-    "                  ng-click=\"\" >\n" +
-    "                <i class=\"glyphicon glyphicon-bookmark\"></i>\n" +
-    "            </span>\n" +
-    "            <span popover=\"Share\" \n" +
-    "                  popover-trigger=\"mouseenter\"\n" +
-    "                  popover-placement=\"left\"\n" +
-    "                  class=\"btn-invisible btn-icon disabled\" \n" +
-    "                  ng-click=\"\" >\n" +
-    "                <i class=\"glyphicon glyphicon-share\"></i>\n" +
-    "            </span>\n" +
-    "        </td>\n" +
-    "    </tr>\n" +
-    "</table>\n"
+    "<table ng-table=\"tableParams\" class=\"table table-striped table-bordered table-hover\">\r" +
+    "\n" +
+    "    <tr ng-repeat=\"node in $data\">\r" +
+    "\n" +
+    "        <td data-title=\"'Name'\" class=\"name\" \r" +
+    "\n" +
+    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null\">{{node.object.name}}</td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Description'\">\r" +
+    "\n" +
+    "            <span>{{node.object.description | txtLen:160:false:'':true}}</span>\r" +
+    "\n" +
+    "            <span ng-hide=\"node.object.description.length < 160\">\r" +
+    "\n" +
+    "                <a href=\"#/resource/{{node.object.id}}\" title=\"Show the complete Description\"><strong>...</strong></a>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Temporal Extent'\" class=\"date\"\r" +
+    "\n" +
+    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null\">\r" +
+    "\n" +
+    "            {{node.object.fromdate | date: \"dd.MM.yyyy\"}} - \r" +
+    "\n" +
+    "            {{node.object.todate | date: \"dd.MM.yyyy\"}}\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Keywords'\" class=\"tags\">\r" +
+    "\n" +
+    "            <span ng-repeat=\"tag in tags = (node.object.tags | orderBy:'name' | limitTo:config.keywordsLimit)\">\r" +
+    "\n" +
+    "                <span ng-hide=\"config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)\" \r" +
+    "\n" +
+    "                      class=\"label\" ng-class=\"isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'\">{{tag.name}}</span>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "            <span ng-if=\"tags.length < node.object.tags.length\"><a href=\"#/resource/{{node.object.id}}\" title=\"Show all Keywords\"><strong>...</strong></a></span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Tools'\" class=\"tools\">\r" +
+    "\n" +
+    "            <a class=\"btn-invisible btn-icon\"\r" +
+    "\n" +
+    "               href=\"#/resource/{{node.object.id}}\"\r" +
+    "\n" +
+    "               title=\"Show detailed resource information\"><i class=\"glyphicon glyphicon-info-sign\"></i></a>\r" +
+    "\n" +
+    "            <a class=\"btn-invisible btn-icon\"\r" +
+    "\n" +
+    "               title=\"Show resource on the on the map\"\r" +
+    "\n" +
+    "               ng-click=\"$parent.$parent.selectedObject = $index\"\r" +
+    "\n" +
+    "               href=\"#/map\"><i class=\"glyphicon glyphicon-globe\"></i></a>\r" +
+    "\n" +
+    "            <span ng-repeat=\"representation in node.object.representation | filter:{function:'download', type:'original data'}\"\r" +
+    "\n" +
+    "                  class=\"btn-invisible\">\r" +
+    "\n" +
+    "                    <a href=\"{{representation.contentlocation}}\" download \r" +
+    "\n" +
+    "                       rel=\"nofollow\"\r" +
+    "\n" +
+    "                       title=\"Download {{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}} ({{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}})\"\r" +
+    "\n" +
+    "                       type=\"{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}\"><i class=\"glyphicon glyphicon-download\"></i></a>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    " <!--           <span bs-tooltip\r" +
+    "\n" +
+    "                  data-placement=\"left\"\r" +
+    "\n" +
+    "                  data-trigger=\"hover\"\r" +
+    "\n" +
+    "                  data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "                  data-title=\"Bookmark\"\r" +
+    "\n" +
+    "                  class=\"btn-invisible btn-icon disabled\"\r" +
+    "\n" +
+    "                  ng-click=\"\" >\r" +
+    "\n" +
+    "                <i class=\"glyphicon glyphicon-bookmark\"></i>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "            <span bs-tooltip\r" +
+    "\n" +
+    "                  data-placement=\"left\"\r" +
+    "\n" +
+    "                  data-trigger=\"hover\"\r" +
+    "\n" +
+    "                  data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "                  data-title=\"Share\"\r" +
+    "\n" +
+    "                  class=\"btn-invisible btn-icon disabled\" \r" +
+    "\n" +
+    "                  ng-click=\"\" >\r" +
+    "\n" +
+    "                <i class=\"glyphicon glyphicon-share\"></i>\r" +
+    "\n" +
+    "            </span>-->\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "    </tr>\r" +
+    "\n" +
+    "</table>\r" +
+    "\n"
+  );
+
+
+  $templateCache.put('templates/map-view-directive.html',
+    "<div>\r" +
+    "\n" +
+    "    <leaflet id=\"mainmap\" defaults=\"defaults\" center=\"center\" width=\"{{currentWidth}}\" height=\"{{currentHeight}}\"></leaflet>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n"
+  );
+
+
+  $templateCache.put('templates/master-toolbar-template.html',
+    "<div class=\"switchon-master-toolbar\" \r" +
+    "\n" +
+    "     ng-class=\"{'switchon-master-toolbar-toggled': masterToolbarService.getCanShow() && masterToolbarService.isShowing()}\">\r" +
+    "\n" +
+    "    <result-pager result-set=\"resultSet\"\r" +
+    "\n" +
+    "                  search-function=\"performSearch()\" \r" +
+    "\n" +
+    "                  filter-expressions=\"filterExpressions\"></result-pager>\r" +
+    "\n" +
+    "    <result-list result-set=\"resultSet\" selected-object=\"selectedObject\"></result-list>\r" +
+    "\n" +
+    "    <postsearchfilter filter-expressions=\"filterExpressions\" \r" +
+    "\n" +
+    "                      post-search-filter-expressions=\"postSearchFilterExpressions\" \r" +
+    "\n" +
+    "                      post-search-filters-filter-expression=\"postSearchFiltersFilterExpression\" \r" +
+    "\n" +
+    "                      filter-tags=\"filterTags\" \r" +
+    "\n" +
+    "                      search-function=\"performSearch()\" \r" +
+    "\n" +
+    "                      notification-function=\"notificationFunction()\"\r" +
+    "\n" +
+    "                      remove-threshold=\"resultSet.$total\">     \r" +
+    "\n" +
+    "    </postsearchfilter>\r" +
+    "\n" +
+    "    <!-- the functions that are only passed through to the lower level are invoked as we want to pass the reference\r" +
+    "\n" +
+    "         to the real function not the reference to the getter function -->\r" +
+    "\n" +
+    "</div>"
   );
 
 
   $templateCache.put('templates/my-profile-directive.html',
-    "<div class=\"page-header\" style=\"text-align: center\">\n" +
-    "    <h1>You are: <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> '{{user.name}}' <small> However, the profile page is yet to come</small></h1>\n" +
+    "<div class=\"page-header\" style=\"text-align: center\">\r" +
+    "\n" +
+    "    <h1>You are: <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> '{{user.name}}' <small> However, the profile page is yet to come</small></h1>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<div class=\"container\">\r" +
+    "\n" +
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div class=\"col-sm-12\">\r" +
+    "\n" +
+    "            <div class=\"thumbnail\">\r" +
+    "\n" +
+    "                <img src=\"images/under_construction_icon-green.svg\"  alt=\"Under Construction\"/>\r" +
+    "\n" +
+    "                <div style=\"margin:auto; width:600px\">\r" +
+    "\n" +
+    "                    <h2>This feature is currently under construction!</h2>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('templates/my-workspace-directive.html',
-    "<div class=\"btn-group nav navbar-nav navbar-right\" dropdown is-open=\"status.isopen\"\n" +
-    "     ng-mouseenter=\"popup(true)\"\n" +
-    "     ng-mouseleave=\"popup(false)\">\n" +
-    "    <button class=\"btn btn-xs navbar-btn dropdown-toggle ws-button\" \n" +
-    "            data-toggle=\"dropdown\"\n" +
-    "            role=\"button\"\n" +
-    "            type=\"button\"\n" +
-    "            aria-expanded=\"false\"\n" +
-    "            ng-click=\"showProfile()\">\n" +
-    "        <div>Hello {{user.name}}</div>\n" +
-    "        <b>My {{workspaceName}} <span class=\"caret\"></span></b>\n" +
-    "    </button>\n" +
-    "    <ul class=\"dropdown-menu hoverdropdown\" role=\"menu\">\n" +
-    "        <li>\n" +
-    "            <a ui-sref=\"profile\">My profile</a>\n" +
-    "        </li>\n" +
-    "        <li class=\"divider\"></li>\n" +
-    "        <li>\n" +
-    "            <a ui-sref=\"login\" ng-show=\"sessionService.isAnonymousUser(user)\">Log in</a>\n" +
-    "            <a ui-sref=\"login\" ng-hide=\"sessionService.isAnonymousUser(user)\">Not {{user.name}}? Log out</a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
+    "<div class=\"btn-group nav navbar-nav navbar-right\" dropdown is-open=\"status.isopen\"\r" +
+    "\n" +
+    "     ng-mouseenter=\"popup(true)\"\r" +
+    "\n" +
+    "     ng-mouseleave=\"popup(false)\">\r" +
+    "\n" +
+    "    <button class=\"btn btn-xs navbar-btn dropdown-toggle ws-button\" \r" +
+    "\n" +
+    "            data-toggle=\"dropdown\"\r" +
+    "\n" +
+    "            role=\"button\"\r" +
+    "\n" +
+    "            type=\"button\"\r" +
+    "\n" +
+    "            aria-expanded=\"false\"\r" +
+    "\n" +
+    "            ng-click=\"showProfile()\">\r" +
+    "\n" +
+    "        <div>Hello {{user.name}}</div>\r" +
+    "\n" +
+    "        <b>My {{workspaceName}} <span class=\"caret\"></span></b>\r" +
+    "\n" +
+    "    </button>\r" +
+    "\n" +
+    "    <ul class=\"dropdown-menu hoverdropdown\" role=\"menu\">\r" +
+    "\n" +
+    "        <li>\r" +
+    "\n" +
+    "            <a ui-sref=\"profile\">My profile</a>\r" +
+    "\n" +
+    "        </li>\r" +
+    "\n" +
+    "        <li class=\"divider\"></li>\r" +
+    "\n" +
+    "        <li>\r" +
+    "\n" +
+    "            <a ui-sref=\"login\" ng-show=\"sessionService.isAnonymousUser(user)\">Log in</a>\r" +
+    "\n" +
+    "            <a ui-sref=\"login\" ng-hide=\"sessionService.isAnonymousUser(user)\">Not {{user.name}}? Log out</a>\r" +
+    "\n" +
+    "        </li>\r" +
+    "\n" +
+    "    </ul>\r" +
+    "\n" +
     "</div>"
   );
 
 
-  $templateCache.put('templates/object-download-modal-template.html',
-    "<div class=\"modal-header\">\n" +
-    "    <h3 class=\"modal-title\">Downloads of {{object.name}}</h3>\n" +
-    "</div>\n" +
-    "<div class=\"modal-body\">\n" +
-    "    <div class=\"container-fluid\">\n" +
-    "        <accordion close-others=\"false\">\n" +
-    "            <accordion-group ng-repeat=\"rep in reps\" is-open=\"rep._status.open\">\n" +
-    "                <accordion-heading>\n" +
-    "                    {{rep.name}} <i class=\"pull-right glyphicon\" ng-class=\"{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}\"></i> \n" +
-    "                </accordion-heading>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-lg-3\">\n" +
-    "                        <label>Temporal resolution:</label>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-lg-9\">\n" +
-    "                        {{rep.temporalresolution || 'n/a'}}\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-lg-3\">\n" +
-    "                        <label>Spatial resolution:</label>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-lg-9\">\n" +
-    "                        {{rep.spatialresolution || 'n/a'}}\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-lg-3\">\n" +
-    "                        <label>Spatial scale:</label>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-lg-9\">\n" +
-    "                        {{rep.spatialscale || 'n/a'}}\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-lg-3\">\n" +
-    "                        <label>Mime type:</label>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-lg-9\">\n" +
-    "                        {{rep.contenttype.name || 'n/a'}}\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-lg-3\">\n" +
-    "                        <label>Data access function:</label>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-lg-9\">\n" +
-    "                        {{rep.function.name || 'n/a'}}\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-lg-3\">\n" +
-    "                        <label>Data access link:</label>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-lg-9\">\n" +
-    "                        <a href=\"{{rep.contentlocation}}\" ng-disabled=\"!rep.contentlocation\">{{rep.contentlocation || 'n/a'}}</a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </accordion-group>\n" +
-    "        </accordion>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "<div class=\"modal-footer\">\n" +
-    "    <button class=\"btn btn-primary\" ng-click=\"closeDownloadView()\">OK</button>\n" +
+  $templateCache.put('templates/object-representation-template.html',
+    "<accordion close-others=\"false\">\r" +
+    "\n" +
+    "    <accordion-group ng-repeat=\"rep in reps | filter:{type:'original data'}\" \r" +
+    "\n" +
+    "                     is-open=\"rep._status.open\"\r" +
+    "\n" +
+    "                     ng-init=\"filename = rep.contentlocation.substr(rep.contentlocation.lastIndexOf('/')+1)\">\r" +
+    "\n" +
+    "        <accordion-heading>\r" +
+    "\n" +
+    "            {{rep.name}} <i class=\"pull-right glyphicon\" ng-class=\"{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}\"></i> \r" +
+    "\n" +
+    "        </accordion-heading>\r" +
+    "\n" +
+    "        <!-- Description -->\r" +
+    "\n" +
+    "        <!--\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.description\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Description of the data, e.g. information on data formats, download possibilities, etc.\">\r" +
+    "\n" +
+    "                <label>Description:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{rep.description}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        -->\r" +
+    "\n" +
+    "        <!-- Temporal resolution -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.temporalresolution\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Temporal resolution of the data, e.g. daily\">\r" +
+    "\n" +
+    "                <label>Temporal resolution:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{rep.temporalresolution || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Spatial resolution -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.spatialresolution\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Spatial resolution of the data, e.g. meters or arc degrees.\">\r" +
+    "\n" +
+    "                <label>Spatial resolution:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{rep.spatialresolution || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Spatial scale -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.spatialscale\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Spatial scale of the data, e.g. 1:2000 or  1:10000\">\r" +
+    "\n" +
+    "                <label>Spatial scale:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{rep.spatialscale || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Content Type -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.contenttype\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"MIME Type of the resource representation\">\r" +
+    "\n" +
+    "                <label>Mime type:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\" title=\"{{rep.contenttype.description || 'n/a'}}\">\r" +
+    "\n" +
+    "                {{rep.contenttype.name || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Data access function -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.function\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Function that can be performed following the link to the resource representation\">\r" +
+    "\n" +
+    "                <label>Data access function:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\" title=\"{{rep.function.description || 'n/a'}}\">\r" +
+    "\n" +
+    "                {{rep.function.name || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Data access Link -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"rep.contentlocation\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Link to the data or website where the data can be obtained\">\r" +
+    "\n" +
+    "                <label>Data access link:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                <a href=\"{{rep.contentlocation}}\" \r" +
+    "\n" +
+    "                    target=\"_blank\" \r" +
+    "\n" +
+    "                    rel=\"nofollow\"\r" +
+    "\n" +
+    "                    type=\"{{(rep.contenttype) ? rep.contenttype.name : 'application/octet-stream'}}\"\r" +
+    "\n" +
+    "                    ng-disabled=\"!rep.contentlocation\">{{(filename && filename.indexOf('.') !== -1) ? filename : rep.name}}</a>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </accordion-group>\r" +
+    "\n" +
+    "</accordion>"
+  );
+
+
+  $templateCache.put('templates/post-search-filter-directive.html',
+    "<accordion class=\"switchon-toolbar-component\" close-others=\"true\" ng-show=\"isVisible\">\r" +
+    "\n" +
+    "    <accordion-group ng-repeat=\"filterExpression in postSearchFilterExpressions.list | filter:{valid:true}\" \r" +
+    "\n" +
+    "                     is-open=\"filterExpression._status.open\">\r" +
+    "\n" +
+    "        <accordion-heading>\r" +
+    "\n" +
+    "            <strong>{{filterExpression.getName()}}<strong><i class=\"pull-right glyphicon\" \r" +
+    "\n" +
+    "                                ng-class=\"{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}\"></i>\r" +
+    "\n" +
+    "        </accordion-heading>\r" +
+    "\n" +
+    "        <span style=\"float:left; padding-bottom: 0.5em;\" \r" +
+    "\n" +
+    "              ng-repeat=\"tag in filterExpression.enumeratedTags\" \r" +
+    "\n" +
+    "              search-filter-tag \r" +
+    "\n" +
+    "              tag=\"tag\" \r" +
+    "\n" +
+    "              remove-threshold=\"removeThreshold\">  \r" +
+    "\n" +
+    "        </span>\r" +
+    "\n" +
+    "    </accordion-group>\r" +
+    "\n" +
+    "</accordion>"
+  );
+
+
+  $templateCache.put('templates/result-pager-template.html',
+    "<div class=\"switchon-toolbar-component switchon-result-pager\" ng-show=\"isVisible\">   \r" +
+    "\n" +
+    "    <span class=\"switchon-result-pager-title\">\r" +
+    "\n" +
+    "        <strong>Resources</strong>\r" +
+    "\n" +
+    "        <span title=\"Showing {{resultSet.$length}} of {{resultSet.$total}} resources\" ng-show=\"resultSet && resultSet.$length && resultSet.$length > 0\">({{resultSet.$total}})</span>\r" +
+    "\n" +
+    "    </span>\r" +
+    "\n" +
+    "    <ul class=\"pagination pagination-sm pull-right\">\r" +
+    "\n" +
+    "        <li ng-class=\"{disabled: !hasPrevious()}\">\r" +
+    "\n" +
+    "            <a title=\"Show previous {{resultSet.$limit}} resources\" aria-label=\"Previous\" \r" +
+    "\n" +
+    "               ng-show=\"hasPrevious()\" ng-click=\"previous()\">\r" +
+    "\n" +
+    "                <span aria-hidden=\"true\">&laquo;</span>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "        </li>\r" +
+    "\n" +
+    "        <li ng-class=\"{disabled: !hasNext()}\">\r" +
+    "\n" +
+    "            <a title=\"Show next {{resultSet.$limit}} resources\" aria-label=\"Next\" \r" +
+    "\n" +
+    "               ng-show=\"hasNext()\" ng-click=\"next()\">\r" +
+    "\n" +
+    "                <span aria-hidden=\"true\">&raquo;</span>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "        </li>\r" +
+    "\n" +
+    "    </ul>\r" +
+    "\n" +
     "</div>"
   );
 
 
-  $templateCache.put('templates/object-info-modal-template.html',
-    "<div class=\"modal-header\">\n" +
-    "    <h3 class=\"modal-title\">Object info of {{object.name}}</h3>\n" +
-    "</div>\n" +
-    "<div class=\"modal-body\">\n" +
-    "    <div class=\"container-fluid\">\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Name:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.name}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Description:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.description}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Keywords:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                <span ng-repeat=\"tag in object.tags\">\n" +
-    "                    <span class=\"label label-primary\">{{tag.name}}</span>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Topic:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.topiccategory.name ? object.topiccategory.name : '[none]'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Point of Contact:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.contact.name ? object.contact.name : '[none]'}} ({{object.contact.organisation ? object.contact.organisation : 'no organisation'}})\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Time Range:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.fromdate | date: \"dd.MM.yyyy HH:mm:ss 'GMT'Z\"}} - {{object.todate | date: \"dd.MM.yyyy HH:mm:ss 'GMT'Z\"}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Last modification:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.lastmodificationdate | date: \"dd.MM.yyyy HH:mm:ss 'GMT'Z\"}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>Access limitations:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.accesslimitations.name ? object.accesslimitations.name : 'unknown'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\">\n" +
-    "            <div class=\"col-lg-3\">\n" +
-    "                <label>License:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{object.licensestatement ? object.licensestatement : 'unknown'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "<div class=\"modal-footer\">\n" +
-    "    <button class=\"btn btn-primary\" ng-click=\"closeInfoView()\">OK</button>\n" +
+  $templateCache.put('templates/resultlist-directive.html',
+    "<div class=\"switchon-toolbar-component switchon-result-list\" ng-show=\"isVisible\">   \r" +
+    "\n" +
+    "    <ul class=\"list-group\">\r" +
+    "\n" +
+    "        <li class=\"list-group-item\" ng-repeat=\"node in resultSet.$collection\">  \r" +
+    "\n" +
+    "            <span class=\"btn-link\" \r" +
+    "\n" +
+    "                  ng-style=\"{'font-weight': $parent.selectedObject === $index ? 'bold' : 'plain'}\"\r" +
+    "\n" +
+    "                  ng-click=\"$parent.selectedObject = $index\">{{node.name}}</span>\r" +
+    "\n" +
+    "            <p><small><small>{{node.object.description| txtLen:80:false:'...':true}}</small></small></p>\r" +
+    "\n" +
+    "        </li>\r" +
+    "\n" +
+    "    </ul>\r" +
+    "\n" +
     "</div>"
-  );
-
-
-  $templateCache.put('templates/resultset-directive.html',
-    "<div class=\"panel panel-default\">\n" +
-    "\n" +
-    "    <div class=\"container nowrap\"> \n" +
-    "        <strong>Resources</strong> ({{resultSet.$total}})\n" +
-    "        <ul class=\"pagination pagination-sm\">\n" +
-    "            <li ng-class=\"{disabled: !resultSet.$previous}\"><a href=\"#\" aria-label=\"Previous\" ng-click=\"alert();\"><span aria-hidden=\"true\">&laquo;</span></a></li>\n" +
-    "            <li ng-class=\"{disabled: resultSet.$next}\"><a href=\"#\" aria-label=\"Next\" ng-click=\"alert();\"><span aria-hidden=\"true\">&raquo;</span></a></li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <ul class=\"list-group\">\n" +
-    "        <li class=\"list-group-item\" ng-repeat=\"node in resultSet.$collection\">  \n" +
-    "            <span class=\"btn-link\" ng-click=\"alert();\">{{node.name}}</span>\n" +
-    "            <p><small>{{node.description}}</small></p>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "\n" +
-    "</div>\n"
   );
 
 
   $templateCache.put('templates/search-filter-ribbon-directive.html',
-    "<button type=\"button\" id=\"search-filter-directive-button\" \n" +
-    "        class=\"btn btn-default navbar-btn navbar-left\" \n" +
-    "        template=\"templates/search-filter-ribbon-popup.html\"\n" +
-    "        placement=\"bottom\"\n" +
-    "        target=\"#universalSearchBox\"\n" +
-    "        bs-popover>\n" +
-    "    Search Filter <span class=\"caret\"></span>\n" +
-    "</button>\n"
-  );
-
-
-  $templateCache.put('templates/search-filter-ribbon-popup.html',
-    "<div class=\"popover switchon-ribbon-popover\">\n" +
-    "    <div class=\"arrow\"></div>\n" +
-    "    <h3 class=\"popover-title\" ng-bind=\"title\" ng-show=\"title\"></h3>\n" +
-    "    <div class=\"popover-content\">\n" +
-    "        <div class=\"switchon-ribbon\">\n" +
-    "            <div class=\"switchon-ribbon-panel\">\n" +
-    "                <date-filter filter-expressions=\"filterExpressions\"></date-filter>\n" +
-    "            </div>\n" +
+    "<button type=\"button\" id=\"search-filter-directive-button\" \r" +
     "\n" +
-    "            <div class=\"switchon-ribbon-panel\">\n" +
-    "                <tabset>\n" +
-    "                    <tab heading=\"CUASHI\">\n" +
-    "                       <keyword-filter filter-expressions=\"filterExpressions\" keyword-group=\"cuashi_keyword\"></keyword-filter>\n" +
-    "                    </tab>\n" +
-    "                    <tab heading=\"INSPIRE\">\n" +
-    "                       <keyword-filter filter-expressions=\"filterExpressions\" keyword-group=\"inspire_keyword\"></keyword-filter>\n" +
-    "                    </tab>\n" +
-    "                    <tab heading=\"Topics\">\n" +
-    "                       <keyword-filter filter-expressions=\"filterExpressions\" keyword-group=\"inspire_topic\"></keyword-filter>\n" +
-    "                    </tab>\n" +
-    "                    <tab heading=\"Keywords\">\n" +
-    "                       <keyword-filter filter-expressions=\"filterExpressions\" keyword-group=\"keyword\"></keyword-filter>\n" +
-    "                    </tab>\n" +
-    "                </tabset>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "        class=\"btn btn-default navbar-btn navbar-left\" \r" +
     "\n" +
+    "        template=\"templates/search-filter-ribbon-popup.html\"\r" +
     "\n" +
+    "        placement=\"bottom-left\"\r" +
+    "\n" +
+    "        auto-close=\"1\"\r" +
+    "\n" +
+    "        bs-popover=\"true\">\r" +
+    "\n" +
+    "    Search Filter <span class=\"caret\"></span>\r" +
+    "\n" +
+    "</button>\r" +
     "\n"
   );
 
 
+  $templateCache.put('templates/search-filter-ribbon-popup.html',
+    "<div class=\"popover switchon-ribbon-popover\">\r" +
+    "\n" +
+    "    <div class=\"arrow\"></div>\r" +
+    "\n" +
+    "    <h3 class=\"popover-title\" ng-bind=\"title\" ng-show=\"title\"></h3>\r" +
+    "\n" +
+    "    <div class=\"popover-content\">\r" +
+    "\n" +
+    "        <div class=\"switchon-ribbon\">\r" +
+    "\n" +
+    "            <div class=\"switchon-ribbon-panel\">\r" +
+    "\n" +
+    "                <div class=\"btn-group switchon-keywordgroup\" dropdown is-open=\"keywordFilters.isopen\">\r" +
+    "\n" +
+    "                    <button type=\"button\" \r" +
+    "\n" +
+    "                            class=\"btn btn-default dropdown-toggle\" \r" +
+    "\n" +
+    "                            dropdown-toggle \r" +
+    "\n" +
+    "                            ng-init=\"keywordFilters.keywordGroup = 'CUAHSI Keywords'\"\r" +
+    "\n" +
+    "                            style=\"width:100%\">\r" +
+    "\n" +
+    "                        {{keywordFilters.keywordGroup}}\r" +
+    "\n" +
+    "                        <span class=\"caret\"></span>\r" +
+    "\n" +
+    "                    </button>\r" +
+    "\n" +
+    "                    <ul class=\"dropdown-menu\" role=\"menu\">\r" +
+    "\n" +
+    "<!--                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                btn-radio=\"'Keywords'\" \r" +
+    "\n" +
+    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
+    "\n" +
+    "                                title=\"All Keywords available in the SWITCH-ON Meta-Data Repository\">\r" +
+    "\n" +
+    "                                Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                   btn-radio=\"'TOPIC Categories'\" \r" +
+    "\n" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
+    "\n" +
+    "                                   title=\"INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository\">\r" +
+    "\n" +
+    "                                TOPIC Categories\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>-->\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                   btn-radio=\"'CUAHSI Keywords'\" \r" +
+    "\n" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "\n" +
+    "                                CUAHSI Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <!--\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                   btn-radio=\"'INSPIRE Keywords'\" \r" +
+    "\n" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">INSPIRE Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                btn-radio=\"'Free Keywords'\" \r" +
+    "\n" +
+    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "\n" +
+    "                                Free Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        -->\r" +
+    "\n" +
+    "                    </ul>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<!--                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-all\"\r" +
+    "\n" +
+    "                                multiple=\"true\">    \r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'TOPIC Categories'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"topicFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"topic-inspire\"\r" +
+    "\n" +
+    "                                multiple=\"false\">\r" +
+    "\n" +
+    "                </keyword-filter>-->\r" +
+    "\n" +
+    "                \r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'CUAHSI Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsCuashiFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-cuahsi\"\r" +
+    "\n" +
+    "                                multiple=\"true\">      \r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
+    "                <!--\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'INSPIRE Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-inspire\"\r" +
+    "\n" +
+    "                                multiple=\"true\">\r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'Free Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-free\"\r" +
+    "\n" +
+    "                                multiple=\"true\">        \r" +
+    "\n" +
+    "                -->\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <!-- FIXME: Date Filter Directive does not work properly in latest versions of \r" +
+    "\n" +
+    "            Firefox and Internet Explorer. See https://github.com/switchonproject/sip-html5/issues/48 -->\r" +
+    "\n" +
+    "<!--            <div class=\"switchon-ribbon-panel\">\r" +
+    "\n" +
+    "                <date-filter from-date-filter-expression=\"fromDateFilterExpression\"\r" +
+    "\n" +
+    "                             to-date-filter-expression=\"toDateFilterExpression\">\r" +
+    "\n" +
+    "                </date-filter>\r" +
+    "\n" +
+    "            </div>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<!--            <div class=\"switchon-ribbon-panel\">\r" +
+    "\n" +
+    "                <tabset>\r" +
+    "\n" +
+    "                    <tab heading=\"Europe\">\r" +
+    "\n" +
+    "                        <countries-filter \r" +
+    "\n" +
+    "                            filter-expression=\"geoFilterExpression\" \r" +
+    "\n" +
+    "                            country-group=\"country-europe\">\r" +
+    "\n" +
+    "                        </countries-filter>\r" +
+    "\n" +
+    "                    </tab>\r" +
+    "\n" +
+    "                    <tab heading=\"World\">\r" +
+    "\n" +
+    "                        <countries-filter \r" +
+    "\n" +
+    "                            filter-expression=\"geoFilterExpression\" \r" +
+    "\n" +
+    "                            country-group=\"country-world\">\r" +
+    "\n" +
+    "                        </countries-filter>\r" +
+    "\n" +
+    "                    </tab>\r" +
+    "\n" +
+    "                </tabset>\r" +
+    "\n" +
+    "            </div>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"switchon-ribbon-panel last\">\r" +
+    "\n" +
+    "                <search-options geo-intersects-filter-expression=\"geoIntersectsFilterExpression\"\r" +
+    "\n" +
+    "                                geo-buffer-filter-expression=\"geoBufferFilterExpression\"\r" +
+    "\n" +
+    "                                limit-filter-expression=\"limitFilterExpression\">\r" +
+    "\n" +
+    "                </search-options>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"switchon-ribbon-footer\">\r" +
+    "\n" +
+    "                <span title=\"Close the Search Filter Dialog\"\r" +
+    "\n" +
+    "                      aria-label=\"Close\"\r" +
+    "\n" +
+    "                      name=\"closeButton\"\r" +
+    "\n" +
+    "                      id=\"closeButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-remove\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "                <span title=\"Clear all Search Filters\"\r" +
+    "\n" +
+    "                      aria-label=\"Clear\"\r" +
+    "\n" +
+    "                      name=\"clearButton\"\r" +
+    "\n" +
+    "                      id=\"clearButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-default\"\r" +
+    "\n" +
+    "                      ng-disabled=\"((filterExpressions.enumeratedTags.length < 1)\r" +
+    "\n" +
+    "                      && (!textFilterExpression.value || textFilterExpression.value.length < 3))\"\r" +
+    "\n" +
+    "                      ng-click=\"clear()\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-trash\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "                <span title=\"Search for resources\"\r" +
+    "\n" +
+    "                      aria-label=\"Search\"\r" +
+    "\n" +
+    "                      name=\"searchButton\"\r" +
+    "\n" +
+    "                      id=\"searchButton\"\r" +
+    "\n" +
+    "                      class=\"btn btn-primary\"\r" +
+    "\n" +
+    "                      ng-disabled=\"((filterExpressions.enumeratedTags.length < 1)\r" +
+    "\n" +
+    "                      && (!textFilterExpression.value || textFilterExpression.value.length < 3))\"\r" +
+    "\n" +
+    "                      ng-click=\"$hide(); performSearch()(0, config.clearPostSearchFilters)\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-search\"></span>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n"
+  );
+
+
+  $templateCache.put('templates/search-filter-tag-directive-template.html',
+    "<span class=\"tag label\" \r" +
+    "\n" +
+    "      ng-class=\"getTagStyle(tag.getType(), false, highlightNegated)\">\r" +
+    "\n" +
+    "    <span ng-class=\"getTagIcon(tag.getType())\" title=\"{{tag.getTitle()}}\"></span>\r" +
+    "\n" +
+    "    <span ng-if=\"!tag.isEditable()\">{{tag.getDisplayValue()}}</span>\r" +
+    "\n" +
+    "    <span ng-if=\"tag.isEditable()\" \r" +
+    "\n" +
+    "          bs-popover template=\"{{tag.getEditor()}}\"\r" +
+    "\n" +
+    "          placement=\"bottom\"\r" +
+    "\n" +
+    "          auto-close=\"1\">{{tag.getDisplayValue(data.editorValue)}}\r" +
+    "\n" +
+    "    </span> \r" +
+    "\n" +
+    "    <span ng-if=\"tag.getCardinality() > 0\"><small><em>({{tag.getCardinality()}})</em></small></span>\r" +
+    "\n" +
+    "    <a ng-if=\"tag.isRemoveable(removeThreshold)\" title=\"delete\"><i ng-click=\"tag.remove()\" \r" +
+    "\n" +
+    "          class=\"glyphicon glyphicon-remove\"></i>\r" +
+    "\n" +
+    "    </a>\r" +
+    "\n" +
+    "</span>"
+  );
+
+
+  $templateCache.put('templates/search-options-directive.html',
+    "<div class=\"panel panel-default\">\r" +
+    "\n" +
+    "    <div class=\"panel-heading\">Options</div>\r" +
+    "\n" +
+    "    <div class=\"panel-body\">\r" +
+    "\n" +
+    "        <form name=\"optionsForm\" id=\"optionsForm\" novalidate> \r" +
+    "\n" +
+    "            <div class=\"form-group \">\r" +
+    "\n" +
+    "                <label for=\"geoIntersectsOption\">Geospatial Search</label>\r" +
+    "\n" +
+    "                <div class=\"form-inline\">\r" +
+    "\n" +
+    "                    <div class=\"radio\" title=\"Find resources that intersect with the geospatial search area\">\r" +
+    "\n" +
+    "                        <label>\r" +
+    "\n" +
+    "                            <input name=\"geoIntersectsOption\" \r" +
+    "\n" +
+    "                                   id=\"geoIntersectsOption\" \r" +
+    "\n" +
+    "                                   type=\"radio\" \r" +
+    "\n" +
+    "                                   ng-model=\"geoIntersectsFilterExpression.value\" \r" +
+    "\n" +
+    "                                   value=\"true\"> Intersects\r" +
+    "\n" +
+    "                        </label>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"radio\" title=\"Find resources that are enclosed in the geospatial search area\">\r" +
+    "\n" +
+    "                        <label>\r" +
+    "\n" +
+    "                            <input name=\"geoEnclosesOption\" \r" +
+    "\n" +
+    "                                   id=\"geoEnclosesOption\" \r" +
+    "\n" +
+    "                                   type=\"radio\" \r" +
+    "\n" +
+    "                                   ng-model=\"geoIntersectsFilterExpression.value\" \r" +
+    "\n" +
+    "                                   value=\"false\"> Encloses\r" +
+    "\n" +
+    "                        </label>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <!--\r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': optionsForm.geoBufferField.$invalid}\">\r" +
+    "\n" +
+    "                 <input type=\"number\" class=\"form-control\" \r" +
+    "\n" +
+    "                   min=\"0\" \r" +
+    "\n" +
+    "                   max=\"1000000\" \r" +
+    "\n" +
+    "                   ngMinlength=\"1\"\r" +
+    "\n" +
+    "                   name=\"geoBufferField\" \r" +
+    "\n" +
+    "                   id=\"geoBufferField\" \r" +
+    "\n" +
+    "                   placeholder=\"buffer in meters\"\r" +
+    "\n" +
+    "                   ng-model=\"geoBufferFilterExpression.value\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            -->\r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error': optionsForm.limitField.$invalid}\">\r" +
+    "\n" +
+    "                <div class=\"form-inline\" title=\"Maximum number of search results that are shown at once\">\r" +
+    "\n" +
+    "                    <label for=\"limitField\">Max. Search Results</label>                    \r" +
+    "\n" +
+    "                    <input type=\"number\" class=\"form-control\" \r" +
+    "\n" +
+    "                           min=\"0\" \r" +
+    "\n" +
+    "                           max=\"50\" \r" +
+    "\n" +
+    "                           ngMinlength=\"1\"\r" +
+    "\n" +
+    "                           name=\"limitField\" \r" +
+    "\n" +
+    "                           id=\"limitField\" \r" +
+    "\n" +
+    "                           ng-model=\"limitFilterExpression.value\">\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('templates/search-progress-modal-template.html',
+    "<div class=\"modal-header\">\r" +
+    "\n" +
+    "    <center><h4>Please wait, search is in progress.</h4></center>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "<div class=\"modal-body\">\r" +
+    "\n" +
+    "    <progressbar class=\"progress-striped active\" \r" +
+    "\n" +
+    "                 max=\"200\" \r" +
+    "\n" +
+    "                 value=\"status.current\" \r" +
+    "\n" +
+    "                 type=\"{{status.type}}\">\r" +
+    "\n" +
+    "    </progressbar>\r" +
+    "\n" +
+    "    <span><i>{{status.message}}</i></span>\r" +
+    "\n" +
+    " </div>\r" +
+    "\n" +
+    "<div class=\"modal-footer\"><!-- empty --></div>"
+  );
+
+
   $templateCache.put('templates/usb-directive.html',
-    "<form  class=\"navbar-form navbar-left\" \n" +
-    "       name=\"universalSearchBox\" \n" +
-    "       id=\"universalSearchBox\" \n" +
-    "       role=\"search\"  \n" +
-    "       novalidate >\n" +
+    "<!--<div class=\"switchon-usb\">-->\r" +
     "\n" +
-    "    <div class=\"form-group\" \n" +
-    "         ng-class=\"{'has-error': !universalSearchBox.filterExpressionInput.$error.required\n" +
-    "                     && universalSearchBox.filterExpressionInput.$invalid}\">\n" +
+    "    <form  class=\"navbar-form navbar-left\" \r" +
     "\n" +
-    "        <input class=\"form-control\" \n" +
-    "               name=\"filterExpressionInput\" \n" +
-    "               id=\"filterExpressionInput\" \n" +
-    "               type=\"text\" \n" +
-    "               size=\"60\" placeholder=\"keyword:\" \n" +
-    "               ng-model=\"filterExpressions.universalSearchString\" \n" +
-    "               ng-pattern=\"pattern\" required/>\n" +
-    "        <!--<input class=\"static\" type=\"text\" placeholder=\"keyword:\" value=\"{{info}}\"/>-->\n" +
-    "        <button ng-click=\"performSearch(universalSearchBox)\" ng-disabled=\"universalSearchBox.filterExpressionInput.$error.required\n" +
-    "                    || universalSearchBox.filterExpressionInput.$invalid\" class=\"btn btn-primary\">\n" +
-    "            <span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span>\n" +
-    "        </button>\n" +
+    "           name=\"universalSearchBox\" \r" +
     "\n" +
-    "        <button ng-click=\"clear()\" class=\"btn btn-default\">Clear</button>\n" +
-    "    </div>\n" +
+    "           id=\"universalSearchBox\" \r" +
     "\n" +
-    "    <p class=\"help-block error\" ng-show=\"notificationFunction === undefined && !universalSearchBox.filterExpressionInput.$error.required\n" +
-    "                    && universalSearchBox.filterExpressionInput.$invalid\">\n" +
-    "        This filter expression is not valid. \n" +
-    "        Try <strong>expression</strong><strong>:</strong><i>\"parameter\"</i>, e.g. keyword:\"water quality\".\n" +
-    "    </p>\n" +
+    "           role=\"search\"  \r" +
     "\n" +
-    "    <p class=\"help-block info\" ng-show=\"notificationFunction === undefined &&\n" +
-    "                    universalSearchBox.filterExpressionInput.$error.required\">\n" +
-    "        Please enter a filter expression,  e.g. keyword:\"water quality\".\n" +
-    "    </p>\n" +
-    "</form>"
+    "           novalidate >\r" +
+    "\n" +
+    "        <div class=\"form-group\" \r" +
+    "\n" +
+    "             ng-class=\"{'has-error': !universalSearchBox.filterExpressionInput.$error.required\r" +
+    "\n" +
+    "                         && universalSearchBox.filterExpressionInput.$invalid}\" >\r" +
+    "\n" +
+    "            \r" +
+    "\n" +
+    "            <div class=\"form-control usb-form-control\">\r" +
+    "\n" +
+    "                <div class=\"usb-tag-container\">\r" +
+    "\n" +
+    "                    <span ng-repeat=\"tag in filterExpressions.enumeratedTags\"\r" +
+    "\n" +
+    "                          search-filter-tag tag=\"tag\" highlight-negated=\"true\">\r" +
+    "\n" +
+    "                    </span>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"usb-input-container\">\r" +
+    "\n" +
+    "                    <input class=\"switchon-usb-input\"\r" +
+    "\n" +
+    "                        name=\"filterExpressionInput\" \r" +
+    "\n" +
+    "                        id=\"filterExpressionInput\" \r" +
+    "\n" +
+    "                        type=\"text\" \r" +
+    "\n" +
+    "                        placeholder=\"Please enter a query\" \r" +
+    "\n" +
+    "                        ng-model=\"textFilterExpression.value\" \r" +
+    "\n" +
+    "                        required/>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <button ng-click=\"performSearch()(0, config.clearPostSearchFilters)\" \r" +
+    "\n" +
+    "                    ng-disabled=\"((filterExpressions.enumeratedTags.length === 0) \r" +
+    "\n" +
+    "                        && (!textFilterExpression.value || textFilterExpression.value.length < 3))\" \r" +
+    "\n" +
+    "                    class=\"btn btn-primary\">\r" +
+    "\n" +
+    "                <span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<!--            <button ng-click=\"clear()\" class=\"btn btn-default\">Clear</button>-->\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <p class=\"help-block error\" \r" +
+    "\n" +
+    "           ng-show=\"notificationFunction === undefined && !universalSearchBox.filterExpressionInput.$error.required\r" +
+    "\n" +
+    "                        && universalSearchBox.filterExpressionInput.$invalid\">\r" +
+    "\n" +
+    "            This filter expression is not valid. \r" +
+    "\n" +
+    "            Try <strong>expression</strong><strong>:</strong><i>\"parameter\"</i>, e.g. keyword:\"water quality\".\r" +
+    "\n" +
+    "        </p>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <p class=\"help-block info\" ng-show=\"notificationFunction === undefined &&\r" +
+    "\n" +
+    "                        universalSearchBox.filterExpressionInput.$error.required\">\r" +
+    "\n" +
+    "            Please enter a filter expression,  e.g. keyword:\"water quality\".\r" +
+    "\n" +
+    "        </p>    \r" +
+    "\n" +
+    "    </form>\r" +
+    "\n" +
+    "<!--</div>-->"
   );
 
 }]);
