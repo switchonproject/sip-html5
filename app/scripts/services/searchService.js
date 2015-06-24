@@ -149,8 +149,8 @@ angular.module(
                         };
 
                         for (i = 0; i < nodes.length; ++i) {
-                            classname = classCache[nodes[i].classId];
-                            objectId = nodes[i].objectId;
+                            classname = classCache[nodes[i].LEGACY_CLASS_ID];
+                            objectId = nodes[i].LEGACY_OBJECT_ID;
 
                             objPromise = entityResource.get({
                                 classname: classname,
