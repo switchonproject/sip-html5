@@ -16,7 +16,7 @@
             "dynamic": false,
             "dynamicChildrenStatement": null,
             "sqlSort": false,
-            "classId": 27,
+            "LEGACY_CLASS_ID": 27,
             "iconFactory": -1,
             "derivePermissionsFromClass": true,
             "iconString": null,
@@ -27,7 +27,7 @@
                     "name": null
                 }
             },
-            "objectId": 51,
+            "LEGACY_OBJECT_ID": 51,
             "object": null,
             "valid": true,
             "group": "BELIS2"
@@ -41,7 +41,7 @@
             "dynamic": false,
             "dynamicChildrenStatement": null,
             "sqlSort": false,
-            "classId": 27,
+            "LEGACY_CLASS_ID": 27,
             "iconFactory": -1,
             "derivePermissionsFromClass": true,
             "iconString": null,
@@ -52,7 +52,7 @@
                     "name": null
                 }
             },
-            "objectId": 132,
+            "LEGACY_OBJECT_ID": 132,
             "object": null,
             "valid": true,
             "group": "BELIS2"
@@ -66,7 +66,7 @@
             "dynamic": false,
             "dynamicChildrenStatement": null,
             "sqlSort": false,
-            "classId": 27,
+            "LEGACY_CLASS_ID": 27,
             "iconFactory": -1,
             "derivePermissionsFromClass": true,
             "iconString": null,
@@ -77,7 +77,7 @@
                     "name": null
                 }
             },
-            "objectId": 102,
+            "LEGACY_OBJECT_ID": 102,
             "object": null,
             "valid": true,
             "group": "BELIS2"
@@ -91,7 +91,7 @@
             "dynamic": false,
             "dynamicChildrenStatement": null,
             "sqlSort": false,
-            "classId": 27,
+            "LEGACY_CLASS_ID": 27,
             "iconFactory": -1,
             "derivePermissionsFromClass": true,
             "iconString": null,
@@ -102,7 +102,7 @@
                     "name": null
                 }
             },
-            "objectId": 99,
+            "LEGACY_OBJECT_ID": 99,
             "object": null,
             "valid": true,
             "group": "BELIS2"

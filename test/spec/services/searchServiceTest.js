@@ -143,7 +143,7 @@ describe('Search Service Test Suite', function () {
             $httpBackend.whenPOST(
                 AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.MetaObjectUniversalSearchStatement/results?deduplicate=true&omitNullValues=true',
                 {'list':[{'key':'Query', 'value':'testquery'}]}
-            ).respond(200, {$collection: [{classId: 1, objectId: 1}]});
+            ).respond(200, {$collection: [{LEGACY_CLASS_ID: 1, LEGACY_OBJECT_ID: 1}]});
             $httpBackend.whenPOST(
                 AppConfig.searchService.host+'/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ClassNameSearch/results',
                 {'list':[{'key':'Domain', 'value':'SWITCHON'}]}
@@ -201,7 +201,7 @@ describe('Search Service Test Suite', function () {
                 ).respond(200, null);
                 
                 for(i = 0; i < resultSet.$collection.length; ++i) {
-                    objId = resultSet.$collection[i].objectId;
+                    objId = resultSet.$collection[i].LEGACY_OBJECT_ID;
                     $httpBackend.expectGET(
                         AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
@@ -252,7 +252,7 @@ describe('Search Service Test Suite', function () {
                 ).respond(200, null);
                 
                 for(i = 0; i < resultSet.$collection.length; ++i) {
-                    objId = resultSet.$collection[i].objectId;
+                    objId = resultSet.$collection[i].LEGACY_OBJECT_ID;
                     $httpBackend.expectGET(
                         AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
@@ -304,7 +304,7 @@ describe('Search Service Test Suite', function () {
                 ).respond(200, null);
                 
                 for(i = 0; i < resultSet.$collection.length; ++i) {
-                    objId = resultSet.$collection[i].objectId;
+                    objId = resultSet.$collection[i].LEGACY_OBJECT_ID;
                     $httpBackend.expectGET(
                         AppConfig.searchService.host+'/SWITCHON.testclass/' + objId + '?deduplicate=false&omitNullValues=true'
                     ).respond(200, objs[objId]);
