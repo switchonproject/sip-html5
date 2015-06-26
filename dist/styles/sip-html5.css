@@ -8,7 +8,12 @@
 }
 
 .date {
-    width: 220px;
+    width: 180px;
+    min-width: 88px;
+}
+
+.tags {
+    width: 200px;
     min-width: 88px;
 }
 
@@ -19,6 +24,21 @@
 .btn-icon.disabled {
     cursor: default;
     opacity: 0.55;
+}
+.switchon-master-toolbar {
+    min-width: 250px;
+    width: 250px;
+    max-width: 250px;
+    margin-left: -250px;
+    transition: all 0.5s ease;
+}
+
+.switchon-master-toolbar-toggled {
+    margin-left: 0px;
+}
+
+.switchon-toolbar-component {
+    width: 250px;
 }
 .btn-xs.ws-button {
     background-color: transparent;
@@ -34,10 +54,54 @@
 .dropdown-menu.hoverdropdown {
     margin: 0px;
 }
+.switchon-object-detail {
+    padding: 9px;
+}
+.switchon-toolbar-component .panel {
+    border-radius: 0px;
+    border: none;
+}
+
+.switchon-toolbar-component .panel-heading {
+    background-color: white;
+}
+
+.switchon-toolbar-component .panel-group .panel + .panel {
+    margin-top: 0px;
+    border-top: 1px solid #ddd;
+}
+.switchon-result-pager {
+    background-color: #ffffff;
+    border-bottom: 1px solid black;
+    height: 34px;
+    display: table;
+}
+
+.switchon-result-pager .pagination {
+    margin: 2px;
+}
+
+.switchon-result-pager-title {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+body {
+    min-width:1024px;
+}
+
+.switchon-categories-dropdown {
+    z-index: 2000;
+}
+
 .switchon-viewbutton {
     margin-top: 8px;
     margin-bottom: 3px;
     height: 34px;
+}
+
+.switchon-keywordgroup {
+    width:100%;
 }
 
 .switchon-alert {
@@ -59,12 +123,35 @@
 .switchon-ribbon-panel {
     float:left;
     clear:none;
-    height: 240px;
+    min-height: 230px;
+    max-width: 210px;
     border-right-color: #999999;
     border-right-width: 1px;
     border-right-style: solid;
-    margin: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
     padding-right: 8px;
+}
+
+.switchon-ribbon-panel.last {
+    border:none;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.switchon-ribbon-footer {
+    float:none;
+    clear:both;
+    min-height: 40px;
+    border-top-color: #999999;
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding-top: 8px;
+}
+
+.switchon-ribbon-footer > span {
+    float:right;
+    margin-left: 8px;
 }
 
 .switchon-ribbon {
@@ -76,8 +163,195 @@
     max-width: 1000px;
 }
 
-.switchon-ribbon-popover.bottom > .arrow {
+.switchon-ribbon-popover.bottom-left {
+    margin-top: 14px;
+}
+
+.switchon-ribbon-popover.bottom-left > .arrow {
     left: 10%;
+}
+
+.switchon-categories-button {
+    background-color: transparent;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.switchon-categories-button:hover {
+    border-color: #ccc
+}
+
+.switchon-categories-popover
+{
+    max-width: 500px;
+    width: 250px;
+}
+
+.switchon-categories-popover.expanded
+{
+    width: 500px;
+}
+
+.switchon-categories-popover.bottom-left {
+    margin-top: 16px;
+}
+
+.switchon-result-list {
+    overflow-y: auto;
+    max-height: 60%;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+}
+
+.switchon-result-list .pagination {
+    float:right;
+    margin: 2px;
+    clear:right; 
+}
+
+.switchon-result-list .list-group {
+    margin-bottom: 0px;
+    border:none;
+}
+
+.switchon-result-list .list-group-item {
+    border:none;
+    padding-top:1px;
+    padding-left: 10px;
+}
+
+.switchon-result-list .list-group-item p {
+    margin:0;
+    line-height: normal;
+}
+
+#switchon-result-header {
+    float:left;
+    margin:6px;
+}
+
+.switchon-categories-list  {
+    padding: 0px;
+    padding-right:10px;
+    min-width:230px;
+    width:50%;
+    float:left;
+    padding-bottom:5px;
+}
+
+.switchon-sub-categories-list  {
+    padding-right:0px;
+    padding-left:10px;
+    padding-bottom:5px;
+    border-left-color: #999999;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+
+.switchon-categories-list .list-group {
+    margin-bottom: 0px;
+    border:none;
+}
+
+.switchon-categories-list .list-group-item {
+    border:none;
+    padding-top: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 2px;
+}
+
+.switchon-categories-list .list-group-item p {
+    margin:0;
+    line-height:normal;
+    white-space:normal;
+}
+
+.switchon-categories-list i {
+    float:right; 
+    color:gray; 
+}
+
+.switchon-categories-list i:hover {
+    color:#00b3ee;
+    text-decoration: none;
+}
+
+.switchon-sub-category-item {
+    border:none;
+    padding-top: 2px;   
+}
+
+postsearchfilter .panel-group {
+    overflow-x: hidden;
+}
+
+postsearchfilter .panel-heading {
+    padding:8px;
+}
+
+postsearchfilter .panel-collapse {
+   overflow-x: hidden;
+   overflow-y: auto;
+   max-height: 100px;
+}
+
+.usb-form-control {
+    min-width: 500px;
+    padding: 1px 2px;
+    line-height: 2;
+}
+
+.usb-tag-container {
+    float: left;
+    max-width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.usb-input-container {
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.usb-input-container input {
+    font-family: sans-serif;
+    font-size: 12px;
+    border: none;
+    padding: 0px;
+    background: transparent;
+    color: #000;
+    outline: 0px;
+    margin-left: 6px;
+    padding-right: 6px;
+    margin-bottom: auto;
+    margin-top: auto;
+    width:100%;
+}
+
+/* adapted from http://maxwells.github.io/bootstrap-tags.html */
+.tag {
+    font-size: 12px;
+    padding: .4em;
+    margin: 0 .2em;
+    font-style: normal;
+}
+.tag > a {
+     cursor: pointer;
+     opacity: 0.5;
+}
+.tag > a:hover {
+    opacity: 1.0;
+}
+
+.tag > a {
+    margin: 0 0 0 .3em;
+}
+
+.tag > span {
+    margin-right: .4em;
 }
 
 .navbar-brand {
@@ -109,7 +383,6 @@
     width: 0;
     height: 100%;
     margin-left: -250px;
-    overflow-y: auto;
     background: #f8f8f8;
     transition: all 0.5s ease;
 }
@@ -162,6 +435,24 @@
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+.label-default a i {
+    color:#474747;
+}
+.label-primary a i {
+    color:#2B6393;
+}
+.label-success a i {
+    color:#499349;
+}
+.label-info a i {
+    color:#469DB6;
+}
+.label-warning a i {
+    color:#C38D41;
+}
+.label-danger a i {
+    color:#A83C39;
 }
 @media(min-width:768px) {
     #wrapper {
