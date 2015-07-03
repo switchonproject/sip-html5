@@ -38,8 +38,8 @@ angular.module(
 //                [], true, true, null, 'Access Protocol (Excluded)');
 //            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 //
-//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
-//                [], true, true, null, 'CUAHSI Keyword (Excluded)');
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_XCUAHSI),
+//                [], true, true, null, 'X-CUAHSI Keyword (Excluded)');
 //            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 
             // those are the actual search-result-dependent post filter expressions 
@@ -57,8 +57,8 @@ angular.module(
 //                [], true, true, null, 'Access Protocols');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 //
-//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
-//                [], true, true, null, 'CUAHSI Keywords');
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_XCUAHSI),
+//                [], true, true, null, 'X-CUAHSI Keywords');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
 //            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD), 

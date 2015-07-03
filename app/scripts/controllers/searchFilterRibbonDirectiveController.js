@@ -18,8 +18,8 @@ angular.module(
                 [], true, true, null, 'Keywords', 'Free Keywords');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
 
-            $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI,
-                    [], true, true, 'templates/filter-expression-editor-popup.html', 'CUAHSI Keyword', 'CUAHSI Keyword');
+            $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_XCUAHSI,
+                    [], true, true, 'templates/filter-expression-editor-popup.html', 'X-CUAHSI Keyword', 'X-CUAHSI Keyword');
             $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
 
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
