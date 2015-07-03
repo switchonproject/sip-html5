@@ -2,6 +2,10 @@ body {
     min-width:1024px;
 }
 
+div#switchon-navbar-collapse-1 {
+    padding-left: 0px;
+}
+
 .switchon-categories-dropdown {
     z-index: 2000;
 }
@@ -9,6 +13,8 @@ body {
 .switchon-viewbutton {
     margin-top: 8px;
     margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
     height: 34px;
 }
 

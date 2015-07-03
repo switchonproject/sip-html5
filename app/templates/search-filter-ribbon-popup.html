@@ -8,12 +8,20 @@
                     <button type="button" 
                             class="btn btn-default dropdown-toggle" 
                             dropdown-toggle 
-                            ng-init="keywordFilters.keywordGroup = 'Keywords'"
+                            ng-init="keywordFilters.keywordGroup = 'X-CUAHSI Keywords'"
                             style="width:100%">
                         {{keywordFilters.keywordGroup}}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <label class="btn" 
+                                   ng-model="keywordFilters.keywordGroup" 
+                                   btn-radio="'X-CUAHSI Keywords'" 
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                X-CUAHSI Keywords
+                            </label>
+                        </li>
                         <li>
                             <label class="btn" 
                                 ng-model="keywordFilters.keywordGroup" 
@@ -31,14 +39,7 @@
                                 TOPIC Categories
                             </label>
                         </li>
-                        <li>
-                            <label class="btn" 
-                                   ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'X-CUAHSI Keywords'" 
-                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
-                                X-CUAHSI Keywords
-                            </label>
-                        </li>
+                        
                         <!--
                         <li>
                             <label class="btn" 
@@ -59,6 +60,12 @@
                     </ul>
                 </div>
 
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'X-CUAHSI Keywords'" 
+                                class="ng-hide"
+                                filter-expression="keywordsCuashiFilterExpression" 
+                                keyword-group="keyword-x-cuahsi"
+                                multiple="true">      
+                </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'Keywords'" 
                                 class="ng-hide"
                                 filter-expression="keywordsFilterExpression" 
@@ -70,13 +77,6 @@
                                 filter-expression="topicFilterExpression" 
                                 keyword-group="topic-inspire"
                                 multiple="false">
-                </keyword-filter>
-                
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'X-CUAHSI Keywords'" 
-                                class="ng-hide"
-                                filter-expression="keywordsCuashiFilterExpression" 
-                                keyword-group="keyword-x-cuahsi"
-                                multiple="true">      
                 </keyword-filter>
                 <!--
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" 

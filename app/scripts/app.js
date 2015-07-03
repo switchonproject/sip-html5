@@ -57,7 +57,7 @@ angular.module(
             };
 
 //            $urlRouterProvider.when();
-            $urlRouterProvider.otherwise('/list');
+            $urlRouterProvider.otherwise('/map');
 
             $stateProvider.state('list', {
                 url: '/list',

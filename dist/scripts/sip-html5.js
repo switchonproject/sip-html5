@@ -441,26 +441,24 @@ angular.module(
             searchGroup = new L.FeatureGroup();
             drawCtrl = new L.Control.Draw({
                 draw: {
-                    polyline: {
-                        shapeOptions: {
-                            color: '#800000'
-                        }
-                    },
+                    polyline: false,
                     polygon: {
                         shapeOptions: {
                             color: '#800000'
-                        }
+                        },
+                        showArea: true,
+                        metric: true
                     },
                     rectangle: {
                         shapeOptions: {
-                            color: '#800000'
-                        }
+                            color: '#800000',
+                            clickable: false
+                        },
+                        metric: true
                     },
                     // no circles for starters as not compatible with WKT
                     circle: false,
-                    marker: {
-                        icon: new MapSearchIcon()
-                    }
+                    marker: false
                 },
                 edit: {
                     featureGroup: searchGroup
@@ -4428,9 +4426,7 @@ angular.module(
             lazyLoadTagLists = function (tagGroup, array) {
                 var intermetiateResult, tags, tagResource, i;
                 // cached list does exist
-                if (tagGroups.hasOwnProperty(tagGroup) &&
-                        tagGroups[tagGroup] !== null &&
-                        tagGroups[tagGroup].length > 0) {
+                if (tagGroups.hasOwnProperty(tagGroup)) {
                     return tagGroups[tagGroup];
                 }
 

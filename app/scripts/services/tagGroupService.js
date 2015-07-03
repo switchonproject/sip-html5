@@ -69,9 +69,7 @@ angular.module(
             lazyLoadTagLists = function (tagGroup, array) {
                 var intermetiateResult, tags, tagResource, i;
                 // cached list does exist
-                if (tagGroups.hasOwnProperty(tagGroup) &&
-                        tagGroups[tagGroup] !== null &&
-                        tagGroups[tagGroup].length > 0) {
+                if (tagGroups.hasOwnProperty(tagGroup)) {
                     return tagGroups[tagGroup];
                 }
 
