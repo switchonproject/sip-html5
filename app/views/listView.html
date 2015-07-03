@@ -1,7 +1,13 @@
 <div>
+    
     <div class="page-header" ng-hide='data.resultSet.$collection' style="text-align: center">
+        <div style="margin:auto; width:600px">
+            <h2>Please select a <strong>Category</strong> or perform a 
+                <strong>Search</strong> to show the list of resources.</h2>
+        </div>
         <img class="img-responsive" style="width:100%" src="images/switchon-logo-transparent.png" alt="SWITCH-ON"/>
     </div>
+    
     <list-view ng-show='data.resultSet.$collection' 
                filter-expressions="filterExpressions" 
                table-data="data.resultSet.$collection"
