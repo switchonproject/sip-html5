@@ -33,7 +33,7 @@ angular.module(
                 switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
-                case FilterExpression.FILTER__KEYWORD_CUAHSI:
+                case FilterExpression.FILTER__KEYWORD_XCUAHSI:
                     return 'glyphicon glyphicon-copyright-mark';
                 case FilterExpression.FILTER__TOPIC:
                     return 'glyphicon glyphicon-tag';
@@ -95,7 +95,7 @@ angular.module(
                 switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return prefix + 'label-success';
-                case FilterExpression.FILTER__KEYWORD_CUAHSI:
+                case FilterExpression.FILTER__KEYWORD_XCUAHSI:
                     return prefix + 'label-info';
                 case FilterExpression.FILTER__TOPIC:
                     return prefix + 'label-success';

@@ -19,7 +19,7 @@ angular.module(
             // per-application configuration of post search filters
             taggroups = {};
             taggroups[FilterExpression.FILTER__ACCESS_CONDITION] = 'access conditions';
-            taggroups[FilterExpression.FILTER__KEYWORD_CUAHSI] = 'keywords - cuahsi';
+            taggroups[FilterExpression.FILTER__KEYWORD_XCUAHSI] = 'keywords - X-CUAHSI';
             taggroups[FilterExpression.FILTER__KEYWORD] = 'keywords - free';
             taggroups[FilterExpression.FILTER__PROTOCOL] = 'protocol';
             taggroups[FilterExpression.FILTER__FUNCTION] = 'function';

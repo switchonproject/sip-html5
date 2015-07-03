@@ -630,7 +630,7 @@ angular.module(
         FilterExpression.FILTER__GEO_INTERSECTS = 'geo-intersects';
         FilterExpression.FILTER__GEO_BUFFER = 'geo-buffer';
         FilterExpression.FILTER__KEYWORD = 'keyword';
-        FilterExpression.FILTER__KEYWORD_CUAHSI = 'keyword-cuahsi';
+        FilterExpression.FILTER__KEYWORD_XCUAHSI = 'keyword-x-cuahsi';
         FilterExpression.FILTER__TOPIC = 'topic';
         FilterExpression.FILTER__COLLECTION = 'collection';
         FilterExpression.FILTER__DATE_START = 'fromDate';
@@ -649,7 +649,7 @@ angular.module(
             FilterExpression.FILTER__GEO_INTERSECTS,
             FilterExpression.FILTER__GEO_BUFFER,
             FilterExpression.FILTER__KEYWORD,
-            FilterExpression.FILTER__KEYWORD_CUAHSI,
+            FilterExpression.FILTER__KEYWORD_XCUAHSI,
             FilterExpression.FILTER__TOPIC,
             FilterExpression.FILTER__COLLECTION,
             FilterExpression.FILTER__DATE_START,

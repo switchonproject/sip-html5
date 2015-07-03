@@ -34,9 +34,9 @@
                         <li>
                             <label class="btn" 
                                    ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'CUAHSI Keywords'" 
+                                   btn-radio="'X-CUAHSI Keywords'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen">
-                                CUAHSI Keywords
+                                X-CUAHSI Keywords
                             </label>
                         </li>
                         <!--
@@ -72,10 +72,10 @@
                                 multiple="false">
                 </keyword-filter>
                 
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'CUAHSI Keywords'" 
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'X-CUAHSI Keywords'" 
                                 class="ng-hide"
                                 filter-expression="keywordsCuashiFilterExpression" 
-                                keyword-group="keyword-cuahsi"
+                                keyword-group="keyword-x-cuahsi"
                                 multiple="true">      
                 </keyword-filter>
                 <!--

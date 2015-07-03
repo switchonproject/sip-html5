@@ -1,16 +1,17 @@
 angular.module(
     'eu.water-switch-on.sip.services'
 ).factory('eu.water-switch-on.sip.services.TagGroupService',
-    ['$resource',
-        function ($resource) {
+    ['$resource', 'eu.water-switch-on.sip.services.Base64', 'AppConfig',
+        function ($resource, Base64, AppConfig) {
             'use strict';
 
             var tagResources, tagGroups, lazyLoadTagLists, getKeywordListFunction,
-                getCountryListFunction, getCategoryListFunction;
+                getCountryListFunction, getCategoryListFunction, config, authdata,
+                tagSearches, searchResource, searchTags;
 
             tagResources = {
-                'keyword-cuahsi': 'data/cuahsiKeywords.json',
-                'keyword-cuahsi-toplevel': 'data/cuahsiToplevelKeywords.json',
+                //'keyword-x-cuahsi': 'data/xcuahsiKeywords.json',
+                //'keyword-x-cuahsi-toplevel': 'data/xcuahsiToplevelKeywords.json',
                 'keyword-inspire': 'data/inspireKeywords.json',
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
@@ -21,17 +22,62 @@ angular.module(
                 'category-collection': 'data/collectionCategories.json'
             };
 
+            tagSearches = {
+                'keyword-x-cuahsi': 'X-CUAHSI'
+            };
+
+            // cached tag group lists
             tagGroups = {};
 
+            config = AppConfig.searchService;
+            authdata = Base64.encode(config.username + ':' + config.password);
+
+            // remote legagy search core search
+            // FIXME: limit and offset not implemented in legacy search!
+            // currently, limit and offset are appended to the POST query parameter!
+            searchResource = $resource(config.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ResourceTagsSearch/results',
+                {
+                    limit: 20,
+                    offset: 0,
+                    omitNullValues: true,
+                    deduplicate: true
+                }, {
+                    search: {
+                        method: 'POST',
+                        params: {
+                        },
+                        isArray: false,
+                        headers: {
+                            'Authorization': 'Basic ' + authdata
+                        }
+                    }
+                });
+
+            searchTags = function (tagGroup) {
+                var queryObject, searchResult;
+
+                queryObject = {
+                    'list': [{'key': 'taggroup', 'value': tagGroup}]
+                };
+                searchResult = searchResource.search(
+                    {},
+                    queryObject
+                );
+                return searchResult;
+            };
+
             lazyLoadTagLists = function (tagGroup, array) {
+                var intermetiateResult, tags, tagResource, i;
                 // cached list does exist
-                if (tagGroups.hasOwnProperty(tagGroup)) {
+                if (tagGroups.hasOwnProperty(tagGroup) &&
+                        tagGroups[tagGroup] !== null &&
+                        tagGroups[tagGroup].length > 0) {
                     return tagGroups[tagGroup];
                 }
 
                 // list not cached but resource does exist
                 if (tagResources.hasOwnProperty(tagGroup)) {
-                    var tagResource = $resource(tagResources[tagGroup], {}, {
+                    tagResource = $resource(tagResources[tagGroup], {}, {
                         query: {
                             method: 'GET',
                             params: {
@@ -41,6 +87,21 @@ angular.module(
                     });
 
                     tagGroups[tagGroup] = tagResource.query();
+                    return tagGroups[tagGroup];
+                }
+
+                if (tagSearches.hasOwnProperty(tagGroup)) {
+                    intermetiateResult = searchTags(tagSearches[tagGroup]);
+                    tags = [];
+                    tags.$resolved = false;
+                    tags.$promise = intermetiateResult.$promise.then(function (resource) {
+                        for (i = 0; i < resource.$collection.length; i++) {
+                            tags.push(resource.$collection[i]);
+                        }
+                        tags.$resolved = true;
+                        return tags;
+                    });
+                    tagGroups[tagGroup] = tags;
                     return tagGroups[tagGroup];
                 }
 

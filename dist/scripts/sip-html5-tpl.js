@@ -1091,11 +1091,11 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
     "\n" +
-    "                                   btn-radio=\"'CUAHSI Keywords'\" \r" +
+    "                                   btn-radio=\"'X-CUAHSI Keywords'\" \r" +
     "\n" +
     "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
     "\n" +
-    "                                CUAHSI Keywords\r" +
+    "                                X-CUAHSI Keywords\r" +
     "\n" +
     "                            </label>\r" +
     "\n" +
@@ -1167,13 +1167,13 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                \r" +
     "\n" +
-    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'CUAHSI Keywords'\" \r" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'X-CUAHSI Keywords'\" \r" +
     "\n" +
     "                                class=\"ng-hide\"\r" +
     "\n" +
     "                                filter-expression=\"keywordsCuashiFilterExpression\" \r" +
     "\n" +
-    "                                keyword-group=\"keyword-cuahsi\"\r" +
+    "                                keyword-group=\"keyword-x-cuahsi\"\r" +
     "\n" +
     "                                multiple=\"true\">      \r" +
     "\n" +

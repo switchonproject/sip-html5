@@ -5,14 +5,14 @@ angular.module(
         function ($resource) {
             'use strict';
 
-            var searchService, cuahsiKeywordsService, inspireKeywordsService,
+            var searchService, xcuahsiKeywordsService, inspireKeywordsService,
                 inspireTopicsService, keywordsService, countriesEuropeService,
                 countriesWorldService, searchFunction, loadKeywordListFunction,
                 loadCountriesListFunction;
 
             searchService = $resource('data/resultSet.json', {});
 
-            cuahsiKeywordsService = $resource('data/cuahsiKeywords.json', {}, {
+            xcuahsiKeywordsService = $resource('data/xcuahsiKeywords.json', {}, {
                 query: {
                     method: 'GET',
                     params: {
@@ -74,8 +74,8 @@ angular.module(
             loadKeywordListFunction =
                 function (keywordGroup) {
                     switch (keywordGroup) {
-                    case 'cuahsi_keyword':
-                        return cuahsiKeywordsService.query();
+                    case 'xcuahsi_keyword':
+                        return xcuahsiKeywordsService.query();
                     case 'inspire_keyword':
                         return inspireKeywordsService.query();
                     case 'inspire_topic':

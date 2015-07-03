@@ -1147,8 +1147,8 @@ angular.module(
 //                [], true, true, null, 'Access Protocol (Excluded)');
 //            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 //
-//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
-//                [], true, true, null, 'CUAHSI Keyword (Excluded)');
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_XCUAHSI),
+//                [], true, true, null, 'X-CUAHSI Keyword (Excluded)');
 //            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
 
             // those are the actual search-result-dependent post filter expressions 
@@ -1166,8 +1166,8 @@ angular.module(
 //                [], true, true, null, 'Access Protocols');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 //
-//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_CUAHSI),
-//                [], true, true, null, 'CUAHSI Keywords');
+//            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__KEYWORD_XCUAHSI),
+//                [], true, true, null, 'X-CUAHSI Keywords');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
 
 //            tempFilterExpression = new FilterExpression(('!'+FilterExpression.FILTER__KEYWORD), 
@@ -1459,8 +1459,8 @@ angular.module(
                 [], true, true, null, 'Keywords', 'Free Keywords');
             $scope.filterExpressions.addFilterExpression($scope.keywordsFilterExpression);
 
-            $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_CUAHSI,
-                    [], true, true, 'templates/filter-expression-editor-popup.html', 'CUAHSI Keyword', 'CUAHSI Keyword');
+            $scope.keywordsCuashiFilterExpression = new FilterExpression(FilterExpression.FILTER__KEYWORD_XCUAHSI,
+                    [], true, true, 'templates/filter-expression-editor-popup.html', 'X-CUAHSI Keyword', 'X-CUAHSI Keyword');
             $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
 
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
@@ -1567,7 +1567,7 @@ angular.module(
                 switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return 'glyphicon glyphicon-tags';
-                case FilterExpression.FILTER__KEYWORD_CUAHSI:
+                case FilterExpression.FILTER__KEYWORD_XCUAHSI:
                     return 'glyphicon glyphicon-copyright-mark';
                 case FilterExpression.FILTER__TOPIC:
                     return 'glyphicon glyphicon-tag';
@@ -1629,7 +1629,7 @@ angular.module(
                 switch (plainType) {
                 case FilterExpression.FILTER__KEYWORD:
                     return prefix + 'label-success';
-                case FilterExpression.FILTER__KEYWORD_CUAHSI:
+                case FilterExpression.FILTER__KEYWORD_XCUAHSI:
                     return prefix + 'label-info';
                 case FilterExpression.FILTER__TOPIC:
                     return prefix + 'label-success';
@@ -2365,7 +2365,7 @@ angular.module(
         appConfig.gui.dev = true;
 
         appConfig.tagFilter = {};
-        //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-cuahsi, protocol';
+        //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-x-cuahsi, protocol';
         appConfig.tagFilter.tagGroups = 'access-condition, function';
 
         appConfig.search = {};
@@ -3035,7 +3035,7 @@ angular.module(
         FilterExpression.FILTER__GEO_INTERSECTS = 'geo-intersects';
         FilterExpression.FILTER__GEO_BUFFER = 'geo-buffer';
         FilterExpression.FILTER__KEYWORD = 'keyword';
-        FilterExpression.FILTER__KEYWORD_CUAHSI = 'keyword-cuahsi';
+        FilterExpression.FILTER__KEYWORD_XCUAHSI = 'keyword-x-cuahsi';
         FilterExpression.FILTER__TOPIC = 'topic';
         FilterExpression.FILTER__COLLECTION = 'collection';
         FilterExpression.FILTER__DATE_START = 'fromDate';
@@ -3054,7 +3054,7 @@ angular.module(
             FilterExpression.FILTER__GEO_INTERSECTS,
             FilterExpression.FILTER__GEO_BUFFER,
             FilterExpression.FILTER__KEYWORD,
-            FilterExpression.FILTER__KEYWORD_CUAHSI,
+            FilterExpression.FILTER__KEYWORD_XCUAHSI,
             FilterExpression.FILTER__TOPIC,
             FilterExpression.FILTER__COLLECTION,
             FilterExpression.FILTER__DATE_START,
@@ -3517,7 +3517,7 @@ angular.module(
             // per-application configuration of post search filters
             taggroups = {};
             taggroups[FilterExpression.FILTER__ACCESS_CONDITION] = 'access conditions';
-            taggroups[FilterExpression.FILTER__KEYWORD_CUAHSI] = 'keywords - cuahsi';
+            taggroups[FilterExpression.FILTER__KEYWORD_XCUAHSI] = 'keywords - X-CUAHSI';
             taggroups[FilterExpression.FILTER__KEYWORD] = 'keywords - free';
             taggroups[FilterExpression.FILTER__PROTOCOL] = 'protocol';
             taggroups[FilterExpression.FILTER__FUNCTION] = 'function';
@@ -3795,14 +3795,14 @@ angular.module(
         function ($resource) {
             'use strict';
 
-            var searchService, cuahsiKeywordsService, inspireKeywordsService,
+            var searchService, xcuahsiKeywordsService, inspireKeywordsService,
                 inspireTopicsService, keywordsService, countriesEuropeService,
                 countriesWorldService, searchFunction, loadKeywordListFunction,
                 loadCountriesListFunction;
 
             searchService = $resource('data/resultSet.json', {});
 
-            cuahsiKeywordsService = $resource('data/cuahsiKeywords.json', {}, {
+            xcuahsiKeywordsService = $resource('data/xcuahsiKeywords.json', {}, {
                 query: {
                     method: 'GET',
                     params: {
@@ -3864,8 +3864,8 @@ angular.module(
             loadKeywordListFunction =
                 function (keywordGroup) {
                     switch (keywordGroup) {
-                    case 'cuahsi_keyword':
-                        return cuahsiKeywordsService.query();
+                    case 'xcuahsi_keyword':
+                        return xcuahsiKeywordsService.query();
                     case 'inspire_keyword':
                         return inspireKeywordsService.query();
                     case 'inspire_topic':
@@ -4360,16 +4360,17 @@ angular.module(
 angular.module(
     'eu.water-switch-on.sip.services'
 ).factory('eu.water-switch-on.sip.services.TagGroupService',
-    ['$resource',
-        function ($resource) {
+    ['$resource', 'eu.water-switch-on.sip.services.Base64', 'AppConfig',
+        function ($resource, Base64, AppConfig) {
             'use strict';
 
             var tagResources, tagGroups, lazyLoadTagLists, getKeywordListFunction,
-                getCountryListFunction, getCategoryListFunction;
+                getCountryListFunction, getCategoryListFunction, config, authdata,
+                tagSearches, searchResource, searchTags;
 
             tagResources = {
-                'keyword-cuahsi': 'data/cuahsiKeywords.json',
-                'keyword-cuahsi-toplevel': 'data/cuahsiToplevelKeywords.json',
+                //'keyword-x-cuahsi': 'data/xcuahsiKeywords.json',
+                //'keyword-x-cuahsi-toplevel': 'data/xcuahsiToplevelKeywords.json',
                 'keyword-inspire': 'data/inspireKeywords.json',
                 'topic-inspire': 'data/inspireTopics.json',
                 'keyword-free': 'data/freeKeywords.json',
@@ -4380,17 +4381,62 @@ angular.module(
                 'category-collection': 'data/collectionCategories.json'
             };
 
+            tagSearches = {
+                'keyword-x-cuahsi': 'X-CUAHSI'
+            };
+
+            // cached tag group lists
             tagGroups = {};
 
+            config = AppConfig.searchService;
+            authdata = Base64.encode(config.username + ':' + config.password);
+
+            // remote legagy search core search
+            // FIXME: limit and offset not implemented in legacy search!
+            // currently, limit and offset are appended to the POST query parameter!
+            searchResource = $resource(config.host + '/searches/SWITCHON.de.cismet.cids.custom.switchon.search.server.ResourceTagsSearch/results',
+                {
+                    limit: 20,
+                    offset: 0,
+                    omitNullValues: true,
+                    deduplicate: true
+                }, {
+                    search: {
+                        method: 'POST',
+                        params: {
+                        },
+                        isArray: false,
+                        headers: {
+                            'Authorization': 'Basic ' + authdata
+                        }
+                    }
+                });
+
+            searchTags = function (tagGroup) {
+                var queryObject, searchResult;
+
+                queryObject = {
+                    'list': [{'key': 'taggroup', 'value': tagGroup}]
+                };
+                searchResult = searchResource.search(
+                    {},
+                    queryObject
+                );
+                return searchResult;
+            };
+
             lazyLoadTagLists = function (tagGroup, array) {
+                var intermetiateResult, tags, tagResource, i;
                 // cached list does exist
-                if (tagGroups.hasOwnProperty(tagGroup)) {
+                if (tagGroups.hasOwnProperty(tagGroup) &&
+                        tagGroups[tagGroup] !== null &&
+                        tagGroups[tagGroup].length > 0) {
                     return tagGroups[tagGroup];
                 }
 
                 // list not cached but resource does exist
                 if (tagResources.hasOwnProperty(tagGroup)) {
-                    var tagResource = $resource(tagResources[tagGroup], {}, {
+                    tagResource = $resource(tagResources[tagGroup], {}, {
                         query: {
                             method: 'GET',
                             params: {
@@ -4400,6 +4446,21 @@ angular.module(
                     });
 
                     tagGroups[tagGroup] = tagResource.query();
+                    return tagGroups[tagGroup];
+                }
+
+                if (tagSearches.hasOwnProperty(tagGroup)) {
+                    intermetiateResult = searchTags(tagSearches[tagGroup]);
+                    tags = [];
+                    tags.$resolved = false;
+                    tags.$promise = intermetiateResult.$promise.then(function (resource) {
+                        for (i = 0; i < resource.$collection.length; i++) {
+                            tags.push(resource.$collection[i]);
+                        }
+                        tags.$resolved = true;
+                        return tags;
+                    });
+                    tagGroups[tagGroup] = tags;
                     return tagGroups[tagGroup];
                 }
 
