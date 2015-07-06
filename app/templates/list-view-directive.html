@@ -1,7 +1,9 @@
 <table ng-table="tableParams" class="table table-striped table-bordered table-hover">
     <tr ng-repeat="node in $data">
         <td data-title="'Name'" class="name" 
-            sortable="(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null">{{node.object.name}}</td>
+            sortable="(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null">
+            {{node.object.name | txtLen:160:false:'...':true}}
+        </td>
         
         <td data-title="'Description'">
             <span>{{node.object.description | txtLen:160:false:'':true}}</span>
