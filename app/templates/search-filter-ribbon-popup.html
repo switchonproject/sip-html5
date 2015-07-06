@@ -4,7 +4,9 @@
     <div class="popover-content">
         <div class="switchon-ribbon">
             <div class="switchon-ribbon-panel">
-                <div class="btn-group switchon-keywordgroup" dropdown is-open="keywordFilters.isopen">
+                <div class="btn-group switchon-keywordgroup" 
+                     dropdown 
+                     is-open="keywordFilters.isopen">
                     <button type="button" 
                             class="btn btn-default dropdown-toggle" 
                             dropdown-toggle 
@@ -23,15 +25,6 @@
                             </label>
                         </li>
                         <li>
-                            <label class="btn" 
-                                ng-model="keywordFilters.keywordGroup" 
-                                btn-radio="'Keywords'" 
-                                ng-click="keywordFilters.isopen = !keywordFilters.isopen"
-                                title="All Keywords available in the SWITCH-ON Meta-Data Repository">
-                                Keywords
-                            </label>
-                        </li>
-                        <li>
                             <label class="btn" ng-model="keywordFilters.keywordGroup" 
                                    btn-radio="'TOPIC Categories'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen"
@@ -41,6 +34,15 @@
                         </li>
                         
                         <!--
+                        <li>
+                            <label class="btn" 
+                                ng-model="keywordFilters.keywordGroup" 
+                                btn-radio="'Keywords'" 
+                                ng-click="keywordFilters.isopen = !keywordFilters.isopen"
+                                title="All Keywords available in the SWITCH-ON Meta-Data Repository">
+                                Keywords
+                            </label>
+                        </li>
                         <li>
                             <label class="btn" 
                                    ng-model="keywordFilters.keywordGroup" 
@@ -66,12 +68,6 @@
                                 keyword-group="keyword-x-cuahsi"
                                 multiple="true">      
                 </keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Keywords'" 
-                                class="ng-hide"
-                                filter-expression="keywordsFilterExpression" 
-                                keyword-group="keyword-all"
-                                multiple="true">    
-                </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" 
                                 class="ng-hide"
                                 filter-expression="topicFilterExpression" 
@@ -79,6 +75,12 @@
                                 multiple="false">
                 </keyword-filter>
                 <!--
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Keywords'" 
+                                class="ng-hide"
+                                filter-expression="keywordsFilterExpression" 
+                                keyword-group="keyword-all"
+                                multiple="true">    
+                </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" 
                                 class="ng-hide"
                                 filter-expression="keywordsFilterExpression" 
