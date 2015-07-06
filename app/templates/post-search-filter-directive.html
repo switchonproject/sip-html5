@@ -1,9 +1,14 @@
-<accordion class="switchon-toolbar-component" close-others="true" ng-show="isVisible">
+<accordion class="switchon-toolbar-component"
+           close-others="!config.expandPostSearchFilters" 
+           ng-show="isVisible">
     <accordion-group ng-repeat="filterExpression in postSearchFilterExpressions.list | filter:{valid:true}" 
+                     ng-init="filterExpression._status.open = config.expandPostSearchFilters"
                      is-open="filterExpression._status.open">
         <accordion-heading>
-            <strong>{{filterExpression.getName()}}<strong><i class="pull-right glyphicon" 
-                                ng-class="{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}"></i>
+            <strong>{{filterExpression.getName()}}<strong>
+                    <i class="pull-right glyphicon" 
+                       ng-class="{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}">      
+                    </i>
         </accordion-heading>
         <span style="float:left; padding-bottom: 0.5em;" 
               ng-repeat="tag in filterExpression.enumeratedTags" 
