@@ -484,7 +484,11 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <td data-title=\"'Name'\" class=\"name\" \r" +
     "\n" +
-    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null\">{{node.object.name}}</td>\r" +
+    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null\">\r" +
+    "\n" +
+    "            {{node.object.name | txtLen:160:false:'...':true}}\r" +
+    "\n" +
+    "        </td>\r" +
     "\n" +
     "        \r" +
     "\n" +
@@ -900,17 +904,27 @@ angular.module('').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/post-search-filter-directive.html',
-    "<accordion class=\"switchon-toolbar-component\" close-others=\"true\" ng-show=\"isVisible\">\r" +
+    "<accordion class=\"switchon-toolbar-component\"\r" +
+    "\n" +
+    "           close-others=\"!config.expandPostSearchFilters\" \r" +
+    "\n" +
+    "           ng-show=\"isVisible\">\r" +
     "\n" +
     "    <accordion-group ng-repeat=\"filterExpression in postSearchFilterExpressions.list | filter:{valid:true}\" \r" +
+    "\n" +
+    "                     ng-init=\"filterExpression._status.open = config.expandPostSearchFilters\"\r" +
     "\n" +
     "                     is-open=\"filterExpression._status.open\">\r" +
     "\n" +
     "        <accordion-heading>\r" +
     "\n" +
-    "            <strong>{{filterExpression.getName()}}<strong><i class=\"pull-right glyphicon\" \r" +
+    "            <strong>{{filterExpression.getName()}}<strong>\r" +
     "\n" +
-    "                                ng-class=\"{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}\"></i>\r" +
+    "                    <i class=\"pull-right glyphicon\" \r" +
+    "\n" +
+    "                       ng-class=\"{'glyphicon-chevron-down': filterExpression._status.open, 'glyphicon-chevron-up': !filterExpression._status.open}\">      \r" +
+    "\n" +
+    "                    </i>\r" +
     "\n" +
     "        </accordion-heading>\r" +
     "\n" +
@@ -986,9 +1000,21 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                  ng-style=\"{'font-weight': $parent.selectedObject === $index ? 'bold' : 'plain'}\"\r" +
     "\n" +
-    "                  ng-click=\"$parent.selectedObject = $index\">{{node.name}}</span>\r" +
+    "                  ng-click=\"$parent.selectedObject = $index\">\r" +
     "\n" +
-    "            <p><small><small>{{node.object.description| txtLen:80:false:'...':true}}</small></small></p>\r" +
+    "                {{node.name | txtLen:35:false:'...':true}}\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "            <p>\r" +
+    "\n" +
+    "                <small><small>\r" +
+    "\n" +
+    "                        {{node.object.description| txtLen:80:false:'...':true}}\r" +
+    "\n" +
+    "                </small></small>\r" +
+    "\n" +
+    "            </p>\r" +
     "\n" +
     "        </li>\r" +
     "\n" +
@@ -1031,7 +1057,11 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            <div class=\"switchon-ribbon-panel\">\r" +
     "\n" +
-    "                <div class=\"btn-group switchon-keywordgroup\" dropdown is-open=\"keywordFilters.isopen\">\r" +
+    "                <div class=\"btn-group switchon-keywordgroup\" \r" +
+    "\n" +
+    "                     dropdown \r" +
+    "\n" +
+    "                     is-open=\"keywordFilters.isopen\">\r" +
     "\n" +
     "                    <button type=\"button\" \r" +
     "\n" +
@@ -1059,27 +1089,11 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                   btn-radio=\"'X-CUAHSI Keywords'\" \r" +
     "\n" +
-    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
+    "\n" +
+    "                                   title=\"X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.\">\r" +
     "\n" +
     "                                X-CUAHSI Keywords\r" +
-    "\n" +
-    "                            </label>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <label class=\"btn\" \r" +
-    "\n" +
-    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
-    "\n" +
-    "                                btn-radio=\"'Keywords'\" \r" +
-    "\n" +
-    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
-    "\n" +
-    "                                title=\"All Keywords available in the SWITCH-ON Meta-Data Repository\">\r" +
-    "\n" +
-    "                                Keywords\r" +
     "\n" +
     "                            </label>\r" +
     "\n" +
@@ -1104,6 +1118,24 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                        \r" +
     "\n" +
     "                        <!--\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                btn-radio=\"'Keywords'\" \r" +
+    "\n" +
+    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
+    "\n" +
+    "                                title=\"All Keywords available in the SWITCH-ON Meta-Data Repository\">\r" +
+    "\n" +
+    "                                Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
     "\n" +
     "                        <li>\r" +
     "\n" +
@@ -1151,9 +1183,27 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                keyword-group=\"keyword-x-cuahsi\"\r" +
     "\n" +
-    "                                multiple=\"true\">      \r" +
+    "                                multiple=\"true\"\r" +
+    "\n" +
+    "                                title=\"X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.\">      \r" +
     "\n" +
     "                </keyword-filter>\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'TOPIC Categories'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"topicFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"topic-inspire\"\r" +
+    "\n" +
+    "                                multiple=\"false\"\r" +
+    "\n" +
+    "                                title=\"INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository\">\r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
+    "                <!--\r" +
     "\n" +
     "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'Keywords'\" \r" +
     "\n" +
@@ -1166,20 +1216,6 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                                multiple=\"true\">    \r" +
     "\n" +
     "                </keyword-filter>\r" +
-    "\n" +
-    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'TOPIC Categories'\" \r" +
-    "\n" +
-    "                                class=\"ng-hide\"\r" +
-    "\n" +
-    "                                filter-expression=\"topicFilterExpression\" \r" +
-    "\n" +
-    "                                keyword-group=\"topic-inspire\"\r" +
-    "\n" +
-    "                                multiple=\"false\">\r" +
-    "\n" +
-    "                </keyword-filter>\r" +
-    "\n" +
-    "                <!--\r" +
     "\n" +
     "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'INSPIRE Keywords'\" \r" +
     "\n" +
@@ -1454,8 +1490,6 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            -->\r" +
-    "\n" +
     "            <div class=\"form-group\" ng-class=\"{'has-error': optionsForm.limitField.$invalid}\">\r" +
     "\n" +
     "                <div class=\"form-inline\" title=\"Maximum number of search results that are shown at once\">\r" +
@@ -1479,6 +1513,8 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                </div>\r" +
     "\n" +
     "            </div>\r" +
+    "\n" +
+    "            -->\r" +
     "\n" +
     "        </form>\r" +
     "\n" +

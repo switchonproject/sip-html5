@@ -20,7 +20,8 @@
                             <label class="btn" 
                                    ng-model="keywordFilters.keywordGroup" 
                                    btn-radio="'X-CUAHSI Keywords'" 
-                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">
+                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen"
+                                   title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">
                                 X-CUAHSI Keywords
                             </label>
                         </li>
@@ -66,13 +67,15 @@
                                 class="ng-hide"
                                 filter-expression="keywordsCuashiFilterExpression" 
                                 keyword-group="keyword-x-cuahsi"
-                                multiple="true">      
+                                multiple="true"
+                                title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">      
                 </keyword-filter>
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" 
                                 class="ng-hide"
                                 filter-expression="topicFilterExpression" 
                                 keyword-group="topic-inspire"
-                                multiple="false">
+                                multiple="false"
+                                title="INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository">
                 </keyword-filter>
                 <!--
                 <keyword-filter ng-show="keywordFilters.keywordGroup === 'Keywords'" 

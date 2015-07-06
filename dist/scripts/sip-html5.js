@@ -1089,16 +1089,31 @@ angular.module(
         function ($scope, resource, AppConfig) {
             'use strict';
 
-            var i;
+            var i, tag;
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
             $scope.reps = $scope.object.representation || [];
+            $scope.keywordsXcuahsi = [];
+            $scope.keywords = [];
 
             for (i = 0; i < $scope.reps.length; ++i) {
                 $scope.reps[i]._status = { // jshint ignore:line
                     open: (i === 0 ? true : false)
                 };
+            }
+
+            if ($scope.object.tags) {
+                for (i = 0; i < $scope.object.tags.length; ++i) {
+                    tag = $scope.object.tags[i];
+                    if (tag.taggroup.name.indexOf('keyword') === 0) {
+                        if (tag.taggroup.name.indexOf('X-CUAHSI') !== -1) {
+                            $scope.keywordsXcuahsi.push(tag);
+                        } else {
+                            $scope.keywords.push(tag);
+                        }
+                    }
+                }
             }
         }
     ]
@@ -2357,10 +2372,10 @@ angular.module(
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';
         appConfig.searchService.password = 'cismet';
-        appConfig.searchService.host = 'http://localhost:8890';
+        //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.defautLimit = 10;
         appConfig.searchService.maxLimit = 50;
-        //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -2403,6 +2418,8 @@ angular.module(
         // if all search result are loaded into the client,
         // filtering can be perfomred on the local search result
         appConfig.postSearchFilter.applyFilterLocally = true;
+        // expand the post search filter accordions by default
+        appConfig.postSearchFilter.expandPostSearchFilters = true;
 
         appConfig.objectInfo = {};
         appConfig.objectInfo.resourceJsonUrl = 'http://' +
