@@ -72,6 +72,8 @@ angular.module(
         // if all search result are loaded into the client,
         // filtering can be perfomred on the local search result
         appConfig.postSearchFilter.applyFilterLocally = true;
+        // expand the post search filter accordions by default
+        appConfig.postSearchFilter.expandPostSearchFilters = true;
 
         appConfig.objectInfo = {};
         appConfig.objectInfo.resourceJsonUrl = 'http://' +

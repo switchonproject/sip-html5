@@ -22,29 +22,40 @@
                 <label>Description:</label>
             </div>
             <div class="col-lg-9">
-                {{object.description}}
+                <p>{{object.description}}</p>
             </div>
         </div>
         <!-- Keywords -->
-        <div class="row" ng-if="object.tags">
+        <div class="row" ng-if="keywords && keywords.length">
             <div class="col-lg-3">
-                <label>Keywords:</label>
+                <label>General Keywords:</label>
             </div>
             <div class="col-lg-9">
-                <span ng-repeat="tag in object.tags">
-                    <span class="label label-primary" 
-                          title="{{tag.description || ''}}" 
-                          ng-if="tag.taggroup.name.indexOf('keyword') === 0">{{tag.name}}</span>
+                <span ng-repeat="tag in keywords">
+                    <span class="label label-info" title="{{tag.description || ''}}">{{tag.name}}</span>
+                </span>
+            </div>
+        </div>
+        <!-- X-CUAHSI Keywords -->
+        <div class="row" ng-if="keywordsXcuahsi && keywordsXcuahsi.length">
+            <div class="col-lg-3">
+                <label title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">
+                    X-CUAHSI Keywords:
+                </label>
+            </div>
+            <div class="col-lg-9">
+                <span ng-repeat="tag in keywordsXcuahsi">
+                    <span class="label label-primary" title="{{tag.description || ''}}">{{tag.name}}</span>
                 </span>
             </div>
         </div>
         <!-- Topic Category -->
         <div class="row">
             <div class="col-lg-3" title="High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search">
-                <label>Topic Category:</label>
+                <label>INSPIRE Topic Category:</label>
             </div>
-            <div class="col-lg-9" title="{{object.topiccategory.description || ''}}">
-                <span class="label label-default" title="{{object.topiccategory.description || ''}}">{{object.topiccategory.name ? object.topiccategory.name : '[none]'}}</span>
+            <div class="col-lg-9" title="{{object.topiccategory.description|| ''}}">
+                <span class="label label-default" title="{{object.topiccategory.description|| ''}}">{{object.topiccategory.name ? object.topiccategory.name : '[none]'}}</span>
             </div>
         </div>
         <!-- Point of Contact: -->
@@ -60,7 +71,7 @@
                     <span ng-if="object.contact.email.indexOf(' ') !== -1">{{object.contact.email}}</span>
                     &gt; 
                 </span>
-                                <span ng-if="object.contact.organisation && !object.contact.url"> ({{object.contact.organisation}})</span>
+                <span ng-if="object.contact.organisation && !object.contact.url"> ({{object.contact.organisation}})</span>
                 <span ng-if="object.contact.organisation && object.contact.url"> 
                     (<a href="{{object.contact.url}}" target="_blank" rel="nofollow">{{object.contact.organisation}}</a>)
                 </span>
@@ -72,27 +83,27 @@
                 <label>Temporal extent:</label>
             </div>
             <div class="col-lg-9">
-                {{object.fromdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}} - {{object.todate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.fromdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}} - {{object.todate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
         <!-- Spatial extent: -->
         <div class="row" ng-if="object.spatialcoverage">
             <div class="col-lg-3">
-                <label>Spatial extent:</label>
+                <label>Geospatial extent:</label>
             </div>
             <div class="col-lg-9">
                 <a href="#/map/object/{{object.id}}"
                    title="Show resource on the on the map">{{object.spatialcoverage.geo_field.substring(0, object.spatialcoverage.geo_field.indexOf('('))}}</a> 
             </div>
         </div>        
-        
+
         <!-- Creation date -->
         <div class="row" ng-if="object.creationdate">
             <div class="col-lg-3" title="Date of creation of the resource">
                 <label>Created:</label>
             </div>
             <div class="col-lg-9">
-                {{object.creationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.creationdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
         <!-- Last modification date -->
@@ -101,7 +112,7 @@
                 <label>Last modified:</label>
             </div>
             <div class="col-lg-9">
-                {{object.lastmodificationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.lastmodificationdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
         <!-- Publication date -->
@@ -110,10 +121,11 @@
                 <label>Published:</label>
             </div>
             <div class="col-lg-9">
-                {{object.publicationdate | date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.publicationdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
             </div>
         </div>
         <!-- Access conditions -->
+        <!--
         <div class="row" ng-if="object.accessconditions">
             <div class="col-lg-3" title="General license which applies to the usage of the data.">
                 <label>Access conditions:</label>
@@ -122,43 +134,49 @@
                 {{object.accessconditions.name ? object.accessconditions.name : 'unknown'}}
             </div>
         </div>
+        -->
         <!-- License statement -->
-        <div class="row" ng-if="object.licensestatement">
+        <div class="row" ng-if="object.accessconditions || object.licensestatement">
             <div class="col-lg-3" title="Detailed license conditions which apply to the usage of the data">
                 <label>License:</label>
             </div>
             <div class="col-lg-9">
-                {{object.licensestatement ? object.licensestatement : 'unknown'}}
+                <span ng-if="object.accessconditions"><strong>
+                    {{object.accessconditions.description ? object.accessconditions.description : object.accessconditions.name}}
+                </strong></span>
+                <p ng-if="object.licensestatement">
+                    {{object.licensestatement ? object.licensestatement : 'unknown'}}
+                </p>
             </div>
         </div>
         <!-- Lineage -->
-        <div class="row" ng-repeat="metadata in object.metadata | filter:{type:'lineage meta-data'}">
+        <div class="row" ng-repeat="metadata in object.metadata| filter:{type:'lineage meta-data'}">
             <div class="col-lg-3" title="Information on how the data was created.">
                 <label>Lineage:</label>
             </div>
             <div class="col-lg-9">
-                <span ng-if="metadata.description">{{metadata.description}}</span>
+                <p ng-if="metadata.description">{{metadata.description}}</p>
             </div>
         </div>
         <!-- Meta-Data Documents-->
         <div class="row">
-            <div class="col-lg-3" title="Information on how the data was created.">
-                <label>Meta-Data documents:</label>
+            <div class="col-lg-3" title="Meta-Data Record as machine-readable standard meta-data documents">
+                <label>Meta-Data files</label> (machine-readable)
             </div>
             <div class="col-lg-9">
                 <span>
-                   <a href="{{config.resourceJsonUrl}}{{object.$self}}"
-                    target="_blank" 
-                    rel="nofollow"
-                    type="application/json"
-                    title="{{object.name}} Meta-Data in SWITCH-ON JSON format">SWITCH-ON Meta-Data Record</a>
+                    <a href="{{config.resourceJsonUrl}}{{object.$self}}"
+                       target="_blank" 
+                       rel="nofollow"
+                       type="application/json"
+                       title="{{object.name}} Meta-Data in SWITCH-ON JSON format">SWITCH-ON Meta-Data Record</a>
                 </span>
-                <span ng-if="object.uuid">, 
-                   <a href="{{config.resourceXmlUrl}}{{object.uuid}}"
-                    target="_blank" 
-                    rel="nofollow"
-                    type="application/xml"
-                    title="{{object.name}} Meta-Data in ISO 19115 XML format">ISO 19115 Meta-Data Record</a> 
+                <span ng-if="object.uuid"><br> 
+                    <a href="{{config.resourceXmlUrl}}{{object.uuid}}"
+                       target="_blank" 
+                       rel="nofollow"
+                       type="application/xml"
+                       title="{{object.name}} Meta-Data in ISO 19115 XML format">ISO 19115 Meta-Data Record</a> 
                 </span>
             </div>
         </div>
