@@ -22,26 +22,37 @@
                 <label>Description:</label>
             </div>
             <div class="col-lg-9">
-                {{object.description}}
+                <p>{{object.description}}</p>
             </div>
         </div>
         <!-- Keywords -->
-        <div class="row" ng-if="object.tags">
+        <div class="row" ng-if="keywords && keywords.length">
             <div class="col-lg-3">
-                <label>Keywords:</label>
+                <label>General Keywords:</label>
             </div>
             <div class="col-lg-9">
-                <span ng-repeat="tag in object.tags">
-                    <span class="label label-primary" 
-                          title="{{tag.description|| ''}}" 
-                          ng-if="tag.taggroup.name.indexOf('keyword') === 0">{{tag.name}}</span>
+                <span ng-repeat="tag in keywords">
+                    <span class="label label-info" title="{{tag.description || ''}}">{{tag.name}}</span>
+                </span>
+            </div>
+        </div>
+        <!-- X-CUAHSI Keywords -->
+        <div class="row" ng-if="keywordsXcuahsi && keywordsXcuahsi.length">
+            <div class="col-lg-3">
+                <label title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">
+                    X-CUAHSI Keywords:
+                </label>
+            </div>
+            <div class="col-lg-9">
+                <span ng-repeat="tag in keywordsXcuahsi">
+                    <span class="label label-primary" title="{{tag.description || ''}}">{{tag.name}}</span>
                 </span>
             </div>
         </div>
         <!-- Topic Category -->
         <div class="row">
             <div class="col-lg-3" title="High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search">
-                <label>Topic Category:</label>
+                <label>INSPIRE Topic Category:</label>
             </div>
             <div class="col-lg-9" title="{{object.topiccategory.description|| ''}}">
                 <span class="label label-default" title="{{object.topiccategory.description|| ''}}">{{object.topiccategory.name ? object.topiccategory.name : '[none]'}}</span>
@@ -78,7 +89,7 @@
         <!-- Spatial extent: -->
         <div class="row" ng-if="object.spatialcoverage">
             <div class="col-lg-3">
-                <label>Spatial extent:</label>
+                <label>Geospatial extent:</label>
             </div>
             <div class="col-lg-9">
                 <a href="#/map/object/{{object.id}}"
@@ -144,13 +155,13 @@
                 <label>Lineage:</label>
             </div>
             <div class="col-lg-9">
-                <span ng-if="metadata.description">{{metadata.description}}</span>
+                <p ng-if="metadata.description">{{metadata.description}}</p>
             </div>
         </div>
         <!-- Meta-Data Documents-->
         <div class="row">
-            <div class="col-lg-3" title="Information on how the data was created.">
-                <label>Meta-Data documents:</label>
+            <div class="col-lg-3" title="Meta-Data Record as machine-readable standard meta-data documents">
+                <label>Meta-Data files</label> (machine-readable)
             </div>
             <div class="col-lg-9">
                 <span>
@@ -160,7 +171,7 @@
                        type="application/json"
                        title="{{object.name}} Meta-Data in SWITCH-ON JSON format">SWITCH-ON Meta-Data Record</a>
                 </span>
-                <span ng-if="object.uuid">, 
+                <span ng-if="object.uuid"><br> 
                     <a href="{{config.resourceXmlUrl}}{{object.uuid}}"
                        target="_blank" 
                        rel="nofollow"
