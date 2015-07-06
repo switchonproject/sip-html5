@@ -343,8 +343,6 @@ angular.module(
                     }
                 }
             };
-
-            masterToolbarService.toggleVisibility($scope.config.gui.dev);
         }
     ]
 );

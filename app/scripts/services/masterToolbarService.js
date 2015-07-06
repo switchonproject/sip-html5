@@ -24,11 +24,11 @@ angular.module(
 
                 return showing;
             };
-            
+
             getCanShow = function () {
                 return canShow;
             };
-            
+
             setCanShow = function (can) {
                 canShow = can;
             };

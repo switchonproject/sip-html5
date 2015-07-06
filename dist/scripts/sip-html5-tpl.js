@@ -1039,7 +1039,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                            dropdown-toggle \r" +
     "\n" +
-    "                            ng-init=\"keywordFilters.keywordGroup = 'Keywords'\"\r" +
+    "                            ng-init=\"keywordFilters.keywordGroup = 'X-CUAHSI Keywords'\"\r" +
     "\n" +
     "                            style=\"width:100%\">\r" +
     "\n" +
@@ -1050,6 +1050,22 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                    </button>\r" +
     "\n" +
     "                    <ul class=\"dropdown-menu\" role=\"menu\">\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                   btn-radio=\"'X-CUAHSI Keywords'\" \r" +
+    "\n" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "\n" +
+    "                                X-CUAHSI Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
     "\n" +
     "                        <li>\r" +
     "\n" +
@@ -1085,21 +1101,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        </li>\r" +
     "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <label class=\"btn\" \r" +
-    "\n" +
-    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
-    "\n" +
-    "                                   btn-radio=\"'X-CUAHSI Keywords'\" \r" +
-    "\n" +
-    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
-    "\n" +
-    "                                X-CUAHSI Keywords\r" +
-    "\n" +
-    "                            </label>\r" +
-    "\n" +
-    "                        </li>\r" +
+    "                        \r" +
     "\n" +
     "                        <!--\r" +
     "\n" +
@@ -1141,6 +1143,18 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "\r" +
     "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'X-CUAHSI Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsCuashiFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-x-cuahsi\"\r" +
+    "\n" +
+    "                                multiple=\"true\">      \r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
     "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'Keywords'\" \r" +
     "\n" +
     "                                class=\"ng-hide\"\r" +
@@ -1162,20 +1176,6 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                                keyword-group=\"topic-inspire\"\r" +
     "\n" +
     "                                multiple=\"false\">\r" +
-    "\n" +
-    "                </keyword-filter>\r" +
-    "\n" +
-    "                \r" +
-    "\n" +
-    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'X-CUAHSI Keywords'\" \r" +
-    "\n" +
-    "                                class=\"ng-hide\"\r" +
-    "\n" +
-    "                                filter-expression=\"keywordsCuashiFilterExpression\" \r" +
-    "\n" +
-    "                                keyword-group=\"keyword-x-cuahsi\"\r" +
-    "\n" +
-    "                                multiple=\"true\">      \r" +
     "\n" +
     "                </keyword-filter>\r" +
     "\n" +

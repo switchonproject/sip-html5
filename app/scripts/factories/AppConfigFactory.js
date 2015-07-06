@@ -46,7 +46,7 @@ angular.module(
         appConfig.gui.dev = true;
 
         appConfig.tagFilter = {};
-        //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-cuahsi, protocol';
+        //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-x-cuahsi, protocol';
         appConfig.tagFilter.tagGroups = 'access-condition, function';
 
         appConfig.search = {};
@@ -81,6 +81,13 @@ angular.module(
         appConfig.objectInfo.resourceXmlUrl = 'http://tl-ap001.xtr.deltares.nl/demo_csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
 
         appConfig.filterExpressionPattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
+
+        appConfig.masterToolbar = {};
+        // show or hide the "tools" toggle button in the master toolbar
+        appConfig.masterToolbar.togglebutton = false;
+        // expanded by default. 
+        // if togglebutton is not visible and toolbar is expanded, it cannot be hidden
+        appConfig.masterToolbar.alwaysExpanded = true;
 
         return appConfig;
     }]);

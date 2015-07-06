@@ -57,7 +57,7 @@ angular.module(
             };
 
 //            $urlRouterProvider.when();
-            $urlRouterProvider.otherwise('/list');
+            $urlRouterProvider.otherwise('/map');
 
             $stateProvider.state('list', {
                 url: '/list',
@@ -1020,8 +1020,6 @@ angular.module(
                     }
                 }
             };
-
-            masterToolbarService.toggleVisibility($scope.config.gui.dev);
         }
     ]
 );
@@ -1923,20 +1921,25 @@ angular.module(
                 '$scope',
                 '$state',
                 'eu.water-switch-on.sip.services.masterToolbarService',
+                'AppConfig',
                 function ($scope,
                         $state,
-                        masterToolbarService) {
+                        masterToolbarService,
+                        AppConfig) {
                     var canShow, visibleComponents;
 
                     $scope.shouldShow = false;
                     $scope.masterToolbarService = masterToolbarService;
+                    $scope.config = AppConfig;
 
                     visibleComponents = {};
+
                     this.toggleVisibility = function (componentName, isVisible) {
                         var prop, visible;
                         if (componentName) {
                             visibleComponents[componentName] = isVisible;
 
+                            // check if at least one registered component is visible
                             visible = false;
                             for (prop in visibleComponents) {
                                 if (visibleComponents.hasOwnProperty(prop)) {
@@ -1954,6 +1957,7 @@ angular.module(
                     };
 
                     canShow = function () {
+                        var masterToolbarCanShow;
                         masterToolbarService.setCanShow($scope.shouldShow &&
                                 $scope.resultSet &&
                                 $scope.resultSet.$collection &&
@@ -1965,14 +1969,24 @@ angular.module(
                                     $state.current.name === 'resourceDetails'
                                 ));
 
-                        return masterToolbarService.getCanShow();
+                        masterToolbarCanShow = masterToolbarService.getCanShow();
+
+                        // if the toolbar shall always be shown (configurable), 
+                        // show it, if it is not already shown
+                        if ($scope.config.masterToolbar.alwaysExpanded &&
+                                masterToolbarCanShow &&
+                                !masterToolbarService.isShowing()) {
+                            masterToolbarService.toggleVisibility(true);
+                        }
+
+                        return masterToolbarCanShow;
                     };
 
-                    $scope.$watchCollection('resultSet.$collection', function() {
+                    $scope.$watchCollection('resultSet.$collection', function () {
                         canShow();
                     });
 
-                    $scope.$on('$stateChangeSuccess', function() {
+                    $scope.$on('$stateChangeSuccess', function () {
                         canShow();
                     });
                 }
@@ -2050,7 +2064,7 @@ angular.module(
                 var toggleVisibility;
 
                 toggleVisibility = function (state) {
-                    scope.isVisible = (state === 'map' || state === 'list' || state === 'th');
+                    scope.isVisible = (state === 'list' || state === 'th');
                     toolbarCtrl.toggleVisibility('resultList', scope.isVisible);
                 };
 
@@ -2398,6 +2412,13 @@ angular.module(
         appConfig.objectInfo.resourceXmlUrl = 'http://tl-ap001.xtr.deltares.nl/demo_csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
 
         appConfig.filterExpressionPattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
+
+        appConfig.masterToolbar = {};
+        // show or hide the "tools" toggle button in the master toolbar
+        appConfig.masterToolbar.togglebutton = false;
+        // expanded by default. 
+        // if togglebutton is not visible and toolbar is expanded, it cannot be hidden
+        appConfig.masterToolbar.alwaysExpanded = true;
 
         return appConfig;
     }]);
@@ -3764,11 +3785,11 @@ angular.module(
 
                 return showing;
             };
-            
+
             getCanShow = function () {
                 return canShow;
             };
-            
+
             setCanShow = function (can) {
                 canShow = can;
             };
