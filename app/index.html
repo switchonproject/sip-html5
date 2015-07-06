@@ -86,7 +86,10 @@
         <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="switchon-navbar-collapse-1">
-                <div class="nav navbar-nav navbar-left" role="group" aria-label="resultViewToggle">
+                <div class="nav navbar-nav navbar-left" 
+                     role="group" 
+                     aria-label="resultViewToggle"
+                     ng-if="config.masterToolbar.togglebutton">
                     <button type="button"
                             class="btn btn-sm btn-default switchon-viewbutton" 
                             ng-click="masterToolbarService.toggleVisibility()"
@@ -98,14 +101,14 @@
                 </div>
                 <div class="nav navbar-nav navbar-left" role="group" aria-label="viewGroup">
                     <button type="button"
-                            class="btn btn-sm btn-danger switchon-viewbutton" 
+                            class="btn btn-sm btn-primary switchon-viewbutton" 
                             ng-click="activateView('list')"
                             ng-hide="state.current.name === 'list'"
                             title="Resources List View">
                         <!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>-->
                         <strong>LIST</strong>
                     </button><button type="button" 
-                            class="btn btn-sm btn-danger switchon-viewbutton" 
+                            class="btn btn-sm btn-primary switchon-viewbutton" 
                             ng-click="activateView('th')"
                             ng-hide="state.current.name === 'th'"
                             ng-show="config.gui.dev === true"
@@ -113,7 +116,7 @@
                         <!--<span class="glyphicon glyphicon-th" aria-hidden="true"></span>-->
                             <strong>PREVIEW</strong>
                     </button><button type="button"
-                            class="btn btn-sm btn-danger switchon-viewbutton" 
+                            class="btn btn-sm btn-primary switchon-viewbutton" 
                             ng-click="activateView('map')"
                             ng-class="{active: state.current.name === 'map'}"
                             ng-hide="state.current.name === 'map'"

@@ -22,7 +22,7 @@ angular.module(
                 var toggleVisibility;
 
                 toggleVisibility = function (state) {
-                    scope.isVisible = (state === 'map' || state === 'list' || state === 'th');
+                    scope.isVisible = (state === 'list' || state === 'th');
                     toolbarCtrl.toggleVisibility('resultList', scope.isVisible);
                 };
 
