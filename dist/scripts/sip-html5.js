@@ -2375,7 +2375,7 @@ angular.module(
         //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.defautLimit = 10;
         appConfig.searchService.maxLimit = 50;
-        appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        appConfig.searchService.host = 'http://tl-ap001.xtr.deltares.nl/switchon_server_rest';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -2389,7 +2389,7 @@ angular.module(
         appConfig.mapView.minZoom = 2;
 
         appConfig.gui = {};
-        appConfig.gui.dev = true;
+        appConfig.gui.dev = false;
 
         appConfig.tagFilter = {};
         //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-x-cuahsi, protocol';

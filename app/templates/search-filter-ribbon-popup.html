@@ -33,33 +33,6 @@
                                 TOPIC Categories
                             </label>
                         </li>
-                        
-                        <!--
-                        <li>
-                            <label class="btn" 
-                                ng-model="keywordFilters.keywordGroup" 
-                                btn-radio="'Keywords'" 
-                                ng-click="keywordFilters.isopen = !keywordFilters.isopen"
-                                title="All Keywords available in the SWITCH-ON Meta-Data Repository">
-                                Keywords
-                            </label>
-                        </li>
-                        <li>
-                            <label class="btn" 
-                                   ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'INSPIRE Keywords'" 
-                                   ng-click="keywordFilters.isopen = !keywordFilters.isopen">INSPIRE Keywords
-                            </label>
-                        </li>
-                        <li>
-                            <label class="btn" 
-                                ng-model="keywordFilters.keywordGroup" 
-                                btn-radio="'Free Keywords'" 
-                                ng-click="keywordFilters.isopen = !keywordFilters.isopen">
-                                Free Keywords
-                            </label>
-                        </li>
-                        -->
                     </ul>
                 </div>
 
@@ -77,51 +50,7 @@
                                 multiple="false"
                                 title="INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository">
                 </keyword-filter>
-                <!--
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Keywords'" 
-                                class="ng-hide"
-                                filter-expression="keywordsFilterExpression" 
-                                keyword-group="keyword-all"
-                                multiple="true">    
-                </keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE Keywords'" 
-                                class="ng-hide"
-                                filter-expression="keywordsFilterExpression" 
-                                keyword-group="keyword-inspire"
-                                multiple="true">
-                </keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'Free Keywords'" 
-                                class="ng-hide"
-                                filter-expression="keywordsFilterExpression" 
-                                keyword-group="keyword-free"
-                                multiple="true">        
-                -->
             </div>
-
-            <!-- FIXME: Date Filter Directive does not work properly in latest versions of 
-            Firefox and Internet Explorer. See https://github.com/switchonproject/sip-html5/issues/48 -->
-<!--            <div class="switchon-ribbon-panel">
-                <date-filter from-date-filter-expression="fromDateFilterExpression"
-                             to-date-filter-expression="toDateFilterExpression">
-                </date-filter>
-            </div>-->
-
-<!--            <div class="switchon-ribbon-panel">
-                <tabset>
-                    <tab heading="Europe">
-                        <countries-filter 
-                            filter-expression="geoFilterExpression" 
-                            country-group="country-europe">
-                        </countries-filter>
-                    </tab>
-                    <tab heading="World">
-                        <countries-filter 
-                            filter-expression="geoFilterExpression" 
-                            country-group="country-world">
-                        </countries-filter>
-                    </tab>
-                </tabset>
-            </div>-->
 
             <div class="switchon-ribbon-panel last">
                 <search-options geo-intersects-filter-expression="geoIntersectsFilterExpression"
