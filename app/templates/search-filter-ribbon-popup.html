@@ -3,7 +3,7 @@
     <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>
     <div class="popover-content">
         <div class="switchon-ribbon">
-            <div class="switchon-ribbon-panel">
+            <div class="switchon-ribbon-panel last">
                 <div class="btn-group switchon-keywordgroup" 
                      dropdown 
                      is-open="keywordFilters.isopen">
@@ -123,12 +123,14 @@
                 </tabset>
             </div>-->
 
+            <!--
             <div class="switchon-ribbon-panel last">
                 <search-options geo-intersects-filter-expression="geoIntersectsFilterExpression"
                                 geo-buffer-filter-expression="geoBufferFilterExpression"
                                 limit-filter-expression="limitFilterExpression">
                 </search-options>
             </div>
+            -->
 
             <div class="switchon-ribbon-footer">
                 <span title="Close the Search Filter Dialog"
