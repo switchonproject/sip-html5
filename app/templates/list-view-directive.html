@@ -14,8 +14,8 @@
         
         <td data-title="'Temporal Extent'" class="date"
             sortable="(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null">
-            {{node.object.fromdate | date: "dd.MM.yyyy"}} - 
-            {{node.object.todate | date: "dd.MM.yyyy"}}
+            {{node.object.fromdate | date: "yyyy-MM-ddTHH:mm:ssZ"}} - 
+            {{node.object.todate | date: "yyyy-MM-ddTHH:mm:ssZ"}}
         </td>
         
         <td data-title="'Keywords'" class="tags">
