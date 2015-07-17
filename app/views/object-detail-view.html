@@ -83,7 +83,7 @@
                 <label>Temporal extent:</label>
             </div>
             <div class="col-lg-9">
-                {{object.fromdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}} - {{object.todate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.fromdate| date: "yyyy-MM-ddTHH:mmZ"}} - {{object.todate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
         <!-- Spatial extent: -->
@@ -103,7 +103,7 @@
                 <label>Created:</label>
             </div>
             <div class="col-lg-9">
-                {{object.creationdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.creationdate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
         <!-- Last modification date -->
@@ -112,7 +112,7 @@
                 <label>Last modified:</label>
             </div>
             <div class="col-lg-9">
-                {{object.lastmodificationdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.lastmodificationdate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
         <!-- Publication date -->
@@ -121,7 +121,7 @@
                 <label>Published:</label>
             </div>
             <div class="col-lg-9">
-                {{object.publicationdate| date: "dd.MM.yyyy HH:mm:ss 'GMT'Z"}}
+                {{object.publicationdate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
         <!-- Access conditions -->

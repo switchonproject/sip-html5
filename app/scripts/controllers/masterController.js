@@ -132,7 +132,7 @@ angular.module(
 
             // TOPIC Categories Filters
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
-                null, false, true, null, 'Topic Categories', 'INSPIRE Topic Categories');
+                null, false, true, null, 'INSPIRE Topic Categories', 'INSPIRE Topic Categories');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
 
             // -----------------------------------------------------------------

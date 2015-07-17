@@ -27,10 +27,10 @@
                         </li>
                         <li>
                             <label class="btn" ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'TOPIC Categories'" 
+                                   btn-radio="'INSPIRE TOPIC Categories'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen"
                                    title="INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository">
-                                TOPIC Categories
+                                INSPIRE TOPIC Categories
                             </label>
                         </li>
                         
@@ -70,7 +70,7 @@
                                 multiple="true"
                                 title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">      
                 </keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" 
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE TOPIC Categories'" 
                                 class="ng-hide"
                                 filter-expression="topicFilterExpression" 
                                 keyword-group="topic-inspire"
