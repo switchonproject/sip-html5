@@ -300,7 +300,7 @@ postsearchfilter .panel-heading {
 postsearchfilter .panel-collapse {
    overflow-x: hidden;
    overflow-y: auto;
-   max-height: 100px;
+   max-height: 200px;
 }
 
 .usb-form-control {

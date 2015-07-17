@@ -23,7 +23,7 @@ angular.module(
             $scope.filterExpressions.addFilterExpression($scope.keywordsCuashiFilterExpression);
 
             $scope.topicFilterExpression = new FilterExpression(FilterExpression.FILTER__TOPIC,
-                null, false, true, null, 'Topic Categories', 'INSPIRE Topic Categories');
+                null, false, true, null, 'INSPIRE Topic Categories', 'INSPIRE Topic Categories');
             $scope.filterExpressions.addFilterExpression($scope.topicFilterExpression);
 
             $scope.fromDateFilterExpression = new FilterExpression(FilterExpression.FILTER__DATE_START,

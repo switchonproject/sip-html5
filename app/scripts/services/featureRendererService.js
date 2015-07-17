@@ -14,6 +14,15 @@ angular.module(
             defaultStyle = {color: '#0000FF', fill: false, weight: 2, riseOnHover: true, clickable: false};
             highlightStyle = {fillOpacity: 0.4, fill: true, fillColor: '#1589FF', riseOnHover: true, clickable: false};
 
+            /**
+             * Returns a "Feature Renderer" (Leaflet Layer) for a resource.
+             * If the resources contains a WMS preview representation a WMS Layer
+             * is instantiated and returned, otherwise, the spatialextent (geom)
+             * of the resourc eis used.
+             *
+             * @param {type} obj
+             * @returns {L.TileLayer.WMS|featureRendererService_L7.getFeatureRenderer.renderer}
+             */
             getFeatureRenderer = function (obj) {
                 // this is only an indirection to hide the conrete implementation
                 // however, as not specified yet, we hardcode this for now
@@ -45,6 +54,7 @@ angular.module(
                                 );
 
                                 // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
+                                // todo: resolve performance problems with multipoint / multipolygon!
                                 renderer.getBounds = function () {
                                     // the geo_field property comes from the server so ...  
                                     if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
@@ -54,13 +64,19 @@ angular.module(
                                         return wicket.toObject().getBounds();
                                     }
                                 };
+
+                                // disable the layer by default and show it only when it is selected!
+                                renderer.setOpacity(0.0);
                             }
 
+                            // execute callback function until renderer is found 
                             return renderer === null;
                         });
                     }
 
                     // the geo_field property comes from the server so ...  
+                    // if no preview (WMS layer representation) is found,
+                    // use the spatial extent
                     if (!renderer && obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
                         ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
                         wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
@@ -69,6 +85,7 @@ angular.module(
                             objectStyle.title = obj.name;
                         }
                         renderer = wicket.toObject(objectStyle);
+                        renderer.setStyle(defaultStyle);
                     }
                 }
 

@@ -52,7 +52,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                categoriesDirectiveController.selectedCategory === 'topic-inspire' ? \r" +
     "\n" +
-    "                            'bold' : 'plain'}\">Topic Categories</span>               \r" +
+    "                            'bold' : 'plain'}\">INSPIRE Topic Categories</span>               \r" +
     "\n" +
     "                        <i class=\"glyphicon glyphicon-chevron-right\" \r" +
     "\n" +
@@ -510,9 +510,9 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null\">\r" +
     "\n" +
-    "            {{node.object.fromdate | date: \"dd.MM.yyyy\"}} - \r" +
+    "            {{node.object.fromdate | date: \"yyyy-MM-ddTHH:mmZ\"}} - \r" +
     "\n" +
-    "            {{node.object.todate | date: \"dd.MM.yyyy\"}}\r" +
+    "            {{node.object.todate | date: \"yyyy-MM-ddTHH:mmZ\"}}\r" +
     "\n" +
     "        </td>\r" +
     "\n" +
@@ -1002,9 +1002,17 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                  ng-click=\"$parent.selectedObject = $index\">\r" +
     "\n" +
-    "                {{node.name | txtLen:35:false:'...':true}}\r" +
+    "                {{node.name | txtLen:30:false:'...':true}}\r" +
     "\n" +
     "            </span>\r" +
+    "\n" +
+    "            <a class=\"btn-invisible btn-icon pull-right\"\r" +
+    "\n" +
+    "               href=\"#/resource/{{node.object.id}}\"\r" +
+    "\n" +
+    "               title=\"Show detailed resource information\"><i class=\"glyphicon glyphicon-info-sign\"></i>\r" +
+    "\n" +
+    "            </a>\r" +
     "\n" +
     "            <p>\r" +
     "\n" +
@@ -1055,7 +1063,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div class=\"switchon-ribbon\">\r" +
     "\n" +
-    "            <div class=\"switchon-ribbon-panel\">\r" +
+    "            <div class=\"switchon-ribbon-panel last\">\r" +
     "\n" +
     "                <div class=\"btn-group switchon-keywordgroup\" \r" +
     "\n" +
@@ -1103,17 +1111,71 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                            <label class=\"btn\" ng-model=\"keywordFilters.keywordGroup\" \r" +
     "\n" +
-    "                                   btn-radio=\"'TOPIC Categories'\" \r" +
+    "                                   btn-radio=\"'INSPIRE TOPIC Categories'\" \r" +
     "\n" +
     "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
     "\n" +
     "                                   title=\"INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository\">\r" +
     "\n" +
-    "                                TOPIC Categories\r" +
+    "                                INSPIRE TOPIC Categories\r" +
     "\n" +
     "                            </label>\r" +
     "\n" +
     "                        </li>\r" +
+    "\n" +
+    "                        \r" +
+    "\n" +
+    "                        <!--\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                btn-radio=\"'Keywords'\" \r" +
+    "\n" +
+    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\"\r" +
+    "\n" +
+    "                                title=\"All Keywords available in the SWITCH-ON Meta-Data Repository\">\r" +
+    "\n" +
+    "                                Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                   ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                   btn-radio=\"'INSPIRE Keywords'\" \r" +
+    "\n" +
+    "                                   ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">INSPIRE Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <label class=\"btn\" \r" +
+    "\n" +
+    "                                ng-model=\"keywordFilters.keywordGroup\" \r" +
+    "\n" +
+    "                                btn-radio=\"'Free Keywords'\" \r" +
+    "\n" +
+    "                                ng-click=\"keywordFilters.isopen = !keywordFilters.isopen\">\r" +
+    "\n" +
+    "                                Free Keywords\r" +
+    "\n" +
+    "                            </label>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        -->\r" +
     "\n" +
     "                    </ul>\r" +
     "\n" +
@@ -1135,7 +1197,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                </keyword-filter>\r" +
     "\n" +
-    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'TOPIC Categories'\" \r" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'INSPIRE TOPIC Categories'\" \r" +
     "\n" +
     "                                class=\"ng-hide\"\r" +
     "\n" +
@@ -1149,9 +1211,99 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "                </keyword-filter>\r" +
     "\n" +
+    "                <!--\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-all\"\r" +
+    "\n" +
+    "                                multiple=\"true\">    \r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'INSPIRE Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-inspire\"\r" +
+    "\n" +
+    "                                multiple=\"true\">\r" +
+    "\n" +
+    "                </keyword-filter>\r" +
+    "\n" +
+    "                <keyword-filter ng-show=\"keywordFilters.keywordGroup === 'Free Keywords'\" \r" +
+    "\n" +
+    "                                class=\"ng-hide\"\r" +
+    "\n" +
+    "                                filter-expression=\"keywordsFilterExpression\" \r" +
+    "\n" +
+    "                                keyword-group=\"keyword-free\"\r" +
+    "\n" +
+    "                                multiple=\"true\">        \r" +
+    "\n" +
+    "                -->\r" +
+    "\n" +
     "            </div>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "            <!-- FIXME: Date Filter Directive does not work properly in latest versions of \r" +
+    "\n" +
+    "            Firefox and Internet Explorer. See https://github.com/switchonproject/sip-html5/issues/48 -->\r" +
+    "\n" +
+    "<!--            <div class=\"switchon-ribbon-panel\">\r" +
+    "\n" +
+    "                <date-filter from-date-filter-expression=\"fromDateFilterExpression\"\r" +
+    "\n" +
+    "                             to-date-filter-expression=\"toDateFilterExpression\">\r" +
+    "\n" +
+    "                </date-filter>\r" +
+    "\n" +
+    "            </div>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<!--            <div class=\"switchon-ribbon-panel\">\r" +
+    "\n" +
+    "                <tabset>\r" +
+    "\n" +
+    "                    <tab heading=\"Europe\">\r" +
+    "\n" +
+    "                        <countries-filter \r" +
+    "\n" +
+    "                            filter-expression=\"geoFilterExpression\" \r" +
+    "\n" +
+    "                            country-group=\"country-europe\">\r" +
+    "\n" +
+    "                        </countries-filter>\r" +
+    "\n" +
+    "                    </tab>\r" +
+    "\n" +
+    "                    <tab heading=\"World\">\r" +
+    "\n" +
+    "                        <countries-filter \r" +
+    "\n" +
+    "                            filter-expression=\"geoFilterExpression\" \r" +
+    "\n" +
+    "                            country-group=\"country-world\">\r" +
+    "\n" +
+    "                        </countries-filter>\r" +
+    "\n" +
+    "                    </tab>\r" +
+    "\n" +
+    "                </tabset>\r" +
+    "\n" +
+    "            </div>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <!--\r" +
     "\n" +
     "            <div class=\"switchon-ribbon-panel last\">\r" +
     "\n" +
@@ -1164,6 +1316,8 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                </search-options>\r" +
     "\n" +
     "            </div>\r" +
+    "\n" +
+    "            -->\r" +
     "\n" +
     "\r" +
     "\n" +

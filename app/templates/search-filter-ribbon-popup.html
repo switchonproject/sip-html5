@@ -3,7 +3,7 @@
     <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>
     <div class="popover-content">
         <div class="switchon-ribbon">
-            <div class="switchon-ribbon-panel">
+            <div class="switchon-ribbon-panel last">
                 <div class="btn-group switchon-keywordgroup" 
                      dropdown 
                      is-open="keywordFilters.isopen">
@@ -27,10 +27,10 @@
                         </li>
                         <li>
                             <label class="btn" ng-model="keywordFilters.keywordGroup" 
-                                   btn-radio="'TOPIC Categories'" 
+                                   btn-radio="'INSPIRE TOPIC Categories'" 
                                    ng-click="keywordFilters.isopen = !keywordFilters.isopen"
                                    title="INSPIRE Topic Categories available in the SWITCH-ON Meta-Data Repository">
-                                TOPIC Categories
+                                INSPIRE TOPIC Categories
                             </label>
                         </li>
                     </ul>
@@ -43,7 +43,7 @@
                                 multiple="true"
                                 title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">      
                 </keyword-filter>
-                <keyword-filter ng-show="keywordFilters.keywordGroup === 'TOPIC Categories'" 
+                <keyword-filter ng-show="keywordFilters.keywordGroup === 'INSPIRE TOPIC Categories'" 
                                 class="ng-hide"
                                 filter-expression="topicFilterExpression" 
                                 keyword-group="topic-inspire"
@@ -52,12 +52,14 @@
                 </keyword-filter>
             </div>
 
+            <!--
             <div class="switchon-ribbon-panel last">
                 <search-options geo-intersects-filter-expression="geoIntersectsFilterExpression"
                                 geo-buffer-filter-expression="geoBufferFilterExpression"
                                 limit-filter-expression="limitFilterExpression">
                 </search-options>
             </div>
+            -->
 
             <div class="switchon-ribbon-footer">
                 <span title="Close the Search Filter Dialog"
