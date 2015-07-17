@@ -4,8 +4,12 @@
             <span class="btn-link" 
                   ng-style="{'font-weight': $parent.selectedObject === $index ? 'bold' : 'plain'}"
                   ng-click="$parent.selectedObject = $index">
-                {{node.name | txtLen:35:false:'...':true}}
+                {{node.name | txtLen:30:false:'...':true}}
             </span>
+            <a class="btn-invisible btn-icon pull-right"
+               href="#/resource/{{node.object.id}}"
+               title="Show detailed resource information"><i class="glyphicon glyphicon-info-sign"></i>
+            </a>
             <p>
                 <small><small>
                         {{node.object.description| txtLen:80:false:'...':true}}
