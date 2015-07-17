@@ -59,7 +59,8 @@
             </div>
         </div>
         <!-- Point of Contact: -->
-        <div class="row" ng-if="object.contact">
+        <!-- Hide the contact for SWITCH-ON Meta-Data Provider (default when no contact information was provided by summerworkers) -->
+        <div class="row" ng-if="object.contact && object.contact.role.name !== 'metadataProvider'">
             <div class="col-lg-3" title="Name of contact person of the responsible party (optional) for providing the data or meta-data.">
                 <label>Point of Contact:</label>
             </div>
