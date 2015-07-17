@@ -192,17 +192,27 @@ angular.module(
                 objGroup.addTo(map);
             });
 
+            /**
+             * Set result objects (entities and resources) and add the respective
+             * layers to the map.
+             * 
+             * @param {type} objs
+             * @returns {undefined}
+             */
             setObjects = function (objs) {
                 var i, renderer;
 
                 objGroup.clearLayers();
+                objGroup.setStyle(rendererService.defaultStyle);
                 for (i = 0; i < objs.length; ++i) {
+                    // get WMS or Feature Layers
                     renderer = rendererService.getFeatureRenderer(objs[i]);
                     if (renderer) {
                         objGroup.addLayer(renderer);
                     }
                 }
 
+                // center on all object layers 
                 if ($scope.centerObjects && objGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(objGroup.getBounds(), {
@@ -215,44 +225,62 @@ angular.module(
                 }
             };
 
-            highlightObjectLayer = function (layer) {
+            // called when an object is selected
+            highlightObjectLayer = function (layerIndex) {
                 leafletData.getMap('mainmap').then(function (map) {
                     // FIXME: probably use with layer ids?
                     // see https://github.com/Leaflet/Leaflet/issues/1805
 
-                    objGroup.setStyle(rendererService.defaultStyle);
-                    // check if function exists (not available in WMS Layers)
-                    if (typeof layer.setStyle === 'function') {
-                        layer.setStyle(rendererService.highlightStyle);
-                    }
-//                    else if (typeof layer.setIcon === 'function') {
-//                        layer.setIcon(...);
-//                    }
+                    var layer, layers, i;
+                    layers = objGroup.getLayers();
 
-                    if (typeof layer.getBounds === 'function' && layer.getBounds()) {
-                        map.fitBounds(layer.getBounds(), {
-                            animate: true,
-                            pan: {animate: true, duration: 0.6},
-                            zoom: {animate: true},
-                            maxZoom: null
-                        });
-                    } else if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
-                        map.setView(layer.getLatLng(), 10, {
-                            animate: true,
-                            pan: {animate: true, duration: 0.6},
-                            zoom: {animate: true}
-                        });
+                    for (i = 0; i < layers.length; i++) {
+                        layer = layers[i];
+
+                        // the highlight layer
+                        if (i === layerIndex) {
+                            // highlight feature layer
+                            if (typeof layer.setStyle === 'function') {
+                                layer.setStyle(rendererService.highlightStyle);
+                            } else if (typeof layer.setOpacity === 'function') {
+                               // "enable" the WMS / Tile layer
+                                layer.setOpacity(1.0);
+                            }
+
+                            // center on feature layer
+                            if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
+                                map.setView(layer.getLatLng(), 10, {
+                                    animate: true,
+                                    pan: {animate: true, duration: 0.6},
+                                    zoom: {animate: true}
+                                });
+                            } else if (typeof layer.getBounds === 'function' && layer.getBounds()) {
+                                map.fitBounds(layer.getBounds(), {
+                                    animate: true,
+                                    pan: {animate: true, duration: 0.6},
+                                    zoom: {animate: true},
+                                    maxZoom: null
+                                });
+                            }
+                        } else {
+                            if (typeof layer.setStyle === 'function') {
+                                layer.setStyle(rendererService.defaultStyle);
+                            } else if (typeof layer.setOpacity === 'function') {
+                               // "disable" the WMS / Tile layer
+                                layer.setOpacity(0.0);
+                            }
+                        }
                     }
                 });
             };
 
             /**
              * This operation is called when a an object id is provided as part of the route.
-             * The object is either loaded from the server of from the cahced object 
-             * (search results sored in the share service).
+             * The object is either loaded from the server of from the cached object 
+             * (search results stored in the share service).
              * 
-             * Therfore the functionlaity to showe a single object ion the map is independet 
-             * from the functionlaity to show the objects returned from search.
+             * Therfore the functionality to show a single object on the map is independet 
+             * from the functionality to show the objects returned from search.
              * 
              * 
              * @param {type} object
@@ -262,14 +290,15 @@ angular.module(
                 if (object) {
                     var i, length, layer;
 
-                    // check if the object is already in the list of (search results) objects rendered on the map
+                    // check if the object is already in the list of 
+                    // (search results) objects rendered on the map
                     if ($scope.objects && $scope.objects > 0) {
                         length = $scope.objects.length;
- 
+
                         for (i = 0; i < length; ++i) {
                             if ($scope.objects[i].id === object.id) {
                                 if (objGroup.getLayers().length > i) {
-                                    highlightObjectLayer(objGroup.getLayers()[i]);
+                                    highlightObjectLayer(i);
                                 }
                                 return;
                             }
@@ -280,7 +309,7 @@ angular.module(
                     layer = rendererService.getFeatureRenderer(object);
                     if (layer) {
                         objGroup.addLayer(layer);
-                        highlightObjectLayer(layer);
+                        highlightObjectLayer(objGroup.getLayers().length - 1);
                     }
                 }
             };
@@ -309,7 +338,10 @@ angular.module(
 
             $scope.$watch('selectedObject', function (n) {
                 if (n !== -1 && objGroup.getLayers().length > n) {
-                    highlightObjectLayer(objGroup.getLayers()[n]);
+                    // works only if index of layer correpsonds to index ob object
+                    // warning: breaks if no layer can be generated for an object!
+                    // other possiblity: attach layer directly to object? 
+                    highlightObjectLayer(n);
                 }
             });
         }
