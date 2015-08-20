@@ -310,6 +310,7 @@ angular.module(
                         $scope.data.messageType = 'success';
                         $scope.data.searchStatus.message = $scope.data.message;
 
+                        // always switch to list view if configured
                         if ($scope.config.search.showListView === true) {
                             $scope.activateView('list');
                         }

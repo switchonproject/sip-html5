@@ -14,6 +14,7 @@ angular.module(
                     searchGeomTitle: '=',
                     centerSearchGeometry: '=',
                     preserveZoomOnCenter: '=',
+                    preserveSearchArea: '=',
                     objects: '=',
                     object: '=',
                     centerObjects: '=',
