@@ -13,7 +13,7 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
+                setSearchGeom, setSearchGeomWkt, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
 
             config = AppConfig.mapView;
 
@@ -129,6 +129,7 @@ angular.module(
                     searchGroup.addLayer($scope.searchGeomLayer);
                 }
 
+                // center on search geometry
                 if ($scope.centerSearchGeometry && searchGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(searchGroup.getBounds(), {
@@ -141,7 +142,32 @@ angular.module(
                 }
             };
 
+            // 
+            setSearchGeomWkt = function (wktString) {
+                if (wktString) {
+                    try {
+                        wicket.read(wktString);
+                        internalChange = true;
+                        setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
+                    } catch (e) {
+
+                        // clear on illigegal WKT
+                        searchGroup.removeLayer($scope.searchGeomLayer);
+                        $scope.searchGeomLayer = undefined;
+                        $scope.searchGeomWkt = null;
+                        console.error('ignoring invalid WKT');
+                    }
+                } else if (wktString === null) {
+                    searchGroup.removeLayer($scope.searchGeomLayer);
+                    $scope.searchGeomLayer = undefined;
+                }
+            };
+
             internalChange = false;
+            setSearchGeomWkt($scope.searchGeomWkt);
+
+            //watch the actual search area and update the WKT String
+            // (and thus the filter expression)
             $scope.$watch('searchGeomLayer', function (n, o) {
                 var wkt;
 
@@ -162,25 +188,15 @@ angular.module(
                 }
             });
 
+            // watch the WKT String, e.g. injected from a filter expression
             $scope.$watch('searchGeomWkt', function (n, o) {
                 if (internalChange) {
                     internalChange = false;
                 } else {
                     if (n && n !== o) {
-                        try {
-                            wicket.read(n);
-                            internalChange = true;
-                            setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
-                        } catch (e) {
-
-                            // clear on illigegal WKT
-                            searchGroup.removeLayer($scope.searchGeomLayer);
-                            $scope.searchGeomLayer = undefined;
-                            $scope.searchGeomWkt = null;
-                        }
+                        setSearchGeomWkt(n);
                     } else if (n === null) {
-                        searchGroup.removeLayer($scope.searchGeomLayer);
-                        $scope.searchGeomLayer = undefined;
+                        setSearchGeomWkt(null);
                     }
                 }
             });
@@ -247,20 +263,22 @@ angular.module(
                                 layer.setOpacity(1.0);
                             }
 
-                            // center on feature layer
-                            if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
-                                map.setView(layer.getLatLng(), 10, {
-                                    animate: true,
-                                    pan: {animate: true, duration: 0.6},
-                                    zoom: {animate: true}
-                                });
-                            } else if (typeof layer.getBounds === 'function' && layer.getBounds()) {
-                                map.fitBounds(layer.getBounds(), {
-                                    animate: true,
-                                    pan: {animate: true, duration: 0.6},
-                                    zoom: {animate: true},
-                                    maxZoom: null
-                                });
+                            // center on feature layer unless preserver search area is on
+                            if (!$scope.searchGeomLayer || ($scope.searchGeomLayer && $scope.preserveSearchArea !== true)) {
+                                if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
+                                    map.setView(layer.getLatLng(), 10, {
+                                        animate: true,
+                                        pan: {animate: true, duration: 0.6},
+                                        zoom: {animate: true}
+                                    });
+                                } else if (typeof layer.getBounds === 'function' && layer.getBounds()) {
+                                    map.fitBounds(layer.getBounds(), {
+                                        animate: true,
+                                        pan: {animate: true, duration: 0.6},
+                                        zoom: {animate: true},
+                                        maxZoom: null
+                                    });
+                                }
                             }
                         } else {
                             if (typeof layer.setStyle === 'function') {
@@ -276,7 +294,7 @@ angular.module(
 
             /**
              * This operation is called when a an object id is provided as part of the route.
-             * The object is either loaded from the server of from the cached object 
+             * The object is either loaded from the server or from the cached object 
              * (search results stored in the share service).
              * 
              * Therfore the functionality to show a single object on the map is independet 
@@ -338,7 +356,7 @@ angular.module(
 
             $scope.$watch('selectedObject', function (n) {
                 if (n !== -1 && objGroup.getLayers().length > n) {
-                    // works only if index of layer correpsonds to index ob object
+                    // FIXME: works only if index of layer correpsonds to index ob object
                     // warning: breaks if no layer can be generated for an object!
                     // other possiblity: attach layer directly to object? 
                     highlightObjectLayer(n);

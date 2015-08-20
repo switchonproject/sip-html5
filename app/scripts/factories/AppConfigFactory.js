@@ -26,10 +26,11 @@ angular.module(
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';
         appConfig.searchService.password = 'cismet';
-        //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.defautLimit = 10;
         appConfig.searchService.maxLimit = 50;
+        //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        //appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -43,19 +44,21 @@ angular.module(
         appConfig.mapView.minZoom = 2;
 
         appConfig.gui = {};
+        // Development Mode (e.g. enable untested features)
         appConfig.gui.dev = true;
 
         appConfig.tagFilter = {};
         //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-x-cuahsi, protocol';
-        appConfig.tagFilter.tagGroups = 'access-condition, function';
+        appConfig.tagFilter.tagGroups = 'access-condition, function, collection';
 
         appConfig.search = {};
-        // clear any postSearchFilter before perfoming a new search with regular search filters
+        // clear any postSearchFilter before performing a new search with regular search filters
         appConfig.search.clearPostSearchFilters = true;
         // combines array-type filter expressions in one tag 
         appConfig.search.combineMultileFilterExpressions = true;
         // switch to list view after successfull search
-        appConfig.search.showListView = true;
+        // set to false to keep map view with search area
+        appConfig.search.showListView = false;
         // default limit for search results
         appConfig.search.defautLimit = appConfig.searchService.defautLimit;
 
@@ -77,10 +80,10 @@ angular.module(
 
         appConfig.objectInfo = {};
         appConfig.objectInfo.resourceJsonUrl = 'http://' +
-                appConfig.searchService.username + ':' +
-                appConfig.searchService.password + '@' +
-                appConfig.searchService.host.replace(/.*?:\/\//g, '');
-        appConfig.objectInfo.resourceXmlUrl = 'http://tl-ap001.xtr.deltares.nl/demo_csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
+        appConfig.searchService.username + ':' +
+        appConfig.searchService.password + '@' +
+        appConfig.searchService.host.replace(/.*?:\/\//g, '');
+        appConfig.objectInfo.resourceXmlUrl = 'http://tl-243.xtr.deltares.nl/csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
 
         appConfig.filterExpressionPattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 

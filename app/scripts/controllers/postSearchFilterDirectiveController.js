@@ -26,6 +26,10 @@ angular.module(
 
             // create default negated filter expressions that can be populated by post filter expressions
             // TODO: Move to a value Provider to allow per-application configuration of post search filters
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__COLLECTION),
+                [], true, true, null, 'Collection (Excluded)');
+            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Condition (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
@@ -45,6 +49,10 @@ angular.module(
             // those are the actual search-result-dependent post filter expressions 
             // that can be selected by the user. 
             // TODO: Move to a value Provider to allow per-application configuration of post search filters
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__COLLECTION),
+                [], true, true, null, 'Collections');
+            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+            
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Conditions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
@@ -52,7 +60,7 @@ angular.module(
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__FUNCTION),
                 [], true, true, null, 'Access Functions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-
+            
 //            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
 //                [], true, true, null, 'Access Protocols');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);

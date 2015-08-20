@@ -40,33 +40,58 @@ angular.module(
                             if (representation.name && representation.contentlocation &&
                                     representation.type && representation.type.name === 'aggregated data' &&
                                     representation['function'] && representation['function'].name === 'service' &&
-                                    representation.protocol && representation.protocol.name === 'OGC:WMS-1.1.1-http-get-capabilities') {
-                                capabilities = representation.contentlocation;
-                                layername = representation.name;
-                                renderer = L.tileLayer.wms(
-                                    capabilities,
-                                    {
-                                        layers: layername,
-                                        format: 'image/png',
-                                        transparent: true,
-                                        version: '1.1.1'
-                                    }
-                                );
+                                    representation.protocol) {
 
-                                // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
-                                // todo: resolve performance problems with multipoint / multipolygon!
-                                renderer.getBounds = function () {
-                                    // the geo_field property comes from the server so ...  
-                                    if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
-                                        ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
-                                        wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
+                                // PRIORITY on TMS!
+                                if (representation.protocol.name === 'WWW:TILESERVER') {
+                                    renderer = L.tileLayer(representation.contentlocation,
+                                        {
+                                            // FIXME: make configurable per layer
+                                            tms: 'true'
+                                        });
 
-                                        return wicket.toObject().getBounds();
-                                    }
-                                };
+                                    // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
+                                    // todo: resolve performance problems with multipoint / multipolygon!
+                                    renderer.getBounds = function () {
+                                        // the geo_field property comes from the server so ...  
+                                        if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
+                                            ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
+                                            wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
 
-                                // disable the layer by default and show it only when it is selected!
-                                renderer.setOpacity(0.0);
+                                            return wicket.toObject().getBounds();
+                                        }
+                                    };
+
+                                    // disable the layer by default and show it only when it is selected!
+                                    renderer.setOpacity(0.0);
+                                } else if (representation.protocol.name === 'OGC:WMS-1.1.1-http-get-capabilities') {
+                                    capabilities = representation.contentlocation;
+                                    layername = representation.name;
+                                    renderer = L.tileLayer.wms(
+                                        capabilities,
+                                        {
+                                            layers: layername,
+                                            format: 'image/png',
+                                            transparent: true,
+                                            version: '1.1.1'
+                                        }
+                                    );
+
+                                    // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
+                                    // todo: resolve performance problems with multipoint / multipolygon!
+                                    renderer.getBounds = function () {
+                                        // the geo_field property comes from the server so ...  
+                                        if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
+                                            ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
+                                            wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
+
+                                            return wicket.toObject().getBounds();
+                                        }
+                                    };
+
+                                    // disable the layer by default and show it only when it is selected!
+                                    renderer.setOpacity(0.0);
+                                }
                             }
 
                             // execute callback function until renderer is found 

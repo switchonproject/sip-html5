@@ -373,7 +373,7 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
+                setSearchGeom, setSearchGeomWkt, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
 
             config = AppConfig.mapView;
 
@@ -489,6 +489,7 @@ angular.module(
                     searchGroup.addLayer($scope.searchGeomLayer);
                 }
 
+                // center on search geometry
                 if ($scope.centerSearchGeometry && searchGroup.getLayers().length > 0) {
                     leafletData.getMap('mainmap').then(function (map) {
                         map.fitBounds(searchGroup.getBounds(), {
@@ -501,7 +502,32 @@ angular.module(
                 }
             };
 
+            // 
+            setSearchGeomWkt = function (wktString) {
+                if (wktString) {
+                    try {
+                        wicket.read(wktString);
+                        internalChange = true;
+                        setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
+                    } catch (e) {
+
+                        // clear on illigegal WKT
+                        searchGroup.removeLayer($scope.searchGeomLayer);
+                        $scope.searchGeomLayer = undefined;
+                        $scope.searchGeomWkt = null;
+                        console.error('ignoring invalid WKT');
+                    }
+                } else if (wktString === null) {
+                    searchGroup.removeLayer($scope.searchGeomLayer);
+                    $scope.searchGeomLayer = undefined;
+                }
+            };
+
             internalChange = false;
+            setSearchGeomWkt($scope.searchGeomWkt);
+
+            //watch the actual search area and update the WKT String
+            // (and thus the filter expression)
             $scope.$watch('searchGeomLayer', function (n, o) {
                 var wkt;
 
@@ -522,25 +548,15 @@ angular.module(
                 }
             });
 
+            // watch the WKT String, e.g. injected from a filter expression
             $scope.$watch('searchGeomWkt', function (n, o) {
                 if (internalChange) {
                     internalChange = false;
                 } else {
                     if (n && n !== o) {
-                        try {
-                            wicket.read(n);
-                            internalChange = true;
-                            setSearchGeom(wicket.toObject({color: '#800000', icon: new MapSearchIcon()}));
-                        } catch (e) {
-
-                            // clear on illigegal WKT
-                            searchGroup.removeLayer($scope.searchGeomLayer);
-                            $scope.searchGeomLayer = undefined;
-                            $scope.searchGeomWkt = null;
-                        }
+                        setSearchGeomWkt(n);
                     } else if (n === null) {
-                        searchGroup.removeLayer($scope.searchGeomLayer);
-                        $scope.searchGeomLayer = undefined;
+                        setSearchGeomWkt(null);
                     }
                 }
             });
@@ -607,20 +623,22 @@ angular.module(
                                 layer.setOpacity(1.0);
                             }
 
-                            // center on feature layer
-                            if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
-                                map.setView(layer.getLatLng(), 10, {
-                                    animate: true,
-                                    pan: {animate: true, duration: 0.6},
-                                    zoom: {animate: true}
-                                });
-                            } else if (typeof layer.getBounds === 'function' && layer.getBounds()) {
-                                map.fitBounds(layer.getBounds(), {
-                                    animate: true,
-                                    pan: {animate: true, duration: 0.6},
-                                    zoom: {animate: true},
-                                    maxZoom: null
-                                });
+                            // center on feature layer unless preserver search area is on
+                            if (!$scope.searchGeomLayer || ($scope.searchGeomLayer && $scope.preserveSearchArea !== true)) {
+                                if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
+                                    map.setView(layer.getLatLng(), 10, {
+                                        animate: true,
+                                        pan: {animate: true, duration: 0.6},
+                                        zoom: {animate: true}
+                                    });
+                                } else if (typeof layer.getBounds === 'function' && layer.getBounds()) {
+                                    map.fitBounds(layer.getBounds(), {
+                                        animate: true,
+                                        pan: {animate: true, duration: 0.6},
+                                        zoom: {animate: true},
+                                        maxZoom: null
+                                    });
+                                }
                             }
                         } else {
                             if (typeof layer.setStyle === 'function') {
@@ -636,7 +654,7 @@ angular.module(
 
             /**
              * This operation is called when a an object id is provided as part of the route.
-             * The object is either loaded from the server of from the cached object 
+             * The object is either loaded from the server or from the cached object 
              * (search results stored in the share service).
              * 
              * Therfore the functionality to show a single object on the map is independet 
@@ -698,7 +716,7 @@ angular.module(
 
             $scope.$watch('selectedObject', function (n) {
                 if (n !== -1 && objGroup.getLayers().length > n) {
-                    // works only if index of layer correpsonds to index ob object
+                    // FIXME: works only if index of layer correpsonds to index ob object
                     // warning: breaks if no layer can be generated for an object!
                     // other possiblity: attach layer directly to object? 
                     highlightObjectLayer(n);
@@ -1019,6 +1037,7 @@ angular.module(
                         $scope.data.messageType = 'success';
                         $scope.data.searchStatus.message = $scope.data.message;
 
+                        // always switch to list view if configured
                         if ($scope.config.search.showListView === true) {
                             $scope.activateView('list');
                         }
@@ -1178,6 +1197,10 @@ angular.module(
 
             // create default negated filter expressions that can be populated by post filter expressions
             // TODO: Move to a value Provider to allow per-application configuration of post search filters
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__COLLECTION),
+                [], true, true, null, 'Collection (Excluded)');
+            $scope.filterExpressions.addFilterExpression(tempFilterExpression);
+
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Condition (Excluded)');
             $scope.filterExpressions.addFilterExpression(tempFilterExpression);
@@ -1197,6 +1220,10 @@ angular.module(
             // those are the actual search-result-dependent post filter expressions 
             // that can be selected by the user. 
             // TODO: Move to a value Provider to allow per-application configuration of post search filters
+            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__COLLECTION),
+                [], true, true, null, 'Collections');
+            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
+            
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__ACCESS_CONDITION),
                 [], true, true, null, 'Access Conditions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
@@ -1204,7 +1231,7 @@ angular.module(
             tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__FUNCTION),
                 [], true, true, null, 'Access Functions');
             $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
-
+            
 //            tempFilterExpression = new FilterExpression(('!' + FilterExpression.FILTER__PROTOCOL),
 //                [], true, true, null, 'Access Protocols');
 //            $scope.postSearchFilterExpressions.addFilterExpression(tempFilterExpression);
@@ -1930,6 +1957,7 @@ angular.module(
                     searchGeomTitle: '=',
                     centerSearchGeometry: '=',
                     preserveZoomOnCenter: '=',
+                    preserveSearchArea: '=',
                     objects: '=',
                     object: '=',
                     centerObjects: '=',
@@ -2404,10 +2432,11 @@ angular.module(
         appConfig.searchService = {};
         appConfig.searchService.username = 'admin@SWITCHON';
         appConfig.searchService.password = 'cismet';
-        //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.defautLimit = 10;
         appConfig.searchService.maxLimit = 50;
+        //appConfig.searchService.host = 'http://localhost:8890';
         appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        //appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -2421,19 +2450,21 @@ angular.module(
         appConfig.mapView.minZoom = 2;
 
         appConfig.gui = {};
+        // Development Mode (e.g. enable untested features)
         appConfig.gui.dev = true;
 
         appConfig.tagFilter = {};
         //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-x-cuahsi, protocol';
-        appConfig.tagFilter.tagGroups = 'access-condition, function';
+        appConfig.tagFilter.tagGroups = 'access-condition, function, collection';
 
         appConfig.search = {};
-        // clear any postSearchFilter before perfoming a new search with regular search filters
+        // clear any postSearchFilter before performing a new search with regular search filters
         appConfig.search.clearPostSearchFilters = true;
         // combines array-type filter expressions in one tag 
         appConfig.search.combineMultileFilterExpressions = true;
         // switch to list view after successfull search
-        appConfig.search.showListView = true;
+        // set to false to keep map view with search area
+        appConfig.search.showListView = false;
         // default limit for search results
         appConfig.search.defautLimit = appConfig.searchService.defautLimit;
 
@@ -2455,10 +2486,10 @@ angular.module(
 
         appConfig.objectInfo = {};
         appConfig.objectInfo.resourceJsonUrl = 'http://' +
-                appConfig.searchService.username + ':' +
-                appConfig.searchService.password + '@' +
-                appConfig.searchService.host.replace(/.*?:\/\//g, '');
-        appConfig.objectInfo.resourceXmlUrl = 'http://tl-ap001.xtr.deltares.nl/demo_csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
+        appConfig.searchService.username + ':' +
+        appConfig.searchService.password + '@' +
+        appConfig.searchService.host.replace(/.*?:\/\//g, '');
+        appConfig.objectInfo.resourceXmlUrl = 'http://tl-243.xtr.deltares.nl/csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
 
         appConfig.filterExpressionPattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 
@@ -3521,33 +3552,58 @@ angular.module(
                             if (representation.name && representation.contentlocation &&
                                     representation.type && representation.type.name === 'aggregated data' &&
                                     representation['function'] && representation['function'].name === 'service' &&
-                                    representation.protocol && representation.protocol.name === 'OGC:WMS-1.1.1-http-get-capabilities') {
-                                capabilities = representation.contentlocation;
-                                layername = representation.name;
-                                renderer = L.tileLayer.wms(
-                                    capabilities,
-                                    {
-                                        layers: layername,
-                                        format: 'image/png',
-                                        transparent: true,
-                                        version: '1.1.1'
-                                    }
-                                );
+                                    representation.protocol) {
 
-                                // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
-                                // todo: resolve performance problems with multipoint / multipolygon!
-                                renderer.getBounds = function () {
-                                    // the geo_field property comes from the server so ...  
-                                    if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
-                                        ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
-                                        wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
+                                // PRIORITY on TMS!
+                                if (representation.protocol.name === 'WWW:TILESERVER') {
+                                    renderer = L.tileLayer(representation.contentlocation,
+                                        {
+                                            // FIXME: make configurable per layer
+                                            tms: 'true'
+                                        });
 
-                                        return wicket.toObject().getBounds();
-                                    }
-                                };
+                                    // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
+                                    // todo: resolve performance problems with multipoint / multipolygon!
+                                    renderer.getBounds = function () {
+                                        // the geo_field property comes from the server so ...  
+                                        if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
+                                            ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
+                                            wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
 
-                                // disable the layer by default and show it only when it is selected!
-                                renderer.setOpacity(0.0);
+                                            return wicket.toObject().getBounds();
+                                        }
+                                    };
+
+                                    // disable the layer by default and show it only when it is selected!
+                                    renderer.setOpacity(0.0);
+                                } else if (representation.protocol.name === 'OGC:WMS-1.1.1-http-get-capabilities') {
+                                    capabilities = representation.contentlocation;
+                                    layername = representation.name;
+                                    renderer = L.tileLayer.wms(
+                                        capabilities,
+                                        {
+                                            layers: layername,
+                                            format: 'image/png',
+                                            transparent: true,
+                                            version: '1.1.1'
+                                        }
+                                    );
+
+                                    // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
+                                    // todo: resolve performance problems with multipoint / multipolygon!
+                                    renderer.getBounds = function () {
+                                        // the geo_field property comes from the server so ...  
+                                        if (obj.spatialcoverage && obj.spatialcoverage.geo_field) { // jshint ignore:line
+                                            ewkt = obj.spatialcoverage.geo_field; // jshint ignore:line
+                                            wicket.read(ewkt.substr(ewkt.indexOf(';') + 1));
+
+                                            return wicket.toObject().getBounds();
+                                        }
+                                    };
+
+                                    // disable the layer by default and show it only when it is selected!
+                                    renderer.setOpacity(0.0);
+                                }
                             }
 
                             // execute callback function until renderer is found 
