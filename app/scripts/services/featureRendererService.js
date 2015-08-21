@@ -64,6 +64,7 @@ angular.module(
 
                                     // disable the layer by default and show it only when it is selected!
                                     renderer.setOpacity(0.0);
+                                    //renderer.bringToBack();
                                 } else if (representation.protocol.name === 'OGC:WMS-1.1.1-http-get-capabilities') {
                                     capabilities = representation.contentlocation;
                                     layername = representation.name;
@@ -91,6 +92,7 @@ angular.module(
 
                                     // disable the layer by default and show it only when it is selected!
                                     renderer.setOpacity(0.0);
+                                    renderer.bringToBack();
                                 }
                             }
 
