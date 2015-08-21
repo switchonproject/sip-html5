@@ -3616,7 +3616,7 @@ angular.module(
 
                                     // disable the layer by default and show it only when it is selected!
                                     renderer.setOpacity(0.0);
-                                    renderer.bringToBack();
+                                    //renderer.bringToBack();
                                 }
                             }
 
