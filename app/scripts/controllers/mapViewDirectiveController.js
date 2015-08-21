@@ -142,7 +142,7 @@ angular.module(
                 }
             };
 
-            // 
+            // set the search geometry from WKT String
             setSearchGeomWkt = function (wktString) {
                 if (wktString) {
                     try {
@@ -163,7 +163,12 @@ angular.module(
                 }
             };
 
+            // internal change flag prevents watches to trigger from internal changes
+            // initially set to false
             internalChange = false;
+
+            // set search geom (e.g. from existing filter expression) 
+            // when switchon to map view
             setSearchGeomWkt($scope.searchGeomWkt);
 
             //watch the actual search area and update the WKT String
@@ -241,7 +246,12 @@ angular.module(
                 }
             };
 
-            // called when an object is selected
+            /**
+             * Called when an object is selected
+             * 
+             * @param {int} layer Index
+             * @returns {undefined}
+             */
             highlightObjectLayer = function (layerIndex) {
                 leafletData.getMap('mainmap').then(function (map) {
                     // FIXME: probably use with layer ids?
@@ -261,9 +271,10 @@ angular.module(
                             } else if (typeof layer.setOpacity === 'function') {
                                // "enable" the WMS / Tile layer
                                 layer.setOpacity(1.0);
+                                //layer.bringToFront();
                             }
 
-                            // center on feature layer unless preserver search area is on
+                            // center on feature layer unless preserve search area is on
                             if (!$scope.searchGeomLayer || ($scope.searchGeomLayer && $scope.preserveSearchArea !== true)) {
                                 if (typeof layer.getLatLng  === 'function' && layer.getLatLng()) {
                                     map.setView(layer.getLatLng(), 10, {
@@ -286,6 +297,7 @@ angular.module(
                             } else if (typeof layer.setOpacity === 'function') {
                                // "disable" the WMS / Tile layer
                                 layer.setOpacity(0.0);
+                                //layer.bringToBack();
                             }
                         }
                     }

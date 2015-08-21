@@ -29,8 +29,8 @@ angular.module(
         appConfig.searchService.defautLimit = 10;
         appConfig.searchService.maxLimit = 50;
         //appConfig.searchService.host = 'http://localhost:8890';
-        appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
-        //appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
+        //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+        appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
 
         appConfig.mapView = {};
         appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
@@ -45,7 +45,7 @@ angular.module(
 
         appConfig.gui = {};
         // Development Mode (e.g. enable untested features)
-        appConfig.gui.dev = true;
+        appConfig.gui.dev = false;
 
         appConfig.tagFilter = {};
         //appConfig.tagFilter.tagGroups = 'access-condition, function, keyword-x-cuahsi, protocol';
@@ -58,7 +58,7 @@ angular.module(
         appConfig.search.combineMultileFilterExpressions = true;
         // switch to list view after successfull search
         // set to false to keep map view with search area
-        appConfig.search.showListView = false;
+        appConfig.search.showListView = true;
         // default limit for search results
         appConfig.search.defautLimit = appConfig.searchService.defautLimit;
 
