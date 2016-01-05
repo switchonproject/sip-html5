@@ -33,7 +33,7 @@ angular.module(
         appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
 
         appConfig.mapView = {};
-        appConfig.mapView.backgroundLayer = 'http://{s}.opentopomap.org/{z}/{x}/{y}.png';
+        appConfig.mapView.backgroundLayer = 'http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
         appConfig.mapView.home = {};
         appConfig.mapView.home.lat = 49.245166;
         appConfig.mapView.home.lng = 6.936809;
