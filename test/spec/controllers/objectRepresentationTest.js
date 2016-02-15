@@ -9,6 +9,7 @@ describe('Object Representation Test Suite', function () {
             module('eu.water-switch-on.sip.controllers');
             module('eu.water-switch-on.sip.factories');
             module('mocks');
+            module("ngSanitize");
         });
         
         beforeEach(inject(

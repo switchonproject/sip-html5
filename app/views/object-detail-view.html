@@ -142,9 +142,9 @@
                 <label>License:</label>
             </div>
             <div class="col-lg-9">
-                <span ng-if="object.accessconditions"><strong>
-                    {{object.accessconditions.description ? object.accessconditions.description : object.accessconditions.name}}
-                </strong></span>
+                <span   ng-if="object.accessconditions"
+                        ng-bind-html="object.accessconditions.description ? object.accessconditions.description : object.accessconditions.name">
+                </span>
                 <p ng-if="object.licensestatement">
                     {{object.licensestatement ? object.licensestatement : 'unknown'}}
                 </p>
