@@ -3,7 +3,8 @@
                      is-open="rep._status.open"
                      ng-init="filename = rep.contentlocation.substr(rep.contentlocation.lastIndexOf('/')+1)">
         <accordion-heading>
-            {{rep.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}"></i> 
+            {{rep.name}} <i class="pull-right glyphicon" 
+                            ng-class="{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}"></i> 
         </accordion-heading>
         <!-- Description -->
         <!--
@@ -45,8 +46,8 @@
         </div>
         <!-- Content Type -->
         <div class="row" ng-if="rep.contenttype">
-            <div class="col-lg-3" title="MIME Type of the resource representation">
-                <label>Mime type:</label>
+            <div class="col-lg-3" title="MIME Type of the dataset">
+                <label>File type:</label>
             </div>
             <div class="col-lg-9" title="{{rep.contenttype.description || 'n/a'}}">
                 {{rep.contenttype.name || 'n/a'}}
@@ -54,8 +55,8 @@
         </div>
         <!-- Data access function -->
         <div class="row" ng-if="rep.function">
-            <div class="col-lg-3" title="Function that can be performed following the link to the resource representation">
-                <label>Data access function:</label>
+            <div class="col-lg-3" title="Function that can be performed following the link to the dataset">
+                <label>Type of Link:</label>
             </div>
             <div class="col-lg-9" title="{{rep.function.description || 'n/a'}}">
                 {{rep.function.name || 'n/a'}}
@@ -64,14 +65,14 @@
         <!-- Data access Link -->
         <div class="row" ng-if="rep.contentlocation">
             <div class="col-lg-3" title="Link to the data or website where the data can be obtained">
-                <label>Data access link:</label>
+                <label>Link to Data:</label>
             </div>
             <div class="col-lg-9">
                 <a href="{{rep.contentlocation}}" 
                     target="_blank" 
                     rel="nofollow"
                     type="{{(rep.contenttype) ? rep.contenttype.name : 'application/octet-stream'}}"
-                    ng-disabled="!rep.contentlocation">{{(filename && filename.indexOf('.') !== -1) ? filename : rep.name}}</a>
+                    ng-disabled="!rep.contentlocation">{{(filename && filename.indexOf('.') !== -1) ? filename : (rep.name ? rep.name : rep.contentlocation)}}</a>
             </div>
         </div>
     </accordion-group>

@@ -106,7 +106,6 @@ module.exports = function(config) {
         'app/views/object-detail-view.html',
         'app/views/profileView.html',
         'app/views/thumbnailView.html',
-        'test/spec/controllers/objectRepresentationTest.js',
         'test/spec/directives/mapViewDirectiveControllerTest.js',
         'test/spec/filters/textLengthFilterTest.js',
         'test/spec/services/searchServiceTest.js',
