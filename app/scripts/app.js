@@ -10,7 +10,8 @@ angular.module(
         'de.cismet.cids.services',
         'ui.router',
         'ui.bootstrap.tpls',
-        'ngResource'
+        'ngResource',
+        'ngSanitize'
     ]
 ).config(
     [

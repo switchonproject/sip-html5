@@ -434,7 +434,8 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "                     is-open=\"rep._status.open\"\n" +
     "                     ng-init=\"filename = rep.contentlocation.substr(rep.contentlocation.lastIndexOf('/')+1)\">\n" +
     "        <accordion-heading>\n" +
-    "            {{rep.name}} <i class=\"pull-right glyphicon\" ng-class=\"{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}\"></i> \n" +
+    "            {{rep.name}} <i class=\"pull-right glyphicon\" \n" +
+    "                            ng-class=\"{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}\"></i> \n" +
     "        </accordion-heading>\n" +
     "        <!-- Description -->\n" +
     "        <!--\n" +
@@ -476,8 +477,8 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "        <!-- Content Type -->\n" +
     "        <div class=\"row\" ng-if=\"rep.contenttype\">\n" +
-    "            <div class=\"col-lg-3\" title=\"MIME Type of the resource representation\">\n" +
-    "                <label>Mime type:</label>\n" +
+    "            <div class=\"col-lg-3\" title=\"MIME Type of the dataset\">\n" +
+    "                <label>File type:</label>\n" +
     "            </div>\n" +
     "            <div class=\"col-lg-9\" title=\"{{rep.contenttype.description || 'n/a'}}\">\n" +
     "                {{rep.contenttype.name || 'n/a'}}\n" +
@@ -485,8 +486,8 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "        <!-- Data access function -->\n" +
     "        <div class=\"row\" ng-if=\"rep.function\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Function that can be performed following the link to the resource representation\">\n" +
-    "                <label>Data access function:</label>\n" +
+    "            <div class=\"col-lg-3\" title=\"Function that can be performed following the link to the dataset\">\n" +
+    "                <label>Type of Link:</label>\n" +
     "            </div>\n" +
     "            <div class=\"col-lg-9\" title=\"{{rep.function.description || 'n/a'}}\">\n" +
     "                {{rep.function.name || 'n/a'}}\n" +
@@ -495,14 +496,14 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "        <!-- Data access Link -->\n" +
     "        <div class=\"row\" ng-if=\"rep.contentlocation\">\n" +
     "            <div class=\"col-lg-3\" title=\"Link to the data or website where the data can be obtained\">\n" +
-    "                <label>Data access link:</label>\n" +
+    "                <label>Link to Data:</label>\n" +
     "            </div>\n" +
     "            <div class=\"col-lg-9\">\n" +
     "                <a href=\"{{rep.contentlocation}}\" \n" +
     "                    target=\"_blank\" \n" +
     "                    rel=\"nofollow\"\n" +
     "                    type=\"{{(rep.contenttype) ? rep.contenttype.name : 'application/octet-stream'}}\"\n" +
-    "                    ng-disabled=\"!rep.contentlocation\">{{(filename && filename.indexOf('.') !== -1) ? filename : rep.name}}</a>\n" +
+    "                    ng-disabled=\"!rep.contentlocation\">{{(filename && filename.indexOf('.') !== -1) ? filename : (rep.name ? rep.name : rep.contentlocation)}}</a>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </accordion-group>\n" +

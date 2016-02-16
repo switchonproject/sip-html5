@@ -40,7 +40,7 @@
         <div class="row" ng-if="keywordsXcuahsi && keywordsXcuahsi.length">
             <div class="col-lg-3">
                 <label title="X-CUAHSI keywords build on a hierarchical keyword selection from the hydrologic ontology developed by CUAHSI, with additional hierarchical keywords for relevant non-hydrosphere data.">
-                    X-CUAHSI Keywords:
+                    CUAHSI Keywords:
                 </label>
             </div>
             <div class="col-lg-9">
@@ -142,9 +142,9 @@
                 <label>License:</label>
             </div>
             <div class="col-lg-9">
-                <span ng-if="object.accessconditions"><strong>
-                    {{object.accessconditions.description ? object.accessconditions.description : object.accessconditions.name}}
-                </strong></span>
+                <span   ng-if="object.accessconditions"
+                        ng-bind-html="object.accessconditions.description ? object.accessconditions.description : object.accessconditions.name">
+                </span>
                 <p ng-if="object.licensestatement">
                     {{object.licensestatement ? object.licensestatement : 'unknown'}}
                 </p>
@@ -153,7 +153,7 @@
         <!-- Lineage -->
         <div class="row" ng-repeat="metadata in object.metadata| filter:{type:'lineage meta-data'}">
             <div class="col-lg-3" title="Information on how the data was created.">
-                <label>Lineage:</label>
+                <label>Data Lineage:</label>
             </div>
             <div class="col-lg-9">
                 <p ng-if="metadata.description">{{metadata.description}}</p>
@@ -185,7 +185,7 @@
         <!-- Representations -->
         <div class="row" ng-if="reps">
             <div class="col-lg-12">
-                <h3>Representations (Data)</h3>
+                <h3>Datasets</h3>
             </div>
         </div>
         <div class="row">

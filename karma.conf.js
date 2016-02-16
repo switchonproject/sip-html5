@@ -15,6 +15,7 @@ module.exports = function(config) {
         'target/dist/bower_components/json3/lib/json3.min.js',
         'target/dist/bower_components/jquery/dist/jquery.js',
         'target/dist/bower_components/angular/angular.js',
+        'target/dist/bower_components/angular-sanitize/angular-sanitize.min.js',
         'target/dist/bower_components/angular-strap/dist/angular-strap.js',
         'target/dist/bower_components/angular-strap/dist/angular-strap.tpl.js',
         'target/dist/bower_components/angular-bootstrap/ui-bootstrap.js',
@@ -105,8 +106,6 @@ module.exports = function(config) {
         'app/views/object-detail-view.html',
         'app/views/profileView.html',
         'app/views/thumbnailView.html',
-        'test/spec/controllers/objecDetailViewTest.js',
-        'test/spec/controllers/objectRepresentationTest.js',
         'test/spec/directives/mapViewDirectiveControllerTest.js',
         'test/spec/filters/textLengthFilterTest.js',
         'test/spec/services/searchServiceTest.js',
@@ -117,7 +116,7 @@ module.exports = function(config) {
     exclude: [],
 
     // web server port
-    port: 8080,
+    port: 8088,
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
