@@ -39,10 +39,9 @@
                 <p class="view"><a href="https://github.com/switchonproject/sip-html5">View the Project on GitHub <small>switchonproject/sip-html5</small></a></p>
                 <ul>
                     <li><a href="https://switchonproject.github.io/" title="switchonproject website on github.io"><strong>Return</strong> Home</a></li>
-                    <li><a href="#mockups" title="View mockups of the application"><strong>View</strong> Mockups</a></li>
-                    <!--<li><a href="#downloads" title="Download sourcecode and binaries"><strong>Download</strong> Software</a></li>
-                    <li><a href="#running" title="Run the Application"><strong>Run</strong> Application</a></li>
-                    <li><a href="#tutorials" title="Watch interactive tutorial videos"><strong>Watch</strong> Tutorial Videos</a></li>-->
+                    <li><a href="#accessing" title="Access the Application"><strong>Access</strong> BYOD</a></li>
+                    <li><a href="#downloads" title="Download sourcecode"><strong>Download</strong> Sourcecode</a></li>
+                    <li><a href="#walkthrough" title="User Guide and Walkthrough"><strong>View</strong> Walkthrough</a></li>
                 </ul>
             </header>
             <section>
@@ -50,12 +49,12 @@
                     <a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About the SIP Catalogue Access GUI
                 </h3>
                 <p>
-                    This is the <strong>SIP Published Catalogue Access GUI Prototype</strong> of the Spatial Information Platform (SIP) 
+                    The BYOD (Browse your own Data) HTML5 Client is the main <strong>Published Catalogue Access GUI Prototype</strong> of the Spatial Information Platform (SIP) 
                     of the <a href="http://www.water-switch-on.eu/" title="SWITCH-ON" target="_blank">SWITCH-ON</a> 
                     EU FP7 collaborative project.
                 </p>
                 <p>
-                    <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/000-startpage.png" alt="SIP Published Catalogue Access GUI Mockup"/>
+                    <img src="https://github.com/switchonproject/sip-html5/images/boyd-with-map.png" alt="SIP Published Catalogue Access GUI"/>
                 </p>
                 <p>    
                     External users have two possibilities for interacting with the SIP. 
@@ -69,9 +68,7 @@
                     and customised <a href="http://www.water-switch-on.eu/products.html" title="Products and Services" target="_blank">Products and Services</a> and thus are the entry points for external 
                     users to results of the SWITCH-ON project. Standard web technologies like 
                     HTML5 and JavaScript are used for their implementation so users only 
-                    need a web browser to access these GUIs. 
-                    The Published Catalogue GUI is currently under development, 
-                    a public demonstrator is not yet available. However, concepts and mockups can already be shown.
+                    need a web browser to access these GUIs.
                 </p>
 
                 <p> The Published Catalogue Access GUI is not meant to completely replace the more powerful
@@ -85,168 +82,82 @@
                 </h3>
                 <p> 
                     In contrast to the <a href="https://switchonproject.github.io/cids-custom-switchon/">SIP Expert Catalogue and Data Management GUI</a> 
-                    which is based on Java and thus requires a Java Plugin on the client, Published Catalogue Access GUI
+                    which is based on Java and thus requires a Java Plugin on the client, the Published Catalogue Access GUI
                     is entirely based on modern web technologies like HTML5, AJAX and REST. Thus, the Published Catalogue Access GUI
                     is implemented as Rich Internet Application which can be run in current web browsers without the need to
                     install additional software on the client. The <a href="https://www.angularjs.org">AngularJS</a> JavaScript Framework 
                     for Single Page Applications is used for the development of the new client.
                 </p>
+                
+                <h3>
+                    <a name="accessing" class="anchor" href="#accessing"><span class="octicon octicon-link"></span></a>Accessing the Published Catalogue Access GUI Prototype
+                </h3>
+                <p>
+                    The latest offical release of the BOYD can be found at <strong><a href="http://www.water-switch-on.eu/sip-webclient/byod/" target="_blank">http://www.water-switch-on.eu/sip-webclient/byod/</a></strong>. 
+                </p>
+                <p>
+                    The most recent development snapshot (may or may not work) is available at <strong><a href="http://tl-243.xtr.deltares.nl/byod/" target="_blank">http://tl-243.xtr.deltares.nl/byod/</a></strong>. 
+                </p>
 
                 <h3>
-                    <a name="mockups" class="anchor" href="#mockups"><span class="octicon octicon-link"></span></a>Mockups and Use Cases
+                    <a name="walkthrough" class="anchor" href="#walkthrough"><span class="octicon octicon-link"></span></a>Walkthrough and Use Cases
                 </h3>
                 <p> 
-                    The following mockups and core use cases are the basis for the development of the Published Catalogue Access GUI.
+                    The following walkthrough is based on the mockups and core use cases that were used as basis for the development of the Published Catalogue Access GUI.
+                    <a href="https://github.com/switchonproject/sip-html5/issues?q=label%3A%22user+story%22+sort%3Acreated-asc" target="_blank"></a>
                 </p>
                 
-                <p>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/002-startpage-with-resultset.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/010-categories.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/020-search-result-map.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/021-search-result-information.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/025-search-result-map-selection.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/030-search-result-list.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/035-search-result-list-filtered.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/040-search-results-thumbnails.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/045-search-results-thumbnails-details.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/046-search-results-thumbnails-download.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/047-search-results-thumbnails-favourites.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/050-workspaces.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/051-workspaces-information.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/055-workspaces-management.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/060-search.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/061-search-geospatial.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/062-search-location.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/063-search-keywords.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/064-search-temporal.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/065-search-freetext.png"/>
-                <hr>
-                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/066-search-results.png"/>
-                </p>
-                <!--
-                <h3>
-                    <a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Technical Documentation
-                </h3>
-                <p>
-                    Currently, the following technical documentation regarding the SIP Expert GUI is available:
-                <ul>
-                    <li>
-                        <strong><a href="assets/SIP-Expert-GUI-Generic-Use-Cases-and-Requirements.pdf" title="SIP Expert GUI Generic Use Cases and Requirements" target="_blank">SIP Expert GUI Generic Use Cases and Requirements</a></strong><br>
-                        This document described the generalised uses cases and related requirements on components of the
-                        Spatial Information Platform (SIP) for the SWITCH-ON project that have been derived from D2.1
-                        “Spatial Information Platform and Application Programming Interface”, D2.6 “Standard Information
-                        Model: Definition and Description” and user requirements expressed by WP3 “New forms of Research”
-                        and WP4 “Products and services”.
-                    </li>
-                    <li>
-                        <strong><a href="assets/SIP-Expert-GUI-Software-Design-Document.pdf" title="SIP Expert GUI Software Design Document" target="_blank">SIP Expert GUI Software Design Document</a></strong><br>
-                        This document represents a software design document that has been created to drive the development of the SIP Expert GUI. 
-                        All features specified in the design document have been implemented in the current 
-                        <a href="https://github.com/switchonproject/cids-custom-switchon/tree/dev" title="SIP Expert Catalogue Management GUI Sourcecode Repository" target="_blank"> development branch</a> of the SIP Expert GUI.
-                    </li>                        
-                    <li>
-                        <strong><a href="https://github.com/switchonproject/cids-custom-switchon/wiki/Developer-Documentation" title="Developer Documentation" target="_blank">Developer Documentation</a></strong><br>
-                        The Developer Documentation wiki of the SIP Expert Catalogue and Data Management GUI (cids-custom-switchon) 
-                        contains useful information for developers of the SIP as well as for individuals involved in the 
-                        installation and maintenance of the SIP instances on cismet and deltares servers. 
-                    </li>                                         
-                </ul>
-                <p>
-                -->
-
-                <!--
                 <h3>
                     <a name="downloads" class="anchor" href="#downloads"><span class="octicon octicon-link"></span></a>Downloads
                 </h3>
                 <p>
-                    The executable software of the SIP Expert GUI is distributed online as Java Web Start Application (see <a href="#running" title="Running the SIP Expert GUI">Running the SIP Expert GUI</a>). 
-                    Therfore a download and a local installation of the software is not necessary. However, <a href="https://repo.cismet.de/simple/cismet-libs-snapshots-local/de/cismet/cids/custom/switchon/cids-custom-switchon/" title="cids-custom-switchon snapshoz builds" target="_blank">binaries</a> (development builds)
-                    and <a href="https://github.com/switchonproject/cids-custom-switchon/zipball/dev" title="zipped dev brach" target="_blank">source code</a> are available on the 
-                    <a href="https://repo.cismet.de/webapp/home.html" title="repo.cismet.de" target="_blank">Artifactory</a> and <a href="https://github.com/switchonproject/cids-custom-switchon/" title="switchonproject/cids-custom-switchon" target="_blank">GitHub</a> repositories.
+                    The sourcecode of the BYOD can be downloaded from 
+                    <a href="https://github.com/switchonproject/sip-html5/releases" target="_blank">https://github.com/switchonproject/sip-html5/releases</a>.
                 </p>
-
-                <h3>
-                    <a name="running" class="anchor" href="#running"><span class="octicon octicon-link"></span></a>Running the SIP Expert GUI
-                </h3>
+                
                 <p>
-                    The latest release of the SIP Expert GUI can be started via the following <strong><a href="http://tl-ap001.xtr.deltares.nl/current/client/switchon/cids-custom-switchon-1.0-SNAPSHOT-starter.jnlp">JNLP Link</a></strong>. 
-                    Please note, that the <a href="http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html" target="_blank" rel="nofollow">Java Runtime Environment 1.7</a> is required run the SIP.
-                    The minimal system requirements for running the SIP Expert GUI besides the presence of a Java Runtime Environment are a PC with at least 2 GB of RAM.
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/002-startpage-with-resultset.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/010-categories.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/020-search-result-map.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/021-search-result-information.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/025-search-result-map-selection.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/030-search-result-list.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/035-search-result-list-filtered.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/040-search-results-thumbnails.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/045-search-results-thumbnails-details.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/046-search-results-thumbnails-download.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/047-search-results-thumbnails-favourites.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/050-workspaces.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/051-workspaces-information.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/055-workspaces-management.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/060-search.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/061-search-geospatial.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/062-search-location.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/063-search-keywords.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/064-search-temporal.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/065-search-freetext.png"/>
+                <hr/>
+                <img src="https://raw.githubusercontent.com/switchonproject/sip-html5/dev/res/design/export/066-search-results.png"/>
                 </p>
-                -->
-
-                <!--
-                <h3>
-                    <a name="tutorials" class="anchor" href="#tutorials"><span class="octicon octicon-link"></span></a>Interactive User Guides and Tutorials
-                </h3>
-                <p>
-                    The following interactive user guides in form of instructional videos have 
-                    been provided for all aspects of the SIP Expert GUI to help 
-                    users understand and use its advanced publish, find and bind 
-                    functionalities.
-                </p>
-                <h4>
-                    How to start the SIP Expert GUI
-                </h4>
-                <p>
-                    This video provides instructions on how to run a JNLP file and start Java Webstart Rich Internet Application from the Internet.
-                </p>
-                <p>
-                    <iframe width="853" height="480" src="//www.youtube.com/embed/GM-t0XAv7jk?rel=0" frameborder="0" allowfullscreen></iframe>
-                </p>
-
-                <h4>
-                    SIP Expert GUI Basics
-                </h4>
-                <p>
-                    This video showcases the basic functionality and features of the SIP Expert GUI. 
-                    It instructs users how to browse the catalogue, how to show information on objects in the catalogue, how use the powerful geospatial visualisation capabilities of the map component and how to use wizards.
-                </p>
-                <p>
-                    <iframe width="853" height="480" src="//www.youtube.com/embed/sA0o-HvcYJ8?rel=0" frameborder="0" allowfullscreen></iframe>
-                </p>
-
-                <h4>
-                    Find, Bind and Publish Open Data
-                </h4>
-                <p>
-                    This video showcases the following <b>find</b>, <b>bind</b> and <b>publish</b> use cases:
-                </p>
-                <ul>
-                    <li>Find Open Data by Browsing Meta-Data <strong>(find)</strong></li>
-                    <li>Find Open Data by browsing a catalogue of Resources <strong>(find)</strong></li>
-                    <li>Assess usefulness of resources by viewing basic Meta-Data</li>
-                    <li>Find Data by queries (temporal, spatial, keywords, ...) on Resource Meta-Data</li>
-                    <li>Assess usefulness of resources by viewing Quality and basic Lineage Meta-Data</li>
-                    <li>Show a Preview of the Resources</li>
-                    <li>Access Resources Data by downloading a file <strong>(bind)</strong></li>
-                    <li>Access Resources Data by viewing Resource Data directly in the SIP GUI</li>
-                    <li>Edit Resource Meta-Data</li>
-                    <li>Register new Resource by providing Meta-Data with help of a Basic Meta-Data Wizard <strong>(publish)</strong></li>
-                </ul>
-                <p>
-                    <iframe width="960" height="720" src="//www.youtube.com/embed/4bLpJHxWkno?rel=0" frameborder="0" allowfullscreen></iframe>
-                </p>
-                -->
 
                 <h3>
                     <a name="problems" class="anchor" href="#problems"><span class="octicon octicon-link"></span></a>Reporting Problems
@@ -259,7 +170,7 @@
         </div>
         <footer>
             <p>Project maintained by <a href="https://github.com/switchonproject">switchonproject</a></p>
-            <!--<p>Software developed by <a href="http://www.cismet.de">cismet GmbH</a></p>-->
+            <p>Software developed by <a href="http://www.cismet.de">cismet GmbH</a></p>
             <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>   
         </footer>
         <!--[if !IE]><script>fixScale(document);</script><![endif]-->
