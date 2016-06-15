@@ -429,84 +429,166 @@ angular.module('').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/object-representation-template.html',
-    "<accordion close-others=\"false\">\n" +
-    "    <accordion-group ng-repeat=\"rep in reps | filter:{type:'original data'}\" \n" +
-    "                     is-open=\"rep._status.open\"\n" +
-    "                     ng-init=\"filename = rep.contentlocation.substr(rep.contentlocation.lastIndexOf('/')+1)\">\n" +
-    "        <accordion-heading>\n" +
-    "            {{rep.name}} <i class=\"pull-right glyphicon\" \n" +
-    "                            ng-class=\"{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}\"></i> \n" +
-    "        </accordion-heading>\n" +
-    "        <!-- Description -->\n" +
-    "        <!--\n" +
-    "        <div class=\"row\" ng-if=\"rep.description\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Description of the data, e.g. information on data formats, download possibilities, etc.\">\n" +
-    "                <label>Description:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{rep.description}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        -->\n" +
-    "        <!-- Temporal resolution -->\n" +
-    "        <div class=\"row\" ng-if=\"rep.temporalresolution\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Temporal resolution of the data, e.g. daily\">\n" +
-    "                <label>Temporal resolution:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{rep.temporalresolution || 'n/a'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <!-- Spatial resolution -->\n" +
-    "        <div class=\"row\" ng-if=\"rep.spatialresolution\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Spatial resolution of the data, e.g. meters or arc degrees.\">\n" +
-    "                <label>Spatial resolution:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{rep.spatialresolution || 'n/a'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <!-- Spatial scale -->\n" +
-    "        <div class=\"row\" ng-if=\"rep.spatialscale\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Spatial scale of the data, e.g. 1:2000 or  1:10000\">\n" +
-    "                <label>Spatial scale:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                {{rep.spatialscale || 'n/a'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <!-- Content Type -->\n" +
-    "        <div class=\"row\" ng-if=\"rep.contenttype\">\n" +
-    "            <div class=\"col-lg-3\" title=\"MIME Type of the dataset\">\n" +
-    "                <label>File type:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\" title=\"{{rep.contenttype.description || 'n/a'}}\">\n" +
-    "                {{rep.contenttype.name || 'n/a'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <!-- Data access function -->\n" +
-    "        <div class=\"row\" ng-if=\"rep.function\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Function that can be performed following the link to the dataset\">\n" +
-    "                <label>Type of Link:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\" title=\"{{rep.function.description || 'n/a'}}\">\n" +
-    "                {{rep.function.name || 'n/a'}}\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <!-- Data access Link -->\n" +
-    "        <div class=\"row\" ng-if=\"rep.contentlocation\">\n" +
-    "            <div class=\"col-lg-3\" title=\"Link to the data or website where the data can be obtained\">\n" +
-    "                <label>Link to Data:</label>\n" +
-    "            </div>\n" +
-    "            <div class=\"col-lg-9\">\n" +
-    "                <a href=\"{{rep.contentlocation}}\" \n" +
-    "                    target=\"_blank\" \n" +
-    "                    rel=\"nofollow\"\n" +
-    "                    type=\"{{(rep.contenttype) ? rep.contenttype.name : 'application/octet-stream'}}\"\n" +
-    "                    ng-disabled=\"!rep.contentlocation\">{{(filename && filename.indexOf('.') !== -1) ? filename : (rep.name ? rep.name : rep.contentlocation)}}</a>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </accordion-group>\n" +
+    "<accordion close-others=\"false\">\r" +
+    "\n" +
+    "    <accordion-group ng-repeat=\"representation in representations | filter:{type:'original data'}\" \r" +
+    "\n" +
+    "                     is-open=\"representation._status.open\"\r" +
+    "\n" +
+    "                     ng-init=\"filename = representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)\">\r" +
+    "\n" +
+    "        <accordion-heading>\r" +
+    "\n" +
+    "            <i class=\"glyphicon {{representation.protocol.name | representationIcon}}\"></i> \r" +
+    "\n" +
+    "            {{representation.name}} \r" +
+    "\n" +
+    "            <i class=\"pull-right glyphicon\" \r" +
+    "\n" +
+    "               ng-class=\"{'glyphicon-chevron-down': representation._status.open, 'glyphicon-chevron-right': !representation._status.open}\"></i> \r" +
+    "\n" +
+    "        </accordion-heading>\r" +
+    "\n" +
+    "        <!-- Description -->\r" +
+    "\n" +
+    "        <!--\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.description\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Description of the data, e.g. information on data formats, download possibilities, etc.\">\r" +
+    "\n" +
+    "                <label>Description:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{representation.description}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        -->\r" +
+    "\n" +
+    "        <!-- Temporal resolution -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.temporalresolution\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Temporal resolution of the data, e.g. daily\">\r" +
+    "\n" +
+    "                <label>Temporal resolution:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{representation.temporalresolution || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Spatial resolution -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.spatialresolution\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Spatial resolution of the data, e.g. meters or arc degrees.\">\r" +
+    "\n" +
+    "                <label>Spatial resolution:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{representation.spatialresolution || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Spatial scale -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.spatialscale\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Spatial scale of the data, e.g. 1:2000 or  1:10000\">\r" +
+    "\n" +
+    "                <label>Spatial scale:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                {{representation.spatialscale || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Content Type -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.contenttype\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"MIME Type of the dataset\">\r" +
+    "\n" +
+    "                <label>File type:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\" title=\"{{representation.contenttype.description || 'n/a'}}\">\r" +
+    "\n" +
+    "                {{representation.contenttype.name || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Data access function -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.function\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Function that can be performed following the link to the dataset\">\r" +
+    "\n" +
+    "                <label>Type of Link:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\" title=\"{{representation.function.description || 'n/a'}}\">\r" +
+    "\n" +
+    "                {{representation.function.name || 'n/a'}}\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <!-- Data access Link -->\r" +
+    "\n" +
+    "        <div class=\"row\" ng-if=\"representation.contentlocation\">\r" +
+    "\n" +
+    "            <div class=\"col-lg-3\" title=\"Link to the data or website where the data can be obtained\">\r" +
+    "\n" +
+    "                <label>Link to Data:</label>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                <a href=\"{{representation.contentlocation}}\" \r" +
+    "\n" +
+    "                    target=\"_blank\" \r" +
+    "\n" +
+    "                    rel=\"nofollow\"\r" +
+    "\n" +
+    "                    type=\"{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}\"\r" +
+    "\n" +
+    "                    ng-disabled=\"!representation.contentlocation\">{{(filename && filename.indexOf('.') !== -1) ? filename : (representation.name ? representation.name : representation.contentlocation)}}</a>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </accordion-group>\r" +
+    "\n" +
     "</accordion>"
   );
 

@@ -71,6 +71,7 @@ module.exports = function(config) {
         'target/dist/scripts/services/filterService.js',
         'target/dist/scripts/filters/_module.js',
         'target/dist/scripts/filters/textLengthFilter.js',
+        'target/dist/scripts/filters/representationIconFilter.js',
         'target/dist/scripts/factories/_module.js',
         'target/dist/scripts/factories/AppConfigFactory.js',
         'target/dist/scripts/factories/FilterExpressionFactory.js',

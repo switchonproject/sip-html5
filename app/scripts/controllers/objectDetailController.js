@@ -14,12 +14,12 @@ angular.module(
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
-            $scope.reps = $scope.object.representation || [];
+            $scope.representations = $scope.object.representation || [];
             $scope.keywordsXcuahsi = [];
             $scope.keywords = [];
 
-            for (i = 0; i < $scope.reps.length; ++i) {
-                $scope.reps[i]._status = { // jshint ignore:line
+            for (i = 0; i < $scope.representations.length; ++i) {
+                $scope.representations[i]._status = { // jshint ignore:line
                     open: (i === 0 ? true : false)
                 };
             }

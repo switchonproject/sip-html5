@@ -1157,12 +1157,12 @@ angular.module(
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
-            $scope.reps = $scope.object.representation || [];
+            $scope.representations = $scope.object.representation || [];
             $scope.keywordsXcuahsi = [];
             $scope.keywords = [];
 
-            for (i = 0; i < $scope.reps.length; ++i) {
-                $scope.reps[i]._status = { // jshint ignore:line
+            for (i = 0; i < $scope.representations.length; ++i) {
+                $scope.representations[i]._status = { // jshint ignore:line
                     open: (i === 0 ? true : false)
                 };
             }
@@ -2452,7 +2452,7 @@ angular.module(
                 //appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
 
                 appConfig.mapView = {};
-                appConfig.mapView.backgroundLayer = 'http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
                 appConfig.mapView.home = {};
                 appConfig.mapView.home.lat = 49.245166;
                 appConfig.mapView.home.lng = 6.936809;
@@ -3402,6 +3402,37 @@ angular.module(
     ]
 );
 
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+angular.module('eu.water-switch-on.sip.filters').
+        filter('representationIcon', function () {
+            'use strict';
+            return function (protocol) {
+                switch (protocol) {
+                    case 'OGC:WMS-1.1.1-http-get-capabilities':
+                    case 'OGC:WFS-1.0.0-http-get-capabilities':
+                        return 'glyphicon-list-alt';    
+                    case 'OGC:WFS-1.0.0-http-get-feature':
+                        return 'glyphicon-star-empty';
+                    case 'OGC:WMS-1.1.1-http-get-map':
+                    case 'WWW:TILESERVER':
+                        return 'glyphicon-th';   
+                    case 'OPeNDAP:OPeNDAP':
+                        return 'glyphicon-align-justify';     
+                    default:
+                        return 'glyphicon-download-alt';
+                }
+            };
+        }
+        );
 angular.module(
     'eu.water-switch-on.sip.filters'
 ).filter(

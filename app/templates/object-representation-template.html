@@ -1,78 +1,80 @@
 <accordion close-others="false">
-    <accordion-group ng-repeat="rep in reps | filter:{type:'original data'}" 
-                     is-open="rep._status.open"
-                     ng-init="filename = rep.contentlocation.substr(rep.contentlocation.lastIndexOf('/')+1)">
+    <accordion-group ng-repeat="representation in representations | filter:{type:'original data'}" 
+                     is-open="representation._status.open"
+                     ng-init="filename = representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)">
         <accordion-heading>
-            {{rep.name}} <i class="pull-right glyphicon" 
-                            ng-class="{'glyphicon-chevron-down': rep._status.open, 'glyphicon-chevron-right': !rep._status.open}"></i> 
+            <i class="glyphicon {{representation.protocol.name | representationIcon}}"></i> 
+            {{representation.name}} 
+            <i class="pull-right glyphicon" 
+               ng-class="{'glyphicon-chevron-down': representation._status.open, 'glyphicon-chevron-right': !representation._status.open}"></i> 
         </accordion-heading>
         <!-- Description -->
         <!--
-        <div class="row" ng-if="rep.description">
+        <div class="row" ng-if="representation.description">
             <div class="col-lg-3" title="Description of the data, e.g. information on data formats, download possibilities, etc.">
                 <label>Description:</label>
             </div>
             <div class="col-lg-9">
-                {{rep.description}}
+                {{representation.description}}
             </div>
         </div>
         -->
         <!-- Temporal resolution -->
-        <div class="row" ng-if="rep.temporalresolution">
+        <div class="row" ng-if="representation.temporalresolution">
             <div class="col-lg-3" title="Temporal resolution of the data, e.g. daily">
                 <label>Temporal resolution:</label>
             </div>
             <div class="col-lg-9">
-                {{rep.temporalresolution || 'n/a'}}
+                {{representation.temporalresolution || 'n/a'}}
             </div>
         </div>
         <!-- Spatial resolution -->
-        <div class="row" ng-if="rep.spatialresolution">
+        <div class="row" ng-if="representation.spatialresolution">
             <div class="col-lg-3" title="Spatial resolution of the data, e.g. meters or arc degrees.">
                 <label>Spatial resolution:</label>
             </div>
             <div class="col-lg-9">
-                {{rep.spatialresolution || 'n/a'}}
+                {{representation.spatialresolution || 'n/a'}}
             </div>
         </div>
         <!-- Spatial scale -->
-        <div class="row" ng-if="rep.spatialscale">
+        <div class="row" ng-if="representation.spatialscale">
             <div class="col-lg-3" title="Spatial scale of the data, e.g. 1:2000 or  1:10000">
                 <label>Spatial scale:</label>
             </div>
             <div class="col-lg-9">
-                {{rep.spatialscale || 'n/a'}}
+                {{representation.spatialscale || 'n/a'}}
             </div>
         </div>
         <!-- Content Type -->
-        <div class="row" ng-if="rep.contenttype">
+        <div class="row" ng-if="representation.contenttype">
             <div class="col-lg-3" title="MIME Type of the dataset">
                 <label>File type:</label>
             </div>
-            <div class="col-lg-9" title="{{rep.contenttype.description || 'n/a'}}">
-                {{rep.contenttype.name || 'n/a'}}
+            <div class="col-lg-9" title="{{representation.contenttype.description || 'n/a'}}">
+                {{representation.contenttype.name || 'n/a'}}
             </div>
         </div>
         <!-- Data access function -->
-        <div class="row" ng-if="rep.function">
+        <div class="row" ng-if="representation.function">
             <div class="col-lg-3" title="Function that can be performed following the link to the dataset">
                 <label>Type of Link:</label>
             </div>
-            <div class="col-lg-9" title="{{rep.function.description || 'n/a'}}">
-                {{rep.function.name || 'n/a'}}
+            <div class="col-lg-9" title="{{representation.function.description || 'n/a'}}">
+                {{representation.function.name || 'n/a'}}
             </div>
         </div>
         <!-- Data access Link -->
-        <div class="row" ng-if="rep.contentlocation">
+        <div class="row" ng-if="representation.contentlocation">
             <div class="col-lg-3" title="Link to the data or website where the data can be obtained">
                 <label>Link to Data:</label>
             </div>
             <div class="col-lg-9">
-                <a href="{{rep.contentlocation}}" 
+                <a href="{{representation.contentlocation}}" 
                     target="_blank" 
                     rel="nofollow"
-                    type="{{(rep.contenttype) ? rep.contenttype.name : 'application/octet-stream'}}"
-                    ng-disabled="!rep.contentlocation">{{(filename && filename.indexOf('.') !== -1) ? filename : (rep.name ? rep.name : rep.contentlocation)}}</a>
+                    type="{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}"
+                    ng-disabled="!representation.contentlocation">{{(filename && filename.indexOf('.') !== -1) ? filename : (representation.name ? representation.name : representation.contentlocation)}}</a>
             </div>
         </div>
     </accordion-group>
