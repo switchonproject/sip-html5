@@ -29,8 +29,8 @@ angular.module(
                 appConfig.searchService.defautLimit = 10;
                 appConfig.searchService.maxLimit = 50;
                 //appConfig.searchService.host = 'http://localhost:8890';
-                appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
-                //appConfig.searchService.host = 'http://tl-243.xtr.deltares.nl/switchon_server_rest';
+                //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+                appConfig.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
 
                 appConfig.mapView = {};
                 appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
@@ -83,7 +83,7 @@ angular.module(
                         appConfig.searchService.username + ':' +
                         appConfig.searchService.password + '@' +
                         appConfig.searchService.host.replace(/.*?:\/\//g, '');
-                appConfig.objectInfo.resourceXmlUrl = 'http://tl-243.xtr.deltares.nl/csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
+                appConfig.objectInfo.resourceXmlUrl = 'http://data.water-switch-on.eu/csw?request=GetRecordById&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw/2.0.2%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&ElementSetName=full&id=';
 
                 appConfig.filterExpressionPattern = /(^!?[A-Za-z_\-]+):"([\s\S]+)"$/;
 
