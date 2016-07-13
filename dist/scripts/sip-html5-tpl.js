@@ -276,11 +276,13 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "            </span>\n" +
     "        </td>\n" +
     "        \n" +
+    "        <!--\n" +
     "        <td data-title=\"'Temporal Extent'\" class=\"date\"\n" +
     "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null\">\n" +
     "            {{node.object.fromdate | date: \"yyyy-MM-ddTHH:mmZ\"}} - \n" +
     "            {{node.object.todate | date: \"yyyy-MM-ddTHH:mmZ\"}}\n" +
     "        </td>\n" +
+    "        -->\n" +
     "        \n" +
     "        <td data-title=\"'Keywords'\" class=\"tags\">\n" +
     "            <span ng-repeat=\"tag in tags = (node.object.tags | orderBy:'name' | limitTo:config.keywordsLimit)\">\n" +

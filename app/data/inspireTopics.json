@@ -1,8 +1,10 @@
-["climatologyMeteorologyAtmosphere",
+["biota",
+    "climatologyMeteorologyAtmosphere",
     "elevation",
+    "environment",
     "farming",
     "geoscientificInformation",
     "imageryBaseMapsEarthCover",
     "inlandWaters",
-    "society"
-]
+    "oceans",
+    "society"]
