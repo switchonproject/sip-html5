@@ -262,73 +262,140 @@ angular.module('').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/list-view-directive.html',
-    "<table ng-table=\"tableParams\" class=\"table table-striped table-bordered table-hover\">\n" +
-    "    <tr ng-repeat=\"node in $data\">\n" +
-    "        <td data-title=\"'Name'\" class=\"name\" \n" +
-    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null\">\n" +
-    "            {{node.object.name | txtLen:160:false:'...':true}}\n" +
-    "        </td>\n" +
-    "        \n" +
-    "        <td data-title=\"'Description'\">\n" +
-    "            <span>{{node.object.description | txtLen:160:false:'':true}}</span>\n" +
-    "            <span ng-hide=\"node.object.description.length < 160\">\n" +
-    "                <a href=\"#/resource/{{node.object.id}}\" title=\"Show the complete Description\"><strong>...</strong></a>\n" +
-    "            </span>\n" +
-    "        </td>\n" +
-    "        \n" +
-    "        <!--\n" +
-    "        <td data-title=\"'Temporal Extent'\" class=\"date\"\n" +
-    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null\">\n" +
-    "            {{node.object.fromdate | date: \"yyyy-MM-ddTHH:mmZ\"}} - \n" +
-    "            {{node.object.todate | date: \"yyyy-MM-ddTHH:mmZ\"}}\n" +
-    "        </td>\n" +
-    "        -->\n" +
-    "        \n" +
-    "        <td data-title=\"'Keywords'\" class=\"tags\">\n" +
-    "            <span ng-repeat=\"tag in tags = (node.object.tags | orderBy:'name' | limitTo:config.keywordsLimit)\">\n" +
-    "                <span ng-hide=\"config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)\" \n" +
-    "                      class=\"label\" ng-class=\"isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'\">{{tag.name}}</span>\n" +
-    "            </span>\n" +
-    "            <span ng-if=\"tags.length < node.object.tags.length\"><a href=\"#/resource/{{node.object.id}}\" title=\"Show all Keywords\"><strong>...</strong></a></span>\n" +
+    "<table ng-table=\"tableParams\" class=\"table table-striped table-bordered table-hover\">\r" +
     "\n" +
-    "        </td>\n" +
-    "        \n" +
-    "        <td data-title=\"'Tools'\" class=\"tools\">\n" +
-    "            <a class=\"btn-invisible btn-icon\"\n" +
-    "               href=\"#/resource/{{node.object.id}}\"\n" +
-    "               title=\"Show detailed resource information\"><i class=\"glyphicon glyphicon-info-sign\"></i></a>\n" +
-    "            <a class=\"btn-invisible btn-icon\"\n" +
-    "               title=\"Show resource on the on the map\"\n" +
-    "               ng-click=\"$parent.$parent.selectedObject = $index\"\n" +
-    "               href=\"#/map\"><i class=\"glyphicon glyphicon-globe\"></i></a>\n" +
-    "            <span ng-repeat=\"representation in node.object.representation | filter:{function:'download', type:'original data'}\"\n" +
-    "                  class=\"btn-invisible\">\n" +
-    "                    <a href=\"{{representation.contentlocation}}\" download \n" +
-    "                       rel=\"nofollow\"\n" +
-    "                       title=\"Download {{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}} ({{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}})\"\n" +
-    "                       type=\"{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}\"><i class=\"glyphicon glyphicon-download\"></i></a>\n" +
-    "            </span>\n" +
-    " <!--           <span bs-tooltip\n" +
-    "                  data-placement=\"left\"\n" +
-    "                  data-trigger=\"hover\"\n" +
-    "                  data-delay=\"{show: 400, hide: 100}\"\n" +
-    "                  data-title=\"Bookmark\"\n" +
-    "                  class=\"btn-invisible btn-icon disabled\"\n" +
-    "                  ng-click=\"\" >\n" +
-    "                <i class=\"glyphicon glyphicon-bookmark\"></i>\n" +
-    "            </span>\n" +
-    "            <span bs-tooltip\n" +
-    "                  data-placement=\"left\"\n" +
-    "                  data-trigger=\"hover\"\n" +
-    "                  data-delay=\"{show: 400, hide: 100}\"\n" +
-    "                  data-title=\"Share\"\n" +
-    "                  class=\"btn-invisible btn-icon disabled\" \n" +
-    "                  ng-click=\"\" >\n" +
-    "                <i class=\"glyphicon glyphicon-share\"></i>\n" +
-    "            </span>-->\n" +
-    "        </td>\n" +
-    "    </tr>\n" +
-    "</table>\n"
+    "    <tr ng-repeat=\"node in $data\">\r" +
+    "\n" +
+    "        <td data-title=\"'Name'\" class=\"name\" \r" +
+    "\n" +
+    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.name' : null\">\r" +
+    "\n" +
+    "            {{node.object.name | txtLen:160:false:'...':true}}\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Description'\">\r" +
+    "\n" +
+    "            <span>{{node.object.description | txtLen:160:false:'':true}}</span>\r" +
+    "\n" +
+    "            <span ng-hide=\"node.object.description.length < 160\">\r" +
+    "\n" +
+    "                <a href=\"#/resource/{{node.object.id}}\" title=\"Show the complete Description\"><strong>...</strong></a>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <!--\r" +
+    "\n" +
+    "        <td data-title=\"'Temporal Extent'\" class=\"date\"\r" +
+    "\n" +
+    "            sortable=\"(filterService.isCompleteResult()  && filterService.getLoadedResourcesNumber() > 1) ? 'object.fromdate' : null\">\r" +
+    "\n" +
+    "            {{node.object.fromdate | date: \"yyyy-MM-ddTHH:mmZ\"}} - \r" +
+    "\n" +
+    "            {{node.object.todate | date: \"yyyy-MM-ddTHH:mmZ\"}}\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        -->\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Keywords'\" class=\"tags\">\r" +
+    "\n" +
+    "            <span ng-repeat=\"tag in tags = (node.object.tags | orderBy:'name' | limitTo:config.keywordsLimit)\">\r" +
+    "\n" +
+    "                <span ng-hide=\"config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)\" \r" +
+    "\n" +
+    "                      class=\"label\" ng-class=\"isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'\">{{tag.name}}</span>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "            <span ng-if=\"tags.length < node.object.tags.length\"><a href=\"#/resource/{{node.object.id}}\" title=\"Show all Keywords\"><strong>...</strong></a></span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "        <td data-title=\"'Tools'\" class=\"tools\">\r" +
+    "\n" +
+    "            <a class=\"btn-invisible btn-icon\"\r" +
+    "\n" +
+    "               href=\"#/resource/{{node.object.id}}\"\r" +
+    "\n" +
+    "               title=\"Show detailed resource information\"><i class=\"glyphicon glyphicon-info-sign\"></i></a>\r" +
+    "\n" +
+    "            <a class=\"btn-invisible btn-icon\"\r" +
+    "\n" +
+    "               title=\"Show resource on the on the map\"\r" +
+    "\n" +
+    "               ng-click=\"$parent.$parent.selectedObject = $index\"\r" +
+    "\n" +
+    "               href=\"#/map\"><i class=\"glyphicon glyphicon-globe\"></i></a>\r" +
+    "\n" +
+    "            <span ng-repeat=\"representation in node.object.representation | filter:{function:'download', type:'original data'}\"\r" +
+    "\n" +
+    "                  class=\"btn-invisible\">\r" +
+    "\n" +
+    "                    <a href=\"{{representation.contentlocation}}\" download \r" +
+    "\n" +
+    "                       rel=\"nofollow\"\r" +
+    "\n" +
+    "                       title=\"Download {{representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)}} ({{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}})\"\r" +
+    "\n" +
+    "                       type=\"{{(representation.contenttype) ? representation.contenttype.name : 'application/octet-stream'}}\"><i class=\"glyphicon glyphicon-download\"></i></a>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    " <!--           <span bs-tooltip\r" +
+    "\n" +
+    "                  data-placement=\"left\"\r" +
+    "\n" +
+    "                  data-trigger=\"hover\"\r" +
+    "\n" +
+    "                  data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "                  data-title=\"Bookmark\"\r" +
+    "\n" +
+    "                  class=\"btn-invisible btn-icon disabled\"\r" +
+    "\n" +
+    "                  ng-click=\"\" >\r" +
+    "\n" +
+    "                <i class=\"glyphicon glyphicon-bookmark\"></i>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "            <span bs-tooltip\r" +
+    "\n" +
+    "                  data-placement=\"left\"\r" +
+    "\n" +
+    "                  data-trigger=\"hover\"\r" +
+    "\n" +
+    "                  data-delay=\"{show: 400, hide: 100}\"\r" +
+    "\n" +
+    "                  data-title=\"Share\"\r" +
+    "\n" +
+    "                  class=\"btn-invisible btn-icon disabled\" \r" +
+    "\n" +
+    "                  ng-click=\"\" >\r" +
+    "\n" +
+    "                <i class=\"glyphicon glyphicon-share\"></i>\r" +
+    "\n" +
+    "            </span>-->\r" +
+    "\n" +
+    "        </td>\r" +
+    "\n" +
+    "    </tr>\r" +
+    "\n" +
+    "</table>\r" +
+    "\n"
   );
 
 
