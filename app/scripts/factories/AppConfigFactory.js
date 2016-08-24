@@ -24,16 +24,62 @@ angular.module(
                 appConfig.listView.keywordsLimit = 5;
 
                 appConfig.searchService = {};
-                appConfig.searchService.username = 'admin@SWITCHON';
-                appConfig.searchService.password = 'cismet';
+                appConfig.searchService.username = 'switchon@SWITCHON';
+                appConfig.searchService.password = 'switchon';
                 appConfig.searchService.defautLimit = 10;
                 appConfig.searchService.maxLimit = 50;
-                appConfig.searchService.host = 'http://localhost:8890';
-                //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+                //appConfig.searchService.host = 'http://localhost:8890';
+                appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
                 //appConfig.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
 
                 appConfig.mapView = {};
-                appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                //appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                      
+                appConfig.selectedBackgroundLayer = null;
+                
+                 /* jshint ignore:start */
+                appConfig.mapView.layerControlOptions = {
+                    container_width     : '300px',
+                    container_maxHeight : '350px', 
+                    group_maxHeight     : '30px',
+                    exclusive           : true
+                };
+                /* jshint ignore:end */
+                
+                appConfig.mapView.defaultLayer =  L.esri.basemapLayer('Topographic');
+                appConfig.mapView.baseMaps = [
+                    {
+                        groupName: 'OSM Base Maps',
+                        expanded: true,
+                        layers: {
+                            'OpenTopoMap': new L.TileLayer(
+                                    'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                                        id: 'mainmap',
+                                        attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, SRTM | Rendering: © <a href="http://opentopomap.org" target="_blank">OpenTopoMap</a> (CC-BY-SA)'
+                            }), 
+                            'Thunderforest': new L.TileLayer(
+                                    'https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=7feb2dce64d744278b638428463c452f', {
+                                        id: 'mainmap',
+                                        attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, | Rendering: © <a href="http://thunderforest.com" target="_blank">Thunderforest</a>'
+                            }), 
+                            'OpenStreetMap': new L.TileLayer(
+                                    'http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                                        id: 'mainmap',
+                                        attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
+                            })
+                        }  
+                    },
+                    {
+                        groupName: 'ArcGIS Base Maps',
+                        expanded: true,
+                        layers: {
+                            'Topographic': appConfig.mapView.defaultLayer,
+                            'Streets': L.esri.basemapLayer('Streets'),
+                            'Imagery': L.esri.basemapLayer('Imagery')
+                        }
+                    }
+                ];
+                
                 appConfig.mapView.home = {};
                 appConfig.mapView.home.lat = 49.245166;
                 appConfig.mapView.home.lng = 6.936809;

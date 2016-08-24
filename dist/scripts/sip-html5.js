@@ -1,117 +1,122 @@
 // main app module registration
-angular.module(
-    'eu.water-switch-on.sip',
-    [
-        'eu.water-switch-on.sip.controllers',
-        'eu.water-switch-on.sip.directives',
-        'eu.water-switch-on.sip.services',
-        'eu.water-switch-on.sip.filters',
-        'eu.water-switch-on.sip.factories',
-        'de.cismet.cids.services',
-        'ui.router',
-        'ui.bootstrap.tpls',
-        'ngResource',
-        'ngSanitize'
-    ]
-).config(
-    [
-        '$stateProvider',
-        '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
-            'use strict';
+var app = angular.module(
+        'eu.water-switch-on.sip',
+        [
+            'eu.water-switch-on.sip.controllers',
+            'eu.water-switch-on.sip.directives',
+            'eu.water-switch-on.sip.services',
+            'eu.water-switch-on.sip.filters',
+            'eu.water-switch-on.sip.factories',
+            'de.cismet.cids.services',
+            'ui.router',
+            'ui.bootstrap.tpls',
+            'ngResource',
+            'ngSanitize'
+        ]
+        );
 
-            var resolveResource;
+app.config(
+        [
+            '$stateProvider',
+            '$urlRouterProvider',
+            '$logProvider',
+            function ($stateProvider, $urlRouterProvider, $logProvider) {
+                'use strict';
 
-            resolveResource =  function ($stateParams, $q, searchService, shareService) {
-                var deferred, obj, objs;
+                var resolveResource;
 
-                deferred = $q.defer();
+                resolveResource = function ($stateParams, $q, searchService, shareService) {
+                    var deferred, obj, objs;
 
-                objs = shareService.getResourceObjects();
-                obj = null;
-                if (objs && angular.isArray(objs)) {
-                    objs.some(function (resource) {
-                        if (resource.id === $stateParams.resId) {
-                            obj = resource;
-                        }
-                        return obj !== null;
-                    });
-                }
+                    deferred = $q.defer();
 
-                if (obj) {
-                    deferred.resolve(obj);
-                } else {
-                    searchService.entityResource.get({
-                        classname: 'resource',
-                        objId: $stateParams.resId
-                    }).$promise.then(
-                        function (obj) {
-                            deferred.resolve(obj);
-                        },
-                        function () {
-                            deferred.reject('No resource with id found: ' + $stateParams.resId);
-                        }
-                    );
-                }
+                    objs = shareService.getResourceObjects();
+                    obj = null;
+                    if (objs && angular.isArray(objs)) {
+                        objs.some(function (resource) {
+                            if (resource.id === $stateParams.resId) {
+                                obj = resource;
+                            }
+                            return obj !== null;
+                        });
+                    }
 
-                return deferred.promise;
-            };
+                    if (obj) {
+                        deferred.resolve(obj);
+                    } else {
+                        searchService.entityResource.get({
+                            classname: 'resource',
+                            objId: $stateParams.resId
+                        }).$promise.then(
+                                function (obj) {
+                                    deferred.resolve(obj);
+                                },
+                                function () {
+                                    deferred.reject('No resource with id found: ' + $stateParams.resId);
+                                }
+                        );
+                    }
+
+                    return deferred.promise;
+                };
 
 //            $urlRouterProvider.when();
-            $urlRouterProvider.otherwise('/map');
+                $urlRouterProvider.otherwise('/map');
 
-            $stateProvider.state('list', {
-                url: '/list',
-                templateUrl: 'views/listView.html'
-            });
-            $stateProvider.state('th', {
-                url: '/th',
-                templateUrl: 'views/thumbnailView.html'
-            });
-            $stateProvider.state('map', {
-                url: '/map',
-                templateUrl: 'views/mapView.html'
-            });
-            $stateProvider.state('mapObject', {
-                url: '/map/object/:resId',
-                templateUrl: 'views/mapView.html',
-                controller: 'eu.water-switch-on.sip.controllers.mapViewController',
-                resolve: {
-                    resource: [
-                        '$stateParams',
-                        '$q',
-                        'eu.water-switch-on.sip.services.SearchService',
-                        'eu.water-switch-on.sip.services.shareService',
-                        resolveResource
-                    ]
-                }
-            });
-            $stateProvider.state('profile', {
-                url: '/profile',
-                templateUrl: 'views/profileView.html'
-            });
-            $stateProvider.state('login', {
-                url: '/login',
-                templateUrl: 'views/loginView.html'
-            });
+                $stateProvider.state('list', {
+                    url: '/list',
+                    templateUrl: 'views/listView.html'
+                });
+                $stateProvider.state('th', {
+                    url: '/th',
+                    templateUrl: 'views/thumbnailView.html'
+                });
+                $stateProvider.state('map', {
+                    url: '/map',
+                    templateUrl: 'views/mapView.html'
+                });
+                $stateProvider.state('mapObject', {
+                    url: '/map/object/:resId',
+                    templateUrl: 'views/mapView.html',
+                    controller: 'eu.water-switch-on.sip.controllers.mapViewController',
+                    resolve: {
+                        resource: [
+                            '$stateParams',
+                            '$q',
+                            'eu.water-switch-on.sip.services.SearchService',
+                            'eu.water-switch-on.sip.services.shareService',
+                            resolveResource
+                        ]
+                    }
+                });
+                $stateProvider.state('profile', {
+                    url: '/profile',
+                    templateUrl: 'views/profileView.html'
+                });
+                $stateProvider.state('login', {
+                    url: '/login',
+                    templateUrl: 'views/loginView.html'
+                });
 
-            $stateProvider.state('resourceDetail', {
-                url: '/resource/:resId',
-                templateUrl: 'views/object-detail-view.html',
-                controller: 'eu.water-switch-on.sip.controllers.objectDetailController',
-                resolve: {
-                    resource: [
-                        '$stateParams',
-                        '$q',
-                        'eu.water-switch-on.sip.services.SearchService',
-                        'eu.water-switch-on.sip.services.shareService',
-                        resolveResource
-                    ]
-                }
-            });
-        }
-    ]
-);
+                $stateProvider.state('resourceDetail', {
+                    url: '/resource/:resId',
+                    templateUrl: 'views/object-detail-view.html',
+                    controller: 'eu.water-switch-on.sip.controllers.objectDetailController',
+                    resolve: {
+                        resource: [
+                            '$stateParams',
+                            '$q',
+                            'eu.water-switch-on.sip.services.SearchService',
+                            'eu.water-switch-on.sip.services.shareService',
+                            resolveResource
+                        ]
+                    }
+                });
+                
+                $logProvider.debugEnabled(false);
+            }
+        ]
+        );
 
 angular.module(
     'eu.water-switch-on.sip.controllers',
@@ -359,6 +364,20 @@ angular.module(
         }
     ]
 );
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+/* global L */
+/* global Wkt */
+/*jshint sub:true*/
+
 angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
@@ -374,13 +393,14 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, setSearchGeomWkt, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
+                setSearchGeom, setSearchGeomWkt, wicket, config, highlightObjectLayer, setObject, southWest, northEast,
+                layerControl;
 
             config = AppConfig.mapView;
 
             angular.extend($scope, {
                 defaults: {
-                    tileLayer: config.backgroundLayer,
+                    //tileLayer: config.backgroundLayer,
                     //tileLayerOptions: {noWrap: true},
                     //maxZoom: 14,
                     minZoom: config.minZoom,
@@ -466,9 +486,28 @@ angular.module(
                 }
             });
 
+            layerControl = L.Control.styledLayerControl(
+                    config.baseMaps, config.overlays, config.drawControlOptions);
+
             leafletData.getMap('mainmap').then(function (map) {
+                
                 map.addLayer(searchGroup);
                 map.addControl(drawCtrl);
+                map.addControl(layerControl);
+                //config.defaultLayer._map = null;
+                if(config.selectedBackgroundLayer) {
+                    //map.addLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                    
+                    // select / unselect / select
+                    // not sure why this is needed ?!
+                    layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                    layerControl.unSelectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                    layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                } else {
+                    
+                    map.addLayer(config.defaultLayer);
+                    layerControl.selectLayer(config.defaultLayer);
+                }
 
                 map.on('draw:created', function (event) {
                     setSearchGeom(event.layer);
@@ -480,6 +519,11 @@ angular.module(
                             setSearchGeom(null);
                         }
                     });
+                });
+                
+                // save the selected basemap layer to app.config
+                map.on('baselayerchange', function (event) {
+                    config.selectedBackgroundLayer = L.Util.stamp(event.layer);
                 });
             });
 
@@ -2443,16 +2487,62 @@ angular.module(
                 appConfig.listView.keywordsLimit = 5;
 
                 appConfig.searchService = {};
-                appConfig.searchService.username = 'admin@SWITCHON';
-                appConfig.searchService.password = 'cismet';
+                appConfig.searchService.username = 'switchon@SWITCHON';
+                appConfig.searchService.password = 'switchon';
                 appConfig.searchService.defautLimit = 10;
                 appConfig.searchService.maxLimit = 50;
-                appConfig.searchService.host = 'http://localhost:8890';
-                //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+                //appConfig.searchService.host = 'http://localhost:8890';
+                appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
                 //appConfig.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
 
                 appConfig.mapView = {};
-                appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                //appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                      
+                appConfig.selectedBackgroundLayer = null;
+                
+                 /* jshint ignore:start */
+                appConfig.mapView.layerControlOptions = {
+                    container_width     : '300px',
+                    container_maxHeight : '350px', 
+                    group_maxHeight     : '30px',
+                    exclusive           : true
+                };
+                /* jshint ignore:end */
+                
+                appConfig.mapView.defaultLayer =  L.esri.basemapLayer('Topographic');
+                appConfig.mapView.baseMaps = [
+                    {
+                        groupName: 'OSM Base Maps',
+                        expanded: true,
+                        layers: {
+                            'OpenTopoMap': new L.TileLayer(
+                                    'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                                        id: 'mainmap',
+                                        attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, SRTM | Rendering: © <a href="http://opentopomap.org" target="_blank">OpenTopoMap</a> (CC-BY-SA)'
+                            }), 
+                            'Thunderforest': new L.TileLayer(
+                                    'https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=7feb2dce64d744278b638428463c452f', {
+                                        id: 'mainmap',
+                                        attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, | Rendering: © <a href="http://thunderforest.com" target="_blank">Thunderforest</a>'
+                            }), 
+                            'OpenStreetMap': new L.TileLayer(
+                                    'http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                                        id: 'mainmap',
+                                        attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
+                            })
+                        }  
+                    },
+                    {
+                        groupName: 'ArcGIS Base Maps',
+                        expanded: true,
+                        layers: {
+                            'Topographic': appConfig.mapView.defaultLayer,
+                            'Streets': L.esri.basemapLayer('Streets'),
+                            'Imagery': L.esri.basemapLayer('Imagery')
+                        }
+                    }
+                ];
+                
                 appConfig.mapView.home = {};
                 appConfig.mapView.home.lat = 49.245166;
                 appConfig.mapView.home.lng = 6.936809;

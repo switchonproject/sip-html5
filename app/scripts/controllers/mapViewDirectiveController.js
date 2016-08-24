@@ -1,3 +1,17 @@
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+/* global L */
+/* global Wkt */
+/*jshint sub:true*/
+
 angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
@@ -13,13 +27,14 @@ angular.module(
             'use strict';
 
             var drawCtrl, fireResize, internalChange, MapSearchIcon, objGroup, searchGroup, setObjects,
-                setSearchGeom, setSearchGeomWkt, wicket, config, highlightObjectLayer, setObject, southWest, northEast;
+                setSearchGeom, setSearchGeomWkt, wicket, config, highlightObjectLayer, setObject, southWest, northEast,
+                layerControl;
 
             config = AppConfig.mapView;
 
             angular.extend($scope, {
                 defaults: {
-                    tileLayer: config.backgroundLayer,
+                    //tileLayer: config.backgroundLayer,
                     //tileLayerOptions: {noWrap: true},
                     //maxZoom: 14,
                     minZoom: config.minZoom,
@@ -105,9 +120,28 @@ angular.module(
                 }
             });
 
+            layerControl = L.Control.styledLayerControl(
+                    config.baseMaps, config.overlays, config.drawControlOptions);
+
             leafletData.getMap('mainmap').then(function (map) {
+                
                 map.addLayer(searchGroup);
                 map.addControl(drawCtrl);
+                map.addControl(layerControl);
+                //config.defaultLayer._map = null;
+                if(config.selectedBackgroundLayer) {
+                    //map.addLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                    
+                    // select / unselect / select
+                    // not sure why this is needed ?!
+                    layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                    layerControl.unSelectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                    layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
+                } else {
+                    
+                    map.addLayer(config.defaultLayer);
+                    layerControl.selectLayer(config.defaultLayer);
+                }
 
                 map.on('draw:created', function (event) {
                     setSearchGeom(event.layer);
@@ -119,6 +153,11 @@ angular.module(
                             setSearchGeom(null);
                         }
                     });
+                });
+                
+                // save the selected basemap layer to app.config
+                map.on('baselayerchange', function (event) {
+                    config.selectedBackgroundLayer = L.Util.stamp(event.layer);
                 });
             });
 

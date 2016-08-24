@@ -27,6 +27,7 @@ module.exports = function(config) {
         'target/dist/bower_components/ng-table/dist/ng-table.js',
         'target/dist/bower_components/leaflet-draw/dist/leaflet.draw.js',
         'target/dist/bower_components/leaflet-styled-layercontrol/src/styledLayerControl.js',
+        'target/dist/bower_components/esri-leaflet/dist/esri-leaflet.js',
         'target/dist/bower_components/Wicket/wicket.js',
         'target/dist/bower_components/Wicket/wicket-leaflet.js',
         'target/dist/scripts/app.js',
