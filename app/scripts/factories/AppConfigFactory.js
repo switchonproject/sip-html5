@@ -57,7 +57,7 @@ angular.module(
                           collapsed: true
                         }
                       },
-                    tileLayer: null
+                    tileLayer: ''
                 };
                 
                 /**
@@ -153,7 +153,7 @@ angular.module(
                                         attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, | Rendering: © <a href="http://thunderforest.com" target="_blank">Thunderforest</a>'
                             }), 
                             'OpenStreetMap': new L.TileLayer(
-                                    'http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                         id: 'mainmap',
                                         attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
                             })

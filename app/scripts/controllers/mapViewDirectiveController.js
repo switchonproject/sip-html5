@@ -55,7 +55,8 @@ angular.module(
                 center: config.center,
                 controls :{
                    scale: true
-                }
+                },
+                tileLayer: ''
             });
                   
 
