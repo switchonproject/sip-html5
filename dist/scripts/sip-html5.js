@@ -398,19 +398,32 @@ angular.module(
 
             config = AppConfig.mapView;
 
+            // leaft-directive control
             angular.extend($scope, {
-                defaults: {
-                    //tileLayer: config.backgroundLayer,
-                    //tileLayerOptions: {noWrap: true},
-                    //maxZoom: 14,
-                    minZoom: config.minZoom,
-                    path: {
-                        weight: 10,
-                        color: '#800000',
-                        opacity: 1
-                    }
+                layers: {
+                    // don't configure baselayers in angular-leaflet-directive:
+                    // does not synchronise with styledLayerControl! :(
+//                  baselayers: config.baselayers,
+                    // don't configure baselayers in angular-leaflet-directive:
+                    // does not synchronise with styledLayerControl! :(
+//                    overlays: {
+//                            searchGroup: {
+//                            name: 'searchGroup',
+//                            type: 'featureGroup',
+//                            visible: true,
+//                            layerParams: {
+//                                showOnSelector: false
+//                            }
+//                        }
+//                    }
+                },
+                defaults: config.defaults,
+                center: config.center,
+                controls :{
+                   scale: true
                 }
             });
+                  
 
             // <editor-fold defaultstate="collapsed" desc=" window resize " >
             fireResize = function (animate) {
@@ -485,9 +498,9 @@ angular.module(
                     featureGroup: searchGroup
                 }
             });
-
+            
             layerControl = L.Control.styledLayerControl(
-                    config.baseMaps, config.overlays, config.drawControlOptions);
+                   config.baseMaps, config.overlays, config.drawControlOptions);
 
             leafletData.getMap('mainmap').then(function (map) {
                 
@@ -497,22 +510,22 @@ angular.module(
                 //config.defaultLayer._map = null;
                 if(config.selectedBackgroundLayer) {
                     //map.addLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
-                    
+                
                     // select / unselect / select
                     // not sure why this is needed ?!
                     layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
                     layerControl.unSelectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
                     layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
                 } else {
-                    
-                    map.addLayer(config.defaultLayer);
+                    //map.addLayer(config.defaultLayer);
                     layerControl.selectLayer(config.defaultLayer);
+                    config.selectedBackgroundLayer = L.Util.stamp(config.defaultLayer);
                 }
 
                 map.on('draw:created', function (event) {
-                    setSearchGeom(event.layer);
+                        setSearchGeom(event.layer);
                 });
-
+                    
                 map.on('draw:deleted', function (event) {
                     event.layers.eachLayer(function (layer) {
                         if (layer === $scope.searchGeomLayer) {
@@ -521,6 +534,11 @@ angular.module(
                     });
                 });
                 
+                
+                //leafletData.getLayers().then(function(baselayers) {
+                //    searchGroup = baselayers.overlays.searchGroup;
+                //});
+
                 // save the selected basemap layer to app.config
                 map.on('baselayerchange', function (event) {
                     config.selectedBackgroundLayer = L.Util.stamp(event.layer);
@@ -549,7 +567,7 @@ angular.module(
 
             // set the search geometry from WKT String
             setSearchGeomWkt = function (wktString) {
-                if (wktString) {
+                if (searchGroup && wktString) {
                     try {
                         wicket.read(wktString);
                         internalChange = true;
@@ -562,7 +580,7 @@ angular.module(
                         $scope.searchGeomWkt = null;
                         console.error('ignoring invalid WKT');
                     }
-                } else if (wktString === null) {
+                } else if (searchGroup && wktString === null) {
                     searchGroup.removeLayer($scope.searchGeomLayer);
                     $scope.searchGeomLayer = undefined;
                 }
@@ -773,7 +791,7 @@ angular.module(
 
             $scope.$watch('selectedObject', function (n) {
                 if (n !== -1 && objGroup.getLayers().length > n) {
-                    // FIXME: works only if index of layer correpsonds to index ob object
+                    // FIXME: works only if index of layer correpsonds to index of object
                     // warning: breaks if no layer can be generated for an object!
                     // other possiblity: attach layer directly to object? 
                     highlightObjectLayer(n);
@@ -1110,9 +1128,14 @@ angular.module(
                     if ($scope.progressModal) {
                         // wait 1/2 sec before closing to allow the progressbar
                         // to advance to 100% (see #59)
-                        setTimeout(function () {
-                            $scope.progressModal.close();
-                        }, 500);
+                        // 
+                        // doesn't work anymore?!
+                        // 
+//                        setTimeout(function () {
+//                            $scope.progressModal.close();
+//                        }, 100);
+                        
+                        $scope.progressModal.close();
                     }
                     // search error ...
                 } else if (type === 'error') {
@@ -2497,6 +2520,92 @@ angular.module(
 
                 appConfig.mapView = {};
                 //appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                
+                appConfig.mapView.home = {};
+                appConfig.mapView.home.lat = 49.245166;
+                appConfig.mapView.home.lng = 6.936809;
+                appConfig.mapView.home.zoom = 4;
+                appConfig.mapView.maxBounds = {};
+                appConfig.mapView.maxBounds.southWest = [90, -180]; // top left corner of map
+                appConfig.mapView.maxBounds.northEast = [-90, 180];  // bottom right corner  
+                
+                appConfig.mapView.defaults = {
+                    minZoom: 2,
+                    path: {
+                        weight: 10,
+                        color: '#800000',
+                        opacity: 1
+                    },
+                    controls: {
+                        layers: {
+                          visible: false,
+                          position: 'bottomright',
+                          collapsed: true
+                        }
+                      },
+                    tileLayer: null
+                };
+                
+                /**
+                 * angular-leaflet-directive baselayers not used: 
+                 * does not synchronise with styledLayerControl!
+                 */
+                appConfig.mapView.baselayers = {
+                    agtopo: {
+                            name: 'ArcGis World Topographic',
+                            type: 'agsBase',
+                            layer: 'Topographic',
+                            visible: false
+                    },
+                    agimagery: {
+                        name: 'ArcGis Imagery',
+                        type: 'agsBase',
+                        layer: 'Imagery',
+                        visible: false
+                    },
+                    opentopo: {
+                        name: 'OpenTopoMap',
+                        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+                        type: 'xyz',
+                        visible: false,
+                        layerOptions: {
+                            subdomains: ['a', 'b', 'c'],
+                            attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, SRTM | Rendering: © <a href="http://opentopomap.org" target="_blank">OpenTopoMap</a> (CC-BY-SA)'
+                        }
+                    },
+                    osm: {
+                        name: 'OpenStreetMap',
+                        url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        type: 'xyz',
+                        visible: false,
+                        layerOptions: {
+                            //noWrap: true,
+                            //maxZoom: 14,
+                            subdomains: ['a', 'b', 'c'],
+                            //continuousWorld: true,
+                            attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
+                        }
+                    },
+                    thunderforest: {
+                        name: 'Thunderforest Landscape',
+                        url: 'https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=7feb2dce64d744278b638428463c452f',
+                        type: 'xyz',
+                        visible: false,
+                        layerOptions: {
+                            subdomains: ['a', 'b', 'c'],
+                            attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, | Rendering: © <a href="http://thunderforest.com" target="_blank">Thunderforest</a>'
+                        }
+                    },
+                    streets: {
+                            name: 'ArcGis Streets',
+                            type: 'agsBase',
+                            layer: 'Streets',
+                            visible: false,
+                            layerOptions: {
+                                 attribution: 'Esri'
+                            }
+                    }
+                };
                       
                 appConfig.selectedBackgroundLayer = null;
                 
@@ -2510,6 +2619,10 @@ angular.module(
                 /* jshint ignore:end */
                 
                 appConfig.mapView.defaultLayer =  L.esri.basemapLayer('Topographic');
+                
+                /**
+                 * styledLayerControl baseMaps!
+                 */
                 appConfig.mapView.baseMaps = [
                     {
                         groupName: 'OSM Base Maps',
@@ -2542,16 +2655,8 @@ angular.module(
                         }
                     }
                 ];
+                appConfig.mapView.overlays = [];
                 
-                appConfig.mapView.home = {};
-                appConfig.mapView.home.lat = 49.245166;
-                appConfig.mapView.home.lng = 6.936809;
-                appConfig.mapView.home.zoom = 4;
-                appConfig.mapView.maxBounds = {};
-                appConfig.mapView.maxBounds.southWest = [90, -180]; // top left corner of map
-                appConfig.mapView.maxBounds.northEast = [-90, 180];  // bottom right corner  
-                appConfig.mapView.minZoom = 2;
-
                 appConfig.gui = {};
                 // Development Mode (e.g. enable untested features)
                 appConfig.gui.dev = false;
@@ -3693,7 +3798,8 @@ angular.module(
                                     renderer = L.tileLayer(representation.contentlocation,
                                         {
                                             // FIXME: make configurable per layer
-                                            tms: 'true'
+                                            tms: 'true',
+                                            zIndex:999
                                         });
 
                                     // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
@@ -3720,7 +3826,8 @@ angular.module(
                                             layers: layername,
                                             format: 'image/png',
                                             transparent: true,
-                                            version: '1.1.1'
+                                            version: '1.1.1',
+                                            zIndex:999
                                         }
                                     );
 

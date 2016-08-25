@@ -32,19 +32,32 @@ angular.module(
 
             config = AppConfig.mapView;
 
+            // leaft-directive control
             angular.extend($scope, {
-                defaults: {
-                    //tileLayer: config.backgroundLayer,
-                    //tileLayerOptions: {noWrap: true},
-                    //maxZoom: 14,
-                    minZoom: config.minZoom,
-                    path: {
-                        weight: 10,
-                        color: '#800000',
-                        opacity: 1
-                    }
+                layers: {
+                    // don't configure baselayers in angular-leaflet-directive:
+                    // does not synchronise with styledLayerControl! :(
+//                  baselayers: config.baselayers,
+                    // don't configure baselayers in angular-leaflet-directive:
+                    // does not synchronise with styledLayerControl! :(
+//                    overlays: {
+//                            searchGroup: {
+//                            name: 'searchGroup',
+//                            type: 'featureGroup',
+//                            visible: true,
+//                            layerParams: {
+//                                showOnSelector: false
+//                            }
+//                        }
+//                    }
+                },
+                defaults: config.defaults,
+                center: config.center,
+                controls :{
+                   scale: true
                 }
             });
+                  
 
             // <editor-fold defaultstate="collapsed" desc=" window resize " >
             fireResize = function (animate) {
@@ -119,9 +132,9 @@ angular.module(
                     featureGroup: searchGroup
                 }
             });
-
+            
             layerControl = L.Control.styledLayerControl(
-                    config.baseMaps, config.overlays, config.drawControlOptions);
+                   config.baseMaps, config.overlays, config.drawControlOptions);
 
             leafletData.getMap('mainmap').then(function (map) {
                 
@@ -131,22 +144,22 @@ angular.module(
                 //config.defaultLayer._map = null;
                 if(config.selectedBackgroundLayer) {
                     //map.addLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
-                    
+                
                     // select / unselect / select
                     // not sure why this is needed ?!
                     layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
                     layerControl.unSelectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
                     layerControl.selectLayer(layerControl._layers[config.selectedBackgroundLayer].layer);
                 } else {
-                    
-                    map.addLayer(config.defaultLayer);
+                    //map.addLayer(config.defaultLayer);
                     layerControl.selectLayer(config.defaultLayer);
+                    config.selectedBackgroundLayer = L.Util.stamp(config.defaultLayer);
                 }
 
                 map.on('draw:created', function (event) {
-                    setSearchGeom(event.layer);
+                        setSearchGeom(event.layer);
                 });
-
+                    
                 map.on('draw:deleted', function (event) {
                     event.layers.eachLayer(function (layer) {
                         if (layer === $scope.searchGeomLayer) {
@@ -155,6 +168,11 @@ angular.module(
                     });
                 });
                 
+                
+                //leafletData.getLayers().then(function(baselayers) {
+                //    searchGroup = baselayers.overlays.searchGroup;
+                //});
+
                 // save the selected basemap layer to app.config
                 map.on('baselayerchange', function (event) {
                     config.selectedBackgroundLayer = L.Util.stamp(event.layer);
@@ -183,7 +201,7 @@ angular.module(
 
             // set the search geometry from WKT String
             setSearchGeomWkt = function (wktString) {
-                if (wktString) {
+                if (searchGroup && wktString) {
                     try {
                         wicket.read(wktString);
                         internalChange = true;
@@ -196,7 +214,7 @@ angular.module(
                         $scope.searchGeomWkt = null;
                         console.error('ignoring invalid WKT');
                     }
-                } else if (wktString === null) {
+                } else if (searchGroup && wktString === null) {
                     searchGroup.removeLayer($scope.searchGeomLayer);
                     $scope.searchGeomLayer = undefined;
                 }
@@ -407,7 +425,7 @@ angular.module(
 
             $scope.$watch('selectedObject', function (n) {
                 if (n !== -1 && objGroup.getLayers().length > n) {
-                    // FIXME: works only if index of layer correpsonds to index ob object
+                    // FIXME: works only if index of layer correpsonds to index of object
                     // warning: breaks if no layer can be generated for an object!
                     // other possiblity: attach layer directly to object? 
                     highlightObjectLayer(n);

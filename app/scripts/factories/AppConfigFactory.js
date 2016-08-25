@@ -34,6 +34,92 @@ angular.module(
 
                 appConfig.mapView = {};
                 //appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+                
+                appConfig.mapView.home = {};
+                appConfig.mapView.home.lat = 49.245166;
+                appConfig.mapView.home.lng = 6.936809;
+                appConfig.mapView.home.zoom = 4;
+                appConfig.mapView.maxBounds = {};
+                appConfig.mapView.maxBounds.southWest = [90, -180]; // top left corner of map
+                appConfig.mapView.maxBounds.northEast = [-90, 180];  // bottom right corner  
+                
+                appConfig.mapView.defaults = {
+                    minZoom: 2,
+                    path: {
+                        weight: 10,
+                        color: '#800000',
+                        opacity: 1
+                    },
+                    controls: {
+                        layers: {
+                          visible: false,
+                          position: 'bottomright',
+                          collapsed: true
+                        }
+                      },
+                    tileLayer: null
+                };
+                
+                /**
+                 * angular-leaflet-directive baselayers not used: 
+                 * does not synchronise with styledLayerControl!
+                 */
+                appConfig.mapView.baselayers = {
+                    agtopo: {
+                            name: 'ArcGis World Topographic',
+                            type: 'agsBase',
+                            layer: 'Topographic',
+                            visible: false
+                    },
+                    agimagery: {
+                        name: 'ArcGis Imagery',
+                        type: 'agsBase',
+                        layer: 'Imagery',
+                        visible: false
+                    },
+                    opentopo: {
+                        name: 'OpenTopoMap',
+                        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+                        type: 'xyz',
+                        visible: false,
+                        layerOptions: {
+                            subdomains: ['a', 'b', 'c'],
+                            attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, SRTM | Rendering: © <a href="http://opentopomap.org" target="_blank">OpenTopoMap</a> (CC-BY-SA)'
+                        }
+                    },
+                    osm: {
+                        name: 'OpenStreetMap',
+                        url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        type: 'xyz',
+                        visible: false,
+                        layerOptions: {
+                            //noWrap: true,
+                            //maxZoom: 14,
+                            subdomains: ['a', 'b', 'c'],
+                            //continuousWorld: true,
+                            attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
+                        }
+                    },
+                    thunderforest: {
+                        name: 'Thunderforest Landscape',
+                        url: 'https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=7feb2dce64d744278b638428463c452f',
+                        type: 'xyz',
+                        visible: false,
+                        layerOptions: {
+                            subdomains: ['a', 'b', 'c'],
+                            attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, | Rendering: © <a href="http://thunderforest.com" target="_blank">Thunderforest</a>'
+                        }
+                    },
+                    streets: {
+                            name: 'ArcGis Streets',
+                            type: 'agsBase',
+                            layer: 'Streets',
+                            visible: false,
+                            layerOptions: {
+                                 attribution: 'Esri'
+                            }
+                    }
+                };
                       
                 appConfig.selectedBackgroundLayer = null;
                 
@@ -47,6 +133,10 @@ angular.module(
                 /* jshint ignore:end */
                 
                 appConfig.mapView.defaultLayer =  L.esri.basemapLayer('Topographic');
+                
+                /**
+                 * styledLayerControl baseMaps!
+                 */
                 appConfig.mapView.baseMaps = [
                     {
                         groupName: 'OSM Base Maps',
@@ -79,16 +169,8 @@ angular.module(
                         }
                     }
                 ];
+                appConfig.mapView.overlays = [];
                 
-                appConfig.mapView.home = {};
-                appConfig.mapView.home.lat = 49.245166;
-                appConfig.mapView.home.lng = 6.936809;
-                appConfig.mapView.home.zoom = 4;
-                appConfig.mapView.maxBounds = {};
-                appConfig.mapView.maxBounds.southWest = [90, -180]; // top left corner of map
-                appConfig.mapView.maxBounds.northEast = [-90, 180];  // bottom right corner  
-                appConfig.mapView.minZoom = 2;
-
                 appConfig.gui = {};
                 // Development Mode (e.g. enable untested features)
                 appConfig.gui.dev = false;
