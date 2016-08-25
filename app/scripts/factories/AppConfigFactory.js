@@ -29,8 +29,8 @@ angular.module(
                 appConfig.searchService.defautLimit = 10;
                 appConfig.searchService.maxLimit = 50;
                 //appConfig.searchService.host = 'http://localhost:8890';
-                appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
-                //appConfig.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
+                //appConfig.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+                appConfig.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
 
                 appConfig.mapView = {};
                 //appConfig.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';

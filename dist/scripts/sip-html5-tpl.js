@@ -400,19 +400,32 @@ angular.module('').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/map-view-directive.html',
-    "<div>\n" +
-    "    <leaflet \n" +
-    "        id=\"mainmap\" \n" +
-    "        defaults=\"defaults\" \n" +
-    "        layers=\"layers\" \n" +
-    "        lf-center=\"center\" \n" +
-    "        controls=\"controls\"\n" +
-    "        width=\"{{currentWidth}}\" \n" +
-    "        height=\"{{currentHeight}}\">\n" +
-    "    </leaflet>\n" +
-    "    \n" +
-    "    \n" +
-    "</div>\n"
+    "<div>\r" +
+    "\n" +
+    "    <leaflet \r" +
+    "\n" +
+    "        id=\"mainmap\" \r" +
+    "\n" +
+    "        defaults=\"defaults\" \r" +
+    "\n" +
+    "        layers=\"layers\" \r" +
+    "\n" +
+    "        lf-center=\"center\" \r" +
+    "\n" +
+    "        controls=\"controls\"\r" +
+    "\n" +
+    "        width=\"{{currentWidth}}\" \r" +
+    "\n" +
+    "        height=\"{{currentHeight}}\">\r" +
+    "\n" +
+    "    </leaflet>\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
