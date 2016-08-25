@@ -47,7 +47,8 @@ angular.module(
                                     renderer = L.tileLayer(representation.contentlocation,
                                         {
                                             // FIXME: make configurable per layer
-                                            tms: 'true'
+                                            tms: 'true',
+                                            zIndex:999
                                         });
 
                                     // unfortunately leaflet does not parse the capabilities, etc, thus no bounds present :(
@@ -74,7 +75,8 @@ angular.module(
                                             layers: layername,
                                             format: 'image/png',
                                             transparent: true,
-                                            version: '1.1.1'
+                                            version: '1.1.1',
+                                            zIndex:999
                                         }
                                     );
 

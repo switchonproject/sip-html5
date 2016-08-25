@@ -326,9 +326,14 @@ angular.module(
                     if ($scope.progressModal) {
                         // wait 1/2 sec before closing to allow the progressbar
                         // to advance to 100% (see #59)
-                        setTimeout(function () {
-                            $scope.progressModal.close();
-                        }, 500);
+                        // 
+                        // doesn't work anymore?!
+                        // 
+//                        setTimeout(function () {
+//                            $scope.progressModal.close();
+//                        }, 100);
+                        
+                        $scope.progressModal.close();
                     }
                     // search error ...
                 } else if (type === 'error') {
