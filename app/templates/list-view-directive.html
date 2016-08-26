@@ -37,7 +37,7 @@
                title="Show resource on the on the map"
                ng-click="$parent.$parent.selectedObject = $index"
                href="#/map"><i class="glyphicon glyphicon-globe"></i></a>
-            <span ng-repeat="representation in node.object.representation | filter:{function:'download', type:'original data'}"
+            <span ng-repeat="representation in node.object.representation | filter:{type: {name: 'original data'}} | filter:{function: {name: 'download'}}"
                   class="btn-invisible">
                     <a href="{{representation.contentlocation}}" download 
                        rel="nofollow"

@@ -1,5 +1,5 @@
 <accordion close-others="false">
-    <accordion-group ng-repeat="representation in representations | filter:{type:'original data'}" 
+    <accordion-group ng-repeat="representation in representations | filter:{type: {name: 'original data'}}" 
                      is-open="representation._status.open"
                      ng-init="filename = representation.contentlocation.substr(representation.contentlocation.lastIndexOf('/')+1)">
         <accordion-heading>
