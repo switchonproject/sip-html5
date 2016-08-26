@@ -340,7 +340,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "               href=\"#/map\"><i class=\"glyphicon glyphicon-globe\"></i></a>\r" +
     "\n" +
-    "            <span ng-repeat=\"representation in node.object.representation | filter:{function:'download', type:'original data'}\"\r" +
+    "            <span ng-repeat=\"representation in node.object.representation | filter:{type: {name: 'original data'}} | filter:{function: {name: 'download'}}\"\r" +
     "\n" +
     "                  class=\"btn-invisible\">\r" +
     "\n" +
@@ -522,7 +522,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/object-representation-template.html',
     "<accordion close-others=\"false\">\r" +
     "\n" +
-    "    <accordion-group ng-repeat=\"representation in representations | filter:{type:'original data'}\" \r" +
+    "    <accordion-group ng-repeat=\"representation in representations | filter:{type: {name: 'original data'}}\" \r" +
     "\n" +
     "                     is-open=\"representation._status.open\"\r" +
     "\n" +
