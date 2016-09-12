@@ -11,7 +11,8 @@ var app = angular.module(
             'ui.router',
             'ui.bootstrap.tpls',
             'ngResource',
-            'ngSanitize'
+            'ngSanitize',
+            'ngCookies'
         ]
         );
 

@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <center>
+        <h3 class="modal-title" id="modal-title">
+            Welcome to the SWITCH-ON Data Catalogue!
+        </h3>
+    </center>
+</div>
+<div class="modal-body" id="modal-body">
+    <p>
+        The SWITCH-ON data catalogue provides metadata and links to water-relevant open datasets, to easily inspect and download data from many  various data providers. 
+    </p>
+    <p>
+        This web-based search tool enables you to:</p>
+    <ul>
+        <li><strong><em>Construct a search query</em></strong>  - on relevant (combinations of) metadata characteristics like: keyword, free text, geospatial extent - to look for required Open Datasets.</li>
+        <li><strong><em>Display the search results and inspect metadata</em></strong> of the datasets found, preview and/or download them.</li>
+        <li><strong><em>Post-filter</em></strong> the resources found based on metadata characteristics.</li>
+    </ul>
+
+    <p>For further information about the catalogue <strong>
+            <a href="data/switch-on-data-search-guide.pdf" 
+               title="SWITCH-ON Data Search Guide" 
+               target="_blank"
+               rel="help"
+               type="application/pdf">read...</a>
+        </strong>
+    </p>
+
+</div>
+<div class="modal-footer">
+    <div class="checkbox">
+        <label class="pull-left">
+            <input
+                type="checkbox"
+                ng-model="hideWelcomeMessage"
+                name="hideWelcomeMessage"> 
+            Don't show this message again
+        </label></div>
+    <button class="btn btn-primary" type="button" ng-click="close()">Close</button>
+</div>

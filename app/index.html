@@ -10,14 +10,14 @@
         <meta name="description" content="The SIP HTML5 GUI is a web-based internet application that provides easy access to water-related open-data, and is the main entry points for external users to the SIP. Standard web technologies like HTML5 and JavaScript are used for its implementation so users only need a web browser to access this GUI.">
         <meta name="content-language" content="en-GB">     
         <meta name="author" content="Pascal Dihé, cismet GmbH, http://www.cismet.de">	
-	<meta name="date" content="2016-08-24T00:00:00+02:00">
-	<meta http-equiv="imagetoolbar" content="no">     
-	<meta http-equiv="window-target" content="_top">  
+        <meta name="date" content="2016-09-12T00:00:00+02:00">
+        <meta http-equiv="imagetoolbar" content="no">     
+        <meta http-equiv="window-target" content="_top">  
         <meta name="viewport" content="width=1024">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
         <link rel="icon" type="image/vnd.microsoft.icon" href="images/favicon.ico"/>
-        
+
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/ng-table/dist/ng-table.css" rel="stylesheet" type="text/css"/>
@@ -38,7 +38,7 @@
         <!--[if lt IE 11]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" rel="nofollow">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
+
         <!-- the real nav -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -57,12 +57,12 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <categories filter-expressions="filterExpressions" 
-                    collection-filter-expression = "collectionFilterExpression"
-                    topic-filter-expression = "topicFilterExpression"
-                    search-function="performSearch"
-                    title="Browse Resource Categories">          
+                            collection-filter-expression = "collectionFilterExpression"
+                            topic-filter-expression = "topicFilterExpression"
+                            search-function="performSearch"
+                            title="Browse Resource Categories">          
                 </categories>
-                
+
                 <!-- search filter ribbon -->
                 <search-filter-ribbon filter-expressions="filterExpressions" 
                                       search-function="performSearch" 
@@ -80,184 +80,202 @@
                               title="Visit your personal Workspace">     
                 </my-workspace>
             </div><!-- /.navbar-collapse -->
-    </nav>
+        </nav>
 
-    <!-- status and view nav -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="switchon-navbar-collapse-1">
-                <!--
-                <div class="nav navbar-nav navbar-left" 
-                     role="group" 
-                     aria-label="resultViewToggle"
-                     ng-if="config.masterToolbar.togglebutton">
-                    <button type="button"
-                            class="btn btn-sm btn-default switchon-viewbutton" 
-                            ng-click="masterToolbarService.toggleVisibility()"
-                            ng-disabled="!masterToolbarService.getCanShow()"
-                            title="Toolbar and Functions">
-                        <strong>TOOLS</strong>
-                    </button>
-                </div>
-                -->
-                <div class="nav navbar-nav navbar-left" role="group" aria-label="viewGroup">
-                    <button type="button"
-                            class="btn btn-sm btn-primary switchon-viewbutton" 
-                            ng-click="activateView('list')"
-                            ng-hide="state.current.name === 'list'"
-                            title="Resources List View">
-                        <!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>-->
-                        <strong>LIST</strong>
-                    </button>
-<!--                    <button type="button" 
-                            class="btn btn-sm btn-primary switchon-viewbutton" 
-                            ng-click="activateView('th')"
-                            ng-hide="state.current.name === 'th'"
-                            ng-show="config.gui.dev === true"
-                            title="Resources Thumbnail View">
-                            <strong>PREVIEW</strong>
-                    </button>-->
-                    <button type="button"
-                            class="btn btn-sm btn-primary switchon-viewbutton" 
-                            ng-click="activateView('map')"
-                            ng-class="{active: state.current.name === 'map'}"
-                            ng-hide="state.current.name === 'map'"
-                            title="Resources Map View">
-                        <!--<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>-->
-                        <strong>MAP</strong>
-                    </button>
-                </div>
-                <alert ng-hide="data.message === null" 
-                       type="{{data.messageType}}"
-                       close="doCloseMessage()"
-                       class="nav navbar-nav navbar-left switchon-alert">{{data.message}}
-                </alert>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <!-- content -->
-
-    <!-- result set and tag filters -->
-    <div id="wrapper" 
-         class="toggled" 
-         ng-class="{toggled: !(masterToolbarService.getCanShow() && masterToolbarService.isShowing())}">
-        <div id="sidebar-wrapper">
-            <master-toolbar result-set="data.resultSet"
-                            selected-object="data.selectedObject"
-                            filter-expressions="filterExpressions" 
-                            post-search-filter-expressions="postSearchFilterExpressions" 
-                            post-search-filters-filter-expression="postSearchFiltersFilterExpression" 
-                            filter-tags="data.resultSet.$filterTags" 
-                            perform-search="performSearch" 
-                            notification-function="showMessage">
-                            <!-- the functions a passed as function reference -->
-            </master-toolbar>
-        </div>
-
-        <div id="page-content-wrapper">
+        <!-- status and view nav -->
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div data-ui-view></div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="switchon-navbar-collapse-1">
+                    <!--
+                    <div class="nav navbar-nav navbar-left" 
+                         role="group" 
+                         aria-label="resultViewToggle"
+                         ng-if="config.masterToolbar.togglebutton">
+                        <button type="button"
+                                class="btn btn-sm btn-default switchon-viewbutton" 
+                                ng-click="masterToolbarService.toggleVisibility()"
+                                ng-disabled="!masterToolbarService.getCanShow()"
+                                title="Toolbar and Functions">
+                            <strong>TOOLS</strong>
+                        </button>
+                    </div>
+                    -->
+                    <div class="nav navbar-nav navbar-left" role="group" aria-label="viewGroup">
+                        <button type="button"
+                                class="btn btn-sm btn-primary switchon-viewbutton" 
+                                ng-click="activateView('list')"
+                                ng-hide="state.current.name === 'list'"
+                                title="Resources List View">
+                            <!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>-->
+                            <strong>LIST</strong>
+                        </button>
+                        <!--                    <button type="button" 
+                                                    class="btn btn-sm btn-primary switchon-viewbutton" 
+                                                    ng-click="activateView('th')"
+                                                    ng-hide="state.current.name === 'th'"
+                                                    ng-show="config.gui.dev === true"
+                                                    title="Resources Thumbnail View">
+                                                    <strong>PREVIEW</strong>
+                                            </button>-->
+                        <button type="button"
+                                class="btn btn-sm btn-primary switchon-viewbutton" 
+                                ng-click="activateView('map')"
+                                ng-class="{active: state.current.name === 'map'}"
+                                ng-hide="state.current.name === 'map'"
+                                title="Resources Map View">
+                            <!--<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>-->
+                            <strong>MAP</strong>
+                        </button>
+                    </div>
+
+                    <alert ng-hide="data.message === null" 
+                           type="{{data.messageType}}"
+                           close="doCloseMessage()"
+                           class="nav navbar-nav navbar-left switchon-alert">{{data.message}}
+                    </alert>
+
+                    <div class="nav navbar-nav navbar-right">
+                        <a
+                            class="btn btn-sm btn-primary switchon-viewbutton" 
+                            role="button" 
+                            href="data/switch-on-data-search-guide.pdf" 
+                            title="SWITCH-ON Data Search Guide" 
+                            target="_blank"
+                            rel="help"
+                            type="application/pdf"
+                            style="padding-top:8px">
+                            <strong>DATA SEARCH GUIDE</strong>
+                        </a>
+                    </div>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <!-- content -->
+
+        <!-- result set and tag filters -->
+        <div id="wrapper" 
+             class="toggled" 
+             ng-class="{toggled: !(masterToolbarService.getCanShow() && masterToolbarService.isShowing())}">
+            <div id="sidebar-wrapper">
+                <master-toolbar result-set="data.resultSet"
+                                selected-object="data.selectedObject"
+                                filter-expressions="filterExpressions" 
+                                post-search-filter-expressions="postSearchFilterExpressions" 
+                                post-search-filters-filter-expression="postSearchFiltersFilterExpression" 
+                                filter-tags="data.resultSet.$filterTags" 
+                                perform-search="performSearch" 
+                                notification-function="showMessage">
+                    <!-- the functions a passed as function reference -->
+                </master-toolbar>
+            </div>
+
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div data-ui-view></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.min.js" type="text/javascript"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.js" type="text/javascript"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js" type="text/javascript"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.js" type="text/javascript"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
-    <script src="bower_components/leaflet/dist/leaflet-src.js" type="text/javascript"></script>
-    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js" type="text/javascript"></script>
-    <script src="bower_components/angular-resource/angular-resource.js" type="text/javascript"></script>
-    <script src="bower_components/ng-table/dist/ng-table.js" type="text/javascript"></script>
-    <script src="bower_components/leaflet-draw/dist/leaflet.draw-src.js" type="text/javascript"></script>
-    <script src="bower_components/leaflet-styled-layercontrol/src/styledLayerControl.js" type="text/javascript"></script>
-    <script src="bower_components/esri-leaflet/dist/esri-leaflet.js" type="text/javascript"></script>
-    <script src="bower_components/Wicket/wicket.js" type="text/javascript"></script>
-    <script src="bower_components/Wicket/wicket-leaflet.js" type="text/javascript"></script>
-    <!-- endbower -->
 
-    <!-- build:js() -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/_module.js"></script>
-    <script src="scripts/controllers/masterController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/mapViewDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/usbDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/myWorkspaceDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/myProfileDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/searchFilterRibbonDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/keywordFilterDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/countriesFilterDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/listViewDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/objectDetailController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/searchFilterTagDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/postSearchFilterDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/categoriesDirectiveController.js" type="text/javascript"></script>
-    <script src="scripts/controllers/mapViewController.js" type="text/javascript"></script>
-    <script src="scripts/directives/_module.js"></script>
-    <script src="scripts/directives/mapViewDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/resultListDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/myWorkspaceDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/myProfileDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/searchFilterRibbonDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/keywordFilterDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/countriesFilterDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/listViewDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/searchOptionsDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/searchFilterTagDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/postSearchFilterDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/categoriesDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/masterToolbarDirective.js" type="text/javascript"></script>
-    <script src="scripts/directives/resultPagerDirective.js" type="text/javascript"></script>
-    <script src="scripts/services/_module.js"></script>
-    <script src="scripts/services/mockService.js" type="text/javascript"></script>
-    <script src="scripts/services/shareService.js" type="text/javascript"></script>
-    <script src="scripts/services/searchService.js" type="text/javascript"></script>
-    <script src="scripts/services/sessionService.js" type="text/javascript"></script>
-    <script src="scripts/services/tagGroupService.js" type="text/javascript"></script>
-    <script src="scripts/services/featureRendererService.js" type="text/javascript"></script>
-    <script src="scripts/services/masterToolbarService.js" type="text/javascript"></script>
-    <script src="scripts/services/filterService.js" type="text/javascript"></script>
-    <script src="scripts/filters/_module.js" type="text/javascript"></script>
-    <script src="scripts/filters/textLengthFilter.js" type="text/javascript"></script>
-    <script src="scripts/filters/representationIconFilter.js"></script>
-    <script src="scripts/factories/_module.js" type="text/javascript"></script>
-    <script src="scripts/factories/AppConfigFactory.js" type="text/javascript"></script>
-    <script src="scripts/factories/FilterExpressionFactory.js" type="text/javascript"></script>
-    <script src="scripts/factories/FilterExpressionsFactory.js" type="text/javascript"></script>
-    <!-- endbuild -->
-    
-     <!-- START OF GOOGLE ANALYTICS -->
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-54079374-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <!-- END OF GOOGLE ANALYTICS -->
-</body>
+        <!--[if lt IE 9]>
+        <script src="bower_components/es5-shim/es5-shim.js"></script>
+        <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.min.js" type="text/javascript"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.js" type="text/javascript"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.tpl.js" type="text/javascript"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.js" type="text/javascript"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
+        <script src="bower_components/leaflet/dist/leaflet-src.js" type="text/javascript"></script>
+        <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js" type="text/javascript"></script>
+        <script src="bower_components/angular-resource/angular-resource.js" type="text/javascript"></script>
+        <script src="bower_components/ng-table/dist/ng-table.js" type="text/javascript"></script>
+        <script src="bower_components/leaflet-draw/dist/leaflet.draw-src.js" type="text/javascript"></script>
+        <script src="bower_components/leaflet-styled-layercontrol/src/styledLayerControl.js" type="text/javascript"></script>
+        <script src="bower_components/esri-leaflet/dist/esri-leaflet.js" type="text/javascript"></script>
+        <script src="bower_components/Wicket/wicket.js" type="text/javascript"></script>
+        <script src="bower_components/Wicket/wicket-leaflet.js" type="text/javascript"></script>
+        <!-- endbower -->
+
+        <!-- build:js() -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/_module.js"></script>
+        <script src="scripts/controllers/masterController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/welcomeMessageController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/mapViewDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/usbDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/myWorkspaceDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/myProfileDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/searchFilterRibbonDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/keywordFilterDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/countriesFilterDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/listViewDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/objectDetailController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/searchFilterTagDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/postSearchFilterDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/categoriesDirectiveController.js" type="text/javascript"></script>
+        <script src="scripts/controllers/mapViewController.js" type="text/javascript"></script>
+        <script src="scripts/directives/_module.js"></script>
+        <script src="scripts/directives/mapViewDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/usbDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/resultListDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/myWorkspaceDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/myProfileDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/searchFilterRibbonDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/keywordFilterDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/countriesFilterDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/listViewDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/searchOptionsDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/searchFilterTagDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/postSearchFilterDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/categoriesDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/masterToolbarDirective.js" type="text/javascript"></script>
+        <script src="scripts/directives/resultPagerDirective.js" type="text/javascript"></script>
+        <script src="scripts/services/_module.js"></script>
+        <script src="scripts/services/mockService.js" type="text/javascript"></script>
+        <script src="scripts/services/shareService.js" type="text/javascript"></script>
+        <script src="scripts/services/searchService.js" type="text/javascript"></script>
+        <script src="scripts/services/sessionService.js" type="text/javascript"></script>
+        <script src="scripts/services/tagGroupService.js" type="text/javascript"></script>
+        <script src="scripts/services/featureRendererService.js" type="text/javascript"></script>
+        <script src="scripts/services/masterToolbarService.js" type="text/javascript"></script>
+        <script src="scripts/services/filterService.js" type="text/javascript"></script>
+        <script src="scripts/filters/_module.js" type="text/javascript"></script>
+        <script src="scripts/filters/textLengthFilter.js" type="text/javascript"></script>
+        <script src="scripts/filters/representationIconFilter.js"></script>
+        <script src="scripts/factories/_module.js" type="text/javascript"></script>
+        <script src="scripts/factories/AppConfigFactory.js" type="text/javascript"></script>
+        <script src="scripts/factories/FilterExpressionFactory.js" type="text/javascript"></script>
+        <script src="scripts/factories/FilterExpressionsFactory.js" type="text/javascript"></script>
+        <!-- endbuild -->
+
+        <!-- START OF GOOGLE ANALYTICS -->
+        <script>
+                         (function (i, s, o, g, r, a, m) {
+                             i['GoogleAnalyticsObject'] = r;
+                             i[r] = i[r] || function () {
+                                 (i[r].q = i[r].q || []).push(arguments)
+                             }, i[r].l = 1 * new Date();
+                             a = s.createElement(o),
+                                     m = s.getElementsByTagName(o)[0];
+                             a.async = 1;
+                             a.src = g;
+                             m.parentNode.insertBefore(a, m)
+                         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                         ga('create', 'UA-54079374-1', 'auto');
+                         ga('send', 'pageview');
+        </script>
+        <!-- END OF GOOGLE ANALYTICS -->
+    </body>
 </html>
