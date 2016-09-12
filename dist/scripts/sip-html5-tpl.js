@@ -1705,4 +1705,48 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "<!--</div>-->"
   );
 
+
+  $templateCache.put('templates/welcome-message.html',
+    "<div class=\"modal-header\">\n" +
+    "    <center>\n" +
+    "        <h3 class=\"modal-title\" id=\"modal-title\">\n" +
+    "            Welcome to the SWITCH-ON Data Catalogue!\n" +
+    "        </h3>\n" +
+    "    </center>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\" id=\"modal-body\">\n" +
+    "    <p>\n" +
+    "        The SWITCH-ON data catalogue provides metadata and links to water-relevant open datasets, to easily inspect and download data from many  various data providers. \n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        This web-based search tool enables you to:</p>\n" +
+    "    <ul>\n" +
+    "        <li><strong><em>Construct a search query</em></strong>  - on relevant (combinations of) metadata characteristics like: keyword, free text, geospatial extent - to look for required Open Datasets.</li>\n" +
+    "        <li><strong><em>Display the search results and inspect metadata</em></strong> of the datasets found, preview and/or download them.</li>\n" +
+    "        <li><strong><em>Post-filter</em></strong> the resources found based on metadata characteristics.</li>\n" +
+    "    </ul>\n" +
+    "\n" +
+    "    <p>For further information about the catalogue <strong>\n" +
+    "            <a href=\"data/switch-on-data-search-guide.pdf\" \n" +
+    "               title=\"SWITCH-ON Data Search Guide\" \n" +
+    "               target=\"_blank\"\n" +
+    "               rel=\"help\"\n" +
+    "               type=\"application/pdf\">read...</a>\n" +
+    "        </strong>\n" +
+    "    </p>\n" +
+    "\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "    <div class=\"checkbox\">\n" +
+    "        <label class=\"pull-left\">\n" +
+    "            <input\n" +
+    "                type=\"checkbox\"\n" +
+    "                ng-model=\"hideWelcomeMessage\"\n" +
+    "                name=\"hideWelcomeMessage\"> \n" +
+    "            Don't show this message again\n" +
+    "        </label></div>\n" +
+    "    <button class=\"btn btn-primary\" type=\"button\" ng-click=\"close()\">Close</button>\n" +
+    "</div>"
+  );
+
 }]);
