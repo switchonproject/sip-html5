@@ -19,6 +19,7 @@
             </div>
         </div>
         -->
+        
         <!-- Temporal resolution -->
         <div class="row" ng-if="representation.temporalresolution">
             <div class="col-lg-3" title="Temporal resolution of the data, e.g. daily">
@@ -28,6 +29,7 @@
                 {{representation.temporalresolution || 'n/a'}}
             </div>
         </div>
+        
         <!-- Spatial resolution -->
         <div class="row" ng-if="representation.spatialresolution">
             <div class="col-lg-3" title="Spatial resolution of the data, e.g. meters or arc degrees.">
@@ -37,6 +39,7 @@
                 {{representation.spatialresolution || 'n/a'}}
             </div>
         </div>
+        
         <!-- Spatial scale -->
         <div class="row" ng-if="representation.spatialscale">
             <div class="col-lg-3" title="Spatial scale of the data, e.g. 1:2000 or  1:10000">
@@ -46,6 +49,7 @@
                 {{representation.spatialscale || 'n/a'}}
             </div>
         </div>
+        
         <!-- Content Type -->
         <div class="row" ng-if="representation.contenttype">
             <div class="col-lg-3" title="MIME Type of the dataset">
@@ -55,6 +59,7 @@
                 {{representation.contenttype.name || 'n/a'}}
             </div>
         </div>
+        
         <!-- Data access function -->
         <div class="row" ng-if="representation.function">
             <div class="col-lg-3" title="Function that can be performed following the link to the dataset">
@@ -64,6 +69,7 @@
                 {{representation.function.name || 'n/a'}}
             </div>
         </div>
+        
         <!-- Data access Link -->
         <div class="row" ng-if="representation.contentlocation">
             <div class="col-lg-3" title="Link to the data or website where the data can be obtained">

@@ -16,6 +16,7 @@
             </div>
         </div>
         -->
+        
         <!-- Description -->
         <div class="row" ng-if="object.description">
             <div class="col-lg-3">
@@ -25,6 +26,7 @@
                 <p>{{object.description}}</p>
             </div>
         </div>
+        
         <!-- Keywords -->
         <div class="row" ng-if="keywords && keywords.length">
             <div class="col-lg-3">
@@ -36,6 +38,7 @@
                 </span>
             </div>
         </div>
+        
         <!-- X-CUAHSI Keywords -->
         <div class="row" ng-if="keywordsXcuahsi && keywordsXcuahsi.length">
             <div class="col-lg-3">
@@ -49,6 +52,7 @@
                 </span>
             </div>
         </div>
+        
         <!-- Topic Category -->
         <div class="row">
             <div class="col-lg-3" title="High-level classification of resources in accordance with ISO 19115 for grouping and topic-based search">
@@ -58,9 +62,10 @@
                 <span class="label label-default" title="{{object.topiccategory.description|| ''}}">{{object.topiccategory.name ? object.topiccategory.name : '[none]'}}</span>
             </div>
         </div>
+        
         <!-- Point of Contact: -->
         <!-- Hide the contact for SWITCH-ON Meta-Data Provider (default when no contact information was provided by summerworkers) -->
-        <div class="row" ng-if="object.contact && object.contact.role.name !== 'metadataProvider'">
+        <div class="row" ng-if="object.contact && object.contact.role.name !== 'metadataProvider' && (object.contact.name || object.contact.organisation)">
             <div class="col-lg-3" title="Name of contact person of the responsible party (optional) for providing the data or meta-data.">
                 <label>Point of Contact:</label>
             </div>
@@ -78,6 +83,18 @@
                 </span>
             </div>
         </div>
+        
+        <!-- Citation / DOI -->
+        <!-- use description of pointOfContact as Citation / DOI -->
+        <div class="row" ng-if="object.contact && object.contact.role.name === 'pointOfContact' && object.contact.description">
+            <div class="col-lg-3" title="Bibliographic citation or a Digital Object Identifier (DOI)">
+                <label>Citation / DOI:</label>
+            </div>
+            <div class="col-lg-9">
+                <span>{{object.contact.description}}</span>
+            </div>
+        </div>
+
         <!-- Temporal extent: -->
         <div class="row" ng-if="object.fromdate || object.todate">
             <div class="col-lg-3">
@@ -87,6 +104,7 @@
                 {{object.fromdate| date: "yyyy-MM-ddTHH:mmZ"}} - {{object.todate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
+        
         <!-- Spatial extent: -->
         <div class="row" ng-if="object.spatialcoverage">
             <div class="col-lg-3">
@@ -107,6 +125,7 @@
                 {{object.creationdate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
+        
         <!-- Last modification date -->
         <div class="row" ng-if="object.lastmodificationdate">
             <div class="col-lg-3" title="Date of last revision of the resource">
@@ -116,6 +135,7 @@
                 {{object.lastmodificationdate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
+        
         <!-- Publication date -->
         <div class="row" ng-if="object.publicationdate">
             <div class="col-lg-3" title="Date of publication of the resource at the origin website, catalogue, etc.">
@@ -125,6 +145,7 @@
                 {{object.publicationdate| date: "yyyy-MM-ddTHH:mmZ"}}
             </div>
         </div>
+        
         <!-- Access conditions -->
         <!--
         <div class="row" ng-if="object.accessconditions">
@@ -136,6 +157,7 @@
             </div>
         </div>
         -->
+        
         <!-- License statement -->
         <div class="row" ng-if="object.accessconditions || object.licensestatement">
             <div class="col-lg-3" title="Detailed license conditions which apply to the usage of the data">
@@ -150,8 +172,9 @@
                 </p>
             </div>
         </div>
+        
         <!-- Lineage -->
-        <div class="row" ng-repeat="metadata in object.metadata| filter:{type:'lineage meta-data'}">
+        <div class="row" ng-repeat="metadata in object.metadata| filter:{type: {name: 'lineage meta-data'}}">
             <div class="col-lg-3" title="Information on how the data was created.">
                 <label>Data Lineage:</label>
             </div>
@@ -159,6 +182,7 @@
                 <p ng-if="metadata.description">{{metadata.description}}</p>
             </div>
         </div>
+        
         <!-- Meta-Data Documents-->
         <div class="row">
             <div class="col-lg-3" title="Meta-Data Record as machine-readable standard meta-data documents">
@@ -182,6 +206,7 @@
             </div>
         </div>
         <hr>
+        
         <!-- Representations -->
         <div class="row" ng-if="representations">
             <div class="col-lg-12">
