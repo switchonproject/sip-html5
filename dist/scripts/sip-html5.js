@@ -837,12 +837,16 @@ angular.module(
                     ) {
                 'use strict';
 
-                var searchProcessCallback;
+                var searchProcessCallback, masterController;
+                masterController = this;
+
+                masterController.hideWelcomeMessage = !(!$cookies.hideByodWelcomeMessage ||
+                        $cookies.hideByodWelcomeMessage === 'false');
 
                 $scope.config = AppConfig;
 
                 $scope.data = {};
-                $scope.data.message = 'Welcome to the SWITCH-ON Spatial Information Platform!';
+                $scope.data.message = null; 
                 $scope.data.messageType = 'success';
                 $scope.data.selectedObject = -1;
                 // FIXME: move to categories directive -----------------------------
@@ -1156,18 +1160,34 @@ angular.module(
                     }
                 };
 
-                if (!$cookies.hideByodWelcomeMessage ||
-                        $cookies.hideByodWelcomeMessage === 'false') {
+
+                /**
+                 * 
+                 * @param {type} hideWelcomeMessage
+                 * @returns {undefined}
+                 */
+                masterController.showWelcomeMessage = function (hideWelcomeMessage) {
                     var welcomeInstance = $modal.open({
                         templateUrl: 'templates/welcome-message.html',
                         size: 'md',
                         backdrop: 'static',
-                        controller: 'welcomeMessageController'
+                        controller: 'welcomeMessageController',
+                        resolve: {hideWelcomeMessage: hideWelcomeMessage}
                     });
 
                     welcomeInstance.result.then(function (hideWelcomeMessage) {
+                        masterController.hideWelcomeMessage = hideWelcomeMessage;
                         $cookies.hideByodWelcomeMessage = hideWelcomeMessage;
+
                     });
+                };
+                
+                $scope.showWelcomeMessage = masterController.showWelcomeMessage;
+
+
+                // show welcome message on controller initialization
+                if (!masterController.hideWelcomeMessage) {
+                    masterController.showWelcomeMessage(true);
                 }
             }
         ]
@@ -1930,10 +1950,10 @@ angular.module(
 );
 
 angular.module('eu.water-switch-on.sip.controllers')
-        .controller('welcomeMessageController', ['$scope', '$modalInstance',
-            function ($scope, $modalInstance) {
+        .controller('welcomeMessageController', ['$scope', '$modalInstance', 'hideWelcomeMessage',
+            function ($scope, $modalInstance, hideWelcomeMessage) {
                 'use strict';
-                $scope.hideWelcomeMessage = false;
+                $scope.hideWelcomeMessage = hideWelcomeMessage;
                 $scope.close = function () {
                     $modalInstance.close($scope.hideWelcomeMessage);
                 };

@@ -1707,45 +1707,84 @@ angular.module('').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/welcome-message.html',
-    "<div class=\"modal-header\">\n" +
-    "    <center>\n" +
-    "        <h3 class=\"modal-title\" id=\"modal-title\">\n" +
-    "            Welcome to the SWITCH-ON Data Catalogue!\n" +
-    "        </h3>\n" +
-    "    </center>\n" +
-    "</div>\n" +
-    "<div class=\"modal-body\" id=\"modal-body\">\n" +
-    "    <p>\n" +
-    "        The SWITCH-ON data catalogue provides metadata and links to water-relevant open datasets, to easily inspect and download data from many  various data providers. \n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        This web-based search tool enables you to:</p>\n" +
-    "    <ul>\n" +
-    "        <li><strong><em>Construct a search query</em></strong>  - on relevant (combinations of) metadata characteristics like: keyword, free text, geospatial extent - to look for required Open Datasets.</li>\n" +
-    "        <li><strong><em>Display the search results and inspect metadata</em></strong> of the datasets found, preview and/or download them.</li>\n" +
-    "        <li><strong><em>Post-filter</em></strong> the resources found based on metadata characteristics.</li>\n" +
-    "    </ul>\n" +
+    "<div class=\"modal-header\">\r" +
     "\n" +
-    "    <p>For further information about the catalogue <strong>\n" +
-    "            <a href=\"data/switch-on-data-search-guide.pdf\" \n" +
-    "               title=\"SWITCH-ON Data Search Guide\" \n" +
-    "               target=\"_blank\"\n" +
-    "               rel=\"help\"\n" +
-    "               type=\"application/pdf\">read...</a>\n" +
-    "        </strong>\n" +
-    "    </p>\n" +
+    "    <center>\r" +
     "\n" +
-    "</div>\n" +
-    "<div class=\"modal-footer\">\n" +
-    "    <div class=\"checkbox\">\n" +
-    "        <label class=\"pull-left\">\n" +
-    "            <input\n" +
-    "                type=\"checkbox\"\n" +
-    "                ng-model=\"hideWelcomeMessage\"\n" +
-    "                name=\"hideWelcomeMessage\"> \n" +
-    "            Don't show this message again\n" +
-    "        </label></div>\n" +
-    "    <button class=\"btn btn-primary\" type=\"button\" ng-click=\"close()\">Close</button>\n" +
+    "        <h3 class=\"modal-title\" id=\"modal-title\">\r" +
+    "\n" +
+    "            Welcome to the SWITCH-ON Data Catalogue!\r" +
+    "\n" +
+    "        </h3>\r" +
+    "\n" +
+    "    </center>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "<div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "    <p>\r" +
+    "\n" +
+    "        The SWITCH-ON data catalogue provides metadata and links to water-relevant open datasets, to easily inspect and download data from many  various data providers. \r" +
+    "\n" +
+    "    </p>\r" +
+    "\n" +
+    "    <p>\r" +
+    "\n" +
+    "        This web-based search tool enables you to:</p>\r" +
+    "\n" +
+    "    <ul>\r" +
+    "\n" +
+    "        <li><strong><em>Construct a search query</em></strong>  - on relevant (combinations of) metadata characteristics like: keyword, free text, geospatial extent - to look for required Open Datasets.</li>\r" +
+    "\n" +
+    "        <li><strong><em>Display the search results and inspect metadata</em></strong> of the datasets found, preview and/or download them.</li>\r" +
+    "\n" +
+    "        <li><strong><em>Post-filter</em></strong> the resources found based on metadata characteristics.</li>\r" +
+    "\n" +
+    "    </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <p>For further information about the catalogue <strong>\r" +
+    "\n" +
+    "            <a href=\"data/switch-on-data-catalogue-information.pdf\" \r" +
+    "\n" +
+    "               title=\"About the SWITCH-ON Data Catalogue\" \r" +
+    "\n" +
+    "               target=\"_blank\"\r" +
+    "\n" +
+    "               rel=\"help\"\r" +
+    "\n" +
+    "               type=\"application/pdf\">read...</a>\r" +
+    "\n" +
+    "        </strong>\r" +
+    "\n" +
+    "    </p>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "<div class=\"modal-footer\">\r" +
+    "\n" +
+    "    <div class=\"checkbox\">\r" +
+    "\n" +
+    "        <label class=\"pull-left\">\r" +
+    "\n" +
+    "            <input\r" +
+    "\n" +
+    "                type=\"checkbox\"\r" +
+    "\n" +
+    "                ng-model=\"hideWelcomeMessage\"\r" +
+    "\n" +
+    "                name=\"hideWelcomeMessage\"> \r" +
+    "\n" +
+    "            Don't show this message again\r" +
+    "\n" +
+    "        </label></div>\r" +
+    "\n" +
+    "    <button class=\"btn btn-primary\" type=\"button\" ng-click=\"close()\">Close</button>\r" +
+    "\n" +
     "</div>"
   );
 
