@@ -44,13 +44,18 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#switchon-navbar-collapse-1">
+                    <button type="button" 
+                            class="navbar-toggle collapsed" 
+                            data-toggle="collapse" 
+                            data-target="#switchon-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://water-switch-on.eu" title="Visit the SWITCH-ON Project website">
+                    <a class="navbar-brand" 
+                       href="http://water-switch-on.eu" 
+                       title="Visit the SWITCH-ON Project website">
                         <img src="images/brand.png" alt="SWITCH-ON"/>
                     </a>
                 </div>
@@ -75,10 +80,13 @@
                      search-function="performSearch" 
                      notification-function="showMessage(message, type)">
                 </usb> 
+
+                <!--
                 <my-workspace workspace-name="SWITCH-ON" 
                               ng-if="config.gui.dev"
                               title="Visit your personal Workspace">     
                 </my-workspace>
+                -->
             </div><!-- /.navbar-collapse -->
         </nav>
 
@@ -129,10 +137,20 @@
                         </button>
                     </div>
 
-                    <alert ng-hide="data.message === null" 
-                           type="{{data.messageType}}"
-                           close="doCloseMessage()"
-                           class="nav navbar-nav navbar-left switchon-alert">{{data.message}}
+                    <alert 
+                        type="{{data.messageType}}"
+                        class="nav navbar-nav navbar-left switchon-alert">
+                        <span ng-if="data.message === null">
+                            Welcome to the SWITCH-ON Data Catalogue! <strong><a  
+                                    title="About the SWITCH-ON Data Catalogue"  
+                                    target="_blank"  
+                                    rel="help"  
+                                    type="application/pdf"  
+                                    ng-click="showWelcomeMessage(true)"> 
+                                    Read more ...</a>
+                            </strong>
+                        </span>
+                        <span ng-if="data.message !== 0">{{data.message}}</span>
                     </alert>
 
                     <div class="nav navbar-nav navbar-right">
