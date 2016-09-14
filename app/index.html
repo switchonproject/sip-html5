@@ -44,13 +44,18 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#switchon-navbar-collapse-1">
+                    <button type="button" 
+                            class="navbar-toggle collapsed" 
+                            data-toggle="collapse" 
+                            data-target="#switchon-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://water-switch-on.eu" title="Visit the SWITCH-ON Project website">
+                    <a class="navbar-brand" 
+                       href="http://water-switch-on.eu" 
+                       title="Visit the SWITCH-ON Project website">
                         <img src="images/brand.png" alt="SWITCH-ON"/>
                     </a>
                 </div>
@@ -75,10 +80,13 @@
                      search-function="performSearch" 
                      notification-function="showMessage(message, type)">
                 </usb> 
+                
+                <!--
                 <my-workspace workspace-name="SWITCH-ON" 
                               ng-if="config.gui.dev"
                               title="Visit your personal Workspace">     
                 </my-workspace>
+                -->
             </div><!-- /.navbar-collapse -->
         </nav>
 
@@ -130,9 +138,10 @@
                     </div>
 
                     <alert ng-hide="data.message === null" 
+                           ng-bind-html="data.message"
                            type="{{data.messageType}}"
                            close="doCloseMessage()"
-                           class="nav navbar-nav navbar-left switchon-alert">{{data.message}}
+                           class="nav navbar-nav navbar-left switchon-alert">
                     </alert>
 
                     <div class="nav navbar-nav navbar-right">

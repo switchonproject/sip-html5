@@ -38,7 +38,14 @@ angular.module(
                 $scope.config = AppConfig;
 
                 $scope.data = {};
-                $scope.data.message = 'Welcome to the SWITCH-ON Spatial Information Platform!';
+                $scope.data.message = 'Welcome to the SWITCH-ON Spatial Information Platform! ' +
+                        '<strong><a href="data/switch-on-data-catalogue-information.pdf" ' +
+                        'title="About the SWITCH-ON Data Catalogue" ' +
+                        'target="_blank" ' +
+                        'rel="help" ' +
+                        'type="application/pdf">' +
+                        'Read more!</a></strong>';
+
                 $scope.data.messageType = 'success';
                 $scope.data.selectedObject = -1;
                 // FIXME: move to categories directive -----------------------------
