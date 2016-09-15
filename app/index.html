@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SWITCH-ON Spatial Information Platform Client (BYOD) SNAPSHOT</title>
+        <title>SWITCH-ON Spatial Information Platform Client (BYOD)</title>
         <meta name="description" content="The SIP HTML5 GUI is a web-based internet application that provides easy access to water-related open-data, and is the main entry points for external users to the SIP. Standard web technologies like HTML5 and JavaScript are used for its implementation so users only need a web browser to access this GUI.">
         <meta name="content-language" content="en-GB">     
         <meta name="author" content="Pascal Dihé, cismet GmbH, http://www.cismet.de">	
@@ -41,7 +41,8 @@
 
         <!-- the real nav -->
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            <div class="container-fluid"
+                 style="width:100%; min-width:1090px">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" 
@@ -87,6 +88,21 @@
                               title="Visit your personal Workspace">     
                 </my-workspace>
                 -->
+                
+                <div class="nav navbar-nav navbar-right">
+                        <a
+                            class="btn btn-sm btn-primary switchon-viewbutton" 
+                            role="button" 
+                            href="data/switch-on-data-catalogue-information.pdf" 
+                            title="About the SWITCH-ON Data Catalogue" 
+                            target="_blank"
+                            rel="help"
+                            type="application/pdf"
+                            style="padding-top:8px;min-width:150px;margin-right:15px">
+                            <strong>ABOUT CONTENT</strong></a>
+                </div>
+                
+                
             </div><!-- /.navbar-collapse -->
         </nav>
 
@@ -94,7 +110,10 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="switchon-navbar-collapse-1">
+                <div 
+                    class="collapse navbar-collapse" 
+                    id="switchon-navbar-collapse-1"
+                    style="width:100%; min-width:1050px">
                     <!--
                     <div class="nav navbar-nav navbar-left" 
                          role="group" 
@@ -109,7 +128,9 @@
                         </button>
                     </div>
                     -->
-                    <div class="nav navbar-nav navbar-left" role="group" aria-label="viewGroup">
+                    <div class="nav navbar-nav navbar-left" 
+                         role="group" 
+                         aria-label="viewGroup">
                         <button type="button"
                                 class="btn btn-sm btn-primary switchon-viewbutton" 
                                 ng-click="activateView('list')"
@@ -162,11 +183,9 @@
                             target="_blank"
                             rel="help"
                             type="application/pdf"
-                            style="padding-top:8px">
-                            <strong>DATA SEARCH GUIDE</strong>
-                        </a>
+                            style="padding-top:8px; min-width:150px;margin-right:0px;">
+                            <strong>DATA SEARCH GUIDE</strong></a>
                     </div>
-
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
