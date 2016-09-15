@@ -28,8 +28,8 @@ angular.module(
                 this.searchService.defautLimit = 10;
                 this.searchService.maxLimit = 50;
                 //this.searchService.host = 'http://localhost:8890';
-                this.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
-                //this.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
+                //this.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
+                this.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
 
                 this.mapView = {};
                 //this.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
