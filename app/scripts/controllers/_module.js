@@ -5,6 +5,7 @@ angular.module(
         'ui.bootstrap.alert',
         'ui.bootstrap.modal',
         'mgcrea.ngStrap.popover',
+        'mgcrea.ngStrap.tooltip',
         'ui.bootstrap.accordion',
         'leaflet-directive',
         'ui.bootstrap.progressbar',
