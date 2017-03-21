@@ -4,6 +4,17 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+/**
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *     ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION 
+ *     
+ *     DON'T UPGRADE TO node.js >= v7
+ *     
+ *     See https://cismet.slack.com/files/pascal.dihe/F4MT8UL6A/Veraltete_Grunt_Build_Scripts
+
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
 /*
  * ===================================================================================================================
  * ================================================ Grunt build file =================================================
@@ -122,7 +133,8 @@ module.exports = function (grunt) {
         // generateSources task
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
+                reporterOutput: ''
             },
             all: [
                 '<%= src %>/scripts/{,*/}*.js'
@@ -828,4 +840,6 @@ module.exports = function (grunt) {
         'depend:validate:clean',
         'doclean:target'
     ]);
+    
+    //grunt.loadNpmTasks('grunt-karma');
 };
