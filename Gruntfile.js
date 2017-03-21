@@ -122,7 +122,8 @@ module.exports = function (grunt) {
         // generateSources task
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
+                reporterOutput: ''
             },
             all: [
                 '<%= src %>/scripts/{,*/}*.js'
