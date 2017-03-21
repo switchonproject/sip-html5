@@ -88,10 +88,20 @@
         <!-- use description of pointOfContact as Citation / DOI -->
         <div class="row" ng-if="object.contact && object.contact.role.name === 'pointOfContact' && object.contact.description">
             <div class="col-lg-3" title="Bibliographic citation or a Digital Object Identifier (DOI)">
-                <label>Citation / DOI:</label>
+                <label>Citation:</label>
             </div>
             <div class="col-lg-9">
                 <span>{{object.contact.description}}</span>
+            </div>
+        </div>
+        
+        <div class="row" ng-if="doiBadge && doiBadge != null">
+            <div class="col-lg-3" title="Digital Object Identifier (DOI)">
+                <label>Digital Object Identifier:</label>
+            </div>
+            <div class="col-lg-9">
+                <a href="{{doiBadge.href}}" target="_blank" title="{{doiBadge.alt}}"><img src="{{doiBadge.src}}" alt="{{doiBadge.alt}}"/></a>
+                <span>(<a href="{{doiBadge.href}}" target="_blank" title="{{doiBadge.alt}}">{{doiBadge.href}}</a>)</span>
             </div>
         </div>
 
