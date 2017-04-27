@@ -1,8 +1,9 @@
 {
   "name": "sip-html5",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
+    "grunt-cli": "^1.2.0",
     "cdnjs-cdn-data": "^0.1.2",
     "google-cdn-data": "^0.1.25",
     "grunt": "^0.4.5",
