@@ -1,11 +1,11 @@
 {
   "built_on": "master",
-  "duration": 25.815000046,
-  "full_display_name": "sip-html5-resource-registration #2",
-  "id": "2",
-  "number": 2,
+  "duration": 63.78800005,
+  "full_display_name": "sip-html5 #11",
+  "id": "11",
+  "number": 11,
   "result": "SUCCESS",
   "status_message": "?",
-  "time": "2017-05-12 14:29:10 +0000",
-  "url": "job/sip-html5-resource-registration/2/"
+  "time": "2017-05-12 14:34:26 +0000",
+  "url": "job/sip-html5/11/"
 }
