@@ -1247,6 +1247,19 @@ angular.module(
         }
     ]
 );
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+/*global angular*/
+/*jshint camelcase: false */
+
 angular.module(
     'eu.water-switch-on.sip.controllers'
 ).controller(
@@ -1259,13 +1272,14 @@ angular.module(
         function ($scope, resource, AppConfig) {
             'use strict';
 
-            var i, tag;
+            var i, tag, metadata;
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
             $scope.representations = $scope.object.representation || [];
             $scope.keywordsXcuahsi = [];
             $scope.keywords = [];
+            $scope.doiBadge = null;
 
             for (i = 0; i < $scope.representations.length; ++i) {
                 $scope.representations[i]._status = { // jshint ignore:line
@@ -1285,6 +1299,25 @@ angular.module(
                     }
                 }
             }
+            
+            if($scope.object.metadata) {
+                for (i = 0; i < $scope.object.metadata.length; ++i) {
+                    metadata = $scope.object.metadata[i];
+                    if(metadata.type.name === 'deposition meta-data') {
+                        if(metadata.content) {
+                            var depositionMetadata = angular.fromJson(metadata.content);
+                            if(depositionMetadata && depositionMetadata.doi && depositionMetadata.links && depositionMetadata.links.badge) {
+                                $scope.doiBadge = {
+                                    'src' : depositionMetadata.links.badge,
+                                    'href' : depositionMetadata.doi_url,
+                                    'alt' : depositionMetadata.doi
+                                };
+                            }
+                            break;
+                        }  
+                    }
+                }
+            } 
         }
     ]
 );
@@ -2547,6 +2580,8 @@ angular.module(
         ).service('AppConfig',
         [function () {
                 'use strict';
+                
+                this.developmentMode = false;
 
                 this.listView = {};
                 // highlight the keywords beloging to the following tag group
@@ -2561,9 +2596,7 @@ angular.module(
                 this.searchService.password = 'switchon';
                 this.searchService.defautLimit = 10;
                 this.searchService.maxLimit = 50;
-                //this.searchService.host = 'http://localhost:8890';
-                //this.searchService.host = 'http://switchon.cismet.de/legacy-rest1';
-                this.searchService.host = 'http://data.water-switch-on.eu/switchon_server_rest';
+                this.searchService.host = this.developmentMode ? 'http://localhost:8890' : 'http://data.water-switch-on.eu/switchon_server_rest';
 
                 this.mapView = {};
                 //this.mapView.backgroundLayer = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
