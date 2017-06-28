@@ -967,7 +967,7 @@ angular.module(
                 };
 
                 $scope.activateView = function (state) {
-                    $scope.showMessage(state + ' view showing', 'success');
+                    //$scope.showMessage(state + ' view showing', 'success');
                     $state.go(state, {});
                 };
 
@@ -1194,7 +1194,6 @@ angular.module(
 
                 // show welcome message on controller initialization
                 // but not for deep links to resource description
-                $scope.showMessage($state + ' view showing', 'success');
                 if (!masterController.hideWelcomeMessage && $state.is('resourceDetail')) {
                     masterController.showWelcomeMessage(true);
                 }
@@ -3683,6 +3682,36 @@ angular.module(
     ]
 );
 
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+angular.module('eu.water-switch-on.sip.filters').
+        filter('keywordsString', function () {
+            'use strict';
+            return function (keywords) {
+                var keywordString = '';
+                
+                if(keywords && keywords.length > 0) {
+                    var arrayLength = keywords.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        keywordString += keywords[i].name;  
+                        if(i < (arrayLength - 1)) {
+                            keywordString += ', ';
+                        }
+                    }
+                }
+
+                return keywordString;
+            };
+        }
+        );
 /* 
  * ***************************************************
  * 
