@@ -967,7 +967,7 @@ angular.module(
                 };
 
                 $scope.activateView = function (state) {
-                    //$scope.showMessage(state + ' view showing', 'success');
+                    $scope.showMessage(state + ' view showing', 'success');
                     $state.go(state, {});
                 };
 
@@ -1193,7 +1193,9 @@ angular.module(
 
 
                 // show welcome message on controller initialization
-                if (!masterController.hideWelcomeMessage) {
+                // but not for deep links to resource description
+                $scope.showMessage($state + ' view showing', 'success');
+                if (!masterController.hideWelcomeMessage && $state.is('resourceDetail')) {
                     masterController.showWelcomeMessage(true);
                 }
             }
