@@ -8,7 +8,7 @@
         <td data-title="'Description'">
             <span>{{node.object.description | txtLen:160:false:'':true}}</span>
             <span ng-hide="node.object.description.length < 160">
-                <a href="#/resource/{{node.object.id}}" title="Show the complete Description"><strong>...</strong></a>
+                <a href="resource/{{node.object.id}}" title="Show the complete Description"><strong>...</strong></a>
             </span>
         </td>
         
@@ -25,18 +25,18 @@
                 <span ng-hide="config.filterKeyword && !(tag.taggroup.name === config.filterKeyword)" 
                       class="label" ng-class="isHighlightKeyword(config.highlightKeyword, tag.name) ? 'label-success' : 'label-default'">{{tag.name}}</span>
             </span>
-            <span ng-if="tags.length < node.object.tags.length"><a href="#/resource/{{node.object.id}}" title="Show all Keywords"><strong>...</strong></a></span>
+            <span ng-if="tags.length < node.object.tags.length"><a href="resource/{{node.object.id}}" title="Show all Keywords"><strong>...</strong></a></span>
 
         </td>
         
         <td data-title="'Tools'" class="tools">
             <a class="btn-invisible btn-icon"
-               href="#/resource/{{node.object.id}}"
+               href="resource/{{node.object.id}}"
                title="Show detailed resource information"><i class="glyphicon glyphicon-info-sign"></i></a>
             <a class="btn-invisible btn-icon"
                title="Show resource on the on the map"
                ng-click="$parent.$parent.selectedObject = $index"
-               href="#/map"><i class="glyphicon glyphicon-globe"></i></a>
+               href="map"><i class="glyphicon glyphicon-globe"></i></a>
             <span ng-repeat="representation in node.object.representation | filter:{type: {name: 'original data'}} | filter:{function: {name: 'download'}}"
                   class="btn-invisible">
                     <a href="{{representation.contentlocation}}" download 

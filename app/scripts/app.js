@@ -12,7 +12,8 @@ var app = angular.module(
             'ui.bootstrap.tpls',
             'ngResource',
             'ngSanitize',
-            'ngCookies'
+            'ngCookies',
+            'updateMeta'
         ]
         );
 
@@ -66,19 +67,19 @@ app.config(
                 $urlRouterProvider.otherwise('/map');
 
                 $stateProvider.state('list', {
-                    url: 'list',
+                    url: '/list',
                     templateUrl: 'views/listView.html'
                 });
                 $stateProvider.state('th', {
-                    url: 'th',
+                    url: '/th',
                     templateUrl: 'views/thumbnailView.html'
                 });
                 $stateProvider.state('map', {
-                    url: 'map',
+                    url: '/map',
                     templateUrl: 'views/mapView.html'
                 });
                 $stateProvider.state('mapObject', {
-                    url: 'map/object/:resId',
+                    url: '/map/object/:resId',
                     templateUrl: 'views/mapView.html',
                     controller: 'eu.water-switch-on.sip.controllers.mapViewController',
                     resolve: {
@@ -92,16 +93,16 @@ app.config(
                     }
                 });
                 $stateProvider.state('profile', {
-                    url: 'profile',
+                    url: '/profile',
                     templateUrl: 'views/profileView.html'
                 });
                 $stateProvider.state('login', {
-                    url: 'login',
+                    url: '/login',
                     templateUrl: 'views/loginView.html'
                 });
 
                 $stateProvider.state('resourceDetail', {
-                    url: 'resource/:resId',
+                    url: '/resource/:resId',
                     templateUrl: 'views/object-detail-view.html',
                     controller: 'eu.water-switch-on.sip.controllers.objectDetailController',
                     resolve: {
@@ -118,8 +119,7 @@ app.config(
                 $logProvider.debugEnabled(false);
                 
                 $locationProvider.html5Mode({
-                    enabled: true,
-                    requireBase: false
+                    enabled: true
                   });
             }
         ]

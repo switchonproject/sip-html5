@@ -15,6 +15,7 @@ module.exports = function(config) {
         'target/dist/bower_components/json3/lib/json3.min.js',
         'target/dist/bower_components/jquery/dist/jquery.js',
         'target/dist/bower_components/angular/angular.js',
+        'target/dist/bower_components/angular-update-meta/dist/update-meta.min.js',
         'target/dist/bower_components/angular-cookies/angular-cookies.min.js',
         'target/dist/bower_components/angular-sanitize/angular-sanitize.min.js',
         'target/dist/bower_components/angular-strap/dist/angular-strap.js',
