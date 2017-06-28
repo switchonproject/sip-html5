@@ -101,7 +101,8 @@ module.exports = function (grunt) {
                     '<%= targetDist %>/**/*.png',
                     '<%= targetDist %>/**/*.gif',
                     '<%= targetDist %>/**/*.svg',
-                    '<%= targetDist %>/**/*.js'
+                    '<%= targetDist %>/**/*.js',
+                    '<%= targetDist %>/**/.htaccess'
                 ]
             },
             write: {
@@ -115,7 +116,8 @@ module.exports = function (grunt) {
                     '<%= target %>/**/*.png',
                     '<%= target %>/**/*.gif',
                     '<%= target %>/**/*.svg',
-                    '<%= target %>/**/*.js'
+                    '<%= target %>/**/*.js',
+                    '<%= target %>/**/.htaccess'
                 ]
             }
         },
