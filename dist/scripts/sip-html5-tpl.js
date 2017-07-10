@@ -498,7 +498,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            <span ng-hide=\"node.object.description.length < 160\">\r" +
     "\n" +
-    "                <a href=\"#/resource/{{node.object.id}}\" title=\"Show the complete Description\"><strong>...</strong></a>\r" +
+    "                <a href=\"resource/{{node.object.id}}\" title=\"Show the complete Description\"><strong>...</strong></a>\r" +
     "\n" +
     "            </span>\r" +
     "\n" +
@@ -532,7 +532,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </span>\r" +
     "\n" +
-    "            <span ng-if=\"tags.length < node.object.tags.length\"><a href=\"#/resource/{{node.object.id}}\" title=\"Show all Keywords\"><strong>...</strong></a></span>\r" +
+    "            <span ng-if=\"tags.length < node.object.tags.length\"><a href=\"resource/{{node.object.id}}\" title=\"Show all Keywords\"><strong>...</strong></a></span>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -544,7 +544,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            <a class=\"btn-invisible btn-icon\"\r" +
     "\n" +
-    "               href=\"#/resource/{{node.object.id}}\"\r" +
+    "               href=\"resource/{{node.object.id}}\"\r" +
     "\n" +
     "               title=\"Show detailed resource information\"><i class=\"glyphicon glyphicon-info-sign\"></i></a>\r" +
     "\n" +
@@ -554,7 +554,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "               ng-click=\"$parent.$parent.selectedObject = $index\"\r" +
     "\n" +
-    "               href=\"#/map\"><i class=\"glyphicon glyphicon-globe\"></i></a>\r" +
+    "               href=\"map\"><i class=\"glyphicon glyphicon-globe\"></i></a>\r" +
     "\n" +
     "            <span ng-repeat=\"representation in node.object.representation | filter:{type: {name: 'original data'}} | filter:{function: {name: 'download'}}\"\r" +
     "\n" +
@@ -1048,7 +1048,7 @@ angular.module('').run(['$templateCache', function($templateCache) {
     "\n" +
     "            <a class=\"btn-invisible btn-icon pull-right\"\r" +
     "\n" +
-    "               href=\"#/resource/{{node.object.id}}\"\r" +
+    "               href=\"resource/{{node.object.id}}\"\r" +
     "\n" +
     "               title=\"Show detailed resource information\"><i class=\"glyphicon glyphicon-info-sign\"></i>\r" +
     "\n" +

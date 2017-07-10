@@ -12,7 +12,8 @@ var app = angular.module(
             'ui.bootstrap.tpls',
             'ngResource',
             'ngSanitize',
-            'ngCookies'
+            'ngCookies',
+            'updateMeta'
         ]
         );
 
@@ -21,7 +22,8 @@ app.config(
             '$stateProvider',
             '$urlRouterProvider',
             '$logProvider',
-            function ($stateProvider, $urlRouterProvider, $logProvider) {
+            '$locationProvider',
+            function ($stateProvider, $urlRouterProvider, $logProvider, $locationProvider) {
                 'use strict';
 
                 var resolveResource;
@@ -115,6 +117,10 @@ app.config(
                 });
                 
                 $logProvider.debugEnabled(false);
+                
+                $locationProvider.html5Mode({
+                    enabled: true
+                  });
             }
         ]
         );

@@ -12,7 +12,8 @@ var app = angular.module(
             'ui.bootstrap.tpls',
             'ngResource',
             'ngSanitize',
-            'ngCookies'
+            'ngCookies',
+            'updateMeta'
         ]
         );
 
@@ -21,7 +22,8 @@ app.config(
             '$stateProvider',
             '$urlRouterProvider',
             '$logProvider',
-            function ($stateProvider, $urlRouterProvider, $logProvider) {
+            '$locationProvider',
+            function ($stateProvider, $urlRouterProvider, $logProvider, $locationProvider) {
                 'use strict';
 
                 var resolveResource;
@@ -115,6 +117,10 @@ app.config(
                 });
                 
                 $logProvider.debugEnabled(false);
+                
+                $locationProvider.html5Mode({
+                    enabled: true
+                  });
             }
         ]
         );
@@ -821,6 +827,7 @@ angular.module(
             'eu.water-switch-on.sip.services.shareService',
             'eu.water-switch-on.sip.services.masterToolbarService',
             'eu.water-switch-on.sip.services.filterService',
+            'pageTitle',
             function (
                     $scope,
                     $rootScope,
@@ -834,17 +841,19 @@ angular.module(
                     AppConfig,
                     shareService,
                     masterToolbarService,
-                    filterService
+                    filterService,
+                    pageTitle
                     ) {
                 'use strict';
 
                 var searchProcessCallback, masterController;
                 masterController = this;
-
                 masterController.hideWelcomeMessage = !(!$cookies.hideByodWelcomeMessage ||
                         $cookies.hideByodWelcomeMessage === 'false');
 
                 $scope.config = AppConfig;
+                $scope.pageTitle = pageTitle;
+                pageTitle.setTitle($scope.config.title);
 
                 $scope.data = {};
                 $scope.data.message = null; 
@@ -1187,7 +1196,8 @@ angular.module(
 
 
                 // show welcome message on controller initialization
-                if (!masterController.hideWelcomeMessage) {
+                // but not for deep links to resource description
+                if (!masterController.hideWelcomeMessage && $state.is('resourceDetail')) {
                     masterController.showWelcomeMessage(true);
                 }
             }
@@ -1269,10 +1279,13 @@ angular.module(
         // the router resolves this resource object
         'resource',
         'AppConfig',
-        function ($scope, resource, AppConfig) {
+        'pageTitle',
+        function ($scope, resource, AppConfig, pageTitle) {
             'use strict';
-
+            
             var i, tag, metadata;
+
+            pageTitle.setTitle(resource.name);
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
@@ -2583,6 +2596,8 @@ angular.module(
                 
                 this.developmentMode = false;
 
+                this.title = 'SWITCH-ON Spatial Information Platform Client (BYOD) v1.4.1'; 
+
                 this.listView = {};
                 // highlight the keywords beloging to the following tag group
                 this.listView.highlightKeyword = 'query-keyword';
@@ -3686,6 +3701,36 @@ angular.module(
  */
 
 angular.module('eu.water-switch-on.sip.filters').
+        filter('keywordsString', function () {
+            'use strict';
+            return function (keywords) {
+                var keywordString = '';
+                
+                if(keywords && keywords.length > 0) {
+                    var arrayLength = keywords.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        keywordString += keywords[i].name;  
+                        if(i < (arrayLength - 1)) {
+                            keywordString += ', ';
+                        }
+                    }
+                }
+
+                return keywordString;
+            };
+        }
+        );
+/* 
+ * ***************************************************
+ * 
+ * cismet GmbH, Saarbruecken, Germany
+ * 
+ *               ... and it just works.
+ * 
+ * ***************************************************
+ */
+
+angular.module('eu.water-switch-on.sip.filters').
         filter('representationIcon', function () {
             'use strict';
             return function (protocol) {
@@ -4251,6 +4296,44 @@ angular.module(
     ]
 );
 angular.module(
+        'eu.water-switch-on.sip.services'
+        ).service(
+        'meta',
+        [
+            function () {
+                'use strict';
+
+                var metaDescription = '';
+                var metaKeywords = '';
+                return {
+                    metaDescription: function () {
+                        return metaDescription;
+                    },
+                    metaKeywords: function () {
+                        return metaKeywords;
+                    },
+                    reset: function () {
+                        metaDescription = '';
+                        metaKeywords = '';
+                    },
+                    setMetaDescription: function (newMetaDescription) {
+                        metaDescription = newMetaDescription;
+                    },
+                    appendMetaKeywords: function (newKeywords) {
+                        for (var key in newKeywords) {
+                            if (metaKeywords === '') {
+                                metaKeywords += newKeywords[key].name;
+                            } else {
+                                metaKeywords += ', ' + newKeywords[key].name;
+                            }
+                        }
+                    }
+                };
+            }
+
+        ]
+        );
+angular.module(
     'eu.water-switch-on.sip.services'
 ).factory('eu.water-switch-on.sip.services.MockService',
     ['$resource',
@@ -4359,6 +4442,26 @@ angular.module(
         }
         ]);
 
+angular.module(
+        'eu.water-switch-on.sip.services'
+        ).service(
+        'pageTitle',
+        [
+            function () {
+                'use strict';
+
+                var title = 'SWITCH-ON Spatial Information Platform Client (BYOD) v1.4';
+                return {
+                    title: function () {
+                        return title;
+                    },
+                    setTitle: function (newTitle) {
+                        title = newTitle;
+                    }
+                };
+            }
+        ]
+        );
 angular.module(
     'eu.water-switch-on.sip.services'
 ).factory('eu.water-switch-on.sip.services.SearchService',
