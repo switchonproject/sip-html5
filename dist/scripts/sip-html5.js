@@ -827,6 +827,7 @@ angular.module(
             'eu.water-switch-on.sip.services.shareService',
             'eu.water-switch-on.sip.services.masterToolbarService',
             'eu.water-switch-on.sip.services.filterService',
+            'pageTitle',
             function (
                     $scope,
                     $rootScope,
@@ -840,17 +841,19 @@ angular.module(
                     AppConfig,
                     shareService,
                     masterToolbarService,
-                    filterService
+                    filterService,
+                    pageTitle
                     ) {
                 'use strict';
 
                 var searchProcessCallback, masterController;
                 masterController = this;
-
                 masterController.hideWelcomeMessage = !(!$cookies.hideByodWelcomeMessage ||
                         $cookies.hideByodWelcomeMessage === 'false');
 
                 $scope.config = AppConfig;
+                $scope.pageTitle = pageTitle;
+                pageTitle.setTitle($scope.config.title);
 
                 $scope.data = {};
                 $scope.data.message = null; 
@@ -1276,10 +1279,13 @@ angular.module(
         // the router resolves this resource object
         'resource',
         'AppConfig',
-        function ($scope, resource, AppConfig) {
+        'pageTitle',
+        function ($scope, resource, AppConfig, pageTitle) {
             'use strict';
-
+            
             var i, tag, metadata;
+
+            pageTitle.setTitle(resource.name);
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;
@@ -2589,6 +2595,8 @@ angular.module(
                 'use strict';
                 
                 this.developmentMode = false;
+
+                this.title = 'SWITCH-ON Spatial Information Platform Client (BYOD) v1.4.1'; 
 
                 this.listView = {};
                 // highlight the keywords beloging to the following tag group
@@ -4288,6 +4296,44 @@ angular.module(
     ]
 );
 angular.module(
+        'eu.water-switch-on.sip.services'
+        ).service(
+        'meta',
+        [
+            function () {
+                'use strict';
+
+                var metaDescription = '';
+                var metaKeywords = '';
+                return {
+                    metaDescription: function () {
+                        return metaDescription;
+                    },
+                    metaKeywords: function () {
+                        return metaKeywords;
+                    },
+                    reset: function () {
+                        metaDescription = '';
+                        metaKeywords = '';
+                    },
+                    setMetaDescription: function (newMetaDescription) {
+                        metaDescription = newMetaDescription;
+                    },
+                    appendMetaKeywords: function (newKeywords) {
+                        for (var key in newKeywords) {
+                            if (metaKeywords === '') {
+                                metaKeywords += newKeywords[key].name;
+                            } else {
+                                metaKeywords += ', ' + newKeywords[key].name;
+                            }
+                        }
+                    }
+                };
+            }
+
+        ]
+        );
+angular.module(
     'eu.water-switch-on.sip.services'
 ).factory('eu.water-switch-on.sip.services.MockService',
     ['$resource',
@@ -4396,6 +4442,26 @@ angular.module(
         }
         ]);
 
+angular.module(
+        'eu.water-switch-on.sip.services'
+        ).service(
+        'pageTitle',
+        [
+            function () {
+                'use strict';
+
+                var title = 'SWITCH-ON Spatial Information Platform Client (BYOD) v1.4';
+                return {
+                    title: function () {
+                        return title;
+                    },
+                    setTitle: function (newTitle) {
+                        title = newTitle;
+                    }
+                };
+            }
+        ]
+        );
 angular.module(
     'eu.water-switch-on.sip.services'
 ).factory('eu.water-switch-on.sip.services.SearchService',

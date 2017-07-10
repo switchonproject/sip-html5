@@ -16,6 +16,7 @@ angular.module(
             'eu.water-switch-on.sip.services.shareService',
             'eu.water-switch-on.sip.services.masterToolbarService',
             'eu.water-switch-on.sip.services.filterService',
+            'pageTitle',
             function (
                     $scope,
                     $rootScope,
@@ -29,17 +30,19 @@ angular.module(
                     AppConfig,
                     shareService,
                     masterToolbarService,
-                    filterService
+                    filterService,
+                    pageTitle
                     ) {
                 'use strict';
 
                 var searchProcessCallback, masterController;
                 masterController = this;
-
                 masterController.hideWelcomeMessage = !(!$cookies.hideByodWelcomeMessage ||
                         $cookies.hideByodWelcomeMessage === 'false');
 
                 $scope.config = AppConfig;
+                $scope.pageTitle = pageTitle;
+                pageTitle.setTitle($scope.config.title);
 
                 $scope.data = {};
                 $scope.data.message = null; 
