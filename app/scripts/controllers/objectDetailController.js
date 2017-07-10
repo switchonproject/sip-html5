@@ -20,10 +20,13 @@ angular.module(
         // the router resolves this resource object
         'resource',
         'AppConfig',
-        function ($scope, resource, AppConfig) {
+        'pageTitle',
+        function ($scope, resource, AppConfig, pageTitle) {
             'use strict';
-
+            
             var i, tag, metadata;
+
+            pageTitle.setTitle(resource.name);
 
             $scope.config = AppConfig.objectInfo;
             $scope.object = resource;

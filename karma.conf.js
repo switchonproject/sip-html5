@@ -66,6 +66,8 @@ module.exports = function(config) {
         'target/dist/scripts/directives/masterToolbarDirective.js',
         'target/dist/scripts/directives/resultPagerDirective.js',
         'target/dist/scripts/services/_module.js',
+        'target/dist/scripts/services/pageTitleService.js',
+        'target/dist/scripts/services/metaService.js',
         'target/dist/scripts/services/mockService.js',
         'target/dist/scripts/services/shareService.js',
         'target/dist/scripts/services/searchService.js',
