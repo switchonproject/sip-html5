@@ -2596,7 +2596,7 @@ angular.module(
                 
                 this.developmentMode = false;
 
-                this.title = 'SWITCH-ON Spatial Information Platform Client (BYOD) v1.4.1'; 
+                this.title = 'SWITCH-ON Spatial Information Platform Client (BYOD) v1.4.2'; 
 
                 this.listView = {};
                 // highlight the keywords beloging to the following tag group
